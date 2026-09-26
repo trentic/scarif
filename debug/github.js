@@ -84,7 +84,11 @@ export class GitHub {
       const file = await this.req(`/contents/${this.path('data/archive.json')}?ref=${ref}`);
       return JSON.parse(base64ToText(file.content));
     } catch (err) {
-      if (err.status === 404) return { updatedAt: null, entries: [] };
+      // Never treat a missing archive as empty: saving on top of that would
+      // start a fresh archive and hide the real one.
+      if (err.status === 404) {
+        throw new GitHubError(`Couldn't find ${this.path('data/archive.json')} on ${this.branch}. Hard-refresh this page (Ctrl+Shift+R / Cmd+Shift+R) and try again.`, 404);
+      }
       throw err;
     }
   }

@@ -182,7 +182,13 @@ async function loadDashboard() {
     setEntries((await gh.readArchive(head.sha)).entries);
   } catch (err) {
     if (handleAuthError(err)) return lock();
-    toast(err.message, 'err');
+    // Don't show an empty (and editable) archive when it couldn't be read.
+    app.replaceChildren(h('div', { class: 'gate' },
+      h('h1', {}, "Couldn't load the archive"),
+      h('p', {}, err.message),
+      h('button', { class: 'btn big', onclick: () => location.reload() }, 'Reload'),
+    ));
+    return;
   }
   renderDashboard();
 }
