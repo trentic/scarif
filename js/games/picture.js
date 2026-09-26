@@ -1,5 +1,5 @@
-// "Name That Blaster": shows the entry's image hidden by a blur, silhouette
-// or zoom effect, then reveals it.
+// "Name That Blaster": shows the entry's image, either clearly or hidden by a
+// blur, silhouette or zoom effect until the answer is revealed.
 import { h } from '../ui.js';
 
 export const renderer = {
@@ -8,7 +8,7 @@ export const renderer = {
   },
 
   mount(el, entry, { settings }) {
-    const fx = settings.pictureFx || 'blur';
+    const fx = settings.pictureMode || 'clear';
     const img = h('img', { src: entry.image, alt: '', draggable: 'false' });
     if (fx === 'zoom') {
       img.style.transformOrigin = `${20 + Math.random() * 60}% ${25 + Math.random() * 50}%`;

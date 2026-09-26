@@ -7,7 +7,7 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 | Game | What players do | Needs per entry |
 | --- | --- | --- |
 | 🔊 **Guess the Blaster** | Hear a blaster sound, pick its name | image + sound |
-| 🎯 **Name That Blaster** | See a hidden blaster (blur / silhouette / zoom), pick its name | image |
+| 🎯 **Name That Blaster** | See a blaster (clear, or hidden by blur / silhouette / zoom), pick its name | image |
 
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 
@@ -100,7 +100,7 @@ The shared engine (`js/engine.js`) already handles the countdown, answers, timer
 - **Settings** (gear icon):
   - number of rounds and answer timer
   - **Auto** or **Host** flow (in Host mode you tap Reveal, then Next)
-  - picture reveal style
+  - picture mode (Clear, or Blur / Silhouette / Zoom to hide it until the reveal)
   - game sound effects on/off
 - **Safe-zone overlay.** Shades the areas TikTok, Reels and Shorts cover. Turn it off before recording.
 - **Clean recording mode.** Hides on-screen buttons during play.

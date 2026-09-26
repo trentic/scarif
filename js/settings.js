@@ -5,7 +5,7 @@ export const DEFAULTS = {
   rounds: 10,
   timer: 10,
   mode: 'auto', // 'auto' advances by itself, 'host' waits for a tap to reveal / continue
-  pictureFx: 'blur',
+  pictureMode: 'clear',
   sfx: true,
   safeZones: false,
   clean: false,
@@ -19,8 +19,8 @@ export const OPTIONS = [
     help: 'Host mode waits for you to tap Reveal and Next (or press Space). Good for "pause and guess" videos.',
   },
   {
-    key: 'pictureFx', title: 'Picture reveal', choices: [['blur', 'Blur'], ['silhouette', 'Silhouette'], ['zoom', 'Zoom']],
-    help: 'Silhouette works best with transparent PNGs.',
+    key: 'pictureMode', title: 'Picture mode', choices: [['clear', 'Clear'], ['blur', 'Blur'], ['silhouette', 'Silhouette'], ['zoom', 'Zoom']],
+    help: 'Clear shows the picture as-is. Blur, Silhouette and Zoom hide it until the answer is revealed (silhouette works best with transparent PNGs).',
   },
   { key: 'sfx', title: 'Game sound effects', choices: [[true, 'On'], [false, 'Off']] },
   {
