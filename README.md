@@ -9,7 +9,7 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 | 🔊 **Guess the Blaster** | Hear a blaster sound, pick its name | image + sound |
 | 🎯 **Name That Blaster** | See a hidden blaster (blur / silhouette / zoom), pick its name | image |
 
-Both games draw from one shared **archive**, which you manage in debug mode. Only your physical security key can unlock debug mode.
+Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 
 ## One-time setup
 
@@ -17,25 +17,26 @@ Both games draw from one shared **archive**, which you manage in debug mode. Onl
 2. **Make a GitHub token for debug mode.** [Create a fine-grained token](https://github.com/settings/personal-access-tokens/new) with:
    - **Repository access:** *Only select repositories* → `trentic/scarif`
    - **Permissions → Repository → Contents:** *Read and write*
-3. **Lock the token to your security key.**
+3. **Set the debug-mode password.**
    - Open `…/scarif/debug/` (or tap the **SCARIF** logo five times on the hub).
-   - Paste the token and touch your key when asked (usually twice).
-   - If your key has a PIN, it may ask for it.
+   - Paste the token and choose a password.
 
-Use Chrome or Edge with a FIDO2 security key that supports `hmac-secret` / PRF. Examples: YubiKey 5 series, Google Titan (v2), SoloKey v2, Feitian BioPass.
+   After that, any device only needs the password.
 
-### How the security key protects it
+### How the password protects it
 
 The site is public and static, so the lock works like this:
 
 - Your GitHub token is the only thing that can change the archive.
-- The token is **encrypted with a secret that only your physical key can produce**. This uses the WebAuthn PRF extension and AES-256-GCM.
-- Only the encrypted token is saved in your browser.
-- Each visit, touching the key decrypts the token into memory. Reloading or pressing **Lock** forgets it again.
+- The token is **encrypted with your password** (PBKDF2-SHA256, 600k rounds → AES-256-GCM).
+- The encrypted copy is stored in the repo at `site/data/vault.json`, which is why any device works with just the password.
+- Unlocking decrypts the token into memory only. Reloading the page or pressing **Lock** forgets it.
 
-So without the key, nobody can change the archive, even on your own computer. That includes anyone who opens `/debug/` from the public URL.
+The encrypted file is publicly downloadable, so someone could try to guess the password offline. **Use a long password** (a phrase of 4+ random words is good; the minimum is 10 characters).
 
-Setup is per device. To add another computer, open `/debug/` there and repeat step 3. You can use the same token or a new one. Register a **backup key** from the dashboard so losing one key doesn't lock you out.
+- **Change the password:** use the dashboard. Other devices pick it up after the next publish (about a minute).
+- **Forgot it, or the token expired:** use **Set up again** on the unlock screen with a new token.
+- **Suspect a leak:** revoke the token on GitHub. That instantly stops anyone from editing.
 
 ## Debug mode: adding blasters
 

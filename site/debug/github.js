@@ -84,6 +84,20 @@ export class GitHub {
     }
   }
 
+  // Creates or replaces one text file under the site folder.
+  async putText(path, text, message) {
+    if (!this.branch) await this.checkAccess();
+    const full = `${this.siteDir}/${path}`;
+    const existing = await this.req(`/contents/${full}?ref=${encodeURIComponent(this.branch)}`).catch((err) => {
+      if (err.status === 404) return null;
+      throw err;
+    });
+    await this.req(`/contents/${full}`, {
+      method: 'PUT',
+      body: { message, content: textToBase64(text), branch: this.branch, ...(existing ? { sha: existing.sha } : {}) },
+    });
+  }
+
   rawUrl(path) {
     if (!path || /^https?:/i.test(path)) return path;
     return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.siteDir}/${path}`;

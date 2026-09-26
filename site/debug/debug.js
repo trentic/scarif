@@ -2,13 +2,13 @@ import { REPO } from '../config.js';
 import { GAMES, meetsRequirements } from '../js/registry.js';
 import { h, icons } from '../js/ui.js';
 import { GitHub } from './github.js';
-import { addKey, forgetDevice, listKeys, removeKey, supported, unlock } from './keyvault.js';
+import { keepLocalCopy, loadVault, MIN_PASSWORD, openToken, sealToken, VAULT_PATH } from './vault.js';
 import { addEntry, deleteEntry, downloadImage, readMedia, slugify, StoreError, updateEntry } from './store.js';
 
 const app = document.getElementById('app');
 const topActions = document.getElementById('top-actions');
 
-const keySvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M18.5 4.5l2 2"/></svg>';
+const lockSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/><circle cx="12" cy="15.5" r="1.4"/></svg>';
 const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new';
 
 // The unlocked GitHub client only ever lives in memory.
@@ -22,8 +22,6 @@ function toast(message, kind = '') {
   document.getElementById('toasts').append(el);
   setTimeout(() => el.remove(), 5000);
 }
-
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) : 'never');
 
 let player = null;
 function playSound(url) {
@@ -46,7 +44,7 @@ function lock() {
 
 function handleAuthError(err) {
   if (err.status === 401) {
-    toast('GitHub rejected the saved token. Set this device up again with a new token.', 'err');
+    toast('GitHub rejected the saved token. Use "Set up again" on the unlock screen with a new token.', 'err');
     return true;
   }
   return false;
@@ -54,31 +52,31 @@ function handleAuthError(err) {
 
 // --- boot / gate -----------------------------------------------------------------------
 
-function boot() {
+async function boot() {
   topActions.replaceChildren();
-  if (!supported()) {
-    app.replaceChildren(h('div', { class: 'gate' },
-      h('div', { class: 'key-icon', html: keySvg }),
-      h('h1', {}, 'Unsupported browser'),
-      h('p', {}, "This browser can't use security keys. Use Chrome or Edge."),
-    ));
-    return;
-  }
   if (gh) return loadDashboard();
-  if (listKeys().length) return renderGate();
-  renderSetup();
+  app.replaceChildren(h('div', { class: 'gate' }, h('p', {}, 'Loading…')));
+  const vault = await loadVault();
+  if (vault) renderGate(vault);
+  else renderSetup();
 }
 
-function renderSetup() {
+function passwordInput(id, placeholder, autocomplete) {
+  return h('input', { type: 'password', id, placeholder, autocomplete, required: true });
+}
+
+function renderSetup({ reset = false } = {}) {
   const error = h('div', { class: 'form-error', role: 'alert' });
   const token = h('input', { type: 'password', id: 'gh-token', autocomplete: 'off', spellcheck: 'false', placeholder: 'github_pat_…', required: true });
-  const label = h('input', { type: 'text', id: 'key-label', placeholder: 'e.g. YubiKey 5C', maxlength: '40' });
-  const btn = h('button', { class: 'btn big', type: 'submit' }, 'Lock token to my security key');
+  const pw = passwordInput('pw', `At least ${MIN_PASSWORD} characters`, 'new-password');
+  const pw2 = passwordInput('pw2', 'Type it again', 'new-password');
+  const idle = reset ? 'Save new password' : 'Set password';
+  const btn = h('button', { class: 'btn big', type: 'submit' }, idle);
 
   app.replaceChildren(h('div', { class: 'gate wide' },
-    h('div', { class: 'key-icon', html: keySvg }),
-    h('h1', {}, 'Set up debug mode'),
-    h('p', {}, 'Once per device. After this, only your security key can unlock the dashboard.'),
+    h('div', { class: 'key-icon', html: lockSvg }),
+    h('h1', {}, reset ? 'Set up again' : 'Set up debug mode'),
+    h('p', {}, 'One time only. After this, any device just needs the password.'),
     h('ol', { class: 'steps' },
       h('li', {},
         h('a', { href: TOKEN_URL, target: '_blank', rel: 'noopener' }, 'Create a fine-grained GitHub token ↗'),
@@ -88,81 +86,90 @@ function renderSetup() {
           h('li', {}, 'Permissions → Repository → ', h('b', {}, 'Contents: Read and write')),
         ),
       ),
-      h('li', {}, 'Paste it below, name your key, and touch the key when asked (usually twice).'),
+      h('li', {}, 'Paste it below and choose the debug-mode password.'),
     ),
     h('form', {
       onsubmit: async (e) => {
         e.preventDefault();
         error.textContent = '';
+        if (pw.value !== pw2.value) {
+          error.textContent = "The passwords don't match.";
+          return;
+        }
         btn.disabled = true;
         btn.textContent = 'Checking token…';
         try {
           const client = new GitHub(token.value.trim(), REPO);
           await client.checkAccess();
-          btn.textContent = 'Touch your security key…';
-          await addKey(token.value.trim(), label.value.trim());
+          btn.textContent = 'Saving…';
+          const vault = await sealToken(token.value.trim(), pw.value);
+          await client.putText(VAULT_PATH, `${JSON.stringify(vault, null, 2)}\n`, 'Debug mode: set password');
+          keepLocalCopy(vault);
           gh = client;
-          toast('Security key set up. Welcome to debug mode.', 'ok');
+          toast('Password set. Welcome to debug mode.', 'ok');
           boot();
         } catch (err) {
           error.textContent = err.message;
         } finally {
           btn.disabled = false;
-          btn.textContent = 'Lock token to my security key';
+          btn.textContent = idle;
         }
       },
     },
       h('div', {}, h('label', { for: 'gh-token' }, 'GitHub token'), token,
-        h('div', { class: 'hint' }, 'The token is encrypted with your key and never stored in plain text.')),
-      h('div', {}, h('label', { for: 'key-label' }, 'Key name ', h('span', { class: 'label-note' }, '(optional)')), label),
+        h('div', { class: 'hint' }, 'Stored in the repo only in encrypted form, locked with your password.')),
+      h('div', {}, h('label', { for: 'pw' }, 'Password'), pw,
+        h('div', { class: 'hint' }, 'The encrypted file is public, so make it long. A short phrase of 4+ words works well.')),
+      h('div', {}, h('label', { for: 'pw2' }, 'Confirm password'), pw2),
       error,
       btn,
+      reset && h('button', { class: 'btn ghost', type: 'button', onclick: () => boot() }, 'Back'),
     ),
   ));
   token.focus();
 }
 
-function renderGate() {
-  const error = h('div', { class: 'form-error', role: 'alert', style: { marginTop: '12px' } });
-  const btn = h('button', { class: 'btn big', onclick: go }, 'Tap security key to unlock');
+function renderGate(vault) {
+  const error = h('div', { class: 'form-error', role: 'alert' });
+  const pw = passwordInput('pw', 'Password', 'current-password');
+  const btn = h('button', { class: 'btn big', type: 'submit' }, 'Unlock');
   app.replaceChildren(h('div', { class: 'gate' },
-    h('div', { class: 'key-icon', html: keySvg }),
+    h('div', { class: 'key-icon', html: lockSvg }),
     h('h1', {}, 'Debug mode'),
-    h('p', {}, 'Insert your security key, press the button, then touch the key.'),
-    btn,
-    error,
+    h('p', {}, 'Enter the password to manage the blaster archive.'),
+    h('form', {
+      onsubmit: async (e) => {
+        e.preventDefault();
+        error.textContent = '';
+        btn.disabled = true;
+        btn.textContent = 'Unlocking…';
+        try {
+          const token = await openToken(vault, pw.value);
+          const client = new GitHub(token, REPO);
+          await client.checkAccess();
+          gh = client;
+          boot();
+        } catch (err) {
+          error.textContent = err.status === 401
+            ? 'Password correct, but GitHub rejected the saved token (expired?). Use "Set up again" with a new token.'
+            : err.message;
+          pw.select();
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Unlock';
+        }
+      },
+    },
+      h('div', {}, h('label', { for: 'pw' }, 'Password'), pw),
+      error,
+      btn,
+    ),
     h('p', { class: 'hint', style: { marginTop: '32px' } },
-      'Lost your key or need a new token? ',
-      h('a', {
-        href: '#',
-        onclick: (e) => {
-          e.preventDefault();
-          if (confirm('Remove the saved keys and token from this browser? You can set it up again with a new token.')) {
-            forgetDevice();
-            boot();
-          }
-        },
-      }, 'Reset this device'),
+      'Forgot the password or need a new token? ',
+      h('a', { href: '#', onclick: (e) => { e.preventDefault(); renderSetup({ reset: true }); } }, 'Set up again'),
     ),
   ));
-
-  async function go() {
-    error.textContent = '';
-    btn.disabled = true;
-    try {
-      const token = await unlock();
-      const client = new GitHub(token, REPO);
-      await client.checkAccess();
-      gh = client;
-      boot();
-    } catch (err) {
-      error.textContent = err.status === 401
-        ? 'Your key worked, but GitHub rejected the saved token (expired?). Use "Reset this device" and set up with a new token.'
-        : err.message;
-    } finally {
-      btn.disabled = false;
-    }
-  }
+  pw.focus();
 }
 
 // --- dashboard --------------------------------------------------------------------------
@@ -220,7 +227,6 @@ function renderPublish(text, kind = '') {
 
 const statsEl = h('div', { class: 'stats' });
 const libraryGrid = h('div');
-const keysList = h('div');
 
 function renderDashboard() {
   topActions.replaceChildren(
@@ -245,8 +251,6 @@ function renderDashboard() {
     },
   }, label));
 
-  const keyLabel = h('input', { type: 'text', placeholder: 'New key name, e.g. Backup key', maxlength: '40' });
-
   app.replaceChildren(
     statsEl,
     h('div', { class: 'layout' },
@@ -263,34 +267,10 @@ function renderDashboard() {
         libraryGrid,
       ),
     ),
-    h('section', { class: 'card' },
-      h('div', { class: 'card-head' }, h('h2', {}, 'Security keys on this device')),
-      keysList,
-      h('div', { class: 'add-key' },
-        keyLabel,
-        h('button', {
-          class: 'btn ghost',
-          onclick: async (e) => {
-            e.target.disabled = true;
-            try {
-              await addKey(gh.token, keyLabel.value.trim());
-              keyLabel.value = '';
-              toast('Key added.', 'ok');
-              renderKeys();
-            } catch (err) {
-              toast(err.message, 'err');
-            } finally {
-              e.target.disabled = false;
-            }
-          },
-        }, 'Register another key'),
-      ),
-      h('p', { class: 'hint' }, 'Register a backup key so you are never locked out. On another computer or phone, open this page and set it up with a token there.'),
-    ),
+    passwordCard(),
   );
   renderStats();
   renderLibrary();
-  renderKeys();
 }
 
 function renderStats() {
@@ -354,24 +334,39 @@ function renderLibrary() {
   ))));
 }
 
-function renderKeys() {
-  const keys = listKeys();
-  keysList.replaceChildren(...keys.map((k) => h('div', { class: 'key-row' },
-    h('div', {},
-      h('b', {}, k.label),
-      h('small', {}, `Added ${fmtDate(k.createdAt)} · last used ${fmtDate(k.lastUsedAt)}`),
-    ),
-    h('button', {
-      class: 'btn danger small',
-      disabled: keys.length <= 1,
-      title: keys.length <= 1 ? "You can't remove your only key" : null,
-      onclick: () => {
-        if (!confirm(`Remove "${k.label}"? It will no longer unlock debug mode on this device.`)) return;
-        removeKey(k.credId);
-        renderKeys();
+function passwordCard() {
+  const error = h('div', { class: 'form-error', role: 'alert' });
+  const pw = passwordInput('new-pw', `New password (${MIN_PASSWORD}+ characters)`, 'new-password');
+  const pw2 = passwordInput('new-pw2', 'Confirm new password', 'new-password');
+  const btn = h('button', { class: 'btn ghost', type: 'submit' }, 'Change password');
+  return h('section', { class: 'card' },
+    h('div', { class: 'card-head' }, h('h2', {}, 'Password')),
+    h('form', {
+      class: 'add-key',
+      onsubmit: async (e) => {
+        e.preventDefault();
+        error.textContent = '';
+        if (pw.value !== pw2.value) {
+          error.textContent = "The passwords don't match.";
+          return;
+        }
+        btn.disabled = true;
+        try {
+          const vault = await sealToken(gh.token, pw.value);
+          await gh.putText(VAULT_PATH, `${JSON.stringify(vault, null, 2)}\n`, 'Debug mode: change password');
+          keepLocalCopy(vault);
+          pw.value = pw2.value = '';
+          toast('Password changed. Other devices pick it up once the site updates (about a minute).', 'ok');
+        } catch (err) {
+          if (handleAuthError(err)) return lock();
+          error.textContent = err.message;
+        } finally {
+          btn.disabled = false;
+        }
       },
-    }, 'Remove'),
-  )));
+    }, pw, pw2, btn),
+    error,
+  );
 }
 
 function openEdit(entry) {
