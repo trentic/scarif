@@ -3,6 +3,7 @@ import { GAMES, meetsRequirements } from '../js/registry.js';
 import { h, icons } from '../js/ui.js';
 import { GitHub } from './github.js';
 import { keepLocalCopy, loadVault, MIN_PASSWORD, openToken, sealToken, VAULT_PATH } from './vault.js';
+import { createTrimmer } from './trimmer.js';
 import { addEntry, deleteEntry, downloadImage, readMedia, slugify, StoreError, updateEntry } from './store.js';
 
 const app = document.getElementById('app');
@@ -371,7 +372,7 @@ function passwordCard() {
 
 function openEdit(entry) {
   const dialog = h('dialog', {});
-  const close = () => { dialog.close(); dialog.remove(); };
+  const close = () => { dialog.querySelectorAll('audio').forEach((a) => a.pause()); dialog.close(); dialog.remove(); };
   dialog.append(
     h('div', { class: 'card-head' }, h('h2', {}, 'Edit entry')),
     entryForm({
@@ -450,21 +451,34 @@ function entryForm({ entry = null, onSaved, onCancel }) {
   const soundInput = h('input', { type: 'file', accept: 'audio/*,.mp3,.wav,.ogg,.m4a,.flac,.webm', 'aria-label': 'Sound file' });
   const soundDrop = h('div', { class: 'drop small' }, soundPrompt, soundInput);
   const soundAudio = h('audio', { controls: true, preload: 'none', src: entry?.soundUrl || null });
-  const soundPreview = h('div', { class: 'sound-preview', hidden: !entry?.sound }, soundAudio);
+  const trimmer = createTrimmer();
+  let trimExisting = false;
+  const trimBtn = entry?.sound && h('button', {
+    type: 'button',
+    class: 'btn ghost small',
+    onclick: () => {
+      trimExisting = true;
+      soundPreview.hidden = true;
+      trimmer.load(entry.soundUrl);
+    },
+  }, '✂ Trim this sound');
+  const soundPreview = h('div', { class: 'sound-preview', hidden: !entry?.sound }, soundAudio, trimBtn);
   const removeSound = h('input', { type: 'checkbox' });
   const removeRow = entry?.sound && h('label', { class: 'check' }, removeSound, 'Remove sound effect');
   removeSound.addEventListener('change', () => {
     soundPreview.style.opacity = removeSound.checked ? 0.35 : 1;
+    trimmer.el.style.opacity = removeSound.checked ? 0.35 : 1;
     updateUnlocks();
   });
 
   const setSoundFile = (file) => {
     if (!file) return;
     soundFile = file;
-    soundAudio.src = URL.createObjectURL(file);
-    soundPreview.hidden = false;
+    trimExisting = false;
+    soundPreview.hidden = true;
+    trimmer.load(file);
     soundPrompt.textContent = file.name;
-    if (removeRow) { removeSound.checked = false; soundPreview.style.opacity = 1; }
+    if (removeRow) { removeSound.checked = false; trimmer.el.style.opacity = 1; }
     updateUnlocks();
   };
   soundInput.addEventListener('change', () => setSoundFile(soundInput.files[0]));
@@ -511,7 +525,13 @@ function entryForm({ entry = null, onSaved, onCancel }) {
       try {
         const image = await collectImage();
         if (!entry && !image) throw new StoreError('Add an image (upload a file or paste an image address).');
-        const sound = soundFile ? { media: await readMedia(soundFile, 'sound') } : null;
+        let sound = null;
+        if (soundFile) {
+          sound = { media: await readMedia(trimmer.isTrimmed() ? trimmer.toWav() : soundFile, 'sound') };
+        } else if (trimExisting && trimmer.isTrimmed() && !removeSound.checked) {
+          sound = { media: await readMedia(trimmer.toWav(), 'sound') };
+        }
+        trimmer.stop();
         submit.textContent = 'Committing to GitHub…';
         const archive = entry
           ? await updateEntry(gh, entry.id, { name: name.value, image, sound, removeSound: removeSound.checked })
@@ -538,6 +558,7 @@ function entryForm({ entry = null, onSaved, onCancel }) {
       h('label', {}, '3. Sound effect ', h('span', { class: 'label-note' }, '(optional)')),
       soundDrop,
       soundPreview,
+      trimmer.el,
       removeRow,
     ),
     unlocks,
@@ -557,6 +578,8 @@ function entryForm({ entry = null, onSaved, onCancel }) {
     imgPrompt.hidden = false;
     urlPreview.hidden = true;
     soundPreview.hidden = true;
+    trimmer.clear();
+    trimExisting = false;
     soundPrompt.textContent = 'Drop a sound or click to choose';
     updateUnlocks();
     name.focus();

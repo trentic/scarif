@@ -53,6 +53,9 @@ Each entry has three parts:
    - A pasted address is **copied into the repo** when the site allows it.
    - Some sites block that. You can then tick *Link to it instead of copying*, or save the image and upload it.
 3. **Sound effect** (optional). Adding one unlocks the entry for sound-based games.
+   - **Trimming:** after picking a sound, a waveform appears. Drag the handles or type start/end times, and use **Auto-trim silence** to cut the quiet parts before and after the shot.
+   - To trim a sound that's already saved, use **Edit → ✂ Trim this sound**.
+   - A trimmed clip is saved as a WAV. Untrimmed files are saved unchanged.
 
 As you fill the form, it shows which games the entry will appear in.
 
