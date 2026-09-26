@@ -1,0 +1,47 @@
+/* Shared tokens for the game stage and the debug dashboard. */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap');
+
+:root {
+  --bg: #04060a;
+  --bg-2: #0a0f16;
+  --panel: #0e141d;
+  --panel-2: #141c28;
+  --line: #1f2b3b;
+  --line-2: #2c3b50;
+  --text: #e9f0f8;
+  --muted: #8494a8;
+  --dim: #4f5d6f;
+
+  --red: #ff3b3b;
+  --red-glow: rgba(255, 59, 59, 0.55);
+  --cyan: #2de2ff;
+  --cyan-glow: rgba(45, 226, 255, 0.5);
+  --gold: #ffc940;
+  --green: #3dff8a;
+  --green-glow: rgba(61, 255, 138, 0.5);
+
+  --accent: var(--red);
+  --accent-glow: var(--red-glow);
+
+  --font-display: 'Orbitron', 'Eurostile', 'Arial Black', system-ui, sans-serif;
+  --font-ui: 'Chakra Petch', 'Rajdhani', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  color-scheme: dark;
+}
+
+.accent-red { --accent: var(--red); --accent-glow: var(--red-glow); }
+.accent-cyan { --accent: var(--cyan); --accent-glow: var(--cyan-glow); }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font: inherit; color: inherit; cursor: pointer; }
+
+[hidden] { display: none !important; }
