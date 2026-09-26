@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T21:19:22.940Z",
+  "updatedAt": "2026-09-26T21:23:32.738Z",
   "entries": [
     {
       "id": "a280c",
@@ -24,6 +24,14 @@
       "sound": "media/e-11-sound-3323850f.mp3",
       "createdAt": "2026-09-26T20:54:47.730Z",
       "updatedAt": "2026-09-26T20:54:47.730Z"
+    },
+    {
+      "id": "nt-242",
+      "name": "NT-242",
+      "image": "media/nt-242-image-17d19a30.webp",
+      "sound": "media/nt-242-sound-13919e88.wav",
+      "createdAt": "2026-09-26T21:23:32.738Z",
+      "updatedAt": "2026-09-26T21:23:32.738Z"
     },
     {
       "id": "tl-50-heavy-repeater",
