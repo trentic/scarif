@@ -1,33 +1,43 @@
 name: Publish to GitHub Pages
 
-# Publishes the site/ folder whenever the default branch changes,
-# including commits made from the debug dashboard.
+# Copies site/ onto the gh-pages branch whenever the default branch changes,
+# including archive edits committed from the debug dashboard. Pages serves
+# gh-pages directly ("Deploy from a branch").
 on:
   push:
     paths: ['site/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  publish:
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-      - id: deployment
-        uses: actions/deploy-pages@v4
+
+      - name: Copy site/ into the gh-pages branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch --depth=1 origin gh-pages; then
+            git worktree add --detach ../pages FETCH_HEAD
+          else
+            git worktree add --orphan -b gh-pages ../pages
+          fi
+          rsync -a --delete --exclude .git site/ ../pages/
+          touch ../pages/.nojekyll
+          cd ../pages
+          git add -A
+          if git diff --cached --quiet; then
+            echo "gh-pages is already up to date."
+            exit 0
+          fi
+          git commit -m "Publish site ${GITHUB_SHA::7}"
+          git push origin HEAD:gh-pages

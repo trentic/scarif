@@ -13,7 +13,13 @@ Both games draw from one shared **archive**, which you manage in password-protec
 
 ## One-time setup
 
-1. **Turn on GitHub Pages.** In the repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. Then open the **Actions** tab and re-run the *Publish to GitHub Pages* workflow, or push any change. The site appears at `https://trentic.github.io/scarif/`.
+1. **Turn on GitHub Pages.** In the repo, go to **Settings → Pages → Build and deployment**:
+   - **Source:** *Deploy from a branch*
+   - **Branch:** `gh-pages`, folder `/ (root)`
+
+   The site appears at `https://trentic.github.io/scarif/` within a minute or two.
+
+   How publishing works: the `gh-pages` branch holds a copy of `site/`. The *Publish to GitHub Pages* workflow refreshes that copy whenever `site/` changes on the default branch, including saves from debug mode. Never edit `gh-pages` by hand.
 2. **Make a GitHub token for debug mode.** [Create a fine-grained token](https://github.com/settings/personal-access-tokens/new) with:
    - **Repository access:** *Only select repositories* → `trentic/scarif`
    - **Permissions → Repository → Contents:** *Read and write*
