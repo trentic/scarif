@@ -1,4 +1,5 @@
-import { getGame } from '/shared/games.js';
+import { loadArchive, loadPool } from './archive.js';
+import { GAMES, getGame, meetsRequirements } from './registry.js';
 import { runGame } from './engine.js';
 import { OPTIONS, onSettingsChange, settings } from './settings.js';
 import { audioContext, sfx } from './sfx.js';
@@ -87,7 +88,7 @@ async function showHub() {
     // Hidden door to debug mode: tap the logo five times.
     onclick: () => {
       clearTimeout(tapTimer);
-      if (++taps >= 5) location.href = '/debug';
+      if (++taps >= 5) location.href = 'debug/';
       tapTimer = setTimeout(() => { taps = 0; }, 1500);
     },
   },
@@ -102,13 +103,14 @@ async function showHub() {
     list,
   ));
 
-  let games = [];
+  let entries = [];
   try {
-    games = await (await fetch('/api/games')).json();
+    entries = (await loadArchive()).entries;
   } catch {
-    list.append(h('div', { class: 'hub-empty' }, "Couldn't reach the server."));
+    list.append(h('div', { class: 'hub-empty' }, "Couldn't load the blaster archive."));
     return;
   }
+  const games = GAMES.map((g) => ({ ...g, eligible: entries.filter((e) => meetsRequirements(e, g.requires)).length }));
 
   for (const g of games) {
     const locked = g.eligible < g.minEntries;
@@ -136,8 +138,7 @@ async function showLobby(gameId) {
   if (!game) { location.hash = '#/'; return; }
   setAccent(game.accent);
 
-  const res = await fetch(`/api/games/${game.id}/pool`).then((r) => r.json()).catch(() => null);
-  const pool = res?.entries || [];
+  const pool = await loadPool(game.id).catch(() => []);
   const ready = pool.length >= game.minEntries;
   const rounds = settings.rounds > 0 ? Math.min(settings.rounds, pool.length) : pool.length;
 

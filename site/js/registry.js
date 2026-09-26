@@ -1,11 +1,10 @@
-// Game registry, shared by the server (to filter the database) and the
-// browser (to draw the hub and run the games).
+// Game registry, used by the hub, the games and the debug dashboard.
 //
-// Each game declares what an entry needs before it can appear in that game.
-// `requires` maps a media field on an entry to `true`, so
+// Each game declares what an archive entry needs before it can appear in that
+// game. `requires` maps a media field on an entry to `true`, so
 // `requires: { sound: true }` means "only entries with a sound effect".
-// To add a new game, add an object here and a matching module in
-// public/js/games/.
+// To add a new game, add an object here and a matching renderer in
+// js/games/ (see README).
 
 export const MEDIA_FIELDS = ['image', 'sound'];
 

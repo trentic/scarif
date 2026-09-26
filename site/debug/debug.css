@@ -71,7 +71,7 @@ h3 { font-size: 13px; color: var(--muted); }
 
 label { display: block; font-weight: 600; margin-bottom: 6px; }
 .label-note { font-weight: 400; color: var(--muted); }
-input[type='text'], input[type='url'], input[type='search'] {
+input[type='text'], input[type='url'], input[type='search'], input[type='password'] {
   width: 100%;
   min-height: 42px;
   padding: 0 12px;
@@ -277,3 +277,15 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
 .toast.err { border-color: var(--red); }
 .toast.ok { border-color: var(--green); }
 @keyframes toast-in { from { opacity: 0; transform: translateY(10px); } }
+
+a { color: var(--cyan); }
+.gate.wide { max-width: 520px; }
+.steps { text-align: left; color: var(--muted); margin: 0 0 24px; padding-left: 20px; display: grid; gap: 10px; }
+.steps ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.steps b { color: var(--text); }
+.publish { font-size: 13px; color: var(--muted); }
+.publish:not(:empty)::before { content: '● '; color: var(--gold); }
+.publish.ok { color: var(--green); }
+.publish.ok::before { color: var(--green); }
+.publish.warn { color: var(--gold); }
+@media (max-width: 600px) { .publish { display: none; } }

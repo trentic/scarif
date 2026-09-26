@@ -1,80 +1,94 @@
 # Scarif — Blaster Archives
 
-A hub of Star Wars mini-games built for recording vertical (9:16) content for TikTok, Reels and Shorts.
+A hub of Star Wars mini-games built for recording vertical (9:16) content for TikTok, Reels and Shorts. It runs entirely on **GitHub Pages**: there's no server to host or pay for.
 
-**Games**
+**Live site:** `https://trentic.github.io/scarif/` · **Debug mode:** `https://trentic.github.io/scarif/debug/`
 
 | Game | What players do | Needs per entry |
 | --- | --- | --- |
 | 🔊 **Guess the Blaster** | Hear a blaster sound, pick its name | image + sound |
 | 🎯 **Name That Blaster** | See a hidden blaster (blur / silhouette / zoom), pick its name | image |
 
-Both games draw from one shared **archive**. You manage it in **debug mode**, which unlocks only with your physical security key.
+Both games draw from one shared **archive**, which you manage in debug mode. Only your physical security key can unlock debug mode.
 
-## Running it
+## One-time setup
 
-Requires Node 20+.
+1. **Turn on GitHub Pages.** In the repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. Then open the **Actions** tab and re-run the *Publish to GitHub Pages* workflow, or push any change. The site appears at `https://trentic.github.io/scarif/`.
+2. **Make a GitHub token for debug mode.** [Create a fine-grained token](https://github.com/settings/personal-access-tokens/new) with:
+   - **Repository access:** *Only select repositories* → `trentic/scarif`
+   - **Permissions → Repository → Contents:** *Read and write*
+3. **Lock the token to your security key.**
+   - Open `…/scarif/debug/` (or tap the **SCARIF** logo five times on the hub).
+   - Paste the token and touch your key when asked (usually twice).
+   - If your key has a PIN, it may ask for it.
 
-```bash
-npm install
-npm start          # http://localhost:3000
-```
+Use Chrome or Edge with a FIDO2 security key that supports `hmac-secret` / PRF. Examples: YubiKey 5 series, Google Titan (v2), SoloKey v2, Feitian BioPass.
 
-### First-time setup: register your security key
+### How the security key protects it
 
-1. Start the server. While no key is registered, the console prints a **one-time setup code**.
-2. Open `http://localhost:3000/debug` (or tap the **SCARIF** logo on the hub five times).
-3. Enter the setup code, press **Register security key**, and touch your key.
+The site is public and static, so the lock works like this:
 
-After that, debug mode opens only when you touch a registered key. The setup code stops working once the first key is registered. From the dashboard you can:
+- Your GitHub token is the only thing that can change the archive.
+- The token is **encrypted with a secret that only your physical key can produce**. This uses the WebAuthn PRF extension and AES-256-GCM.
+- Only the encrypted token is saved in your browser.
+- Each visit, touching the key decrypts the token into memory. Reloading or pressing **Lock** forgets it again.
 
-- add a backup key (recommended, so you never get locked out)
-- remove keys
-- lock the dashboard again
+So without the key, nobody can change the archive, even on your own computer. That includes anyone who opens `/debug/` from the public URL.
 
-Any FIDO2/WebAuthn key works (YubiKey, Titan, SoloKey, …). Browsers only allow security keys on **HTTPS** or on `localhost`.
+Setup is per device. To add another computer, open `/debug/` there and repeat step 3. You can use the same token or a new one. Register a **backup key** from the dashboard so losing one key doesn't lock you out.
 
 ## Debug mode: adding blasters
 
 Each entry has three parts:
 
 1. **Name**, e.g. `DL-44 Heavy Blaster Pistol`. It becomes an ID (`dl-44-heavy-blaster-pistol`) that code can refer to. The ID stays the same if you rename the entry later.
-2. **Image** (required). Upload a file, or paste an image address (right-click an image → *Copy image address*). The server downloads pasted images and stores them itself, so they keep working if the original link dies.
+2. **Image** (required). Upload a file, or paste an image address.
+   - A pasted address is **copied into the repo** when the site allows it.
+   - Some sites block that. You can then tick *Link to it instead of copying*, or save the image and upload it.
 3. **Sound effect** (optional). Adding one unlocks the entry for sound-based games.
 
 As you fill the form, it shows which games the entry will appear in.
 
+Every save is a commit to this repo:
+
+- `site/data/archive.json` holds the entries.
+- `site/media/` holds the images and sounds.
+
+Pages republishes automatically, and the dashboard shows **Live on the site ✓** when it's done (usually about a minute).
+
 Accepted formats:
 
-- Images: PNG, JPG, GIF, WebP, AVIF (transparent PNGs look best, especially with the silhouette reveal)
+- Images: PNG, JPG, GIF, WebP, AVIF (transparent PNGs look best)
 - Sounds: MP3, WAV, OGG, FLAC, M4A, WebM
 - Maximum size: 10 MB per file
 
-Files are checked by their actual contents, not their file extension.
+Files are checked by their actual contents, not their extension.
+
+> The repository must be **public** for free GitHub Pages, so uploaded media is publicly visible in the repo. Upload only media you're allowed to share.
 
 ## How games choose entries (requirements)
 
-Games are defined in [`shared/games.js`](shared/games.js). The server and the browser both use this file:
+Games are defined in [`site/js/registry.js`](site/js/registry.js):
 
 ```js
 {
   id: 'blaster-sounds',
   title: 'Guess the Blaster',
-  module: 'sound',                         // public/js/games/sound.js
+  module: 'sound',                         // site/js/games/sound.js
   requires: { image: true, sound: true },  // only entries with both
   minEntries: 4,                           // 4 answer choices per round
 }
 ```
 
-`GET /api/games/:id/pool` returns only the entries that meet a game's `requires`. The hub shows a game as locked until it has `minEntries` eligible entries.
+Each game gets only the archive entries that meet its `requires`. The hub shows a game as locked until it has `minEntries` of them.
 
 ### Adding a new game
 
-1. Add an entry to `GAMES` in `shared/games.js` with its `requires`.
-2. Create `public/js/games/<module>.js` exporting a `renderer` with `mount(promptEl, entry, ctx)`. It returns `{ reveal(), replay?(), destroy() }`.
-3. Register the module in the `renderers` map in `public/js/app.js`.
+1. Add an entry to `GAMES` in `site/js/registry.js` with its `requires`.
+2. Create `site/js/games/<module>.js` exporting a `renderer` with `mount(promptEl, entry, ctx)`. It returns `{ reveal(), replay?(), destroy() }`.
+3. Register the module in the `renderers` map in `site/js/app.js`.
 
-The shared engine (`public/js/engine.js`) already handles the countdown, answers, timer, scoring, streaks and results screen.
+The shared engine (`site/js/engine.js`) already handles the countdown, answers, timer, scoring, streaks and results screen.
 
 ## Recording features
 
@@ -98,21 +112,10 @@ Keyboard shortcuts:
 | `C` | Toggle clean mode |
 | `Esc` | Back to menu |
 
-## Deploying
+## Local preview
 
-The app is a single Node server. It needs a host with a **persistent disk** for the `data/` folder (Railway, Render with a disk, Fly.io with a volume, a VPS, …) and **HTTPS**.
+```bash
+npm start   # http://localhost:8080 — no install needed (Node 20+)
+```
 
-| Env var | Purpose | Default |
-| --- | --- | --- |
-| `PORT` | Port to listen on | `3000` |
-| `DATA_DIR` | Where the database and media live | `./data` |
-| `ORIGIN` | Public URL, e.g. `https://scarif.example.com` (strongly recommended in production) | from the request |
-| `RP_ID` | Security-key domain, e.g. `scarif.example.com` | hostname of `ORIGIN` |
-| `TRUST_PROXY` | Set to `1` behind a reverse proxy / load balancer | unset |
-| `SETUP_CODE` | Use a fixed setup code instead of a random one | random |
-
-Security keys are bound to the domain (`RP_ID`). If you move to a new domain, register your keys again: delete `credentials` from `data/db.json`, restart, and use the new setup code.
-
-**Backups:** everything lives in `DATA_DIR` (`db.json` plus the `media/` folder). Copy that folder to back up.
-
-Star Wars and related names are trademarks of Lucasfilm Ltd. Upload only media you have the rights to use.
+Debug mode works on `localhost` too, and it commits to the real repository set in [`site/config.js`](site/config.js).
