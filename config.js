@@ -1,10 +1,9 @@
-// Where the archive lives. The debug dashboard commits new blasters here,
-// and GitHub Pages republishes the site automatically.
+// Where the archive lives. Debug mode commits straight to this branch, which
+// GitHub Pages serves, so every save goes live automatically.
 export const REPO = {
   owner: 'trentic',
   repo: 'scarif',
-  // Leave empty to use the repository's default branch.
-  branch: '',
-  // Folder inside the repo that GitHub Pages publishes.
-  siteDir: 'site',
+  branch: 'gh-pages',
+  // Folder the site lives in on that branch ('' = the root).
+  siteDir: '',
 };

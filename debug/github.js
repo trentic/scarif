@@ -28,7 +28,12 @@ export class GitHub {
     this.owner = owner;
     this.repo = repo;
     this.branch = branch || null;
-    this.siteDir = siteDir.replace(/\/+$/, '');
+    this.siteDir = (siteDir || '').replace(/^\/+|\/+$/g, '');
+  }
+
+  // Repo path for a file inside the site folder.
+  path(p) {
+    return this.siteDir ? `${this.siteDir}/${p}` : p;
   }
 
   async req(path, { method = 'GET', body } = {}) {
@@ -76,7 +81,7 @@ export class GitHub {
 
   async readArchive(ref) {
     try {
-      const file = await this.req(`/contents/${this.siteDir}/data/archive.json?ref=${ref}`);
+      const file = await this.req(`/contents/${this.path('data/archive.json')}?ref=${ref}`);
       return JSON.parse(base64ToText(file.content));
     } catch (err) {
       if (err.status === 404) return { updatedAt: null, entries: [] };
@@ -87,7 +92,7 @@ export class GitHub {
   // Creates or replaces one text file under the site folder.
   async putText(path, text, message) {
     if (!this.branch) await this.checkAccess();
-    const full = `${this.siteDir}/${path}`;
+    const full = this.path(path);
     const existing = await this.req(`/contents/${full}?ref=${encodeURIComponent(this.branch)}`).catch((err) => {
       if (err.status === 404) return null;
       throw err;
@@ -100,7 +105,7 @@ export class GitHub {
 
   rawUrl(path) {
     if (!path || /^https?:/i.test(path)) return path;
-    return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.siteDir}/${path}`;
+    return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.path(path)}`;
   }
 
   // mutate(archive) → { archive, message, add: [{ path, base64 }], remove: [path] }
@@ -120,13 +125,13 @@ export class GitHub {
           sha = (await this.req('/git/blobs', { method: 'POST', body: { content: file.base64, encoding: 'base64' } })).sha;
           blobCache.set(file.path, sha);
         }
-        tree.push({ path: `${this.siteDir}/${file.path}`, mode: '100644', type: 'blob', sha });
+        tree.push({ path: this.path(file.path), mode: '100644', type: 'blob', sha });
       }
       for (const path of change.remove || []) {
-        tree.push({ path: `${this.siteDir}/${path}`, mode: '100644', type: 'blob', sha: null });
+        tree.push({ path: this.path(path), mode: '100644', type: 'blob', sha: null });
       }
       tree.push({
-        path: `${this.siteDir}/data/archive.json`,
+        path: this.path('data/archive.json'),
         mode: '100644',
         type: 'blob',
         content: `${JSON.stringify(change.archive, null, 2)}\n`,

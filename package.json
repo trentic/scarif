@@ -1,0 +1,21 @@
+{
+  "name": "scarif",
+  "version": "0.1.0",
+  "description": "Star Wars mini-game hub built for vertical content recording",
+  "scripts": {
+    "start": "node scripts/serve.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trentic/scarif.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trentic/scarif/issues"
+  },
+  "homepage": "https://github.com/trentic/scarif#readme",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

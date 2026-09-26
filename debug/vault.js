@@ -2,7 +2,7 @@
 //
 // Saving to the archive needs a GitHub token. That token is encrypted with
 // your password (PBKDF2-SHA256 → AES-256-GCM) and the encrypted copy is kept
-// in the repo at site/data/vault.json, so any device only needs the password.
+// in the repo at data/vault.json, so any device only needs the password.
 // Anyone can download the encrypted file, so use a long password.
 export const VAULT_PATH = 'data/vault.json';
 export const MIN_PASSWORD = 10;
