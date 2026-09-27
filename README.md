@@ -8,6 +8,9 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 | --- | --- | --- |
 | 🔊 **Guess the Blaster** | Hear a blaster sound, pick its name | image + sound |
 | 🎯 **Name That Blaster** | See a blaster (clear, or hidden by blur / silhouette / zoom), pick its name | image |
+| 🔍 **Zoom Out** | Starts on an extreme close-up and zooms out in 4 steps. Answer early for more points (4 → 1) | image |
+| ⚡ **Speed Round** | Name as many blasters as you can before the clock runs out (30 / 60 / 90s) | image |
+| 📊 **Higher or Lower** | Is the next blaster's stat (e.g. price) higher or lower? One wrong answer ends the run | image + a stat value |
 
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 
@@ -70,6 +73,14 @@ Files are checked by their actual contents, not their extension.
 
 > The repository must be **public** for free GitHub Pages, so uploaded media is publicly visible in the repo. Upload only media you're allowed to share.
 
+## Stats (for Higher or Lower)
+
+In debug mode, the **Stats** card lets you create stat types, such as *Price* in *credits*, *Length* in *cm*, or *Year* of first appearance. Every blaster form then gets a number box for each stat type.
+
+- Higher or Lower needs at least **3 blasters with a value for the same stat**.
+- With more than one playable stat, the lobby lets you choose one, or pick **Random**.
+- Deleting a stat type also removes its values from every blaster.
+
 ## How games choose entries (requirements)
 
 Games are defined in [`js/registry.js`](js/registry.js):
@@ -110,6 +121,7 @@ Keyboard shortcuts:
 | Key | Action |
 | --- | --- |
 | `1`–`4` / `A`–`D` | Answer |
+| `↑` / `↓` | Higher / Lower |
 | `Space` | Reveal / next (Host mode) |
 | `R` | Replay sound |
 | `Z` | Toggle safe zones |

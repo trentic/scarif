@@ -1,10 +1,12 @@
 import { REPO } from '../config.js';
 import { GAMES, meetsRequirements } from '../js/registry.js';
-import { h, icons } from '../js/ui.js';
+import { formatStat, h, icons } from '../js/ui.js';
 import { GitHub } from './github.js';
 import { keepLocalCopy, loadVault, MIN_PASSWORD, openToken, sealToken, VAULT_PATH } from './vault.js';
 import { createTrimmer } from './trimmer.js';
-import { addEntry, deleteEntry, downloadImage, readMedia, slugify, StoreError, updateEntry } from './store.js';
+import {
+  addEntry, addStatType, deleteEntry, deleteStatType, downloadImage, readMedia, slugify, StoreError, updateEntry, updateStatType,
+} from './store.js';
 
 const app = document.getElementById('app');
 const topActions = document.getElementById('top-actions');
@@ -14,7 +16,7 @@ const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new';
 
 // The unlocked GitHub client only ever lives in memory.
 let gh = null;
-const state = { entries: [], query: '', filter: 'all', publishing: null };
+const state = { entries: [], statTypes: [], query: '', filter: 'all', publishing: null };
 
 // --- helpers --------------------------------------------------------------------------
 
@@ -179,7 +181,7 @@ async function loadDashboard() {
   app.replaceChildren(h('div', { class: 'gate' }, h('p', {}, 'Loading archive…')));
   try {
     const head = await gh.head();
-    setEntries((await gh.readArchive(head.sha)).entries);
+    setArchive(await gh.readArchive(head.sha));
   } catch (err) {
     if (handleAuthError(err)) return lock();
     // Don't show an empty (and editable) archive when it couldn't be read.
@@ -193,15 +195,21 @@ async function loadDashboard() {
   renderDashboard();
 }
 
-function setEntries(entries) {
-  state.entries = entries.map((e) => ({ ...e, imageUrl: gh.rawUrl(e.image), soundUrl: gh.rawUrl(e.sound) }));
+function setArchive(archive) {
+  state.statTypes = archive.stats || [];
+  state.entries = archive.entries.map((e) => ({ ...e, imageUrl: gh.rawUrl(e.image), soundUrl: gh.rawUrl(e.sound) }));
 }
 
 // Called after every commit: update the view, then watch for the site to go live.
-function committed(archive) {
-  setEntries(archive.entries);
-  renderStats();
-  renderLibrary();
+// `full` rebuilds the whole dashboard (stat types changed, so forms change too).
+function committed(archive, { full = false } = {}) {
+  setArchive(archive);
+  if (full) renderDashboard();
+  else {
+    renderStats();
+    renderLibrary();
+    renderStatTypes();
+  }
   watchPublish(archive.updatedAt);
 }
 
@@ -274,10 +282,12 @@ function renderDashboard() {
         libraryGrid,
       ),
     ),
+    statTypesEl,
     passwordCard(),
   );
   renderStats();
   renderLibrary();
+  renderStatTypes();
 }
 
 function renderStats() {
@@ -317,6 +327,7 @@ function renderLibrary() {
       h('div', { class: 'name' }, e.name),
       h('div', {}, h('code', {}, e.id)),
       e.sound ? null : h('div', { class: 'no-sound' }, 'No sound effect'),
+      statLine(e),
       /^https?:/.test(e.image) ? h('div', { class: 'no-sound' }, 'Image is linked, not copied') : null,
       h('div', { class: 'chips' }, gameChips(e)),
       h('div', { class: 'actions' },
@@ -339,6 +350,74 @@ function renderLibrary() {
       ),
     ),
   ))));
+}
+
+function statLine(e) {
+  const parts = state.statTypes.filter((t) => Number.isFinite(e.stats?.[t.id])).map((t) => `${t.name}: ${formatStat(e.stats[t.id], t.unit)}`);
+  return parts.length ? h('div', { class: 'entry-stats' }, parts.join(' · ')) : null;
+}
+
+const statTypesEl = h('section', { class: 'card' });
+
+function renderStatTypes() {
+  const error = h('div', { class: 'form-error', role: 'alert' });
+  const name = h('input', { type: 'text', placeholder: 'Stat name, e.g. Price', maxlength: '40', required: true });
+  const unit = h('input', { type: 'text', placeholder: 'Unit, e.g. credits (optional)', maxlength: '20' });
+  const btn = h('button', { class: 'btn ghost', type: 'submit' }, 'Add stat');
+
+  const run = async (el, work) => {
+    el.disabled = true;
+    error.textContent = '';
+    try {
+      committed(await work(), { full: true });
+    } catch (err) {
+      if (handleAuthError(err)) return lock();
+      error.textContent = err.message;
+      el.disabled = false;
+    }
+  };
+
+  const rows = state.statTypes.map((t) => {
+    const count = state.entries.filter((e) => Number.isFinite(e.stats?.[t.id])).length;
+    return h('div', { class: 'key-row' },
+      h('div', {},
+        h('b', {}, t.name), t.unit ? h('span', { class: 'label-note' }, ` (${t.unit})`) : null,
+        h('small', {}, `${count} blaster${count === 1 ? '' : 's'} have a value${count < 3 ? ' · Higher or Lower needs 3' : ''}`),
+      ),
+      h('div', { class: 'row-actions' },
+        h('button', {
+          class: 'btn ghost small',
+          onclick: (ev) => {
+            const newName = prompt('Stat name', t.name);
+            if (newName == null) return;
+            const newUnit = prompt('Unit (leave empty for none)', t.unit || '');
+            if (newUnit == null) return;
+            run(ev.target, () => updateStatType(gh, t.id, { name: newName, unit: newUnit }));
+          },
+        }, 'Edit'),
+        h('button', {
+          class: 'btn danger small',
+          onclick: (ev) => {
+            if (!confirm(`Delete the "${t.name}" stat? Its values are removed from every blaster.`)) return;
+            run(ev.target, () => deleteStatType(gh, t.id));
+          },
+        }, 'Delete'),
+      ),
+    );
+  });
+
+  statTypesEl.replaceChildren(
+    h('div', { class: 'card-head' }, h('h2', {}, 'Stats'), h('span', { class: 'hint' }, 'Numbers for 📊 Higher or Lower')),
+    rows.length ? h('div', {}, rows) : h('p', { class: 'hint' }, 'No stats yet. Add one (e.g. Price in credits, Length in cm, Year of first appearance), then fill in values when adding or editing blasters.'),
+    h('form', {
+      class: 'add-key',
+      onsubmit: (e) => {
+        e.preventDefault();
+        run(btn, () => addStatType(gh, { name: name.value, unit: unit.value }));
+      },
+    }, name, unit, btn),
+    error,
+  );
 }
 
 function passwordCard() {
@@ -490,12 +569,27 @@ function entryForm({ entry = null, onSaved, onCancel }) {
   soundInput.addEventListener('change', () => setSoundFile(soundInput.files[0]));
   wireDrop(soundDrop, setSoundFile);
 
+  // 4. stats
+  const statInputs = state.statTypes.map((t) => {
+    const input = h('input', {
+      type: 'number',
+      step: 'any',
+      inputmode: 'decimal',
+      'aria-label': t.name,
+      value: Number.isFinite(entry?.stats?.[t.id]) ? String(entry.stats[t.id]) : null,
+      oninput: () => updateUnlocks(),
+    });
+    return { t, input, row: h('label', { class: 'stat-field' }, h('span', {}, t.name), input, h('span', { class: 'unit' }, t.unit || '')) };
+  });
+  const readStats = () => Object.fromEntries(statInputs.filter(({ input }) => input.value.trim() !== '').map(({ t, input }) => [t.id, Number(input.value)]));
+
   // which games this will appear in
   const unlocks = h('div', { class: 'unlocks' });
   function updateUnlocks() {
     const hasImage = Boolean(entry?.image || imageFile || (imageMode === 'url' && urlInput.value.trim()));
     const hasSound = Boolean(soundFile || (entry?.sound && !removeSound.checked));
-    unlocks.replaceChildren('Appears in: ', ...gameChips({ image: hasImage, sound: hasSound }));
+    const hasStats = Object.keys(readStats?.() || {}).length > 0;
+    unlocks.replaceChildren('Appears in: ', ...gameChips({ image: hasImage, sound: hasSound, stats: hasStats }));
   }
   updateUnlocks();
 
@@ -540,8 +634,8 @@ function entryForm({ entry = null, onSaved, onCancel }) {
         trimmer.stop();
         submit.textContent = 'Committing to GitHub…';
         const archive = entry
-          ? await updateEntry(gh, entry.id, { name: name.value, image, sound, removeSound: removeSound.checked })
-          : await addEntry(gh, { name: name.value, image, sound });
+          ? await updateEntry(gh, entry.id, { name: name.value, image, sound, removeSound: removeSound.checked, stats: readStats() })
+          : await addEntry(gh, { name: name.value, image, sound, stats: readStats() });
         if (!entry) reset();
         onSaved?.(archive);
       } catch (err) {
@@ -566,6 +660,12 @@ function entryForm({ entry = null, onSaved, onCancel }) {
       soundPreview,
       trimmer.el,
       removeRow,
+    ),
+    h('div', {},
+      h('label', {}, '4. Stats ', h('span', { class: 'label-note' }, '(optional, for Higher or Lower)')),
+      statInputs.length
+        ? h('div', { class: 'stat-fields' }, statInputs.map(({ row }) => row))
+        : h('div', { class: 'hint' }, 'Add stat types in the Stats section below to use Higher or Lower.'),
     ),
     unlocks,
     error,

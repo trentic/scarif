@@ -40,3 +40,9 @@ export function shuffle(list) {
 }
 
 export const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// 750 → "750 credits", 1234.5 → "1,234.5 m"
+export function formatStat(value, unit) {
+  const n = Number(value).toLocaleString('en-US', { maximumFractionDigits: 2 });
+  return unit ? `${n} ${unit}` : n;
+}

@@ -6,6 +6,7 @@ export const DEFAULTS = {
   timer: 10,
   mode: 'auto', // 'auto' advances by itself, 'host' waits for a tap to reveal / continue
   pictureMode: 'clear',
+  speedSeconds: 60,
   sfx: true,
   safeZones: false,
   clean: false,
@@ -22,6 +23,7 @@ export const OPTIONS = [
     key: 'pictureMode', title: 'Picture mode', choices: [['clear', 'Clear'], ['blur', 'Blur'], ['silhouette', 'Silhouette'], ['zoom', 'Zoom']],
     help: 'Clear shows the picture as-is. Blur, Silhouette and Zoom hide it until the answer is revealed (silhouette works best with transparent PNGs).',
   },
+  { key: 'speedSeconds', title: 'Speed Round length', choices: [[30, '30s'], [60, '60s'], [90, '90s']] },
   { key: 'sfx', title: 'Game sound effects', choices: [[true, 'On'], [false, 'Off']] },
   {
     key: 'safeZones', title: 'Safe-zone overlay', choices: [[true, 'Show'], [false, 'Hide']],

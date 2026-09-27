@@ -1,5 +1,5 @@
-import { loadArchive, loadPool } from './archive.js';
-import { GAMES, getGame, meetsRequirements } from './registry.js';
+import { loadArchive, poolFor } from './archive.js';
+import { GAMES, getGame, meetsRequirements, requirementLabel } from './registry.js';
 import { runGame } from './engine.js';
 import { OPTIONS, onSettingsChange, settings } from './settings.js';
 import { audioContext, sfx } from './sfx.js';
@@ -9,9 +9,14 @@ import { h, iconButton } from './ui.js';
 const stage = document.getElementById('stage');
 fitStage(stage);
 
-const renderers = {
+// Each module exports either `renderer` (runs on the shared quiz engine) or
+// `run()` (its own game loop), plus an optional `lobby()` hook.
+const modules = {
   sound: () => import('./games/sound.js'),
   picture: () => import('./games/picture.js'),
+  zoom: () => import('./games/zoom.js'),
+  speed: () => import('./games/speed.js'),
+  higherlower: () => import('./games/higherlower.js'),
 };
 
 let stopCurrent = () => {};
@@ -22,7 +27,7 @@ function show(screen) {
 }
 
 function setAccent(accent) {
-  stage.classList.remove('accent-red', 'accent-cyan');
+  stage.classList.remove('accent-red', 'accent-cyan', 'accent-gold', 'accent-green');
   if (accent) stage.classList.add(`accent-${accent}`);
 }
 
@@ -114,7 +119,7 @@ async function showHub() {
 
   for (const g of games) {
     const locked = g.eligible < g.minEntries;
-    const needs = g.requires.sound ? 'with a sound' : 'with an image';
+    const needs = requirementLabel(g.requires);
     list.append(h('button', {
       class: `game-tile accent-${g.accent} ${locked ? 'locked' : ''}`,
       onclick: () => { location.hash = `#/play/${g.id}`; },
@@ -138,22 +143,31 @@ async function showLobby(gameId) {
   if (!game) { location.hash = '#/'; return; }
   setAccent(game.accent);
 
-  const pool = await loadPool(game.id).catch(() => []);
-  const ready = pool.length >= game.minEntries;
+  const [archive, mod] = await Promise.all([
+    loadArchive().catch(() => ({ entries: [], stats: [] })),
+    modules[game.module](),
+  ]);
+  const pool = poolFor(game, archive);
+  const refresh = () => showLobby(gameId);
+
+  // Games can customise the lobby (extra controls, their own facts line).
+  const custom = mod.lobby?.({ game, pool, archive, settings, refresh }) || {};
+  const ready = custom.ready ?? pool.length >= game.minEntries;
   const rounds = settings.rounds > 0 ? Math.min(settings.rounds, pool.length) : pool.length;
 
-  const facts = ready
-    ? [`${rounds} rounds`, settings.timer ? `${settings.timer}s timer` : 'no timer', settings.mode === 'host' ? 'host mode' : null]
-      .filter(Boolean).join(' · ')
-    : `Needs ${game.minEntries} blasters · ${pool.length} added. Add more in debug mode.`;
+  const facts = !ready
+    ? custom.notReady || `Needs ${game.minEntries} blasters ${requirementLabel(game.requires)} · ${pool.length} added. Add more in debug mode.`
+    : custom.facts || [`${rounds} rounds`, settings.timer ? `${settings.timer}s timer` : 'no timer', settings.mode === 'host' ? 'host mode' : null]
+      .filter(Boolean).join(' · ');
 
   show(h('div', { class: 'screen lobby' },
     h('div', { class: 'corner left' }, iconButton('home', 'Menu', () => { location.hash = '#/'; })),
-    h('div', { class: 'corner right' }, iconButton('gear', 'Settings', () => openSettings(() => showLobby(gameId)))),
+    h('div', { class: 'corner right' }, iconButton('gear', 'Settings', () => openSettings(refresh))),
     h('div', { class: 'glyph' }, game.icon),
     h('h1', { class: 'display' }, game.title),
     h('div', { class: 'tag' }, game.tagline),
     h('div', { class: 'facts' }, facts),
+    custom.extra || null,
     h('div', { class: 'actions' },
       h('button', { class: 'btn', disabled: !ready, style: ready ? null : { opacity: 0.4 }, onclick: () => ready && start() }, 'Start'),
     ),
@@ -169,16 +183,18 @@ async function showLobby(gameId) {
     stopCurrent();
     audioContext(); // unlock audio inside the tap
     sfx.lock();
-    const { renderer } = await renderers[game.module]();
-    runGame({
+    const opts = {
       stage,
       game,
       pool,
-      renderer,
+      archive,
+      settings,
       register: (stop) => { stopCurrent = stop; },
       onExit: () => { location.hash = '#/'; },
       onReplay: start,
-    });
+    };
+    if (mod.run) mod.run(opts);
+    else runGame({ ...opts, renderer: mod.renderer });
   }
 }
 

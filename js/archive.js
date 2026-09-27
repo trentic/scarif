@@ -1,5 +1,5 @@
 // Loads the blaster archive (data/archive.json) published with the site.
-import { getGame, meetsRequirements } from './registry.js';
+import { meetsRequirements } from './registry.js';
 
 export const SITE_ROOT = new URL('../', import.meta.url);
 
@@ -16,10 +16,9 @@ export async function loadArchive() {
   return res.json();
 }
 
-export async function loadPool(gameId) {
-  const game = getGame(gameId);
-  const archive = await loadArchive();
+// The entries a game can use, with media paths turned into full URLs.
+export function poolFor(game, archive) {
   return archive.entries
     .filter((e) => meetsRequirements(e, game.requires))
-    .map((e) => ({ id: e.id, name: e.name, image: mediaUrl(e.image), sound: mediaUrl(e.sound) }));
+    .map((e) => ({ id: e.id, name: e.name, image: mediaUrl(e.image), sound: mediaUrl(e.sound), stats: e.stats || {} }));
 }

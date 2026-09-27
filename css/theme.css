@@ -31,6 +31,8 @@
 
 .accent-red { --accent: var(--red); --accent-glow: var(--red-glow); }
 .accent-cyan { --accent: var(--cyan); --accent-glow: var(--cyan-glow); }
+.accent-gold { --accent: var(--gold); --accent-glow: rgba(255, 201, 64, 0.5); }
+.accent-green { --accent: var(--green); --accent-glow: var(--green-glow); }
 
 *, *::before, *::after { box-sizing: border-box; }
 

@@ -1,8 +1,12 @@
 // Shared quiz flow: countdown → rounds (prompt + 4 answers + timer) → results.
 // Each game only supplies a "renderer" that draws the prompt for one entry:
 //
-//   renderer.mount(promptEl, entry, ctx) → { reveal(), replay?(), destroy() }
+//   renderer.mount(promptEl, entry, ctx) → { reveal(), replay?(), destroy(), points?() }
 //   renderer.preload?(entry)
+//   renderer.maxPoints (default 1) — points a perfect round is worth
+//
+// Games with their own flow (Speed Round, Higher or Lower) export `run()`
+// instead and reuse `countdown()` and `resultsScreen()` from here.
 import { settings } from './settings.js';
 import { sfx } from './sfx.js';
 import { h, iconButton, shuffle, wait } from './ui.js';
@@ -24,6 +28,41 @@ export function rankFor(score, total) {
   return RANKS.find(([min]) => pct >= min);
 }
 
+export function showScreen(stage, screen) {
+  stage.querySelectorAll('.screen').forEach((s) => s.remove());
+  stage.prepend(screen);
+}
+
+// 3-2-1 countdown. Resolves false if the game was stopped meanwhile.
+export async function countdown(stage, isAlive) {
+  for (const n of [3, 2, 1]) {
+    if (!isAlive()) return false;
+    showScreen(stage, h('div', { class: 'screen countdown' }, h('div', { class: 'num' }, n)));
+    sfx.beep();
+    await wait(850);
+  }
+  if (!isAlive()) return false;
+  sfx.pew();
+  return true;
+}
+
+// Shared end screen. `stats` is a list of [value, label].
+export function resultsScreen(stage, { title, big, of, rank, blurb, stats, cta = 'Comment your score 👇', onMenu, onReplay }) {
+  sfx.fanfare();
+  showScreen(stage, h('div', { class: 'screen results' },
+    h('div', { class: 'label' }, title),
+    h('div', { class: 'big' }, big, of != null ? h('small', {}, ` / ${of}`) : null),
+    h('div', { class: 'rank display' }, rank),
+    h('div', { class: 'rank-sub' }, blurb),
+    h('div', { class: 'stats' }, stats.map(([value, label]) => h('div', { class: 'stat' }, h('b', {}, value), h('span', {}, label)))),
+    h('div', { class: 'cta' }, cta),
+    h('div', { class: 'actions' },
+      h('button', { class: 'btn ghost', onclick: onMenu }, 'Menu'),
+      h('button', { class: 'btn', onclick: onReplay }, 'Play again'),
+    ),
+  ));
+}
+
 export async function runGame({ stage, game, pool, renderer, onExit, onReplay, register }) {
   let alive = true;
   let cleanupRound = () => {};
@@ -39,10 +78,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
   const onKey = (e) => keyHandler?.(e);
   document.addEventListener('keydown', onKey);
 
-  const show = (screen) => {
-    stage.querySelectorAll('.screen').forEach((s) => s.remove());
-    stage.prepend(screen);
-  };
+  const show = (screen) => showScreen(stage, screen);
 
   const exit = () => {
     stop();
@@ -55,17 +91,12 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
 
   // --- countdown -------------------------------------------------------------
   keyHandler = (e) => e.key === 'Escape' && exit();
-  for (const n of [3, 2, 1]) {
-    if (!alive) return stop;
-    show(h('div', { class: 'screen countdown' }, h('div', { class: 'num' }, n)));
-    sfx.beep();
-    await wait(850);
-  }
-  if (!alive) return stop;
-  sfx.pew();
+  if (!(await countdown(stage, () => alive))) return stop;
 
   // --- rounds ------------------------------------------------------------------
+  const maxPoints = renderer.maxPoints || 1;
   let score = 0;
+  let correct = 0;
   let streak = 0;
   let bestStreak = 0;
 
@@ -207,10 +238,12 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
         });
 
         if (picked === correctIdx) {
-          score++;
+          const pts = view.points?.() ?? 1;
+          score += pts;
+          correct++;
           streak++;
           bestStreak = Math.max(bestStreak, streak);
-          flash(streak >= 3 ? `${streak} streak!` : 'Correct!', 'good');
+          flash(maxPoints > 1 ? `+${pts} pts` : streak >= 3 ? `${streak} streak!` : 'Correct!', 'good');
           sfx.correct();
         } else if (picked !== null) {
           streak = 0;
@@ -246,26 +279,25 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
   }
 
   function showResults() {
-    const [, rank, blurb] = rankFor(score, targets.length);
-    sfx.fanfare();
+    const total = targets.length * maxPoints;
+    const [, rank, blurb] = rankFor(score, total);
+    const replay = () => { stop(); onReplay(); };
     keyHandler = (e) => {
       if (e.key === 'Escape') exit();
-      if (e.key === 'Enter' || e.key === ' ') { stop(); onReplay(); }
+      if (e.key === 'Enter' || e.key === ' ') replay();
     };
-    show(h('div', { class: 'screen results' },
-      h('div', { class: 'label' }, game.title),
-      h('div', { class: 'big' }, score, h('small', {}, ` / ${targets.length}`)),
-      h('div', { class: 'rank display' }, rank),
-      h('div', { class: 'rank-sub' }, blurb),
-      h('div', { class: 'stats' },
-        h('div', { class: 'stat' }, h('b', {}, `${Math.round((score / targets.length) * 100)}%`), h('span', {}, 'Accuracy')),
-        h('div', { class: 'stat' }, h('b', {}, `🔥 ${bestStreak}`), h('span', {}, 'Best streak')),
-      ),
-      h('div', { class: 'cta' }, 'Comment your score 👇'),
-      h('div', { class: 'actions' },
-        h('button', { class: 'btn ghost', onclick: exit }, 'Menu'),
-        h('button', { class: 'btn', onclick: () => { stop(); onReplay(); } }, 'Play again'),
-      ),
-    ));
+    resultsScreen(stage, {
+      title: game.title,
+      big: score,
+      of: maxPoints > 1 ? `${total} pts` : total,
+      rank,
+      blurb,
+      stats: [
+        [`${Math.round((correct / targets.length) * 100)}%`, 'Accuracy'],
+        [`🔥 ${bestStreak}`, 'Best streak'],
+      ],
+      onMenu: exit,
+      onReplay: replay,
+    });
   }
 }

@@ -180,6 +180,8 @@ input:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outl
 }
 .chip.on.accent-red { border-color: var(--red); color: var(--red); background: color-mix(in srgb, var(--red) 12%, transparent); }
 .chip.on.accent-cyan { border-color: var(--cyan); color: var(--cyan); background: color-mix(in srgb, var(--cyan) 12%, transparent); }
+.chip.on.accent-gold { border-color: var(--gold); color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, transparent); }
+.chip.on.accent-green { border-color: var(--green); color: var(--green); background: color-mix(in srgb, var(--green) 12%, transparent); }
 
 .form-error { color: #ff8080; font-size: 14px; min-height: 1em; }
 .form-actions { display: flex; gap: 8px; justify-content: flex-end; }
@@ -300,3 +302,12 @@ a { color: var(--cyan); }
 .trim-field { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-weight: 600; font-size: 13px; color: var(--muted); }
 .trim-field input { width: 74px; min-height: 32px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--panel); color: var(--text); font: inherit; font-variant-numeric: tabular-nums; }
 .sound-preview .btn { flex: none; }
+
+/* ---- stats ---- */
+.stat-fields { display: grid; gap: 8px; }
+.stat-field { display: grid; grid-template-columns: minmax(80px, 1fr) 120px minmax(40px, auto); align-items: center; gap: 8px; margin: 0; font-weight: 600; }
+.stat-field input { min-height: 38px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); font: inherit; font-variant-numeric: tabular-nums; }
+.stat-field .unit { color: var(--muted); font-weight: 400; font-size: 13px; }
+.entry-stats { font-size: 12.5px; color: var(--gold); }
+.row-actions { display: flex; gap: 4px; flex: none; }
+.card-head .hint { margin: 0; }

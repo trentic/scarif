@@ -83,11 +83,21 @@ function checkName(archive, raw, selfId) {
   return name;
 }
 
+// Keeps only finite numbers for stat types that exist.
+function cleanStats(archive, stats) {
+  const ids = new Set((archive.stats || []).map((t) => t.id));
+  const out = {};
+  for (const [id, v] of Object.entries(stats || {})) {
+    if (ids.has(id) && v !== '' && v != null && Number.isFinite(Number(v))) out[id] = Number(v);
+  }
+  return out;
+}
+
 const isLocal = (path) => typeof path === 'string' && path.startsWith('media/');
 
 // image: { media: {ext, base64} } | { link: 'https://…' } | null
 // sound: { media } | null
-export function addEntry(gh, { name, image, sound }) {
+export function addEntry(gh, { name, image, sound, stats }) {
   return gh.commitArchive((archive) => {
     const clean = checkName(archive, name);
     const base = slugify(clean) || 'entry';
@@ -107,6 +117,7 @@ export function addEntry(gh, { name, image, sound }) {
       name: clean,
       image: image.link || place(image.media, 'image'),
       sound: sound ? place(sound.media, 'sound') : null,
+      ...(Object.keys(cleanStats(archive, stats)).length ? { stats: cleanStats(archive, stats) } : {}),
       createdAt: now,
       updatedAt: now,
     });
@@ -115,7 +126,7 @@ export function addEntry(gh, { name, image, sound }) {
   });
 }
 
-export function updateEntry(gh, id, { name, image, sound, removeSound }) {
+export function updateEntry(gh, id, { name, image, sound, removeSound, stats }) {
   return gh.commitArchive((archive) => {
     const entry = archive.entries.find((e) => e.id === id);
     if (!entry) throw new StoreError('That entry no longer exists. Reload the page.');
@@ -135,6 +146,11 @@ export function updateEntry(gh, id, { name, image, sound, removeSound }) {
       if (isLocal(entry.sound)) remove.push(entry.sound);
       entry.sound = sound ? place(sound.media, 'sound') : null;
     }
+    if (stats !== undefined) {
+      const clean = cleanStats(archive, stats);
+      if (Object.keys(clean).length) entry.stats = clean;
+      else delete entry.stats;
+    }
     entry.updatedAt = new Date().toISOString();
     archive.entries.sort((a, b) => a.name.localeCompare(b.name));
     return { archive, add, remove, message: `Archive: update ${entry.name}` };
@@ -148,5 +164,52 @@ export function deleteEntry(gh, id) {
     archive.entries = archive.entries.filter((e) => e.id !== id);
     const remove = [entry.image, entry.sound].filter(isLocal);
     return { archive, remove, message: `Archive: remove ${entry.name}` };
+  });
+}
+
+// --- stat types (used by Higher or Lower) ---------------------------------------------
+
+export function addStatType(gh, { name, unit }) {
+  return gh.commitArchive((archive) => {
+    const clean = String(name ?? '').trim().replace(/\s+/g, ' ');
+    if (!clean) throw new StoreError('Give the stat a name, e.g. "Price".');
+    if (clean.length > 40) throw new StoreError('Stat names must be 40 characters or fewer.');
+    archive.stats ||= [];
+    if (archive.stats.some((t) => t.name.toLowerCase() === clean.toLowerCase())) throw new StoreError(`"${clean}" already exists.`);
+    const base = slugify(clean) || 'stat';
+    let id = base;
+    for (let n = 2; archive.stats.some((t) => t.id === id); n++) id = `${base}-${n}`;
+    archive.stats.push({ id, name: clean, unit: String(unit ?? '').trim().slice(0, 20) });
+    return { archive, message: `Archive: add stat ${clean}` };
+  });
+}
+
+export function updateStatType(gh, id, { name, unit }) {
+  return gh.commitArchive((archive) => {
+    const type = (archive.stats || []).find((t) => t.id === id);
+    if (!type) throw new StoreError('That stat no longer exists. Reload the page.');
+    if (name !== undefined) {
+      const clean = String(name).trim().replace(/\s+/g, ' ');
+      if (!clean) throw new StoreError('Stat names can’t be empty.');
+      if (archive.stats.some((t) => t.id !== id && t.name.toLowerCase() === clean.toLowerCase())) throw new StoreError(`"${clean}" already exists.`);
+      type.name = clean.slice(0, 40);
+    }
+    if (unit !== undefined) type.unit = String(unit).trim().slice(0, 20);
+    return { archive, message: `Archive: update stat ${type.name}` };
+  });
+}
+
+export function deleteStatType(gh, id) {
+  return gh.commitArchive((archive) => {
+    const type = (archive.stats || []).find((t) => t.id === id);
+    if (!type) throw new StoreError('That stat no longer exists. Reload the page.');
+    archive.stats = archive.stats.filter((t) => t.id !== id);
+    for (const e of archive.entries) {
+      if (e.stats) {
+        delete e.stats[id];
+        if (!Object.keys(e.stats).length) delete e.stats;
+      }
+    }
+    return { archive, message: `Archive: remove stat ${type.name}` };
   });
 }
