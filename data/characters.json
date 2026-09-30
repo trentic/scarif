@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:03:23.841Z",
+  "updatedAt": "2026-09-30T04:03:42.347Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -15,9 +15,9 @@
       "name": "Ahsoka Tano",
       "side": "jedi",
       "power": 84,
-      "image": null,
+      "image": "media/characters/ahsoka-tano-4e05fc2f.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:03:42.347Z"
     },
     {
       "id": "anakin-skywalker",
