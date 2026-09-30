@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:10:08.725Z",
+  "updatedAt": "2026-09-30T04:10:19.831Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -150,9 +150,9 @@
       "name": "Darth Vader",
       "side": "sith",
       "power": 93,
-      "image": null,
+      "image": "media/characters/darth-vader-4ca6c8a5.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:10:19.831Z"
     },
     {
       "id": "darth-vitiate",
