@@ -17,4 +17,12 @@ export const VOTES = {
   endpoint: '',
   // Show real percentages only once a matchup has this many votes.
   minVotes: 20,
+  // Fan estimate (used until real votes exist), from the gap in fan power:
+  //   gap 0 → 50/50 · 5 → 60/40 · 10 → 70/30 · 20 → 84/16 · 30+ → 92/8
+  estimate: {
+    spread: 12, // bigger = gentler curve (closer splits for the same gap)
+    jitter: 3, // ± random points so the same matchup varies a little
+    min: 8, // never show less than this %
+    max: 92, // never show more than this %
+  },
 };

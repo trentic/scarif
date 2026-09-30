@@ -1,4 +1,4 @@
-import { loadArchive, poolFor } from './archive.js';
+import { keepLoadable, loadArchive, poolFor } from './archive.js';
 import { ARCHIVES, GAMES, getGame, meetsRequirements, requirementLabel } from './registry.js';
 import { runGame } from './engine.js';
 import { OPTIONS, onSettingsChange, settings } from './settings.js';
@@ -189,10 +189,17 @@ async function showLobby(gameId) {
     stopCurrent();
     audioContext(); // unlock audio inside the tap
     sfx.lock();
+    // Only use entries whose picture actually loads.
+    const playable = game.requires.image ? await keepLoadable(pool) : pool;
+    if (playable.length < game.minEntries) {
+      showLobby(gameId);
+      alert(`Only ${playable.length} ${ARCHIVES[game.archive].noun} have a picture that loads right now. Check the pictures in debug mode.`);
+      return;
+    }
     const opts = {
       stage,
       game,
-      pool,
+      pool: playable,
       archive,
       settings,
       register: (stop) => { stopCurrent = stop; },

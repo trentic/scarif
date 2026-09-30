@@ -6,16 +6,20 @@
 // These are labelled as estimates on screen, never as real votes.
 import { VOTES } from '../config.js';
 
-const SPREAD = 8; // power points per logistic step; lower = more one-sided
-const JITTER = 4; // ± percentage points of randomness
+// Logistic curve on the fan-power gap: equal powers split 50/50, and the
+// split grows with the gap but levels off (see VOTES.estimate in config.js).
+export function estimateShare(gap, { spread = 12, min = 8, max = 92 } = {}) {
+  const share = 100 / (1 + Math.exp(-gap / spread));
+  return Math.min(max, Math.max(min, share));
+}
 
 function estimate(a, b) {
-  const pa = Number(a.power) || 50;
-  const pb = Number(b.power) || 50;
-  const share = 1 / (1 + Math.exp(-(pa - pb) / SPREAD));
-  const jitter = (Math.random() * 2 - 1) * JITTER;
-  const pctA = Math.round(Math.min(94, Math.max(6, share * 100 + jitter)));
-  return { a: pctA, b: 100 - pctA, source: 'estimate' };
+  const opts = VOTES.estimate || {};
+  const gap = (Number(a.power) || 50) - (Number(b.power) || 50);
+  const jitter = (Math.random() * 2 - 1) * (opts.jitter ?? 3);
+  const pctA = Math.round(estimateShare(gap, opts) + jitter);
+  const clamped = Math.min(opts.max ?? 92, Math.max(opts.min ?? 8, pctA));
+  return { a: clamped, b: 100 - clamped, source: 'estimate' };
 }
 
 export async function split(a, b) {

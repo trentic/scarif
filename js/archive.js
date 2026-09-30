@@ -29,3 +29,18 @@ export function poolFor(game, archive) {
       stats: e.stats || {},
     }));
 }
+
+// Drops entries whose picture doesn't actually load (e.g. a linked image from
+// a site that went down), so a game never shows a blank card.
+export async function keepLoadable(pool, timeoutMs = 6000) {
+  const loads = (src) => new Promise((resolve) => {
+    if (!src) return resolve(false);
+    const img = new Image();
+    const timer = setTimeout(() => resolve(false), timeoutMs);
+    img.onload = () => { clearTimeout(timer); resolve(img.naturalWidth > 0); };
+    img.onerror = () => { clearTimeout(timer); resolve(false); };
+    img.src = src;
+  });
+  const ok = await Promise.all(pool.map((e) => loads(e.image)));
+  return pool.filter((_, i) => ok[i]);
+}

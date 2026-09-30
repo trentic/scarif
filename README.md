@@ -87,7 +87,15 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 
 ### Who Would Win? percentages
 
-Until real voting is set up, the split is a **fan estimate** worked out from each character's fan power (a bigger gap = more one-sided, with a little randomness), and it's labelled *Fan estimate* on screen. Starting fan powers come from popular power rankings (e.g. [SlashFilm](https://www.slashfilm.com/1984100/most-powerful-sith-star-wars-ranked/), [Collider](https://collider.com/strongest-jedi-star-wars-ranked/), [CCSabers](https://www.ccsabers.com/blogs/ccsabers-blog/who-is-the-most-powerful-jedi-definitive-ranking-2026)) — adjust them any time in debug mode.
+Until real voting is set up, the split is a **fan estimate** from the gap in fan power, labelled *Fan estimate* on screen. It uses a logistic curve, so close fights stay close and big mismatches level off:
+
+| Power gap | 0 | 5 | 10 | 20 | 30+ |
+| --- | --- | --- | --- | --- | --- |
+| Split | 50/50 | 60/40 | 70/30 | 84/16 | 92/8 |
+
+Plus up to ±3 points of randomness. Tune it with `VOTES.estimate` in [`config.js`](config.js) (`spread` = how gentle the curve is, `jitter`, `min`/`max`).
+
+Games only use entries whose picture actually loads, so a broken linked image never shows up as a blank card. Starting fan powers come from popular power rankings (e.g. [SlashFilm](https://www.slashfilm.com/1984100/most-powerful-sith-star-wars-ranked/), [Collider](https://collider.com/strongest-jedi-star-wars-ranked/), [CCSabers](https://www.ccsabers.com/blogs/ccsabers-blog/who-is-the-most-powerful-jedi-definitive-ranking-2026)) — adjust them any time in debug mode.
 
 To switch to real votes later, set `VOTES.endpoint` in [`config.js`](config.js) to a service that implements `GET /split?a=&b=` → `{ a, b, total }` and `POST /vote { a, b, winner }` (see [`js/votes.js`](js/votes.js)). Once a matchup has enough votes the label changes to *of players picked*.
 
