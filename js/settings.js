@@ -14,7 +14,7 @@ export const DEFAULTS = {
 };
 
 export const OPTIONS = [
-  { key: 'rounds', title: 'Rounds', choices: [[5, '5'], [10, '10'], [15, '15'], [20, '20'], [0, 'All']] },
+  { key: 'rounds', title: 'Rounds', choices: [[3, '3'], [5, '5'], [10, '10'], [15, '15'], [20, '20'], [0, 'All']] },
   { key: 'timer', title: 'Answer timer', choices: [[0, 'Off'], [5, '5s'], [10, '10s'], [15, '15s']] },
   {
     key: 'mode', title: 'Flow', choices: [['auto', 'Auto'], ['host', 'Host']],
