@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:08:36.478Z",
+  "updatedAt": "2026-09-30T04:08:58.938Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -105,9 +105,9 @@
       "name": "Darth Nihilus",
       "side": "sith",
       "power": 88,
-      "image": null,
+      "image": "media/characters/darth-nihilus-0ad9f7c4.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:08:58.938Z"
     },
     {
       "id": "darth-plagueis",
