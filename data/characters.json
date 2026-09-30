@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:04:10.186Z",
+  "updatedAt": "2026-09-30T04:04:33.444Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -33,9 +33,9 @@
       "name": "Asajj Ventress",
       "side": "sith",
       "power": 70,
-      "image": null,
+      "image": "media/characters/asajj-ventress-32af3a25.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:04:33.444Z"
     },
     {
       "id": "cal-kestis",
