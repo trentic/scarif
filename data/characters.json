@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:15:27.466Z",
+  "updatedAt": "2026-09-30T04:15:43.477Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -294,9 +294,9 @@
       "name": "Rey",
       "side": "jedi",
       "power": 83,
-      "image": null,
+      "image": "media/characters/rey-ee5bff7a.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:15:43.477Z"
     },
     {
       "id": "savage-opress",
