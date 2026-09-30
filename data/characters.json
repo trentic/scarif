@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:11:02.241Z",
+  "updatedAt": "2026-09-30T04:11:14.407Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -186,9 +186,9 @@
       "name": "Grogu",
       "side": "jedi",
       "power": 65,
-      "image": null,
+      "image": "media/characters/grogu-0803266e.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:11:14.407Z"
     },
     {
       "id": "kanan-jarrus",
