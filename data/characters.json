@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:06:46.463Z",
+  "updatedAt": "2026-09-30T04:07:33.254Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -87,9 +87,9 @@
       "name": "Darth Malgus",
       "side": "sith",
       "power": 83,
-      "image": null,
+      "image": "media/characters/darth-malgus-8f25a000.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:07:33.254Z"
     },
     {
       "id": "darth-maul",
