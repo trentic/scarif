@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:05:03.626Z",
+  "updatedAt": "2026-09-30T04:05:21.598Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -51,9 +51,9 @@
       "name": "Cere Junda",
       "side": "jedi",
       "power": 73,
-      "image": null,
+      "image": "media/characters/cere-junda-59ee244c.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:05:21.598Z"
     },
     {
       "id": "count-dooku",
