@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-09-30T00:00:00.000Z",
+  "updatedAt": "2026-09-30T04:03:23.841Z",
   "entries": [
     {
       "id": "aayla-secura",
       "name": "Aayla Secura",
       "side": "jedi",
       "power": 68,
-      "image": null,
+      "image": "media/characters/aayla-secura-a3dad0fc.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:03:23.841Z"
     },
     {
       "id": "ahsoka-tano",
