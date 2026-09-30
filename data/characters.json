@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:14:56.208Z",
+  "updatedAt": "2026-09-30T04:15:10.840Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -303,9 +303,9 @@
       "name": "Savage Opress",
       "side": "sith",
       "power": 72,
-      "image": null,
+      "image": "media/characters/savage-opress-eb98e5cf.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:15:10.840Z"
     },
     {
       "id": "second-sister",
