@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:07:33.254Z",
+  "updatedAt": "2026-09-30T04:08:12.909Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -96,9 +96,9 @@
       "name": "Darth Maul",
       "side": "sith",
       "power": 84,
-      "image": null,
+      "image": "media/characters/darth-maul-315d9051.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:08:12.909Z"
     },
     {
       "id": "darth-nihilus",
