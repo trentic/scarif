@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:13:50.018Z",
+  "updatedAt": "2026-09-30T04:14:01.569Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -276,9 +276,9 @@
       "name": "Qui-Gon Jinn",
       "side": "jedi",
       "power": 82,
-      "image": null,
+      "image": "https://preview.redd.it/i-dont-think-people-realize-how-qui-gon-jinn-is-the-most-v0-yno7cqh3lnhf1.jpeg?auto=webp&s=368f0db3d36d49cd3372839b5ae3a0048dc6f61c",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:14:01.569Z"
     },
     {
       "id": "quinlan-vos",
