@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:15:10.840Z",
+  "updatedAt": "2026-09-30T04:15:27.466Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -321,9 +321,9 @@
       "name": "Shaak Ti",
       "side": "jedi",
       "power": 71,
-      "image": null,
+      "image": "media/characters/shaak-ti-41ef478e.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:15:27.466Z"
     },
     {
       "id": "snoke",
