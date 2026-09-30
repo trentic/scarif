@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:04:33.444Z",
+  "updatedAt": "2026-09-30T04:05:03.626Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -42,9 +42,9 @@
       "name": "Cal Kestis",
       "side": "jedi",
       "power": 80,
-      "image": null,
+      "image": "media/characters/cal-kestis-c92e6adc.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:05:03.626Z"
     },
     {
       "id": "cere-junda",
