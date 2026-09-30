@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:14:44.898Z",
+  "updatedAt": "2026-09-30T04:14:56.208Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -348,9 +348,9 @@
       "name": "The Grand Inquisitor",
       "side": "sith",
       "power": 68,
-      "image": null,
+      "image": "media/characters/the-grand-inquisitor-153c9f16.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:14:56.208Z"
     },
     {
       "id": "yoda",
