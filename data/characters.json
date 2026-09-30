@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:09:39.070Z",
+  "updatedAt": "2026-09-30T04:10:08.725Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -132,9 +132,9 @@
       "name": "Darth Sidious",
       "side": "sith",
       "power": 98,
-      "image": null,
+      "image": "media/characters/darth-sidious-dccafdc3.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:10:08.725Z"
     },
     {
       "id": "darth-sion",
