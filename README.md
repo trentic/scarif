@@ -16,7 +16,7 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 
 | Game | What players do | Needs per character |
 | --- | --- | --- |
-| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Choose 3, 10 or Unlimited matchups in the lobby (Unlimited: tap **Finish** or press F to end). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
+| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Uses the **Rounds** setting; **All** means unlimited matchups (tap **Finish** or press F to end). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
 
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 

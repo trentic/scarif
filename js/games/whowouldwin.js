@@ -16,20 +16,12 @@ const RANKS = [
   [0, 'Certified Contrarian', 'Did you pick the underdog every time?'],
 ];
 
-const LENGTHS = [[3, '3'], [10, '10'], [0, '∞ Unlimited']];
-
-export function lobby({ pool, settings, refresh }) {
-  const length = LENGTHS.some(([n]) => n === settings.wvwRounds) ? settings.wvwRounds : 10;
+// Uses the Rounds setting; "All" (0) means unlimited matchups here.
+export function lobby({ pool, settings }) {
+  const length = settings.rounds;
   return {
     notReady: 'Needs 2 characters with a picture. Add pictures in debug mode → Characters.',
     facts: `${length ? `${length} matchups` : 'Unlimited matchups'} · ${pool.length} fighters · no wrong answers`,
-    extra: h('div', { class: 'hl-choose' },
-      h('div', { class: 'title' }, 'Matchups'),
-      h('div', { class: 'seg' }, LENGTHS.map(([n, label]) => h('button', {
-        'aria-pressed': String(n === length),
-        onclick: () => { settings.wvwRounds = n; refresh(); },
-      }, label))),
-    ),
   };
 }
 
@@ -69,7 +61,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   register?.(stop);
   const exit = () => { stop(); onExit(); };
 
-  const total = LENGTHS.some(([n]) => n === settings.wvwRounds) ? settings.wvwRounds : 10; // 0 = unlimited
+  const total = settings.rounds; // 0 ("All") = unlimited
   const nextPair = pairer(pool);
   let played = 0;
   let finishing = false; // "Finish" tapped in unlimited mode

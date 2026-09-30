@@ -7,14 +7,16 @@ export const DEFAULTS = {
   mode: 'auto', // 'auto' advances by itself, 'host' waits for a tap to reveal / continue
   pictureMode: 'clear',
   speedSeconds: 60,
-  wvwRounds: 10, // Who Would Win?: 3, 10 or 0 (unlimited)
   sfx: true,
   safeZones: false,
   clean: false,
 };
 
 export const OPTIONS = [
-  { key: 'rounds', title: 'Rounds', choices: [[3, '3'], [5, '5'], [10, '10'], [15, '15'], [20, '20'], [0, 'All']] },
+  {
+    key: 'rounds', title: 'Rounds', choices: [[3, '3'], [5, '5'], [10, '10'], [15, '15'], [20, '20'], [0, 'All']],
+    help: 'All = every entry once. In Who Would Win? it means unlimited matchups (tap Finish to end).',
+  },
   { key: 'timer', title: 'Answer timer', choices: [[0, 'Off'], [5, '5s'], [10, '10s'], [15, '15s']] },
   {
     key: 'mode', title: 'Flow', choices: [['auto', 'Auto'], ['host', 'Host']],
