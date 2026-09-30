@@ -1,5 +1,5 @@
 import { loadArchive, poolFor } from './archive.js';
-import { GAMES, getGame, meetsRequirements, requirementLabel } from './registry.js';
+import { ARCHIVES, GAMES, getGame, meetsRequirements, requirementLabel } from './registry.js';
 import { runGame } from './engine.js';
 import { OPTIONS, onSettingsChange, settings } from './settings.js';
 import { audioContext, sfx } from './sfx.js';
@@ -17,6 +17,7 @@ const modules = {
   zoom: () => import('./games/zoom.js'),
   speed: () => import('./games/speed.js'),
   higherlower: () => import('./games/higherlower.js'),
+  whowouldwin: () => import('./games/whowouldwin.js'),
 };
 
 let stopCurrent = () => {};
@@ -108,31 +109,36 @@ async function showHub() {
     list,
   ));
 
-  let entries = [];
-  try {
-    entries = (await loadArchive()).entries;
-  } catch {
-    list.append(h('div', { class: 'hub-empty' }, "Couldn't load the blaster archive."));
-    return;
-  }
-  const games = GAMES.map((g) => ({ ...g, eligible: entries.filter((e) => meetsRequirements(e, g.requires)).length }));
+  for (const [key, info] of Object.entries(ARCHIVES)) {
+    const games = GAMES.filter((g) => g.archive === key);
+    if (!games.length) continue;
+    const section = h('div', { class: 'game-section' });
+    list.append(h('div', { class: 'section-title' }, info.title), section);
 
-  for (const g of games) {
-    const locked = g.eligible < g.minEntries;
-    const needs = requirementLabel(g.requires);
-    list.append(h('button', {
-      class: `game-tile accent-${g.accent} ${locked ? 'locked' : ''}`,
-      onclick: () => { location.hash = `#/play/${g.id}`; },
-    },
-      h('div', { class: 'glyph' }, g.icon),
-      h('div', {},
-        h('h2', { class: 'display' }, g.title),
-        h('div', { class: 'tag' }, g.tagline),
-        h('div', { class: 'meta' }, locked
-          ? `🔒 Needs ${g.minEntries} blasters ${needs} · ${g.eligible} added`
-          : `${g.eligible} blasters in the archive`),
-      ),
-    ));
+    let entries;
+    try {
+      entries = (await loadArchive(key)).entries;
+    } catch {
+      section.append(h('div', { class: 'hub-empty' }, `Couldn't load the ${info.noun} archive.`));
+      continue;
+    }
+    for (const g of games) {
+      const eligible = entries.filter((e) => meetsRequirements(e, g.requires)).length;
+      const locked = eligible < g.minEntries;
+      section.append(h('button', {
+        class: `game-tile accent-${g.accent} ${locked ? 'locked' : ''}`,
+        onclick: () => { location.hash = `#/play/${g.id}`; },
+      },
+        h('div', { class: 'glyph' }, g.icon),
+        h('div', {},
+          h('h2', { class: 'display' }, g.title),
+          h('div', { class: 'tag' }, g.tagline),
+          h('div', { class: 'meta' }, locked
+            ? `🔒 Needs ${g.minEntries} ${info.noun} ${requirementLabel(g.requires)} · ${eligible} added`
+            : `${eligible} ${info.noun} in the archive`),
+        ),
+      ));
+    }
   }
 }
 
@@ -144,7 +150,7 @@ async function showLobby(gameId) {
   setAccent(game.accent);
 
   const [archive, mod] = await Promise.all([
-    loadArchive().catch(() => ({ entries: [], stats: [] })),
+    loadArchive(game.archive).catch(() => ({ entries: [], stats: [] })),
     modules[game.module](),
   ]);
   const pool = poolFor(game, archive);
@@ -156,7 +162,7 @@ async function showLobby(gameId) {
   const rounds = settings.rounds > 0 ? Math.min(settings.rounds, pool.length) : pool.length;
 
   const facts = !ready
-    ? custom.notReady || `Needs ${game.minEntries} blasters ${requirementLabel(game.requires)} · ${pool.length} added. Add more in debug mode.`
+    ? custom.notReady || `Needs ${game.minEntries} ${ARCHIVES[game.archive].noun} ${requirementLabel(game.requires)} · ${pool.length} added. Add more in debug mode.`
     : custom.facts || [`${rounds} rounds`, settings.timer ? `${settings.timer}s timer` : 'no timer', settings.mode === 'host' ? 'host mode' : null]
       .filter(Boolean).join(' · ');
 

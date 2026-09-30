@@ -79,15 +79,16 @@ export class GitHub {
     return { sha: ref.object.sha, tree: commit.tree.sha };
   }
 
-  async readArchive(ref) {
+  async readArchive(ref, file = 'data/archive.json', { allowMissing = false } = {}) {
     try {
-      const file = await this.req(`/contents/${this.path('data/archive.json')}?ref=${ref}`);
-      return JSON.parse(base64ToText(file.content));
+      const res = await this.req(`/contents/${this.path(file)}?ref=${ref}`);
+      return JSON.parse(base64ToText(res.content));
     } catch (err) {
+      if (err.status === 404 && allowMissing) return { updatedAt: null, entries: [] };
       // Never treat a missing archive as empty: saving on top of that would
       // start a fresh archive and hide the real one.
       if (err.status === 404) {
-        throw new GitHubError(`Couldn't find ${this.path('data/archive.json')} on ${this.branch}. Hard-refresh this page (Ctrl+Shift+R / Cmd+Shift+R) and try again.`, 404);
+        throw new GitHubError(`Couldn't find ${this.path(file)} on ${this.branch}. Hard-refresh this page (Ctrl+Shift+R / Cmd+Shift+R) and try again.`, 404);
       }
       throw err;
     }
@@ -114,11 +115,19 @@ export class GitHub {
 
   // mutate(archive) → { archive, message, add: [{ path, base64 }], remove: [path] }
   // Retries on top of the new head if someone else committed in between.
-  async commitArchive(mutate) {
+  // Saves from this page run one at a time (quick-pasting fires several).
+  commitArchive(mutate, file = 'data/archive.json') {
+    const run = () => this._commit(mutate, file);
+    const next = (this._queue || Promise.resolve()).then(run, run);
+    this._queue = next.catch(() => {});
+    return next;
+  }
+
+  async _commit(mutate, file) {
     const blobCache = new Map();
     for (let attempt = 0; attempt < 4; attempt++) {
       const head = await this.head();
-      const current = await this.readArchive(head.sha);
+      const current = await this.readArchive(head.sha, file);
       const change = await mutate(structuredClone(current));
       change.archive.updatedAt = new Date().toISOString();
 
@@ -135,7 +144,7 @@ export class GitHub {
         tree.push({ path: this.path(path), mode: '100644', type: 'blob', sha: null });
       }
       tree.push({
-        path: this.path('data/archive.json'),
+        path: this.path(file),
         mode: '100644',
         type: 'blob',
         content: `${JSON.stringify(change.archive, null, 2)}\n`,

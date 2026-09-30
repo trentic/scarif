@@ -1,0 +1,227 @@
+// "Who Would Win?": two random characters (any side vs any side), tap the one
+// you think wins. It's opinion only; after each pick the fan split is shown.
+import { countdown, resultsScreen, showScreen } from '../engine.js';
+import { SIDES } from '../registry.js';
+import { sfx } from '../sfx.js';
+import { h, iconButton, shuffle, wait } from '../ui.js';
+import { record, split, splitLabel } from '../votes.js';
+
+const AUTO_NEXT_MS = 2600;
+
+const RANKS = [
+  [80, 'Totally Normal Fan', 'You think like the rest of the galaxy.'],
+  [60, 'Mostly Normal', 'A few spicy picks in there.'],
+  [40, 'Hot Take Haver', 'You were born to argue in the comments.'],
+  [20, 'Chaos Agent', 'The fans would like a word.'],
+  [0, 'Certified Contrarian', 'Did you pick the underdog every time?'],
+];
+
+export function lobby({ pool, settings }) {
+  const rounds = settings.rounds > 0 ? settings.rounds : Math.floor(pool.length / 2);
+  return {
+    notReady: 'Needs 2 characters with a picture. Add pictures in debug mode → Characters.',
+    facts: `${rounds} matchups · ${pool.length} fighters · no wrong answers`,
+  };
+}
+
+// Random pairs with no repeated matchup, and nobody fighting twice in a row
+// when there are enough characters.
+function makePairs(pool, count) {
+  const pairs = [];
+  const seen = new Set();
+  let prev = new Set();
+  for (let tries = 0; pairs.length < count && tries < count * 50; tries++) {
+    const [a, b] = shuffle(pool);
+    const key = [a.id, b.id].sort().join('|');
+    const maxPairs = (pool.length * (pool.length - 1)) / 2;
+    if (seen.has(key) && seen.size < maxPairs) continue;
+    if (pool.length >= 4 && (prev.has(a.id) || prev.has(b.id))) continue;
+    seen.add(key);
+    prev = new Set([a.id, b.id]);
+    pairs.push([a, b]);
+  }
+  return pairs;
+}
+
+export async function run({ stage, game, pool, settings, register, onExit, onReplay }) {
+  let alive = true;
+  let keyHandler = null;
+  let cleanupRound = () => {};
+  const onKey = (e) => keyHandler?.(e);
+  document.addEventListener('keydown', onKey);
+  const stop = () => {
+    alive = false;
+    cleanupRound();
+    document.removeEventListener('keydown', onKey);
+  };
+  register?.(stop);
+  const exit = () => { stop(); onExit(); };
+
+  const count = settings.rounds > 0 ? settings.rounds : Math.max(1, Math.floor(pool.length / 2));
+  const pairs = makePairs(pool, count);
+  pool.forEach((c) => { new Image().src = c.image; });
+
+  keyHandler = (e) => e.key === 'Escape' && exit();
+  if (!(await countdown(stage, () => alive))) return;
+
+  let agreed = 0;
+  const picks = { jedi: 0, sith: 0 };
+
+  for (let i = 0; i < pairs.length && alive; i++) {
+    const result = await round(i, pairs[i]);
+    if (result === 'exit') return;
+  }
+  if (alive) finish();
+
+  function round(index, [a, b]) {
+    return new Promise((resolve) => {
+      let phase = 'picking';
+      let timerRaf = 0;
+      let nextTimer = 0;
+
+      const half = (c, pos) => {
+        const pct = h('div', { class: 'wv-pct' });
+        const el = h('button', { class: `wv-half wv-${pos}`, 'aria-label': `${c.name} wins` },
+          h('div', { class: 'wv-img' }, h('img', { src: c.image, alt: '', draggable: 'false' })),
+          h('div', { class: 'wv-label' },
+            h('span', { class: `wv-side ${c.side}` }, SIDES[c.side]?.label || c.side),
+            h('span', { class: 'wv-name' }, c.name),
+          ),
+          pct,
+          h('div', { class: 'wv-pick' }, '✓ Your pick'),
+        );
+        el.addEventListener('click', () => onTap(c));
+        return { el, pct };
+      };
+      const top = half(a, 'top');
+      const bottom = half(b, 'bottom');
+
+      const timerFill = h('div', { class: 'fill' });
+      const timer = h('div', { class: `timer ${settings.timer ? '' : 'hidden'}` }, timerFill);
+      const hostHint = h('div', { class: 'wv-host chrome' });
+
+      const screen = h('div', { class: 'screen round-screen wv-screen' },
+        h('div', { class: 'corner left chrome' }, iconButton('home', 'Quit to menu', () => { finish(); resolve('exit'); exit(); })),
+        h('div', { class: 'hud' },
+          h('div', { class: 'wv-title' }, 'Who would win?'),
+          h('span', { class: 'pill' }, `${index + 1} / ${pairs.length}`),
+        ),
+        timer,
+        h('div', { class: 'wv-panel' }, top.el, bottom.el, h('div', { class: 'wv-or' }, 'OR')),
+        hostHint,
+      );
+      showScreen(stage, screen);
+
+      keyHandler = (e) => {
+        if (e.repeat) return;
+        const k = e.key.toLowerCase();
+        if (k === 'arrowup' || k === '1' || k === 'w') onTap(a);
+        else if (k === 'arrowdown' || k === '2' || k === 's') onTap(b);
+        else if (k === ' ' || k === 'enter') { e.preventDefault(); if (phase === 'shown') next(); }
+        else if (k === 'escape') { finish(); resolve('exit'); exit(); }
+      };
+
+      cleanupRound = finish;
+      if (settings.timer) startTimer();
+
+      function finish() {
+        cancelAnimationFrame(timerRaf);
+        clearTimeout(nextTimer);
+        cleanupRound = () => {};
+      }
+
+      function startTimer() {
+        const total = settings.timer * 1000;
+        const start = performance.now();
+        let lastTick = null;
+        const step = (now) => {
+          const left = Math.max(0, total - (now - start));
+          timerFill.style.transform = `scaleX(${left / total})`;
+          const secs = Math.ceil(left / 1000);
+          timer.classList.toggle('low', secs <= 3);
+          if (secs <= 3 && secs > 0 && secs !== lastTick) { lastTick = secs; sfx.tick(); }
+          if (left <= 0) return reveal(null);
+          timerRaf = requestAnimationFrame(step);
+        };
+        timerRaf = requestAnimationFrame(step);
+      }
+
+      function onTap(c) {
+        if (phase === 'picking') reveal(c);
+        else if (phase === 'shown') next();
+      }
+
+      async function reveal(pick) {
+        if (phase !== 'picking') return;
+        phase = 'revealing';
+        cancelAnimationFrame(timerRaf);
+        timer.classList.add('hidden');
+        if (pick) {
+          (pick === a ? top : bottom).el.classList.add('picked');
+          (pick === a ? bottom : top).el.classList.add('not-picked');
+          picks[pick.side] = (picks[pick.side] || 0) + 1;
+          record(a, b, pick);
+          sfx.clash();
+        }
+        const result = await split(a, b);
+        if (!alive) return;
+        const label = splitLabel(result.source);
+        countUp(top.pct, result.a, label);
+        countUp(bottom.pct, result.b, label);
+        screen.classList.add('revealed');
+        const fav = result.a >= result.b ? a : b;
+        (fav === a ? top : bottom).el.classList.add('fan-fav');
+        if (pick && (result.a === result.b || pick === fav)) agreed++;
+        await wait(700);
+        if (!alive) return;
+        phase = 'shown';
+        if (settings.mode === 'host') hostHint.textContent = 'Tap to continue';
+        else nextTimer = setTimeout(next, AUTO_NEXT_MS);
+      }
+
+      function next() {
+        if (phase !== 'shown') return;
+        phase = 'done';
+        finish();
+        resolve('next');
+      }
+    });
+  }
+
+  function countUp(el, target, label) {
+    const num = h('b', {}, '0%');
+    el.replaceChildren(num, h('small', {}, label));
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / 650);
+      num.textContent = `${Math.round(target * (1 - (1 - p) ** 3))}%`;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function finish() {
+    const pct = pairs.length ? (agreed / pairs.length) * 100 : 0;
+    const [, rank, blurb] = RANKS.find(([min]) => pct >= min);
+    const replay = () => { stop(); onReplay(); };
+    keyHandler = (e) => {
+      if (e.key === 'Escape') exit();
+      if (e.key === 'Enter' || e.key === ' ') replay();
+    };
+    resultsScreen(stage, {
+      title: 'Are you a normal Star Wars fan?',
+      big: agreed,
+      of: pairs.length,
+      caption: 'picks matched the fan favourite',
+      rank,
+      blurb,
+      stats: [
+        [`${picks.jedi || 0}`, 'Jedi picks'],
+        [`${picks.sith || 0}`, 'Sith picks'],
+      ],
+      cta: 'Who would YOU pick? 👇',
+      onMenu: exit,
+      onReplay: replay,
+    });
+  }
+}

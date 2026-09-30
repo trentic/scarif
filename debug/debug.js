@@ -3,6 +3,7 @@ import { GAMES, meetsRequirements } from '../js/registry.js';
 import { formatStat, h, icons } from '../js/ui.js';
 import { GitHub } from './github.js';
 import { keepLocalCopy, loadVault, MIN_PASSWORD, openToken, sealToken, VAULT_PATH } from './vault.js';
+import { leaveCharacters, renderCharacters } from './characters.js';
 import { createTrimmer } from './trimmer.js';
 import {
   addEntry, addStatType, deleteEntry, deleteStatType, downloadImage, readMedia, slugify, StoreError, updateEntry, updateStatType,
@@ -16,13 +17,16 @@ const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new';
 
 // The unlocked GitHub client only ever lives in memory.
 let gh = null;
-const state = { entries: [], statTypes: [], query: '', filter: 'all', publishing: null };
+const state = { entries: [], statTypes: [], query: '', filter: 'all', publishing: null, tab: 'blasters' };
+try { state.tab = localStorage.getItem('scarif.debug.tab') || 'blasters'; } catch {}
 
 // --- helpers --------------------------------------------------------------------------
 
 function toast(message, kind = '') {
   const el = h('div', { class: `toast ${kind}` }, message);
-  document.getElementById('toasts').append(el);
+  const box = document.getElementById('toasts');
+  box.append(el);
+  while (box.children.length > 3) box.firstElementChild.remove();
   setTimeout(() => el.remove(), 5000);
 }
 
@@ -41,6 +45,7 @@ function gameChips(entryLike) {
 }
 
 function lock() {
+  leaveCharacters();
   gh = null;
   boot();
 }
@@ -57,7 +62,7 @@ function handleAuthError(err) {
 
 async function boot() {
   topActions.replaceChildren();
-  if (gh) return loadDashboard();
+  if (gh) return openTab(state.tab);
   app.replaceChildren(h('div', { class: 'gate' }, h('p', {}, 'Loading…')));
   const vault = await loadVault();
   if (vault) renderGate(vault);
@@ -175,17 +180,50 @@ function renderGate(vault) {
   pw.focus();
 }
 
-// --- dashboard --------------------------------------------------------------------------
+// --- tabs -------------------------------------------------------------------------------
+
+const TABS = [['blasters', '🔫 Blasters'], ['characters', '⚔️ Characters']];
+const tabsBar = h('div', { class: 'tabs-bar', role: 'tablist' });
+const content = h('div');
+
+function openTab(tab) {
+  state.tab = TABS.some(([key]) => key === tab) ? tab : 'blasters';
+  try { localStorage.setItem('scarif.debug.tab', state.tab); } catch {}
+  leaveCharacters();
+  tabsBar.replaceChildren(...TABS.map(([key, label]) => h('button', {
+    role: 'tab',
+    'aria-selected': String(key === state.tab),
+    onclick: () => key !== state.tab && openTab(key),
+  }, label)));
+  topActions.replaceChildren(
+    publishEl,
+    h('a', { class: 'btn ghost small', href: '../', target: '_blank', rel: 'noopener' }, 'Open games ↗'),
+    h('button', { class: 'btn ghost small', onclick: lock }, 'Lock'),
+  );
+  app.replaceChildren(tabsBar, content);
+  if (state.tab === 'characters') {
+    renderCharacters(content, {
+      gh,
+      toast,
+      watchPublish,
+      onAuthError: (err) => (handleAuthError(err) ? (lock(), true) : false),
+    });
+  } else {
+    loadDashboard();
+  }
+}
+
+// --- dashboard (blasters) -------------------------------------------------------------------
 
 async function loadDashboard() {
-  app.replaceChildren(h('div', { class: 'gate' }, h('p', {}, 'Loading archive…')));
+  content.replaceChildren(h('div', { class: 'gate' }, h('p', {}, 'Loading archive…')));
   try {
     const head = await gh.head();
     setArchive(await gh.readArchive(head.sha));
   } catch (err) {
     if (handleAuthError(err)) return lock();
     // Don't show an empty (and editable) archive when it couldn't be read.
-    app.replaceChildren(h('div', { class: 'gate' },
+    content.replaceChildren(h('div', { class: 'gate' },
       h('h1', {}, "Couldn't load the archive"),
       h('p', {}, err.message),
       h('button', { class: 'btn big', onclick: () => location.reload() }, 'Reload'),
@@ -213,14 +251,14 @@ function committed(archive, { full = false } = {}) {
   watchPublish(archive.updatedAt);
 }
 
-async function watchPublish(stamp) {
+async function watchPublish(stamp, file = 'archive') {
   state.publishing = stamp;
   renderPublish('Publishing to the site…');
   const started = Date.now();
   while (state.publishing === stamp && Date.now() - started < 10 * 60 * 1000) {
     await new Promise((r) => setTimeout(r, 8000));
     try {
-      const res = await fetch(`../data/archive.json?v=${Date.now()}`, { cache: 'no-store' });
+      const res = await fetch(`../data/${file}.json?v=${Date.now()}`, { cache: 'no-store' });
       if ((await res.json()).updatedAt === stamp) {
         if (state.publishing === stamp) {
           state.publishing = null;
@@ -244,11 +282,6 @@ const statsEl = h('div', { class: 'stats' });
 const libraryGrid = h('div');
 
 function renderDashboard() {
-  topActions.replaceChildren(
-    publishEl,
-    h('a', { class: 'btn ghost small', href: '../', target: '_blank', rel: 'noopener' }, 'Open games ↗'),
-    h('button', { class: 'btn ghost small', onclick: lock }, 'Lock'),
-  );
 
   const search = h('input', {
     type: 'search',
@@ -266,7 +299,7 @@ function renderDashboard() {
     },
   }, label));
 
-  app.replaceChildren(
+  content.replaceChildren(
     statsEl,
     h('div', { class: 'layout' },
       h('section', { class: 'card' },

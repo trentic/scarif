@@ -47,11 +47,12 @@ export async function countdown(stage, isAlive) {
 }
 
 // Shared end screen. `stats` is a list of [value, label].
-export function resultsScreen(stage, { title, big, of, rank, blurb, stats, cta = 'Comment your score 👇', onMenu, onReplay }) {
+export function resultsScreen(stage, { title, big, of, caption, rank, blurb, stats, cta = 'Comment your score 👇', onMenu, onReplay }) {
   sfx.fanfare();
   showScreen(stage, h('div', { class: 'screen results' },
     h('div', { class: 'label' }, title),
     h('div', { class: 'big' }, big, of != null ? h('small', {}, ` / ${of}`) : null),
+    caption ? h('div', { class: 'big-caption' }, caption) : null,
     h('div', { class: 'rank display' }, rank),
     h('div', { class: 'rank-sub' }, blurb),
     h('div', { class: 'stats' }, stats.map(([value, label]) => h('div', { class: 'stat' }, h('b', {}, value), h('span', {}, label)))),

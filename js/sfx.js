@@ -26,7 +26,32 @@ function tone(freq, { at = 0, dur = 0.15, type = 'square', vol = 0.12, slideTo =
   osc.stop(t + dur + 0.05);
 }
 
+// A short burst of filtered noise: the crackle of a lightsaber clash.
+function crackle({ dur = 0.25, vol = 0.12, freq = 2400 } = {}) {
+  if (!settings.sfx) return;
+  const ac = audioContext();
+  const t = ac.currentTime;
+  const buf = ac.createBuffer(1, Math.floor(ac.sampleRate * dur), ac.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length) ** 2;
+  const src = ac.createBufferSource();
+  src.buffer = buf;
+  const filter = ac.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = freq;
+  filter.Q.value = 0.8;
+  const gain = ac.createGain();
+  gain.gain.value = vol;
+  src.connect(filter).connect(gain).connect(ac.destination);
+  src.start(t);
+}
+
 export const sfx = {
+  clash: () => {
+    crackle({ dur: 0.35, vol: 0.18, freq: 1800 });
+    tone(140, { dur: 0.45, type: 'sawtooth', vol: 0.07, slideTo: 90 });
+    tone(620, { dur: 0.18, type: 'square', vol: 0.04, slideTo: 300 });
+  },
   tick: () => tone(1400, { dur: 0.05, vol: 0.06 }),
   beep: () => tone(520, { dur: 0.18, vol: 0.1 }),
   pew: () => {

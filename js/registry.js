@@ -16,6 +16,7 @@ export const GAMES = [
     icon: '🔊',
     accent: 'red',
     module: 'sound',
+    archive: 'blasters',
     requires: { image: true, sound: true },
     minEntries: 4,
   },
@@ -26,6 +27,7 @@ export const GAMES = [
     icon: '🎯',
     accent: 'cyan',
     module: 'picture',
+    archive: 'blasters',
     requires: { image: true },
     minEntries: 4,
   },
@@ -36,6 +38,7 @@ export const GAMES = [
     icon: '🔍',
     accent: 'gold',
     module: 'zoom',
+    archive: 'blasters',
     requires: { image: true },
     minEntries: 4,
   },
@@ -46,6 +49,7 @@ export const GAMES = [
     icon: '⚡',
     accent: 'red',
     module: 'speed',
+    archive: 'blasters',
     requires: { image: true },
     minEntries: 4,
   },
@@ -56,11 +60,34 @@ export const GAMES = [
     icon: '📊',
     accent: 'green',
     module: 'higherlower',
+    archive: 'blasters',
     // `stats: true` = the entry has at least one stat value (see debug mode).
     requires: { image: true, stats: true },
     minEntries: 3,
   },
+  {
+    id: 'who-would-win',
+    title: 'Who Would Win?',
+    tagline: 'pick your fighter',
+    icon: '⚔️',
+    accent: 'red',
+    module: 'whowouldwin',
+    archive: 'characters',
+    requires: { image: true },
+    minEntries: 2,
+  },
 ];
+
+// The archives games draw from. Each is its own JSON file in data/.
+export const ARCHIVES = {
+  blasters: { file: 'archive', title: 'Blaster games', noun: 'blasters' },
+  characters: { file: 'characters', title: 'Character games', noun: 'characters' },
+};
+
+export const SIDES = {
+  jedi: { label: 'Jedi' },
+  sith: { label: 'Sith' },
+};
 
 export function getGame(id) {
   return GAMES.find((g) => g.id === id) || null;
@@ -81,7 +108,7 @@ export function meetsRequirements(entry, requires = {}) {
 export function requirementLabel(requires = {}) {
   if (requires.stats) return 'with stats';
   if (requires.sound) return 'with a sound';
-  return 'with an image';
+  return 'with a picture';
 }
 
 export function gamesForEntry(entry) {

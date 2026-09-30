@@ -706,3 +706,161 @@ body {
 .hl-buttons .hl-down { --accent: var(--red); --accent-glow: var(--red-glow); }
 .hl-buttons.used { visibility: hidden; }
 .hl-flash { top: 45%; }
+
+/* ---------- hub sections ---------- */
+
+.section-title {
+  flex: none;
+  margin: 14px 4px 0;
+  font-size: 30px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.game-section { display: flex; flex-direction: column; gap: 30px; flex: none; }
+.results .big-caption { margin-top: 10px; font-size: 36px; color: var(--muted); letter-spacing: 0.08em; }
+
+/* ---------- who would win ---------- */
+/* Sized to stay inside the TikTok/Reels/Shorts safe zone: the panel ends at
+   y≈1510 (captions start ~1520) and stays within x 120–960. */
+
+.wv-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 50px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.wv-panel {
+  position: relative;
+  height: 1140px;
+  margin-top: 24px;
+  border-radius: 40px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  background: #000;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
+}
+.wv-half {
+  position: relative;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: filter 0.3s, transform 0.2s;
+}
+.wv-top { background: radial-gradient(ellipse at 50% 40%, #ff4d4d 0%, #e02b2b 55%, #b81d1d 100%); justify-content: flex-start; }
+.wv-bottom { background: radial-gradient(ellipse at 50% 60%, #3dc0ff 0%, #0ea5ff 55%, #0a7fd1 100%); justify-content: flex-end; }
+.wv-half:active { transform: scale(0.99); }
+
+.wv-img {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.wv-top .wv-img { padding: 110px 60px 110px; }
+.wv-bottom .wv-img { padding: 110px 60px 110px; }
+.wv-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.45));
+}
+.wv-label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 30px 36px;
+  max-width: 100%;
+}
+.wv-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 54px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.35), 0 0 30px rgba(0, 0, 0, 0.35);
+  text-align: left;
+}
+.wv-side {
+  flex: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.wv-side.jedi { box-shadow: inset 0 0 0 2px #7fd6ff; }
+.wv-side.sith { box-shadow: inset 0 0 0 2px #ff8a8a; }
+
+.wv-or {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 210px;
+  height: 210px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #000;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 84px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 10px #000;
+  pointer-events: none;
+  z-index: 3;
+}
+.wv-screen.revealed .wv-or { animation: bump 0.4s ease-out; }
+
+.wv-pct {
+  position: absolute;
+  z-index: 2;
+  left: 40px;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+.wv-top .wv-pct { bottom: 40px; }
+.wv-bottom .wv-pct { top: 40px; }
+.wv-pct b { font-family: var(--font-display); font-weight: 900; font-size: 104px; line-height: 1; font-variant-numeric: tabular-nums; }
+.wv-pct small { font-size: 26px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85; }
+.wv-screen.revealed .wv-pct { display: flex; animation: flash-in 0.4s ease-out; }
+
+.wv-pick {
+  position: absolute;
+  z-index: 2;
+  right: 40px;
+  display: none;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.wv-top .wv-pick { bottom: 150px; }
+.wv-bottom .wv-pick { top: 150px; }
+.wv-half.picked .wv-pick { display: block; animation: flash-in 0.35s ease-out; }
+.wv-half.picked { box-shadow: inset 0 0 0 10px #fff; }
+.wv-half.not-picked { filter: saturate(0.55) brightness(0.8); }
+.wv-half.fan-fav .wv-pct b::after { content: ' 👑'; font-size: 70px; }
+
+.wv-host { margin-top: 12px; text-align: center; font-size: 30px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; min-height: 36px; }

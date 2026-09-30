@@ -12,6 +12,12 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 | ⚡ **Speed Round** | Name as many blasters as you can before the clock runs out (30 / 60 / 90s) | image |
 | 📊 **Higher or Lower** | Is the next blaster's stat (e.g. price) higher or lower? One wrong answer ends the run | image + a stat value |
 
+**Character games** (Jedi & Sith archive):
+
+| Game | What players do | Needs per character |
+| --- | --- | --- |
+| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Opinion only; the end screen shows how many picks matched the fan favourite | picture |
+
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 
 ## One-time setup
@@ -72,6 +78,18 @@ Accepted formats:
 Files are checked by their actual contents, not their extension.
 
 > The repository must be **public** for free GitHub Pages, so uploaded media is publicly visible in the repo. Upload only media you're allowed to share.
+
+## Characters (Jedi & Sith)
+
+Debug mode has two tabs: **Blasters** and **Characters**. Characters live in their own archive (`data/characters.json`, pictures in `media/characters/`) with a name, side (Jedi or Sith), a **fan power** (1–100) and a picture. It starts with 20 Jedi and 20 Sith; characters appear in games once they have a picture.
+
+**Quick pictures:** hover a character card and press **Ctrl+V** (or click **📋 Paste**). It uses whatever you last copied — an image address (right-click → *Copy image address*) or the image itself (right-click → *Copy image*). You can also drop an image file on a card. If a site blocks copying its images, the address is linked instead.
+
+### Who Would Win? percentages
+
+Until real voting is set up, the split is a **fan estimate** worked out from each character's fan power (a bigger gap = more one-sided, with a little randomness), and it's labelled *Fan estimate* on screen. Starting fan powers come from popular power rankings (e.g. [SlashFilm](https://www.slashfilm.com/1984100/most-powerful-sith-star-wars-ranked/), [Collider](https://collider.com/strongest-jedi-star-wars-ranked/), [CCSabers](https://www.ccsabers.com/blogs/ccsabers-blog/who-is-the-most-powerful-jedi-definitive-ranking-2026)) — adjust them any time in debug mode.
+
+To switch to real votes later, set `VOTES.endpoint` in [`config.js`](config.js) to a service that implements `GET /split?a=&b=` → `{ a, b, total }` and `POST /vote { a, b, winner }` (see [`js/votes.js`](js/votes.js)). Once a matchup has enough votes the label changes to *of players picked*.
 
 ## Stats (for Higher or Lower)
 

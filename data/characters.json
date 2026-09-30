@@ -1,0 +1,365 @@
+{
+  "updatedAt": "2026-09-30T00:00:00.000Z",
+  "entries": [
+    {
+      "id": "aayla-secura",
+      "name": "Aayla Secura",
+      "side": "jedi",
+      "power": 68,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "ahsoka-tano",
+      "name": "Ahsoka Tano",
+      "side": "jedi",
+      "power": 84,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "anakin-skywalker",
+      "name": "Anakin Skywalker",
+      "side": "jedi",
+      "power": 95,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "asajj-ventress",
+      "name": "Asajj Ventress",
+      "side": "sith",
+      "power": 70,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "cal-kestis",
+      "name": "Cal Kestis",
+      "side": "jedi",
+      "power": 80,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "cere-junda",
+      "name": "Cere Junda",
+      "side": "jedi",
+      "power": 73,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "count-dooku",
+      "name": "Count Dooku",
+      "side": "sith",
+      "power": 86,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-bane",
+      "name": "Darth Bane",
+      "side": "sith",
+      "power": 89,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-malak",
+      "name": "Darth Malak",
+      "side": "sith",
+      "power": 80,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-malgus",
+      "name": "Darth Malgus",
+      "side": "sith",
+      "power": 83,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-maul",
+      "name": "Darth Maul",
+      "side": "sith",
+      "power": 84,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-nihilus",
+      "name": "Darth Nihilus",
+      "side": "sith",
+      "power": 88,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-plagueis",
+      "name": "Darth Plagueis",
+      "side": "sith",
+      "power": 90,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-revan",
+      "name": "Darth Revan",
+      "side": "sith",
+      "power": 91,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-sidious",
+      "name": "Darth Sidious",
+      "side": "sith",
+      "power": 98,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-sion",
+      "name": "Darth Sion",
+      "side": "sith",
+      "power": 82,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-vader",
+      "name": "Darth Vader",
+      "side": "sith",
+      "power": 93,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-vitiate",
+      "name": "Darth Vitiate",
+      "side": "sith",
+      "power": 92,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "darth-zannah",
+      "name": "Darth Zannah",
+      "side": "sith",
+      "power": 78,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "ezra-bridger",
+      "name": "Ezra Bridger",
+      "side": "jedi",
+      "power": 72,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "grogu",
+      "name": "Grogu",
+      "side": "jedi",
+      "power": 65,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "kanan-jarrus",
+      "name": "Kanan Jarrus",
+      "side": "jedi",
+      "power": 70,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "ki-adi-mundi",
+      "name": "Ki-Adi-Mundi",
+      "side": "jedi",
+      "power": 70,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "kit-fisto",
+      "name": "Kit Fisto",
+      "side": "jedi",
+      "power": 74,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "kylo-ren",
+      "name": "Kylo Ren",
+      "side": "sith",
+      "power": 79,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "luke-skywalker",
+      "name": "Luke Skywalker",
+      "side": "jedi",
+      "power": 94,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "luminara-unduli",
+      "name": "Luminara Unduli",
+      "side": "jedi",
+      "power": 66,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "mace-windu",
+      "name": "Mace Windu",
+      "side": "jedi",
+      "power": 92,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "obi-wan-kenobi",
+      "name": "Obi-Wan Kenobi",
+      "side": "jedi",
+      "power": 89,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "plo-koon",
+      "name": "Plo Koon",
+      "side": "jedi",
+      "power": 76,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "qui-gon-jinn",
+      "name": "Qui-Gon Jinn",
+      "side": "jedi",
+      "power": 82,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "quinlan-vos",
+      "name": "Quinlan Vos",
+      "side": "jedi",
+      "power": 77,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "rey",
+      "name": "Rey",
+      "side": "jedi",
+      "power": 83,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "savage-opress",
+      "name": "Savage Opress",
+      "side": "sith",
+      "power": 72,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "second-sister",
+      "name": "Second Sister",
+      "side": "sith",
+      "power": 64,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "shaak-ti",
+      "name": "Shaak Ti",
+      "side": "jedi",
+      "power": 71,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "snoke",
+      "name": "Snoke",
+      "side": "sith",
+      "power": 85,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "starkiller",
+      "name": "Starkiller",
+      "side": "sith",
+      "power": 87,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "the-grand-inquisitor",
+      "name": "The Grand Inquisitor",
+      "side": "sith",
+      "power": 68,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "yoda",
+      "name": "Yoda",
+      "side": "jedi",
+      "power": 97,
+      "image": null,
+      "createdAt": "2026-09-30T00:00:00.000Z",
+      "updatedAt": "2026-09-30T00:00:00.000Z"
+    }
+  ]
+}
