@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:10:43.382Z",
+  "updatedAt": "2026-09-30T04:11:02.241Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -213,9 +213,9 @@
       "name": "Kit Fisto",
       "side": "jedi",
       "power": 74,
-      "image": null,
+      "image": "media/characters/kit-fisto-522c9122.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:11:02.241Z"
     },
     {
       "id": "kylo-ren",
