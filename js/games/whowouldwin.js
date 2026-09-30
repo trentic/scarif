@@ -172,7 +172,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           (pick === a ? bottom : top).el.classList.add('not-picked');
           picks[pick.side] = (picks[pick.side] || 0) + 1;
           record(a, b, pick);
-          sfx.clash();
+          sfx.choose();
         }
         const result = await split(a, b);
         if (!alive) return;

@@ -759,15 +759,17 @@ body {
 
 .wv-img {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
+  left: 50px;
+  right: 50px;
 }
-.wv-top .wv-img { padding: 110px 60px 110px; }
-.wv-bottom .wv-img { padding: 110px 60px 110px; }
+/* Fixed boxes: the name sits outside them, so pictures are never covered or
+   cropped, just scaled to fit. */
+.wv-top .wv-img { top: 114px; bottom: 36px; }
+.wv-bottom .wv-img { top: 36px; bottom: 114px; }
 .wv-img img {
-  max-width: 100%;
-  max-height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.45));
 }
@@ -777,8 +779,9 @@ body {
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 30px 36px;
+  padding: 26px 36px;
   max-width: 100%;
+  min-height: 104px;
 }
 .wv-name {
   font-family: var(--font-display);
@@ -808,8 +811,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 210px;
-  height: 210px;
+  width: 124px;
+  height: 124px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: #000;
@@ -818,9 +821,9 @@ body {
   color: #fff;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 84px;
+  font-size: 50px;
   letter-spacing: 0.02em;
-  box-shadow: 0 0 0 10px #000;
+  box-shadow: 0 0 0 6px #000;
   pointer-events: none;
   z-index: 3;
 }
