@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:12:01.826Z",
+  "updatedAt": "2026-09-30T04:12:16.517Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -249,9 +249,9 @@
       "name": "Mace Windu",
       "side": "jedi",
       "power": 92,
-      "image": null,
+      "image": "media/characters/mace-windu-63e69c3c.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:12:16.517Z"
     },
     {
       "id": "obi-wan-kenobi",
