@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:06:22.977Z",
+  "updatedAt": "2026-09-30T04:06:46.463Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -78,9 +78,9 @@
       "name": "Darth Malak",
       "side": "sith",
       "power": 80,
-      "image": null,
+      "image": "media/characters/darth-malak-87770223.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:06:46.463Z"
     },
     {
       "id": "darth-malgus",
