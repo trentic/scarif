@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:14:15.728Z",
+  "updatedAt": "2026-09-30T04:14:44.898Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -339,9 +339,9 @@
       "name": "Starkiller",
       "side": "sith",
       "power": 87,
-      "image": null,
+      "image": "media/characters/starkiller-96552ab8.png",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:14:44.898Z"
     },
     {
       "id": "the-grand-inquisitor",
