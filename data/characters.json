@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:09:15.535Z",
+  "updatedAt": "2026-09-30T04:09:39.070Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -123,9 +123,9 @@
       "name": "Darth Revan",
       "side": "sith",
       "power": 91,
-      "image": null,
+      "image": "media/characters/darth-revan-6c7c6db8.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:09:39.070Z"
     },
     {
       "id": "darth-sidious",
