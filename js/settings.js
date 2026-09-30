@@ -7,6 +7,7 @@ export const DEFAULTS = {
   mode: 'auto', // 'auto' advances by itself, 'host' waits for a tap to reveal / continue
   pictureMode: 'clear',
   speedSeconds: 60,
+  wvwRounds: 10, // Who Would Win?: 3, 10 or 0 (unlimited)
   sfx: true,
   safeZones: false,
   clean: false,

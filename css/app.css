@@ -864,3 +864,4 @@ body {
 .wv-half.fan-fav .wv-pct b::after { content: ' 👑'; font-size: 70px; }
 
 .wv-host { margin-top: 12px; text-align: center; font-size: 30px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; min-height: 36px; }
+.wv-finish { min-height: 100px; padding: 0 40px; font-size: 38px; }

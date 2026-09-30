@@ -16,31 +16,43 @@ const RANKS = [
   [0, 'Certified Contrarian', 'Did you pick the underdog every time?'],
 ];
 
-export function lobby({ pool, settings }) {
-  const rounds = settings.rounds > 0 ? settings.rounds : Math.floor(pool.length / 2);
+const LENGTHS = [[3, '3'], [10, '10'], [0, '∞ Unlimited']];
+
+export function lobby({ pool, settings, refresh }) {
+  const length = LENGTHS.some(([n]) => n === settings.wvwRounds) ? settings.wvwRounds : 10;
   return {
     notReady: 'Needs 2 characters with a picture. Add pictures in debug mode → Characters.',
-    facts: `${rounds} matchups · ${pool.length} fighters · no wrong answers`,
+    facts: `${length ? `${length} matchups` : 'Unlimited matchups'} · ${pool.length} fighters · no wrong answers`,
+    extra: h('div', { class: 'hl-choose' },
+      h('div', { class: 'title' }, 'Matchups'),
+      h('div', { class: 'seg' }, LENGTHS.map(([n, label]) => h('button', {
+        'aria-pressed': String(n === length),
+        onclick: () => { settings.wvwRounds = n; refresh(); },
+      }, label))),
+    ),
   };
 }
 
-// Random pairs with no repeated matchup, and nobody fighting twice in a row
-// when there are enough characters.
-function makePairs(pool, count) {
-  const pairs = [];
+// Random pairs on demand: no repeated matchup until every pairing has been
+// used, and nobody fights twice in a row when there are enough characters.
+function pairer(pool) {
+  const maxPairs = (pool.length * (pool.length - 1)) / 2;
   const seen = new Set();
   let prev = new Set();
-  for (let tries = 0; pairs.length < count && tries < count * 50; tries++) {
+  return () => {
+    if (seen.size >= maxPairs) seen.clear();
+    for (let tries = 0; tries < 500; tries++) {
+      const [a, b] = shuffle(pool);
+      const key = [a.id, b.id].sort().join('|');
+      if (seen.has(key)) continue;
+      if (pool.length >= 4 && tries < 400 && (prev.has(a.id) || prev.has(b.id))) continue;
+      seen.add(key);
+      prev = new Set([a.id, b.id]);
+      return [a, b];
+    }
     const [a, b] = shuffle(pool);
-    const key = [a.id, b.id].sort().join('|');
-    const maxPairs = (pool.length * (pool.length - 1)) / 2;
-    if (seen.has(key) && seen.size < maxPairs) continue;
-    if (pool.length >= 4 && (prev.has(a.id) || prev.has(b.id))) continue;
-    seen.add(key);
-    prev = new Set([a.id, b.id]);
-    pairs.push([a, b]);
-  }
-  return pairs;
+    return [a, b];
+  };
 }
 
 export async function run({ stage, game, pool, settings, register, onExit, onReplay }) {
@@ -57,8 +69,10 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   register?.(stop);
   const exit = () => { stop(); onExit(); };
 
-  const count = settings.rounds > 0 ? settings.rounds : Math.max(1, Math.floor(pool.length / 2));
-  const pairs = makePairs(pool, count);
+  const total = LENGTHS.some(([n]) => n === settings.wvwRounds) ? settings.wvwRounds : 10; // 0 = unlimited
+  const nextPair = pairer(pool);
+  let played = 0;
+  let finishing = false; // "Finish" tapped in unlimited mode
   pool.forEach((c) => { new Image().src = c.image; });
 
   keyHandler = (e) => e.key === 'Escape' && exit();
@@ -67,8 +81,8 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   let agreed = 0;
   const picks = { jedi: 0, sith: 0 };
 
-  for (let i = 0; i < pairs.length && alive; i++) {
-    const result = await round(i, pairs[i]);
+  for (let i = 0; alive && (total === 0 || i < total) && !finishing; i++) {
+    const result = await round(i, nextPair());
     if (result === 'exit') return;
   }
   if (alive) finish();
@@ -102,9 +116,13 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
 
       const screen = h('div', { class: 'screen round-screen wv-screen' },
         h('div', { class: 'corner left chrome' }, iconButton('home', 'Quit to menu', () => { finish(); resolve('exit'); exit(); })),
+        // Stays visible in clean mode (it sits under the app's own header strip).
+        total === 0 && h('div', { class: 'corner right' },
+          h('button', { class: 'btn ghost wv-finish', onclick: () => endRun() }, 'Finish'),
+        ),
         h('div', { class: 'hud' },
           h('div', { class: 'wv-title' }, 'Who would win?'),
-          h('span', { class: 'pill' }, `${index + 1} / ${pairs.length}`),
+          h('span', { class: 'pill' }, total ? `${index + 1} / ${total}` : `#${index + 1}`),
         ),
         timer,
         h('div', { class: 'wv-panel' }, top.el, bottom.el, h('div', { class: 'wv-or' }, 'OR')),
@@ -119,6 +137,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
         else if (k === 'arrowdown' || k === '2' || k === 's') onTap(b);
         else if (k === ' ' || k === 'enter') { e.preventDefault(); if (phase === 'shown') next(); }
         else if (k === 'escape') { finish(); resolve('exit'); exit(); }
+        else if (k === 'f' && total === 0) endRun();
       };
 
       cleanupRound = finish;
@@ -169,12 +188,14 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
         countUp(top.pct, result.a, label);
         countUp(bottom.pct, result.b, label);
         screen.classList.add('revealed');
+        played++;
         const fav = result.a >= result.b ? a : b;
         (fav === a ? top : bottom).el.classList.add('fan-fav');
         if (pick && (result.a === result.b || pick === fav)) agreed++;
         await wait(700);
         if (!alive) return;
         phase = 'shown';
+        if (finishing) return next();
         if (settings.mode === 'host') hostHint.textContent = 'Tap to continue';
         else nextTimer = setTimeout(next, AUTO_NEXT_MS);
       }
@@ -184,6 +205,16 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
         phase = 'done';
         finish();
         resolve('next');
+      }
+
+      // Unlimited mode: end now (or right after this reveal) and show results.
+      function endRun() {
+        finishing = true;
+        if (phase === 'picking') {
+          phase = 'done';
+          finish();
+          resolve('next');
+        } else if (phase === 'shown') next();
       }
     });
   }
@@ -201,7 +232,8 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   }
 
   function finish() {
-    const pct = pairs.length ? (agreed / pairs.length) * 100 : 0;
+    if (!played) return exit();
+    const pct = (agreed / played) * 100;
     const [, rank, blurb] = RANKS.find(([min]) => pct >= min);
     const replay = () => { stop(); onReplay(); };
     keyHandler = (e) => {
@@ -211,7 +243,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
     resultsScreen(stage, {
       title: 'Are you a normal Star Wars fan?',
       big: agreed,
-      of: pairs.length,
+      of: played,
       caption: 'picks matched the fan favourite',
       rank,
       blurb,
