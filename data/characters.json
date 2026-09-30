@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:05:21.598Z",
+  "updatedAt": "2026-09-30T04:06:01.400Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -60,9 +60,9 @@
       "name": "Count Dooku",
       "side": "sith",
       "power": 86,
-      "image": null,
+      "image": "media/characters/count-dooku-1f234494.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:06:01.400Z"
     },
     {
       "id": "darth-bane",
