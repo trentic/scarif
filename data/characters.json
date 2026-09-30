@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:10:19.831Z",
+  "updatedAt": "2026-09-30T04:10:43.382Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -204,9 +204,9 @@
       "name": "Ki-Adi-Mundi",
       "side": "jedi",
       "power": 70,
-      "image": null,
+      "image": "media/characters/ki-adi-mundi-5154ea09.png",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:10:43.382Z"
     },
     {
       "id": "kit-fisto",
