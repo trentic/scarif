@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:14:01.569Z",
+  "updatedAt": "2026-09-30T04:14:15.728Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -357,9 +357,9 @@
       "name": "Yoda",
       "side": "jedi",
       "power": 97,
-      "image": null,
+      "image": "media/characters/yoda-abf5f839.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:14:15.728Z"
     }
   ]
 }
