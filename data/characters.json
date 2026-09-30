@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:06:01.400Z",
+  "updatedAt": "2026-09-30T04:06:22.977Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -69,9 +69,9 @@
       "name": "Darth Bane",
       "side": "sith",
       "power": 89,
-      "image": null,
+      "image": "media/characters/darth-bane-1b0b3db4.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:06:22.977Z"
     },
     {
       "id": "darth-malak",
