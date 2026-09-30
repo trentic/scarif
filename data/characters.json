@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:08:58.938Z",
+  "updatedAt": "2026-09-30T04:09:15.535Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -114,9 +114,9 @@
       "name": "Darth Plagueis",
       "side": "sith",
       "power": 90,
-      "image": null,
+      "image": "media/characters/darth-plagueis-48da8f6d.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:09:15.535Z"
     },
     {
       "id": "darth-revan",
