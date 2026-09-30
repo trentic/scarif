@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:12:16.517Z",
+  "updatedAt": "2026-09-30T04:12:31.011Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -258,9 +258,9 @@
       "name": "Obi-Wan Kenobi",
       "side": "jedi",
       "power": 89,
-      "image": null,
+      "image": "media/characters/obi-wan-kenobi-cee5acac.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-09-30T04:12:31.011Z"
     },
     {
       "id": "plo-koon",
