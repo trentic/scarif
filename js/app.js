@@ -1,5 +1,7 @@
 import { keepLoadable, loadArchive, poolFor } from './archive.js';
 import { ARCHIVES, GAMES, getGame, meetsRequirements, requirementLabel } from './registry.js';
+import * as chat from './chat.js';
+import { openChatPanel } from './chatpanel.js';
 import { runGame } from './engine.js';
 import { OPTIONS, onSettingsChange, settings } from './settings.js';
 import { audioContext, sfx } from './sfx.js';
@@ -59,6 +61,25 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// --- chat status chip -------------------------------------------------------------------
+// Test chat always shows a badge (so viewers know votes are fake); otherwise
+// the chip is a streamer aid and hides in clean mode.
+const chatChip = h('div', { class: 'chat-chip' });
+stage.append(chatChip);
+function renderChatChip() {
+  const { status, detail } = chat.state;
+  const test = chat.config.source === 'test' && status !== 'off';
+  chatChip.className = `chat-chip ${status} ${test ? 'test' : 'chrome'}`;
+  chatChip.hidden = status === 'off';
+  chatChip.textContent = test ? '🧪 TEST CHAT (fake votes)'
+    : status === 'live' ? '🔴 Chat live'
+    : status === 'error' || status === 'quota' ? `⚠ Chat: ${detail}`
+    : status === 'connecting' ? '💬 Connecting…'
+    : '💬 Chat ready';
+}
+chat.on('status', renderChatChip);
+renderChatChip();
+
 // --- settings drawer ----------------------------------------------------------------
 
 function openSettings(onClose) {
@@ -114,7 +135,7 @@ async function showHub() {
   );
   const list = h('div', { class: 'game-list' });
   show(h('div', { class: 'screen' },
-    h('div', { class: 'corner right' }, iconButton('gear', 'Settings', () => openSettings())),
+    h('div', { class: 'corner right' }, iconButton('chat', 'Chat', () => openChatPanel(stage)), iconButton('gear', 'Settings', () => openSettings())),
     logo,
     list,
   ));
@@ -178,7 +199,7 @@ async function showLobby(gameId) {
 
   show(h('div', { class: 'screen lobby' },
     h('div', { class: 'corner left' }, iconButton('home', 'Menu', () => { location.hash = '#/'; })),
-    h('div', { class: 'corner right' }, iconButton('gear', 'Settings', () => openSettings(refresh))),
+    h('div', { class: 'corner right' }, iconButton('chat', 'Chat', () => openChatPanel(stage, refresh)), iconButton('gear', 'Settings', () => openSettings(refresh))),
     h('div', { class: 'glyph' }, game.icon),
     h('h1', { class: 'display' }, game.title),
     h('div', { class: 'tag' }, game.tagline),
@@ -212,10 +233,11 @@ async function showLobby(gameId) {
       pool: playable,
       archive,
       settings,
-      register: (stop) => { stopCurrent = stop; },
+      register: (stop) => { stopCurrent = () => { stop(); chat.endGame(); }; },
       onExit: () => { location.hash = '#/'; },
       onReplay: start,
     };
+    chat.startGame(); // read chat only while a game is running
     if (mod.run) mod.run(opts);
     else runGame({ ...opts, renderer: mod.renderer });
   }

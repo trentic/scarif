@@ -7,12 +7,15 @@
 //
 // Games with their own flow (Speed Round, Higher or Lower) export `run()`
 // instead and reuse `countdown()` and `resultsScreen()` from here.
+import * as chat from './chat.js';
+import { award, GRACE_MS, top, voteRound } from './chatvotes.js';
 import { settings } from './settings.js';
 import { sfx } from './sfx.js';
 import { h, iconButton, shuffle, wait } from './ui.js';
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 const AUTO_NEXT_MS = 2800;
+const AUTO_NEXT_CHAT_MS = 4200; // a little longer with chat, so viewers see the chat result
 
 const RANKS = [
   [100, 'The Chosen One', 'Flawless. The Force is strong with you.'],
@@ -47,8 +50,21 @@ export async function countdown(stage, isAlive) {
 }
 
 // Shared end screen. `stats` is a list of [value, label].
+// The session's top chat players, or null when chat is off / nobody scored.
+export function chatBoard() {
+  if (!chat.isOn() || !chat.config.leaderboard) return null;
+  const rows = top(5);
+  if (!rows.length) return null;
+  return h('div', { class: 'chat-board' },
+    h('div', { class: 'chat-board-title' }, '💬 Chat leaderboard'),
+    h('ol', {}, rows.map((r) => h('li', {}, h('span', { class: 'who' }, r.user), h('b', {}, `${r.points} pts`)))),
+  );
+}
+
 export function resultsScreen(stage, { title, big, of, caption, rank, blurb, stats, cta = 'Comment your score 👇', onMenu, onReplay }) {
+  chat.endGame(); // stop reading chat while sitting on the results screen
   sfx.fanfare();
+  const board = chatBoard();
   showScreen(stage, h('div', { class: 'screen results' },
     h('div', { class: 'label' }, title),
     h('div', { class: 'big' }, big, of != null ? h('small', {}, ` / ${of}`) : null),
@@ -56,7 +72,7 @@ export function resultsScreen(stage, { title, big, of, caption, rank, blurb, sta
     h('div', { class: 'rank display' }, rank),
     h('div', { class: 'rank-sub' }, blurb),
     h('div', { class: 'stats' }, stats.map(([value, label]) => h('div', { class: 'stat' }, h('b', {}, value), h('span', {}, label)))),
-    h('div', { class: 'cta' }, cta),
+    board || h('div', { class: 'cta' }, cta),
     h('div', { class: 'actions' },
       h('button', { class: 'btn ghost', onclick: onMenu }, 'Menu'),
       h('button', { class: 'btn', onclick: onReplay }, 'Play again'),
@@ -143,13 +159,43 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
       );
       const answers = h('div', { class: 'answers' }, answerEls);
 
+      // Chat votes: viewers type A–D (or 1–4, or the name).
+      const chatOn = chat.isOn();
+      const chatBars = answerEls.map((el) => {
+        const bar = h('span', { class: 'chat-bar' });
+        const count = h('span', { class: 'chat-count' });
+        el.prepend(bar);
+        el.append(count);
+        return { bar, count };
+      });
+      const chatHint = chatOn && h('div', { class: 'chat-hint' }, '💬 Chat: type ', h('b', {}, 'A'), ', ', h('b', {}, 'B'), ', ', h('b', {}, 'C'), ' or ', h('b', {}, 'D'));
+      const showTally = ({ counts, total }) => {
+        choices.forEach((_, i) => {
+          const n = counts[i] || 0;
+          chatBars[i].bar.style.width = total ? `${(n / total) * 100}%` : '0';
+          chatBars[i].count.textContent = n ? `💬 ${n}` : '';
+        });
+        if (chatBanner) updateBanner();
+      };
+      let chatBanner = null;
+      const votes = chatOn ? voteRound(choices.map((e, i) => ({ id: i, keys: [LETTERS[i], String(i + 1)], names: [e.name] })), { onUpdate: showTally }) : null;
+      if (chatOn) {
+        // Test chat leans towards the right answer, like a real audience might.
+        chat.setTestHint(() => (phase === 'asking' ? [LETTERS[correctIdx], LETTERS[correctIdx], choices[correctIdx].name, ...LETTERS] : []));
+      }
+      function updateBanner() {
+        const { counts, total } = votes.tally();
+        const pct = total ? Math.round(((counts[correctIdx] || 0) / total) * 100) : 0;
+        chatBanner.firstChild.textContent = total ? `💬 Chat: ${pct}% got it right (${total} vote${total === 1 ? '' : 's'})` : '💬 No chat votes this round';
+      }
+
       const hostBtn = h('button', { class: 'btn', onclick: () => hostAction() }, 'Reveal');
       const hostBar = h('div', { class: 'host-bar chrome' }, hostBtn);
       if (settings.mode !== 'host') hostBar.style.visibility = 'hidden';
 
       const screen = h('div', { class: 'screen round-screen' },
         h('div', { class: 'corner left chrome' }, iconButton('home', 'Quit to menu', () => { finish(); resolve('exit'); exit(); })),
-        hud, timer, prompt, answers, hostBar,
+        hud, timer, prompt, chatHint, answers, hostBar,
       );
       show(screen);
 
@@ -171,6 +217,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
       function finish() {
         cancelAnimationFrame(timerRaf);
         clearTimeout(nextTimer);
+        if (votes && phase !== 'revealed' && phase !== 'done') votes.cancel();
         view.destroy?.();
         cleanupRound = () => {};
       }
@@ -260,8 +307,19 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
         [scorePill, streakPill].forEach((p) => { p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); });
 
         view.reveal();
+
+        if (votes) {
+          chatBanner = h('div', { class: 'chat-banner' }, h('span'), h('span', { class: 'first' }));
+          prompt.append(chatBanner);
+          updateBanner();
+          // Shout out the earliest correct voter straight away; points are
+          // handed out once late votes (stream delay) have come in.
+          const firstNow = votes.firstFor(correctIdx);
+          if (firstNow) chatBanner.lastChild.textContent = `⚡ @${firstNow.user} got it first!`;
+          votes.close(GRACE_MS).then((result) => award(result, correctIdx));
+        }
         hostBtn.textContent = index + 1 < targets.length ? 'Next' : 'Results';
-        if (settings.mode !== 'host') nextTimer = setTimeout(next, AUTO_NEXT_MS);
+        if (settings.mode !== 'host') nextTimer = setTimeout(next, votes ? AUTO_NEXT_CHAT_MS : AUTO_NEXT_MS);
       }
 
       function next() {

@@ -1,5 +1,7 @@
 // "Who Would Win?": two random characters (any side vs any side), tap the one
 // you think wins. It's opinion only; after each pick the fan split is shown.
+import * as chat from '../chat.js';
+import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
 import { SIDES } from '../registry.js';
 import { sfx } from '../sfx.js';
@@ -7,6 +9,7 @@ import { h, iconButton, shuffle, wait } from '../ui.js';
 import { record, split, splitLabel } from '../votes.js';
 
 const AUTO_NEXT_MS = 2600;
+const MIN_CHAT_VOTES = 3; // fewer than this → show the fan estimate instead
 
 const RANKS = [
   [80, 'Totally Normal Fan', 'You think like the rest of the galaxy.'],
@@ -85,8 +88,10 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       let timerRaf = 0;
       let nextTimer = 0;
 
+      const chatOn = chat.isOn();
       const half = (c, pos) => {
         const pct = h('div', { class: 'wv-pct' });
+        const chatEl = chatOn && h('div', { class: 'wv-chat' }, `💬 Type ${pos === 'top' ? 1 : 2}`);
         const el = h('button', { class: `wv-half wv-${pos}`, 'aria-label': `${c.name} wins` },
           h('div', { class: 'wv-img' }, h('img', { src: c.image, alt: '', draggable: 'false' })),
           h('div', { class: 'wv-label' },
@@ -94,13 +99,32 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
             h('span', { class: 'wv-name' }, c.name),
           ),
           pct,
+          chatEl,
           h('div', { class: 'wv-pick' }, '✓ Your pick'),
         );
         el.addEventListener('click', () => onTap(c));
-        return { el, pct };
+        return { el, pct, chatEl };
       };
       const top = half(a, 'top');
       const bottom = half(b, 'bottom');
+
+      // Chat votes: 1 / 2, red / blue, top / bottom, left / right, or the name.
+      const votes = chatOn ? voteRound([
+        { id: 'a', keys: ['1', 'red', 'top', 'left'], names: [a.name] },
+        { id: 'b', keys: ['2', 'blue', 'bottom', 'right'], names: [b.name] },
+      ], {
+        onUpdate: ({ counts, total }) => {
+          if (phase !== 'picking') return;
+          top.chatEl.textContent = `💬 1 · ${counts.a} vote${counts.a === 1 ? '' : 's'}`;
+          bottom.chatEl.textContent = `💬 2 · ${counts.b} vote${counts.b === 1 ? '' : 's'}`;
+          void total;
+        },
+      }) : null;
+      if (chatOn) {
+        // Test chat leans towards the character with more fan power.
+        const fav = (a.power || 50) >= (b.power || 50) ? ['1', a.name] : ['2', b.name];
+        chat.setTestHint(() => (phase === 'picking' ? [...fav, ...fav, '1', '2', a.name, b.name] : []));
+      }
 
       const timerFill = h('div', { class: 'fill' });
       const timer = h('div', { class: `timer ${settings.timer ? '' : 'hidden'}` }, timerFill);
@@ -138,6 +162,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       function finish() {
         cancelAnimationFrame(timerRaf);
         clearTimeout(nextTimer);
+        votes?.cancel();
         cleanupRound = () => {};
       }
 
@@ -174,9 +199,22 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           record(a, b, pick);
           sfx.choose();
         }
-        const result = await split(a, b);
+        // Real chat votes win over the fan estimate when there are enough.
+        const chatTally = votes?.tally();
+        votes?.cancel();
+        let result;
+        let label;
+        if (chatTally && chatTally.total >= MIN_CHAT_VOTES) {
+          const pctA = Math.round((chatTally.counts.a / chatTally.total) * 100);
+          result = { a: pctA, b: 100 - pctA, source: 'chat' };
+          label = `Chat vote · ${chatTally.total}`;
+        } else {
+          result = await split(a, b);
+          label = splitLabel(result.source);
+        }
         if (!alive) return;
-        const label = splitLabel(result.source);
+        top.chatEl?.remove();
+        bottom.chatEl?.remove();
         countUp(top.pct, result.a, label);
         countUp(bottom.pct, result.b, label);
         screen.classList.add('revealed');
