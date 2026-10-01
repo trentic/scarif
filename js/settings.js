@@ -7,12 +7,27 @@ export const DEFAULTS = {
   mode: 'auto', // 'auto' advances by itself, 'host' waits for a tap to reveal / continue
   pictureMode: 'clear',
   speedSeconds: 60,
+  layout: 'vertical', // 'vertical' (9:16) or '43' (4:3 landscape)
+  align: 'left', // 4:3 position: 'left' | 'center' | 'right'
+  sideFill: 'dark', // 4:3 empty space: 'dark' | 'green'
   sfx: true,
   safeZones: false,
   clean: false,
 };
 
 export const OPTIONS = [
+  {
+    key: 'layout', title: 'Screen format', choices: [['vertical', '9:16 Vertical'], ['43', '4:3 Landscape']],
+    help: 'Vertical for Shorts / TikTok / Reels. 4:3 for long-form videos and streams.',
+  },
+  {
+    key: 'align', title: '4:3 position', choices: [['left', 'Left'], ['center', 'Center'], ['right', 'Right']], when: (s) => s.layout === '43',
+    help: 'Put the game on one side to leave room for your webcam. Shortcut: P.',
+  },
+  {
+    key: 'sideFill', title: '4:3 empty space', choices: [['dark', 'Dark'], ['green', 'Green screen']], when: (s) => s.layout === '43',
+    help: 'Green screen lets you key out the empty area in OBS.',
+  },
   {
     key: 'rounds', title: 'Rounds', choices: [[3, '3'], [5, '5'], [10, '10'], [15, '15'], [20, '20'], [0, 'All']],
     help: 'All = every entry once. In Who Would Win? it means unlimited matchups (tap Finish to end).',

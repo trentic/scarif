@@ -131,6 +131,15 @@ Each game gets only the archive entries that meet its `requires`. The hub shows 
 
 The shared engine (`js/engine.js`) already handles the countdown, answers, timer, scoring, streaks and results screen.
 
+## Screen formats (Shorts vs long-form)
+
+**Settings → Screen format**:
+
+- **9:16 Vertical** (default) — a 1080×1920 stage for Shorts / TikTok / Reels, with the safe-zone overlay.
+- **4:3 Landscape** — a 1440×1080 stage for long-form videos and streams. Every game has a landscape layout (quiz picture left / answers right, Who Would Win? fighters side by side, Higher or Lower cards side by side).
+  - **4:3 position: Left / Center / Right** — on a 16:9 window, Left or Right leaves a quarter of the screen free for your webcam. Press **P** to cycle.
+  - **4:3 empty space: Dark / Green screen** — green lets you key out the free area in OBS.
+
 ## Recording features
 
 - **Fixed 9:16 stage.** The game always renders at 1080×1920, scaled to fit the screen, so recordings look the same on any device.
@@ -152,6 +161,7 @@ Keyboard shortcuts:
 | `R` | Replay sound |
 | `Z` | Toggle safe zones |
 | `C` | Toggle clean mode |
+| `P` | Move the 4:3 stage left / center / right |
 | `Esc` | Back to menu |
 
 ## Local preview

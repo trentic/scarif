@@ -4,10 +4,6 @@ import { h } from '../ui.js';
 
 const STAGES = [6, 3.6, 2.1, 1]; // zoom factor per step
 const STEP_MS = 2500; // per step when the answer timer is off
-// Size of the <img> box inside the frame (stage px); used to map a point on
-// the picture to a point on the element when the picture is letterboxed.
-const BOX_W = 760;
-const BOX_H = 460;
 
 // Picks a spot that's actually on the blaster (not empty background) so the
 // close-up isn't just a blank patch. Falls back to the middle if the image
@@ -35,7 +31,10 @@ function focusPoint(img) {
     }
     if (!spots.length) return fallback;
     const [u, v] = spots[Math.floor(Math.random() * spots.length)];
-    // Map from picture coordinates to the letterboxed element box.
+    // Map from picture coordinates to the letterboxed <img> box (its layout
+    // size in stage px, which differs between 9:16 and 4:3).
+    const BOX_W = img.offsetWidth || 760;
+    const BOX_H = img.offsetHeight || 460;
     const scale = Math.min(BOX_W / img.naturalWidth, BOX_H / img.naturalHeight);
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;

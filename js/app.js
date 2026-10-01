@@ -37,7 +37,8 @@ function setAccent(accent) {
 function applyRecordingOptions() {
   stage.classList.toggle('clean', Boolean(settings.clean));
   stage.querySelector('.safe-zones')?.remove();
-  if (settings.safeZones) {
+  // Safe-zone guides are for vertical (Shorts/TikTok/Reels) videos only.
+  if (settings.safeZones && settings.layout !== '43') {
     stage.append(h('div', { class: 'safe-zones' },
       h('div', { class: 'top' }, 'App header'),
       h('div', { class: 'side' }, 'Like / share'),
@@ -52,6 +53,10 @@ document.addEventListener('keydown', (e) => {
   if (e.target.closest?.('input, textarea')) return;
   if (e.key === 'z' || e.key === 'Z') settings.safeZones = !settings.safeZones;
   if (e.key === 'c' || e.key === 'C') settings.clean = !settings.clean;
+  if ((e.key === 'p' || e.key === 'P') && settings.layout === '43') {
+    const order = ['left', 'center', 'right'];
+    settings.align = order[(order.indexOf(settings.align) + 1) % order.length];
+  }
 });
 
 // --- settings drawer ----------------------------------------------------------------
@@ -69,16 +74,21 @@ function openSettings(onClose) {
           onclick: () => {
             settings[opt.key] = value;
             buttons.forEach((b, i) => b.setAttribute('aria-pressed', String(opt.choices[i][0] === value)));
+            // Show/hide options that depend on this one (e.g. 4:3 position).
+            drawer.querySelectorAll('[data-when]').forEach((el) => {
+              const dep = OPTIONS.find((o) => o.key === el.dataset.when);
+              el.hidden = !dep.when(settings);
+            });
           },
         }, label),
       );
-      return h('div', { class: 'setting' },
+      return h('div', { class: 'setting', 'data-when': opt.when ? opt.key : null, hidden: opt.when ? !opt.when(settings) : false },
         h('div', { class: 'title' }, opt.title),
         h('div', { class: 'seg' }, buttons),
         opt.help && h('div', { class: 'help' }, opt.help),
       );
     }),
-    h('div', { class: 'keys' }, 'Keyboard: 1–4 answer · Space reveal/next · R replay sound · Z safe zones · C clean mode · Esc menu'),
+    h('div', { class: 'keys' }, 'Keyboard: 1–4 answer · Space reveal/next · R replay sound · Z safe zones · C clean mode · P move 4:3 left/center/right · Esc menu'),
   );
   stage.append(backdrop, drawer);
 }

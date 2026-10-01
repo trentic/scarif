@@ -1,0 +1,130 @@
+/* 4:3 landscape layout (1440×1080 stage) for long-form videos and streams.
+   Everything here is scoped to #stage.layout-43, so 9:16 is unaffected. */
+
+body.side-green { background: #00b140; }
+
+#stage.layout-43 {
+  width: 1440px;
+  height: 1080px;
+  font-size: 40px;
+  background:
+    radial-gradient(ellipse 80% 90% at 50% 45%, #0c1726 0%, transparent 70%),
+    var(--bg);
+}
+
+.layout-43 .screen { padding: 50px 80px 40px; }
+.layout-43 .corner { top: 50px; }
+.layout-43 .corner.left { left: 80px; }
+.layout-43 .corner.right { right: 80px; }
+
+/* ---------- hub: two columns of tiles ---------- */
+
+.layout-43 .hub-logo { margin: 0 0 14px; }
+.layout-43 .hub-logo .mark { font-size: 84px; }
+.layout-43 .hub-logo .sub { margin-top: 10px; font-size: 22px; }
+.layout-43 .hub-logo .rule { margin-top: 14px; }
+.layout-43 .game-list { gap: 18px; padding-bottom: 40px; }
+.layout-43 .game-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.layout-43 .section-title { margin-top: 6px; font-size: 26px; }
+.layout-43 .game-tile { grid-template-columns: 84px 1fr; gap: 22px; padding: 16px 22px; border-radius: 22px; }
+.layout-43 .game-tile .glyph { width: 84px; height: 84px; font-size: 46px; border-radius: 18px; }
+.layout-43 .game-tile h2 { font-size: 32px; }
+.layout-43 .game-tile .tag { margin-top: 6px; font-size: 22px; }
+.layout-43 .game-tile .meta { margin-top: 6px; font-size: 20px; }
+
+/* ---------- lobby ---------- */
+
+.layout-43 .lobby .glyph { margin-top: 40px; width: 210px; height: 210px; font-size: 104px; }
+.layout-43 .lobby h1 { margin-top: 44px; font-size: 92px; }
+.layout-43 .lobby .tag { margin-top: 20px; font-size: 40px; }
+.layout-43 .lobby .facts { margin-top: 34px; font-size: 32px; }
+.layout-43 .lobby .actions { width: 640px; margin-bottom: 70px; }
+.layout-43 .hl-choose { margin-top: 30px; }
+
+/* ---------- countdown ---------- */
+
+.layout-43 .countdown { padding-bottom: 0; }
+.layout-43 .countdown .num { font-size: 420px; }
+
+/* ---------- quiz rounds: prompt left, answers right ---------- */
+
+.layout-43 .round-screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    'hud hud'
+    'timer timer'
+    'prompt answers'
+    'prompt host';
+  column-gap: 56px;
+}
+.layout-43 .hud { grid-area: hud; padding: 0 0 0 140px; }
+.layout-43 .timer { grid-area: timer; margin-top: 18px; }
+.layout-43 .prompt { grid-area: prompt; height: auto; margin-top: 28px; }
+.layout-43 .answers { grid-area: answers; align-self: center; margin-top: 28px; }
+.layout-43 .host-bar { grid-area: host; margin-top: 18px; }
+.layout-43 .picture-frame { width: 100%; height: 560px; }
+.layout-43 .sound-orb { width: 540px; height: 540px; }
+.layout-43 .reveal-card { inset: 70px 0 0; }
+.layout-43 .reveal-card img { max-height: 400px; }
+.layout-43 .flash { font-size: 84px; }
+
+/* ---------- higher or lower: cards side by side ---------- */
+
+.layout-43 .hl-screen .hl-cards {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  flex-direction: row;
+  align-items: stretch;
+  margin-top: 30px;
+}
+.layout-43 .hl-card { flex: 1; justify-content: center; }
+.layout-43 .hl-img { height: 380px; }
+.layout-43 .hl-vs { margin: 0 -30px; align-self: center; }
+.layout-43 .hl-buttons .btn { font-size: 36px; min-height: 100px; }
+.layout-43 .hl-flash { top: 50%; }
+
+/* ---------- who would win: fighters side by side ---------- */
+
+.layout-43 .wv-screen .wv-panel {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  height: auto;
+  margin-top: 26px;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+.layout-43 .wv-host { grid-column: 1 / -1; grid-row: 4; }
+.layout-43 .wv-bottom { justify-content: flex-start; }
+.layout-43 .wv-top .wv-img,
+.layout-43 .wv-bottom .wv-img { top: 112px; bottom: 36px; left: 40px; right: 40px; }
+.layout-43 .wv-name { font-size: 40px; white-space: nowrap; }
+.layout-43 .wv-label { gap: 14px; padding: 28px 24px; }
+.layout-43 .wv-top .wv-pct,
+.layout-43 .wv-bottom .wv-pct { top: auto; bottom: 36px; }
+.layout-43 .wv-top .wv-pick,
+.layout-43 .wv-bottom .wv-pick { top: 126px; bottom: auto; right: 36px; }
+.layout-43 .wv-pct b { font-size: 96px; }
+
+/* ---------- results ---------- */
+
+.layout-43 .results .label { margin-top: 40px; font-size: 34px; }
+.layout-43 .results .big { margin-top: 20px; font-size: 190px; }
+.layout-43 .results .big small { font-size: 90px; }
+.layout-43 .results .big-caption { font-size: 30px; }
+.layout-43 .results .rank { margin-top: 26px; font-size: 72px; }
+.layout-43 .results .rank-sub { margin-top: 14px; font-size: 32px; }
+.layout-43 .results .stats { margin-top: 34px; }
+.layout-43 .results .stat { padding: 22px 44px; }
+.layout-43 .results .stat b { font-size: 56px; }
+.layout-43 .results .cta { margin-top: 34px; font-size: 40px; }
+.layout-43 .results .actions { width: 820px; margin-bottom: 30px; }
+
+/* ---------- settings drawer ---------- */
+
+.layout-43 .drawer { left: 50%; right: auto; width: 1100px; transform: translateX(-50%); max-height: 92%; padding: 44px 60px 80px; }
+.layout-43 .drawer { animation: none; }
+.layout-43 .seg button { min-height: 80px; font-size: 32px; }
+.layout-43 .setting { margin-bottom: 30px; }
+.layout-43 .setting .title { font-size: 30px; }
