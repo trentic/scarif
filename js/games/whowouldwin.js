@@ -91,7 +91,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       const chatOn = chat.isOn();
       const half = (c, pos) => {
         const pct = h('div', { class: 'wv-pct' });
-        const chatEl = chatOn && h('div', { class: 'wv-chat' }, `💬 Type ${pos === 'top' ? 1 : 2}`);
+        const chatEl = chatOn ? h('div', { class: 'wv-chat' }, `💬 Type ${pos === 'top' ? 1 : 2}`) : null;
         const el = h('button', { class: `wv-half wv-${pos}`, 'aria-label': `${c.name} wins` },
           h('div', { class: 'wv-img' }, h('img', { src: c.image, alt: '', draggable: 'false' })),
           h('div', { class: 'wv-label' },

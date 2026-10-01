@@ -168,7 +168,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
         el.append(count);
         return { bar, count };
       });
-      const chatHint = chatOn && h('div', { class: 'chat-hint' }, '💬 Chat: type ', h('b', {}, 'A'), ', ', h('b', {}, 'B'), ', ', h('b', {}, 'C'), ' or ', h('b', {}, 'D'));
+      const chatHint = chatOn ? h('div', { class: 'chat-hint' }, '💬 Chat: type ', h('b', {}, 'A'), ', ', h('b', {}, 'B'), ', ', h('b', {}, 'C'), ' or ', h('b', {}, 'D')) : null;
       const showTally = ({ counts, total }) => {
         choices.forEach((_, i) => {
           const n = counts[i] || 0;
