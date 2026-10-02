@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-02T03:40:20.196Z",
+  "updatedAt": "2026-10-02T03:40:25.774Z",
   "entries": [
+    {
+      "id": "a-180-blaster",
+      "name": "A-180 Blaster",
+      "image": "media/a-180-blaster-image-fa844214.webp",
+      "sound": null,
+      "wiki": "A-180 blaster",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
     {
       "id": "a280-blaster-rifle",
       "name": "A280 Blaster Rifle",
@@ -143,6 +152,15 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "elrik-vonreg-s-rk-3-blaster",
+      "name": "Elrik Vonreg's RK-3 Blaster",
+      "image": "media/elrik-vonreg-s-rk-3-blaster-image-51b48b79.webp",
+      "sound": null,
+      "wiki": "Elrik Vonreg's RK-3 blaster",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
       "id": "ezra-bridger-s-first-lightsaber",
       "name": "Ezra Bridger's First Lightsaber",
       "image": "media/ezra-bridger-s-first-lightsaber-image-cbe467ad.webp",
@@ -161,6 +179,15 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "glie-44-blaster-pistol",
+      "name": "Glie-44 Blaster Pistol",
+      "image": "media/glie-44-blaster-pistol-image-294bc114.webp",
+      "sound": null,
+      "wiki": "Glie-44 blaster pistol",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
       "id": "ib-94-blaster",
       "name": "IB-94 Blaster",
       "image": "media/ib-94-blaster-image-a0c3cf82.webp",
@@ -168,6 +195,15 @@
       "wiki": "IB-94 blaster",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "ion-blaster",
+      "name": "Ion Blaster",
+      "image": "media/ion-blaster-image-b7b86b00.webp",
+      "sound": null,
+      "wiki": "Ion blaster",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
     },
     {
       "id": "k-16-bryar-pistol",
@@ -197,6 +233,15 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "nn-14-blaster-pistol",
+      "name": "NN-14 Blaster Pistol",
+      "image": "media/nn-14-blaster-pistol-image-3cb2cc63.webp",
+      "sound": null,
+      "wiki": "NN-14 blaster pistol",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
       "id": "nt-242",
       "name": "NT-242",
       "image": "media/nt-242-image-17d19a30.webp",
@@ -223,6 +268,24 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "t-21-light-repeating-blaster",
+      "name": "T-21 Light Repeating Blaster",
+      "image": "media/t-21-light-repeating-blaster-image-aae31563.webp",
+      "sound": null,
+      "wiki": "T-21 light repeating blaster",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
+      "id": "teroj-s-blaster",
+      "name": "Teroj's Blaster",
+      "image": "media/teroj-s-blaster-image-3a006173.webp",
+      "sound": null,
+      "wiki": "Teroj's blaster",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
       "id": "the-mandalorian-s-ib-94-blaster-pistol",
       "name": "The Mandalorian's IB-94 Blaster Pistol",
       "image": "media/the-mandalorian-s-ib-94-blaster-pistol-image-1ee534dd.webp",
@@ -238,6 +301,15 @@
       "sound": "media/tl-50-heavy-repeater-sound-6b32ce99.wav",
       "createdAt": "2026-09-26T21:13:06.082Z",
       "updatedAt": "2026-09-26T21:13:06.082Z"
+    },
+    {
+      "id": "vm-19-heavy-blaster-pistol",
+      "name": "VM-19 Heavy Blaster Pistol",
+      "image": "media/vm-19-heavy-blaster-pistol-image-4b35a89a.webp",
+      "sound": null,
+      "wiki": "VM-19 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:40:25.774Z",
+      "updatedAt": "2026-10-02T03:40:25.774Z"
     },
     {
       "id": "westar-34-blaster-pistol",
