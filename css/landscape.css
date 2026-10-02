@@ -138,7 +138,26 @@ body.side-green { background: #00b140; }
 .layout-43 .chat-hint { grid-area: answers; align-self: start; margin-top: 30px; font-size: 28px; }
 .layout-43 .chat-hint + .answers { margin-top: 80px; }
 .layout-43 .chat-board { margin-top: 24px; max-width: 900px; }
-.layout-43 .chat-board ol { grid-template-columns: 1fr 1fr; }
+.layout-43 .chat-board ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .layout-43 .chat-board li { font-size: 28px; padding: 6px 20px; }
 .layout-43 .chat-chip { top: 8px; }
 .layout-43 .wv-top .wv-chat, .layout-43 .wv-bottom .wv-chat { top: auto; bottom: 40px; }
+
+/* results with the chat leaderboard: board beside the score */
+.layout-43 .results.has-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas: 'main board' 'actions actions';
+  column-gap: 60px;
+  align-items: center;
+}
+.layout-43 .results.has-board .results-main { grid-area: main; }
+.layout-43 .results.has-board .label { margin-top: 0; }
+.layout-43 .results.has-board .rank { font-size: 64px; }
+.layout-43 .results.has-board .chat-board { grid-area: board; margin-top: 0; max-width: none; }
+.layout-43 .results.has-board .chat-board ol { grid-template-columns: minmax(0, 1fr); }
+.layout-43 .results.has-board .big { font-size: 170px; }
+.layout-43 .results.has-board .big small { font-size: 80px; }
+.layout-43 .results.has-board .chat-board li { font-size: 30px; padding: 8px 22px; }
+.layout-43 .results.has-board .actions { grid-area: actions; justify-self: center; }

@@ -1012,3 +1012,19 @@ body {
 .chat-setup li { margin: 10px 0; line-height: 1.4; }
 .chat-board-preview { margin-bottom: 30px; font-size: 30px; color: var(--muted); }
 .chat-board-preview ol { margin: 0 0 16px; }
+
+/* results with the chat leaderboard: tighter so the buttons stay on screen */
+.results-main { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.results.has-board .label { margin-top: 30px; }
+.results.has-board .big { margin-top: 0; }
+.results.has-board .rank { margin-top: 24px; }
+.results.has-board .rank-sub { margin-top: 12px; }
+.results.has-board .stats { margin-top: 36px; }
+.results.has-board .chat-board { margin-top: 30px; }
+.results.has-board .big { font-size: 230px; }
+.results.has-board .big small { font-size: 96px; }
+.results.has-board .stat { padding: 18px 44px; }
+.results.has-board .stat b { font-size: 60px; }
+.results.has-board .chat-board ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.results.has-board .chat-board li { font-size: 28px; padding: 6px 18px; gap: 12px; }
+.results.has-board .chat-board li::before { width: 26px; }
