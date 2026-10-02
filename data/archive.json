@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:40:55.013Z",
+  "updatedAt": "2026-10-02T03:41:00.738Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -55,6 +55,15 @@
       "updatedAt": "2026-10-02T03:40:37.269Z"
     },
     {
+      "id": "abr-2-zato-blaster-rifle",
+      "name": "ABR-2 Zato Blaster Rifle",
+      "image": "media/abr-2-zato-blaster-rifle-image-4b5017a1.webp",
+      "sound": null,
+      "wiki": "ABR-2 Zato blaster rifle",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
+    },
+    {
       "id": "ad-616k6ka",
       "name": "AD-616K6KA",
       "image": "media/ad-616k6ka-image-3601a6eb.webp",
@@ -62,6 +71,15 @@
       "wiki": "AD-616K6KA",
       "createdAt": "2026-10-02T03:40:31.534Z",
       "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "ascension-gun",
+      "name": "Ascension Gun",
+      "image": "media/ascension-gun-image-d8bad885.webp",
+      "sound": null,
+      "wiki": "Ascension gun",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
       "id": "b1-na-blaster-pistol",
@@ -89,6 +107,15 @@
       "wiki": "Boiler rifle",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "bossk-s-relby-v10-mortar-gun",
+      "name": "Bossk's Relby-V10 Mortar Gun",
+      "image": "media/bossk-s-relby-v10-mortar-gun-image-e34f372f.webp",
+      "sound": null,
+      "wiki": "Bossk's Relby-v10 Mortar Gun",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
       "id": "cc-420-pistol",
@@ -187,6 +214,24 @@
       "wiki": "DT-12 heavy blaster pistol",
       "createdAt": "2026-10-02T03:40:55.013Z",
       "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
+      "id": "dt-29-heavy-blaster-pistol",
+      "name": "DT-29 Heavy Blaster Pistol",
+      "image": "media/dt-29-heavy-blaster-pistol-image-41f96528.webp",
+      "sound": null,
+      "wiki": "DT-29 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
+    },
+    {
+      "id": "dt-57-annihilator-blaster",
+      "name": "DT-57 \"Annihilator\" Blaster",
+      "image": "media/dt-57-annihilator-blaster-image-efce103f.webp",
+      "sound": null,
+      "wiki": "DT-57 \"Annihilator\" blaster",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
       "id": "dx-2-disruptor-blaster-pistol",
@@ -312,6 +357,15 @@
       "wiki": "Ezra Bridger's first lightsaber",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "ezra-s-heavy-blaster-pistol",
+      "name": "Ezra's Heavy Blaster Pistol",
+      "image": "media/ezra-s-heavy-blaster-pistol-image-aa814dab.webp",
+      "sound": null,
+      "wiki": "Ezra's heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
       "id": "f-11d-blaster-rifle",
@@ -467,6 +521,15 @@
       "updatedAt": "2026-10-02T03:40:43.326Z"
     },
     {
+      "id": "mk-ii-paladin-blaster-rifle",
+      "name": "Mk II Paladin Blaster Rifle",
+      "image": "media/mk-ii-paladin-blaster-rifle-image-b38f9abf.webp",
+      "sound": null,
+      "wiki": "Mk II Paladin blaster rifle",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
+    },
+    {
       "id": "mt2-blaster-pistol",
       "name": "MT2 Blaster Pistol",
       "image": "media/mt2-blaster-pistol-image-71c55ff5.webp",
@@ -563,6 +626,15 @@
       "wiki": "Scattergun",
       "createdAt": "2026-10-02T03:40:43.326Z",
       "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "se-14c-blaster-pistol",
+      "name": "SE-14C Blaster Pistol",
+      "image": "media/se-14c-blaster-pistol-image-74609434.webp",
+      "sound": null,
+      "wiki": "SE-14C blaster pistol",
+      "createdAt": "2026-10-02T03:41:00.737Z",
+      "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
       "id": "se-14r-light-repeating-blaster",
