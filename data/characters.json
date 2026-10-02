@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:37:32.744Z",
+  "updatedAt": "2026-10-02T03:37:39.274Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -630,9 +630,10 @@
       "name": "Second Sister",
       "side": "sith",
       "power": 64,
-      "image": null,
+      "image": "media/characters/second-sister-44c23b9e.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:39.274Z",
+      "wiki": "Second Sister"
     },
     {
       "id": "shaak-ti",
@@ -668,9 +669,10 @@
       "name": "Snoke",
       "side": "sith",
       "power": 85,
-      "image": null,
+      "image": "media/characters/snoke-328dc6ae.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:39.274Z",
+      "wiki": "Snoke"
     },
     {
       "id": "starkiller",
