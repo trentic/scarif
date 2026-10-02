@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:25:50.172Z",
+  "updatedAt": "2026-10-02T03:25:56.535Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -18,6 +18,16 @@
       "image": "media/characters/ahsoka-tano-4e05fc2f.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:03:42.347Z"
+    },
+    {
+      "id": "ajunta-pall",
+      "name": "Ajunta Pall",
+      "side": "sith",
+      "power": 52,
+      "image": "media/characters/ajunta-pall-187f2a8f.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Ajunta Pall"
     },
     {
       "id": "anakin-skywalker",
@@ -114,6 +124,16 @@
       "wiki": "Darth Caedus"
     },
     {
+      "id": "darth-desolous",
+      "name": "Darth Desolous",
+      "side": "sith",
+      "power": 54,
+      "image": "media/characters/darth-desolous-f70dbfc8.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Darth Desolous"
+    },
+    {
       "id": "darth-krayt",
       "name": "Darth Krayt",
       "side": "sith",
@@ -170,6 +190,16 @@
       "updatedAt": "2026-09-30T04:08:58.938Z"
     },
     {
+      "id": "darth-phobos",
+      "name": "Darth Phobos",
+      "side": "sith",
+      "power": 55,
+      "image": "media/characters/darth-phobos-bb934662.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Darth Phobos"
+    },
+    {
       "id": "darth-plagueis",
       "name": "Darth Plagueis",
       "side": "sith",
@@ -224,6 +254,16 @@
       "updatedAt": "2026-09-30T00:00:00.000Z"
     },
     {
+      "id": "darth-vowrawn",
+      "name": "Darth Vowrawn",
+      "side": "sith",
+      "power": 57,
+      "image": "media/characters/darth-vowrawn-cf9e5a88.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Darth Vowrawn"
+    },
+    {
       "id": "darth-zannah",
       "name": "Darth Zannah",
       "side": "sith",
@@ -250,6 +290,16 @@
       "createdAt": "2026-10-02T03:25:43.708Z",
       "updatedAt": "2026-10-02T03:25:43.708Z",
       "wiki": "Freedon Nadd"
+    },
+    {
+      "id": "gol",
+      "name": "Gol",
+      "side": "sith",
+      "power": 53,
+      "image": "media/characters/gol-ec3cbd34.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Gol (Sith)"
     },
     {
       "id": "grogu",
@@ -286,6 +336,16 @@
       "image": "media/characters/kit-fisto-522c9122.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:11:02.241Z"
+    },
+    {
+      "id": "kouru",
+      "name": "Kouru",
+      "side": "sith",
+      "power": 56,
+      "image": "media/characters/kouru-ef2ea45d.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Kouru"
     },
     {
       "id": "kreia",
@@ -410,6 +470,16 @@
       "updatedAt": "2026-09-30T00:00:00.000Z"
     },
     {
+      "id": "quorlac-fornayh",
+      "name": "Quorlac Fornayh",
+      "side": "sith",
+      "power": 50,
+      "image": "media/characters/quorlac-fornayh-3d1c6ff9.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Quorlac Fornayh"
+    },
+    {
       "id": "remulus-dreypa",
       "name": "Remulus Dreypa",
       "side": "sith",
@@ -501,6 +571,16 @@
       "createdAt": "2026-10-02T03:25:43.708Z",
       "updatedAt": "2026-10-02T03:25:43.708Z",
       "wiki": "The Stranger"
+    },
+    {
+      "id": "tulak-hord",
+      "name": "Tulak Hord",
+      "side": "sith",
+      "power": 51,
+      "image": "media/characters/tulak-hord-9f226b78.webp",
+      "createdAt": "2026-10-02T03:25:56.534Z",
+      "updatedAt": "2026-10-02T03:25:56.534Z",
+      "wiki": "Tulak Hord"
     },
     {
       "id": "x1",
