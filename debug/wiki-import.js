@@ -347,6 +347,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         check,
         r.inArchive ? h('span', { class: 'wiki-flag' }, 'In archive') : null,
         r.both ? h('span', { class: 'wiki-flag warn', title: 'Listed as both Jedi and Sith. Check the side.' }, 'Jedi & Sith') : null,
+        r.legends ? h('span', { class: 'wiki-flag legends' }, 'Legends') : null,
       ),
       h('div', { class: 'body' },
         ...fields,
@@ -399,12 +400,13 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         if (missing.length) problems.push(`Not found on Wookieepedia: ${missing.join(', ')}`);
       }
 
-      let list = [...found.values()].filter(({ result }) => !K.skip.test(result.title) && (prefs.legends || !result.title.endsWith('/Legends')));
+      let list = [...found.values()].filter(({ result }) => !K.skip.test(result.title) && (prefs.legends || !result.legends));
       const noPic = list.filter(({ result }) => !result.image);
       if (noPic.length) {
         setStatus(`Finding pictures for ${noPic.length} articles…`);
         await fillMissingImages(noPic.map((x) => x.result), { onProgress: (d, t) => setStatus(`Finding pictures… ${d} / ${t}`) });
       }
+      const legendsSkipped = prefs.legends ? 0 : [...found.values()].filter(({ result }) => result.legends).length;
       const withoutPicture = list.filter(({ result }) => !result.image).length;
       list = list.filter(({ result }) => result.image);
 
@@ -435,7 +437,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       let left = prefs.top;
       for (const r of visible()) r.selected = !r.inArchive && left-- > 0;
 
-      const extra = [withoutPicture && `${withoutPicture} skipped (no picture)`, ...problems].filter(Boolean);
+      const extra = [legendsSkipped && `${legendsSkipped} Legends articles left out`, withoutPicture && `${withoutPicture} skipped (no picture)`, ...problems].filter(Boolean);
       setStatus(`${results.size ? 'Done.' : 'Nothing found.'}${extra.length ? ` ${extra.join(' · ')}` : ''}`, problems.length ? 'warn' : 'ok');
       progress.textContent = '';
       showResults();

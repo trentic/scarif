@@ -440,3 +440,4 @@ dialog.wiki-dialog { width: min(1100px, calc(100vw - 32px)); padding: 20px 20px 
 .warn-text { color: var(--gold); }
 .ok-text { color: var(--green); }
 @media (max-width: 700px) { .sound-row { grid-template-columns: 1fr auto; } .sound-pick { grid-column: 1 / -1; grid-row: 2; } }
+.wiki-flag.legends { left: 38px; right: auto; color: var(--muted); }

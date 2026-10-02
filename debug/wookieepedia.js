@@ -66,10 +66,22 @@ export async function findCategories(prefix) {
     .sort((a, b) => b.size - a.size);
 }
 
-const PAGE_PROPS = { prop: 'pageimages|info', piprop: 'thumbnail', pithumbsize: String(THUMB), pilimit: '50' };
+// Wookieepedia files every Legends article under this category. Legends-only
+// characters have plain titles; "/Legends" is only added when a canon article
+// with the same name exists.
+const LEGENDS = 'Category:Legends articles';
+const PAGE_PROPS = {
+  prop: 'pageimages|info|categories', piprop: 'thumbnail', pithumbsize: String(THUMB), pilimit: '50', clcategories: LEGENDS, cllimit: 'max',
+};
 
 function toResult(p) {
-  return { pageid: p.pageid, title: p.title, length: p.length || 0, image: p.thumbnail?.source || null };
+  return {
+    pageid: p.pageid,
+    title: p.title,
+    length: p.length || 0,
+    image: p.thumbnail?.source || null,
+    legends: p.title.endsWith('/Legends') || (p.categories || []).some((c) => c.title === LEGENDS),
+  };
 }
 
 // Article pages in a category, with their main picture.
