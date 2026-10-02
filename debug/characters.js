@@ -95,16 +95,10 @@ function render() {
       h('section', { class: 'card' },
         h('div', { class: 'card-head' },
           h('h2', {}, 'Characters'),
-          h('button', {
-            class: 'btn small',
-            onclick: () => openWikiImport({
-              gh: view.ctx.gh,
-              entries: view.entries,
-              toast: view.ctx.toast,
-              onAuthError: view.ctx.onAuthError,
-              onSaved: saved,
-            }),
-          }, '🌐 Import from Wookieepedia'),
+          h('div', { class: 'head-btns' },
+            h('button', { class: 'btn small', onclick: () => openWikiImport(wikiCtx()) }, '🌐 Import from Wookieepedia'),
+            missingBtn,
+          ),
         ),
         h('div', { class: 'filter' }, filterBtns),
         h('div', { class: 'library-tools' }, search),
@@ -116,9 +110,22 @@ function render() {
   renderGrid();
 }
 
+const wikiCtx = (extra = {}) => ({
+  kind: 'characters',
+  gh: view.ctx.gh,
+  entries: view.entries,
+  toast: view.ctx.toast,
+  onAuthError: view.ctx.onAuthError,
+  onSaved: saved,
+  ...extra,
+});
+const missingBtn = h('button', { class: 'btn ghost small', onclick: () => openWikiImport(wikiCtx({ findMissing: true })) });
+
 function renderStats() {
   const n = (fn) => view.entries.filter(fn).length;
   const missing = n((e) => !e.image);
+  missingBtn.hidden = !missing;
+  missingBtn.textContent = `🖼 Find ${missing} missing picture${missing === 1 ? '' : 's'}`;
   statsEl.replaceChildren(
     h('div', { class: 'stat' }, h('b', {}, view.entries.length), h('span', {}, 'Characters')),
     h('div', { class: 'stat' }, h('b', {}, n((e) => e.side === 'jedi')), h('span', {}, 'Jedi')),

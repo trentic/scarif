@@ -85,7 +85,13 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 
 **Quick pictures:** hover a character card and press **Ctrl+V** (or click **📋 Paste**). It uses whatever you last copied — an image address (right-click → *Copy image address*) or the image itself (right-click → *Copy image*). You can also drop an image file on a card. If a site blocks copying its images, the address is linked instead.
 
-**Import from Wookieepedia:** in the Characters tab, click **🌐 Import from Wookieepedia**. Choose categories to read (each marked Jedi or Sith; use **Find** to look up category names) and/or paste names or Wookieepedia links, then **Search Wookieepedia**. You get a list with each article's main picture, a guessed fan power (longer article = better known) and anyone already in your archive greyed out (redirects count, so *Darth Sidious* matches *Sheev Palpatine*). Pick who to add, fix names, sides and fan power, then **Add**. Pictures are copied into the site and saved in batches of 8. Wookieepedia is read from your browser, so nothing needs setting up.
+**Import from Wookieepedia** (Characters and Blasters tabs): click **🌐 Import from Wookieepedia**. Choose categories to read (characters: each marked Jedi or Sith; use **Find** to look up category names) and/or paste names or Wookieepedia links, then **Search Wookieepedia**. You get a list with each article's main picture (and, for characters, a guessed fan power: longer article = better known). Anything already in your archive is greyed out (redirects count, so *Darth Sidious* matches *Sheev Palpatine*, and a blaster's model code counts, so *DL-44* matches *DL-44 Heavy Blaster Pistol*). Pick what to add, fix names (and sides / fan power), then **Add**. Pictures are copied into the site and saved in batches of 8. Wookieepedia is read from your browser, so nothing needs setting up.
+
+**Missing character pictures:** **🖼 Find N missing pictures** (Characters tab) looks up every character with no picture on Wookieepedia and shows what it found. For any it can't find, type the right article name (or paste its link) and press **Look up**, then **Save**.
+
+**Blaster sounds:** Wookieepedia has no sounds, so add your own files:
+- **🔊 Match sound files** (Blasters tab): drop many sound files at once. Each is matched to a blaster by its file name (`dl-44.mp3`, `E-11 blaster.wav`, `westar35_shot.ogg`…); fix any match, then **Save**.
+- Or drop one sound file on a blaster's card to open its Edit form with the sound loaded, ready to trim.
 
 ### Who Would Win? percentages
 

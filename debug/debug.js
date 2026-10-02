@@ -5,6 +5,8 @@ import { GitHub } from './github.js';
 import { keepLocalCopy, loadVault, MIN_PASSWORD, openToken, sealToken, VAULT_PATH } from './vault.js';
 import { leaveCharacters, renderCharacters } from './characters.js';
 import { createTrimmer } from './trimmer.js';
+import { openWikiImport } from './wiki-import.js';
+import { openSoundMatch } from './sound-match.js';
 import {
   addEntry, addStatType, deleteEntry, deleteStatType, downloadImage, readMedia, slugify, StoreError, updateEntry, updateStatType,
 } from './store.js';
@@ -309,8 +311,12 @@ function renderDashboard() {
       h('section', { class: 'card' },
         h('div', { class: 'card-head' },
           h('h2', {}, 'Archive'),
-          h('div', { class: 'filter' }, filterBtns),
+          h('div', { class: 'head-btns' },
+            h('button', { class: 'btn small', onclick: () => openWikiImport({ kind: 'blasters', ...dialogCtx() }) }, '🌐 Import from Wookieepedia'),
+            h('button', { class: 'btn ghost small', onclick: () => openSoundMatch(dialogCtx()) }, '🔊 Match sound files'),
+          ),
         ),
+        h('div', { class: 'filter' }, filterBtns),
         h('div', { class: 'library-tools' }, search),
         libraryGrid,
       ),
@@ -321,6 +327,17 @@ function renderDashboard() {
   renderStats();
   renderLibrary();
   renderStatTypes();
+}
+
+// What the Wookieepedia and sound dialogs need to save to the blaster archive.
+function dialogCtx() {
+  return {
+    gh,
+    entries: state.entries,
+    toast,
+    onAuthError: (err) => (handleAuthError(err) ? (lock(), true) : false),
+    onSaved: (archive) => committed(archive),
+  };
 }
 
 function renderStats() {
@@ -351,7 +368,7 @@ function renderLibrary() {
     return;
   }
 
-  libraryGrid.replaceChildren(h('div', { class: 'grid' }, list.map((e) => h('article', { class: 'entry' },
+  libraryGrid.replaceChildren(h('div', { class: 'grid' }, list.map((e) => soundDropTarget(e, h('article', { class: 'entry' },
     h('div', { class: 'thumb' },
       h('img', { src: e.imageUrl, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }),
       e.sound && h('button', { class: 'play', 'aria-label': `Play ${e.name}`, html: icons.play, onclick: () => playSound(e.soundUrl) }),
@@ -382,7 +399,23 @@ function renderLibrary() {
         }, 'Delete'),
       ),
     ),
-  ))));
+  )))));
+}
+
+// Drop a sound file on a blaster card → its Edit form opens with the sound
+// loaded, ready to trim. Dropping several opens Match sound files.
+function soundDropTarget(entry, el) {
+  el.addEventListener('dragover', (ev) => { ev.preventDefault(); el.classList.add('over'); });
+  el.addEventListener('dragleave', () => el.classList.remove('over'));
+  el.addEventListener('drop', (ev) => {
+    ev.preventDefault();
+    el.classList.remove('over');
+    const files = [...ev.dataTransfer.files].filter((f) => f.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|flac|webm)$/i.test(f.name));
+    if (files.length > 1) openSoundMatch({ ...dialogCtx(), files });
+    else if (files.length) openEdit(entry, { soundFile: files[0] });
+    else toast('Drop a sound file (MP3, WAV, OGG, M4A, FLAC or WebM) to give this blaster a sound.', 'err');
+  });
+  return el;
 }
 
 function statLine(e) {
@@ -488,13 +521,14 @@ function passwordCard() {
   );
 }
 
-function openEdit(entry) {
+function openEdit(entry, { soundFile = null } = {}) {
   const dialog = h('dialog', {});
   const close = () => { dialog.querySelectorAll('audio').forEach((a) => a.pause()); dialog.close(); dialog.remove(); };
   dialog.append(
     h('div', { class: 'card-head' }, h('h2', {}, 'Edit entry')),
     entryForm({
       entry,
+      soundFile,
       onSaved: (archive) => { close(); toast('Saved.', 'ok'); committed(archive); },
       onCancel: close,
     }),
@@ -506,7 +540,7 @@ function openEdit(entry) {
 
 // --- add / edit form ------------------------------------------------------------------------
 
-function entryForm({ entry = null, onSaved, onCancel }) {
+function entryForm({ entry = null, soundFile: initialSound = null, onSaved, onCancel }) {
   const uid = Math.random().toString(36).slice(2, 8);
   let imageFile = null;
   let soundFile = null;
@@ -707,6 +741,8 @@ function entryForm({ entry = null, onSaved, onCancel }) {
       submit,
     ),
   );
+
+  if (initialSound) setSoundFile(initialSound);
 
   function reset() {
     form.reset();

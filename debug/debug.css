@@ -411,3 +411,32 @@ dialog.wiki-dialog { width: min(1100px, calc(100vw - 32px)); padding: 20px 20px 
 .wiki-flag.warn { top: auto; bottom: 8px; color: var(--gold); border-color: var(--gold); }
 .wiki-footer { position: sticky; bottom: 0; display: flex; justify-content: flex-end; align-items: center; gap: 14px; margin: 16px -20px 0; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--panel); }
 .wiki-progress { flex: 1; font-size: 14px; color: var(--muted); }
+.wiki-dialog [hidden] { display: none !important; }
+.head-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.entry.over { border-color: var(--cyan); box-shadow: 0 0 0 2px var(--cyan); }
+.wiki-fix { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 14px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); background: color-mix(in srgb, var(--gold) 6%, var(--panel)); font-size: 14px; color: var(--muted); }
+.wiki-fix b { color: var(--gold); }
+.wiki-notfound { margin: 8px 0 14px; padding: 12px 14px; border-radius: 12px; border: 1px dashed var(--line-2); }
+.wiki-notfound h3 { margin-bottom: 4px; }
+.wiki-notfound .hint { margin: 0 0 8px; font-size: 13px; color: var(--muted); }
+.wiki-retry { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(160px, 1.4fr) auto; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.wiki-retry .hint { margin: 0; font-size: 12px; }
+@media (max-width: 700px) { .wiki-retry { grid-template-columns: 1fr auto; } .wiki-retry .hint { grid-column: 1 / -1; } }
+.wiki-card.blasters .thumb { aspect-ratio: 16 / 10; }
+.wiki-card.blasters .thumb img { object-fit: contain; object-position: center; padding: 6%; }
+.wiki-card .name { font-weight: 700; }
+
+/* ---- match sound files ---- */
+.drop.sound-drop { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 0; padding: 22px; text-align: center; cursor: pointer; }
+.sound-rows { display: grid; gap: 8px; margin-top: 12px; }
+.sound-row { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
+.sound-row.matched { border-color: color-mix(in srgb, var(--green) 50%, var(--line)); }
+.sound-file { display: grid; gap: 6px; min-width: 0; }
+.sound-file b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.sound-file audio { width: 100%; height: 32px; }
+.sound-pick { display: grid; gap: 4px; min-width: 0; }
+.sound-pick select { min-height: 36px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--panel); color: var(--text); font: inherit; max-width: 100%; }
+.sound-pick span { font-size: 12px; }
+.warn-text { color: var(--gold); }
+.ok-text { color: var(--green); }
+@media (max-width: 700px) { .sound-row { grid-template-columns: 1fr auto; } .sound-pick { grid-column: 1 / -1; grid-row: 2; } }

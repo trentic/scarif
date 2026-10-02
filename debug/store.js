@@ -157,6 +157,59 @@ export function updateEntry(gh, id, { name, image, sound, removeSound, stats }) 
   });
 }
 
+// Adds many blasters in one commit (from the Wookieepedia import). Names already
+// in the archive are skipped and listed in `skipped`.
+// items: [{ name, image, wiki }]
+export async function addEntries(gh, items) {
+  let skipped = [];
+  const archive = await gh.commitArchive((archive) => {
+    skipped = [];
+    const add = [];
+    const now = new Date().toISOString();
+    for (const item of items) {
+      let clean;
+      try {
+        clean = checkName(archive, item.name);
+      } catch {
+        skipped.push(item.name);
+        continue;
+      }
+      const base = slugify(clean) || 'entry';
+      let id = base;
+      for (let n = 2; archive.entries.some((e) => e.id === id); n++) id = `${base}-${n}`;
+      let image = item.image.link;
+      if (!image) {
+        image = `media/${id}-image-${rand()}.${item.image.media.ext}`;
+        add.push({ path: image, base64: item.image.media.base64 });
+      }
+      archive.entries.push({ id, name: clean, image, sound: null, ...(item.wiki ? { wiki: item.wiki } : {}), createdAt: now, updatedAt: now });
+    }
+    archive.entries.sort((a, b) => a.name.localeCompare(b.name));
+    return { archive, add, message: `Archive: import ${items.length - skipped.length} from Wookieepedia` };
+  });
+  return { archive, skipped };
+}
+
+// Sets the sound for several blasters in one commit. items: [{ id, sound: { media } }]
+export function setSounds(gh, items) {
+  return gh.commitArchive((archive) => {
+    const add = [];
+    const remove = [];
+    const names = [];
+    for (const { id, sound } of items) {
+      const entry = archive.entries.find((e) => e.id === id);
+      if (!entry) continue;
+      if (isLocal(entry.sound)) remove.push(entry.sound);
+      entry.sound = `media/${id}-sound-${rand()}.${sound.media.ext}`;
+      add.push({ path: entry.sound, base64: sound.media.base64 });
+      entry.updatedAt = new Date().toISOString();
+      names.push(entry.name);
+    }
+    if (!names.length) throw new StoreError('Those blasters no longer exist. Reload the page.');
+    return { archive, add, remove, message: `Archive: add sound for ${names.length > 3 ? `${names.length} blasters` : names.join(', ')}` };
+  });
+}
+
 export function deleteEntry(gh, id) {
   return gh.commitArchive((archive) => {
     const entry = archive.entries.find((e) => e.id === id);

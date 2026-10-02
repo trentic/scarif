@@ -118,6 +118,26 @@ export function setCharacterImage(gh, id, image) {
   }, CHAR_FILE);
 }
 
+// Sets pictures for several characters in one commit (Wookieepedia "missing pictures").
+// items: [{ id, image, wiki }]
+export function setCharacterImages(gh, items) {
+  return gh.commitArchive((archive) => {
+    const add = [];
+    const remove = [];
+    let n = 0;
+    for (const { id, image, wiki } of items) {
+      const entry = archive.entries.find((e) => e.id === id);
+      if (!entry) continue;
+      placeImage(entry, image, add, remove);
+      if (wiki) entry.wiki = wiki;
+      entry.updatedAt = new Date().toISOString();
+      n++;
+    }
+    if (!n) throw new StoreError('Those characters no longer exist. Reload the page.');
+    return { archive, add, remove, message: `Characters: pictures for ${n} from Wookieepedia` };
+  }, CHAR_FILE);
+}
+
 export function deleteCharacter(gh, id) {
   return gh.commitArchive((archive) => {
     const entry = archive.entries.find((e) => e.id === id);
