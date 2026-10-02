@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:25:43.713Z",
+  "updatedAt": "2026-10-02T03:25:50.172Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -38,6 +38,16 @@
       "updatedAt": "2026-09-30T04:04:33.444Z"
     },
     {
+      "id": "bichan",
+      "name": "Bichan",
+      "side": "sith",
+      "power": 59,
+      "image": "media/characters/bichan-8b5ce79b.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Bichan"
+    },
+    {
       "id": "cal-kestis",
       "name": "Cal Kestis",
       "side": "jedi",
@@ -63,6 +73,26 @@
       "image": "media/characters/count-dooku-1f234494.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:06:01.400Z"
+    },
+    {
+      "id": "darth-acina",
+      "name": "Darth Acina",
+      "side": "sith",
+      "power": 58,
+      "image": "media/characters/darth-acina-1847604e.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Darth Acina"
+    },
+    {
+      "id": "darth-andeddu",
+      "name": "Darth Andeddu",
+      "side": "sith",
+      "power": 63,
+      "image": "media/characters/darth-andeddu-b531645c.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Darth Andeddu"
     },
     {
       "id": "darth-bane",
@@ -119,6 +149,16 @@
       "image": "media/characters/darth-maul-a2f6d435.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:08:36.478Z"
+    },
+    {
+      "id": "darth-momin",
+      "name": "Darth Momin",
+      "side": "sith",
+      "power": 64,
+      "image": "media/characters/darth-momin-4fec1d27.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Darth Momin"
     },
     {
       "id": "darth-nihilus",
@@ -277,6 +317,16 @@
       "wiki": "Kyp Durron"
     },
     {
+      "id": "ludo-kressh",
+      "name": "Ludo Kressh",
+      "side": "sith",
+      "power": 62,
+      "image": "media/characters/ludo-kressh-b160bd84.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Ludo Kressh"
+    },
+    {
       "id": "luke-skywalker",
       "name": "Luke Skywalker",
       "side": "jedi",
@@ -314,6 +364,16 @@
       "updatedAt": "2026-09-30T04:12:16.517Z"
     },
     {
+      "id": "marka-ragnos",
+      "name": "Marka Ragnos",
+      "side": "sith",
+      "power": 60,
+      "image": "media/characters/marka-ragnos-2aae444d.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Marka Ragnos"
+    },
+    {
       "id": "obi-wan-kenobi",
       "name": "Obi-Wan Kenobi",
       "side": "jedi",
@@ -348,6 +408,16 @@
       "image": null,
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "remulus-dreypa",
+      "name": "Remulus Dreypa",
+      "side": "sith",
+      "power": 70,
+      "image": "media/characters/remulus-dreypa-07a4f2a1.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "Remulus Dreypa"
     },
     {
       "id": "rey",
@@ -431,6 +501,16 @@
       "createdAt": "2026-10-02T03:25:43.708Z",
       "updatedAt": "2026-10-02T03:25:43.708Z",
       "wiki": "The Stranger"
+    },
+    {
+      "id": "x1",
+      "name": "X1",
+      "side": "sith",
+      "power": 67,
+      "image": "media/characters/x1-078292e6.webp",
+      "createdAt": "2026-10-02T03:25:50.172Z",
+      "updatedAt": "2026-10-02T03:25:50.172Z",
+      "wiki": "X1"
     },
     {
       "id": "yoda",
