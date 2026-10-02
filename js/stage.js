@@ -16,13 +16,13 @@ export function fitStage(stage) {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const scale = Math.min(vw / w, vh / h);
-    const align = layout === '43' ? settings.align : 'center';
+    const align = layout === '43' ? settings.stagePos : 'center';
     const x = align === 'left' ? 0 : align === 'right' ? vw - w * scale : (vw - w * scale) / 2;
     const y = (vh - h * scale) / 2;
     stage.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
   };
   window.addEventListener('resize', fit);
   window.visualViewport?.addEventListener('resize', fit);
-  onSettingsChange((key) => ['layout', 'align', 'sideFill'].includes(key) && fit());
+  onSettingsChange((key) => ['layout', 'stagePos', 'sideFill'].includes(key) && fit());
   fit();
 }

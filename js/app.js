@@ -57,7 +57,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'c' || e.key === 'C') settings.clean = !settings.clean;
   if ((e.key === 'p' || e.key === 'P') && settings.layout === '43') {
     const order = ['left', 'center', 'right'];
-    settings.align = order[(order.indexOf(settings.align) + 1) % order.length];
+    settings.stagePos = order[(order.indexOf(settings.stagePos) + 1) % order.length];
   }
 });
 

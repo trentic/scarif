@@ -8,7 +8,7 @@ export const DEFAULTS = {
   pictureMode: 'clear',
   speedSeconds: 60,
   layout: 'vertical', // 'vertical' (9:16) or '43' (4:3 landscape)
-  align: 'left', // 4:3 position: 'left' | 'center' | 'right'
+  stagePos: 'center', // 4:3 position: 'left' | 'center' | 'right'
   sideFill: 'dark', // 4:3 empty space: 'dark' | 'green'
   sfx: true,
   safeZones: false,
@@ -21,7 +21,7 @@ export const OPTIONS = [
     help: 'Vertical for Shorts / TikTok / Reels. 4:3 for long-form videos and streams.',
   },
   {
-    key: 'align', title: '4:3 position', choices: [['left', 'Left'], ['center', 'Center'], ['right', 'Right']], when: (s) => s.layout === '43',
+    key: 'stagePos', title: '4:3 position', choices: [['left', 'Left'], ['center', 'Center'], ['right', 'Right']], when: (s) => s.layout === '43',
     help: 'Put the game on one side to leave room for your webcam. Shortcut: P.',
   },
   {
