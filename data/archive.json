@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:24.181Z",
+  "updatedAt": "2026-10-02T03:41:29.707Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -154,6 +154,15 @@
       "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
+      "id": "beti",
+      "name": "Beti",
+      "image": "media/beti-image-37b50b61.webp",
+      "sound": null,
+      "wiki": "Beti (rifle)",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
+    },
+    {
       "id": "bh-4-double-blaster",
       "name": "BH-4 Double Blaster",
       "image": "media/bh-4-double-blaster-image-e918a165.webp",
@@ -161,6 +170,15 @@
       "wiki": "BH-4 Double Blaster",
       "createdAt": "2026-10-02T03:41:12.904Z",
       "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
+      "id": "blaster-musket",
+      "name": "Blaster Musket",
+      "image": "media/blaster-musket-image-9a2fd672.webp",
+      "sound": null,
+      "wiki": "Blaster musket",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
     },
     {
       "id": "blaster-spear",
@@ -242,6 +260,15 @@
       "wiki": "Clem's blaster pistol",
       "createdAt": "2026-10-02T03:41:18.442Z",
       "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
+      "id": "cs14-ghost-light-blaster-pistol",
+      "name": "CS14 \"Ghost\" Light Blaster Pistol",
+      "image": "media/cs14-ghost-light-blaster-pistol-image-6f3207b7.webp",
+      "sound": null,
+      "wiki": "CS14 \"Ghost\" light blaster pistol",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
     },
     {
       "id": "dc-12u-beam-rifle",
@@ -342,6 +369,15 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "donderbus-blaster-pistol",
+      "name": "Donderbus Blaster Pistol",
+      "image": "media/donderbus-blaster-pistol-image-22b5342f.webp",
+      "sound": null,
+      "wiki": "Donderbus blaster pistol",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
+    },
+    {
       "id": "dt-12-heavy-blaster-pistol",
       "name": "DT-12 Heavy Blaster Pistol",
       "image": "media/dt-12-heavy-blaster-pistol-image-b125008d.webp",
@@ -385,6 +421,15 @@
       "wiki": "E-10 blaster rifle",
       "createdAt": "2026-10-02T03:40:43.326Z",
       "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "e-10-5-rifle",
+      "name": "E-10.5 Rifle",
+      "image": "media/e-10-5-rifle-image-7b14da23.webp",
+      "sound": null,
+      "wiki": "E-10.5 rifle",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
     },
     {
       "id": "e-10r-blaster-rifle",
@@ -871,6 +916,15 @@
       "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
+      "id": "s-195-blaster-pistol",
+      "name": "S-195 Blaster Pistol",
+      "image": "media/s-195-blaster-pistol-image-6f209d2b.webp",
+      "sound": null,
+      "wiki": "S-195 blaster pistol",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
+    },
+    {
       "id": "s-5-security-grade-blaster-ascension-gun",
       "name": "S-5 Security-Grade Blaster/ascension Gun",
       "image": "media/s-5-security-grade-blaster-ascension-gun-image-d6f7e7e7.webp",
@@ -914,6 +968,15 @@
       "wiki": "SE-44C blaster pistol",
       "createdAt": "2026-10-02T03:40:49.346Z",
       "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
+      "id": "snub-blaster",
+      "name": "Snub-Blaster",
+      "image": "media/snub-blaster-image-bc0c9b27.webp",
+      "sound": null,
+      "wiki": "Snub-blaster",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
     },
     {
       "id": "sp-b50-blaster-rifle",
@@ -1048,6 +1111,15 @@
       "wiki": "X-8 Night Sniper",
       "createdAt": "2026-10-02T03:40:43.326Z",
       "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "zorii-bliss-s-blasters",
+      "name": "Zorii Bliss's Blasters",
+      "image": "media/zorii-bliss-s-blasters-image-bf47faa5.webp",
+      "sound": null,
+      "wiki": "Zorii Bliss's blasters",
+      "createdAt": "2026-10-02T03:41:29.706Z",
+      "updatedAt": "2026-10-02T03:41:29.706Z"
     }
   ]
 }
