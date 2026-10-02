@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:58.660Z",
+  "updatedAt": "2026-10-02T03:42:04.332Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -620,6 +620,15 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "e-5-carbine",
+      "name": "E-5 Carbine",
+      "image": "media/e-5-carbine-image-30cc42ca.webp",
+      "sound": null,
+      "wiki": "E-5 carbine",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
+    },
+    {
       "id": "e-851-blaster-pistol",
       "name": "E-851 Blaster Pistol",
       "image": "media/e-851-blaster-pistol-image-ae1ed426.webp",
@@ -890,6 +899,15 @@
       "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
+      "id": "kueget-ln-21-blaster-pistol",
+      "name": "Kueget LN-21 Blaster Pistol",
+      "image": "media/kueget-ln-21-blaster-pistol-image-46d1e345.webp",
+      "sound": null,
+      "wiki": "Kueget LN-21 blaster pistol",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
+    },
+    {
       "id": "kuruk-s-blaster-rifle",
       "name": "Kuruk's Blaster Rifle",
       "image": "media/kuruk-s-blaster-rifle-image-419b90b4.webp",
@@ -897,6 +915,15 @@
       "wiki": "Kuruk's blaster rifle",
       "createdAt": "2026-10-02T03:41:06.897Z",
       "updatedAt": "2026-10-02T03:41:06.897Z"
+    },
+    {
+      "id": "kx-60-blaster-rifle",
+      "name": "KX-60 Blaster Rifle",
+      "image": "media/kx-60-blaster-rifle-image-1a564dcc.webp",
+      "sound": null,
+      "wiki": "KX-60 blaster rifle",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
     },
     {
       "id": "kyd-21-blaster-pistol",
@@ -1114,6 +1141,15 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "phase-pulse-short-rifle",
+      "name": "Phase-Pulse Short Rifle",
+      "image": "media/phase-pulse-short-rifle-image-69ab8a24.webp",
+      "sound": null,
+      "wiki": "Phase-Pulse Short Rifle",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
+    },
+    {
       "id": "poe-s-blaster-rifle",
       "name": "Poe's Blaster Rifle",
       "image": "media/poe-s-blaster-rifle-image-8a5c0875.webp",
@@ -1130,6 +1166,15 @@
       "wiki": "Power 5 blaster",
       "createdAt": "2026-10-02T03:41:12.904Z",
       "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
+      "id": "proton-rifle",
+      "name": "Proton Rifle",
+      "image": "media/proton-rifle-image-ee197684.webp",
+      "sound": null,
+      "wiki": "Proton rifle",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
     },
     {
       "id": "relby-blaster-pistol",
@@ -1339,6 +1384,15 @@
       "updatedAt": "2026-10-02T03:41:41.253Z"
     },
     {
+      "id": "tatooine-thunderblaster-rifle",
+      "name": "Tatooine Thunderblaster Rifle",
+      "image": "media/tatooine-thunderblaster-rifle-image-7f589b1b.webp",
+      "sound": null,
+      "wiki": "Tatooine Thunderblaster rifle",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
+    },
+    {
       "id": "teroj-s-blaster",
       "name": "Teroj's Blaster",
       "image": "media/teroj-s-blaster-image-3a006173.webp",
@@ -1471,6 +1525,15 @@
       "wiki": "Zorii Bliss's blasters",
       "createdAt": "2026-10-02T03:41:29.706Z",
       "updatedAt": "2026-10-02T03:41:29.706Z"
+    },
+    {
+      "id": "zp08-blaster-pistol",
+      "name": "ZP08 Blaster Pistol",
+      "image": "media/zp08-blaster-pistol-image-527dc3c8.webp",
+      "sound": null,
+      "wiki": "ZP08 blaster pistol",
+      "createdAt": "2026-10-02T03:42:04.331Z",
+      "updatedAt": "2026-10-02T03:42:04.331Z"
     },
     {
       "id": "zygerrian-blaster-rifle",
