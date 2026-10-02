@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:26:02.871Z",
+  "updatedAt": "2026-10-02T03:26:09.023Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -303,6 +303,16 @@
       "updatedAt": "2026-09-30T00:00:00.000Z"
     },
     {
+      "id": "edward-starspeeder",
+      "name": "Edward Starspeeder",
+      "side": "sith",
+      "power": 38,
+      "image": "media/characters/edward-starspeeder-81e4de2c.webp",
+      "createdAt": "2026-10-02T03:26:09.023Z",
+      "updatedAt": "2026-10-02T03:26:09.023Z",
+      "wiki": "Edward Starspeeder"
+    },
+    {
       "id": "exar-kun",
       "name": "Exar Kun",
       "side": "sith",
@@ -311,6 +321,16 @@
       "createdAt": "2026-10-02T03:26:02.871Z",
       "updatedAt": "2026-10-02T03:26:02.871Z",
       "wiki": "Exar Kun"
+    },
+    {
+      "id": "exim-panshard",
+      "name": "Exim Panshard",
+      "side": "sith",
+      "power": 40,
+      "image": "media/characters/exim-panshard-464595ba.webp",
+      "createdAt": "2026-10-02T03:26:09.023Z",
+      "updatedAt": "2026-10-02T03:26:09.023Z",
+      "wiki": "Exim Panshard"
     },
     {
       "id": "ezra-bridger",
@@ -358,6 +378,16 @@
       "image": null,
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "kane-starkiller",
+      "name": "Kane Starkiller",
+      "side": "jedi",
+      "power": 39,
+      "image": "media/characters/kane-starkiller-b0abf032.webp",
+      "createdAt": "2026-10-02T03:26:09.023Z",
+      "updatedAt": "2026-10-02T03:26:09.023Z",
+      "wiki": "Kane Starkiller"
     },
     {
       "id": "ki-adi-mundi",
@@ -493,6 +523,16 @@
       "updatedAt": "2026-09-30T04:12:31.011Z"
     },
     {
+      "id": "phobos",
+      "name": "Phobos",
+      "side": "sith",
+      "power": 37,
+      "image": "media/characters/phobos-579cf266.webp",
+      "createdAt": "2026-10-02T03:26:09.023Z",
+      "updatedAt": "2026-10-02T03:26:09.023Z",
+      "wiki": "Phobos"
+    },
+    {
       "id": "plo-koon",
       "name": "Plo Koon",
       "side": "jedi",
@@ -557,6 +597,16 @@
       "createdAt": "2026-10-02T03:26:02.871Z",
       "updatedAt": "2026-10-02T03:26:02.871Z",
       "wiki": "Rorr'hn of Drgi"
+    },
+    {
+      "id": "saalo-morn",
+      "name": "Saalo Morn",
+      "side": "sith",
+      "power": 39,
+      "image": "media/characters/saalo-morn-4bdce3bc.webp",
+      "createdAt": "2026-10-02T03:26:09.023Z",
+      "updatedAt": "2026-10-02T03:26:09.023Z",
+      "wiki": "Saalo Morn"
     },
     {
       "id": "savage-opress",
@@ -661,6 +711,16 @@
       "createdAt": "2026-10-02T03:25:56.534Z",
       "updatedAt": "2026-10-02T03:25:56.534Z",
       "wiki": "Tulak Hord"
+    },
+    {
+      "id": "vanzell-mar-klar",
+      "name": "Vanzell Mar-Klar",
+      "side": "jedi",
+      "power": 36,
+      "image": "media/characters/vanzell-mar-klar-ebb98e9d.webp",
+      "createdAt": "2026-10-02T03:26:09.023Z",
+      "updatedAt": "2026-10-02T03:26:09.023Z",
+      "wiki": "Vanzell Mar-Klar"
     },
     {
       "id": "x1",
