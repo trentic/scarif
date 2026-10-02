@@ -7,6 +7,7 @@ import { leaveCharacters, renderCharacters } from './characters.js';
 import { createTrimmer } from './trimmer.js';
 import { openWikiImport } from './wiki-import.js';
 import { openSoundMatch } from './sound-match.js';
+import { createYouTubeRecorder } from './yt-recorder.js';
 import {
   addEntry, addStatType, deleteEntry, deleteStatType, downloadImage, readMedia, slugify, StoreError, updateEntry, updateStatType,
 } from './store.js';
@@ -523,7 +524,12 @@ function passwordCard() {
 
 function openEdit(entry, { soundFile = null } = {}) {
   const dialog = h('dialog', {});
-  const close = () => { dialog.querySelectorAll('audio').forEach((a) => a.pause()); dialog.close(); dialog.remove(); };
+  const close = () => {
+    dialog.querySelectorAll('audio').forEach((a) => a.pause());
+    dialog.querySelector('form')?.teardown?.();
+    dialog.close();
+    dialog.remove();
+  };
   dialog.append(
     h('div', { class: 'card-head' }, h('h2', {}, 'Edit entry')),
     entryForm({
@@ -636,6 +642,21 @@ function entryForm({ entry = null, soundFile: initialSound = null, onSaved, onCa
   soundInput.addEventListener('change', () => setSoundFile(soundInput.files[0]));
   wireDrop(soundDrop, setSoundFile);
 
+  // …or record it from a YouTube video
+  let recorder = null;
+  const ytBox = h('div', { hidden: true });
+  const ytBtn = h('button', {
+    type: 'button',
+    class: 'btn ghost small yt-toggle',
+    onclick: () => {
+      recorder ||= createYouTubeRecorder({ onClip: (file) => setSoundFile(file) });
+      if (!ytBox.firstChild) ytBox.append(recorder.el);
+      ytBox.hidden = !ytBox.hidden;
+      ytBtn.textContent = ytBox.hidden ? '🎬 Record from YouTube' : 'Hide YouTube recorder';
+      if (ytBox.hidden) recorder.stop();
+    },
+  }, '🎬 Record from YouTube');
+
   // 4. stats
   const statInputs = state.statTypes.map((t) => {
     const input = h('input', {
@@ -724,6 +745,8 @@ function entryForm({ entry = null, soundFile: initialSound = null, onSaved, onCa
     h('div', {},
       h('label', {}, '3. Sound effect ', h('span', { class: 'label-note' }, '(optional)')),
       soundDrop,
+      ytBtn,
+      ytBox,
       soundPreview,
       trimmer.el,
       removeRow,
@@ -743,6 +766,8 @@ function entryForm({ entry = null, soundFile: initialSound = null, onSaved, onCa
   );
 
   if (initialSound) setSoundFile(initialSound);
+  // Called when the Edit dialog closes.
+  form.teardown = () => { recorder?.stop(); trimmer.stop(); };
 
   function reset() {
     form.reset();

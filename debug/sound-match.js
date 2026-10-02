@@ -4,6 +4,7 @@
 // then save them all in a few commits.
 import { h } from '../js/ui.js';
 import { readMedia, setSounds } from './store.js';
+import { createYouTubeRecorder } from './yt-recorder.js';
 
 const BATCH = 8;
 const AUDIO = /\.(mp3|wav|ogg|oga|m4a|aac|flac|webm)$/i;
@@ -65,6 +66,7 @@ export function openSoundMatch({ gh, entries, toast, onAuthError, onSaved, files
     if (saving && !confirm('Still saving. Stop after the current batch?')) return;
     saving = false;
     dialog.querySelectorAll('audio').forEach((a) => a.pause());
+    recorder.stop();
     rows.forEach((r) => URL.revokeObjectURL(r.url));
     dialog.close();
     dialog.remove();
@@ -77,6 +79,9 @@ export function openSoundMatch({ gh, entries, toast, onAuthError, onSaved, files
     h('span', { class: 'hint' }, 'Name each file after its blaster (e.g. dl-44.mp3, E-11 blaster.wav) and it’s matched for you.'),
     input,
   );
+  // Record clips from YouTube; each finished clip becomes a row to match.
+  const recorder = createYouTubeRecorder({ trim: true, clipLabel: 'Add clip to the list', onClip: (file) => addFiles([file]) });
+  const ytSection = h('details', { class: 'yt-section' }, h('summary', {}, '🎬 Record clips from YouTube'), recorder.el);
   const onlyMissing = h('input', { type: 'checkbox', checked: true, onchange: () => { regroup(); } });
   const listEl = h('div', { class: 'sound-rows' });
   const summary = h('div', { class: 'wiki-summary' });
@@ -199,6 +204,7 @@ export function openSoundMatch({ gh, entries, toast, onAuthError, onSaved, files
     ),
     h('p', { class: 'hint' }, `${missing} of ${entries.length} blasters have no sound yet. Add sound files in bulk: each is matched to a blaster by its file name, and you can fix any match before saving. To trim a sound, use Edit on the blaster afterwards (or drop the file on its card).`),
     drop,
+    ytSection,
     h('label', { class: 'check' }, onlyMissing, 'Only match to blasters that have no sound yet'),
     summary,
     listEl,

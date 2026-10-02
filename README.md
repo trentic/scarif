@@ -92,6 +92,7 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 **Blaster sounds:** Wookieepedia has no sounds, so add your own files:
 - **🔊 Match sound files** (Blasters tab): drop many sound files at once. Each is matched to a blaster by its file name (`dl-44.mp3`, `E-11 blaster.wav`, `westar35_shot.ogg`…); fix any match, then **Save**.
 - Or drop one sound file on a blaster's card to open its Edit form with the sound loaded, ready to trim.
+- **🎬 Record from YouTube** (in a blaster's Edit form, and in Match sound files): paste a YouTube link (a `?t=` time in the link sets **Start at**), press **● Record**, and when Chrome asks, share **this tab** with **Share tab audio** on. The video plays from the start time and records until you press **■ Stop** (30 s max). The clip loads into the trimmer as a WAV. Desktop Chrome or Edge only. Only use clips you're allowed to reuse.
 
 ### Who Would Win? percentages
 
