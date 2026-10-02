@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:25:56.535Z",
+  "updatedAt": "2026-10-02T03:26:02.871Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -124,6 +124,16 @@
       "wiki": "Darth Caedus"
     },
     {
+      "id": "darth-caldoth",
+      "name": "Darth Caldoth",
+      "side": "sith",
+      "power": 45,
+      "image": "media/characters/darth-caldoth-3fcc55a5.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Darth Caldoth"
+    },
+    {
       "id": "darth-desolous",
       "name": "Darth Desolous",
       "side": "sith",
@@ -190,6 +200,16 @@
       "updatedAt": "2026-09-30T04:08:58.938Z"
     },
     {
+      "id": "darth-noctyss",
+      "name": "Darth Noctyss",
+      "side": "sith",
+      "power": 41,
+      "image": "media/characters/darth-noctyss-49b65178.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Darth Noctyss"
+    },
+    {
       "id": "darth-phobos",
       "name": "Darth Phobos",
       "side": "sith",
@@ -216,6 +236,16 @@
       "image": "media/characters/darth-revan-6c7c6db8.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:09:39.070Z"
+    },
+    {
+      "id": "darth-shaa",
+      "name": "Darth Shaa",
+      "side": "sith",
+      "power": 46,
+      "image": "media/characters/darth-shaa-88007e44.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Darth Shaa"
     },
     {
       "id": "darth-sidious",
@@ -271,6 +301,16 @@
       "image": null,
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "exar-kun",
+      "name": "Exar Kun",
+      "side": "sith",
+      "power": 44,
+      "image": "media/characters/exar-kun-5df39f4f.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Exar Kun"
     },
     {
       "id": "ezra-bridger",
@@ -434,6 +474,16 @@
       "wiki": "Marka Ragnos"
     },
     {
+      "id": "naga-sadow",
+      "name": "Naga Sadow",
+      "side": "sith",
+      "power": 45,
+      "image": "media/characters/naga-sadow-26691c79.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Naga Sadow"
+    },
+    {
       "id": "obi-wan-kenobi",
       "name": "Obi-Wan Kenobi",
       "side": "jedi",
@@ -499,6 +549,16 @@
       "updatedAt": "2026-09-30T04:15:43.477Z"
     },
     {
+      "id": "rorr-hn-of-drgi",
+      "name": "Rorr'hn of Drgi",
+      "side": "jedi",
+      "power": 42,
+      "image": "media/characters/rorr-hn-of-drgi-6f71ceb7.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Rorr'hn of Drgi"
+    },
+    {
       "id": "savage-opress",
       "name": "Savage Opress",
       "side": "sith",
@@ -524,6 +584,26 @@
       "image": "media/characters/shaak-ti-41ef478e.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:15:27.466Z"
+    },
+    {
+      "id": "shar-dakhan",
+      "name": "Shar Dakhan",
+      "side": "sith",
+      "power": 47,
+      "image": "media/characters/shar-dakhan-2081a482.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Shar Dakhan"
+    },
+    {
+      "id": "sith-mother",
+      "name": "Sith Mother",
+      "side": "sith",
+      "power": 48,
+      "image": "media/characters/sith-mother-621cbb6a.webp",
+      "createdAt": "2026-10-02T03:26:02.871Z",
+      "updatedAt": "2026-10-02T03:26:02.871Z",
+      "wiki": "Sith Mother"
     },
     {
       "id": "snoke",
