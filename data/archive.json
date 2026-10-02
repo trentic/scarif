@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:12.904Z",
+  "updatedAt": "2026-10-02T03:41:18.442Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -145,6 +145,15 @@
       "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
+      "id": "blaster-spear",
+      "name": "Blaster Spear",
+      "image": "media/blaster-spear-image-a15afcc5.webp",
+      "sound": null,
+      "wiki": "Blaster spear",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
       "id": "bo-rifle",
       "name": "Bo-Rifle",
       "image": "media/bo-rifle-image-1878e0e3.webp",
@@ -181,6 +190,15 @@
       "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
+      "id": "c-10-heavy-blaster-pistol",
+      "name": "C-10 Heavy Blaster Pistol",
+      "image": "media/c-10-heavy-blaster-pistol-image-bbf0a0e9.webp",
+      "sound": null,
+      "wiki": "C-10 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
       "id": "cc-420-pistol",
       "name": "CC-420 Pistol",
       "image": "media/cc-420-pistol-image-bea863cd.webp",
@@ -188,6 +206,15 @@
       "wiki": "CC-420 pistol",
       "createdAt": "2026-10-02T03:40:55.013Z",
       "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
+      "id": "clem-s-blaster-pistol",
+      "name": "Clem's Blaster Pistol",
+      "image": "media/clem-s-blaster-pistol-image-4c72e575.webp",
+      "sound": null,
+      "wiki": "Clem's blaster pistol",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
     },
     {
       "id": "dc-12u-beam-rifle",
@@ -215,6 +242,15 @@
       "wiki": "DC-17 repeater hand blaster",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "dg-29-heavy-blaster-pistol",
+      "name": "DG-29 Heavy Blaster Pistol",
+      "image": "media/dg-29-heavy-blaster-pistol-image-1f8d579f.webp",
+      "sound": null,
+      "wiki": "DG-29 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
     },
     {
       "id": "dh-16-blaster-pistol",
@@ -447,6 +483,15 @@
       "wiki": "F-11D blaster rifle",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "finn-s-blaster-pistol",
+      "name": "Finn's Blaster Pistol",
+      "image": "media/finn-s-blaster-pistol-image-f0a526a7.webp",
+      "sound": null,
+      "wiki": "Finn's blaster pistol",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
     },
     {
       "id": "galaar-15-blaster-carbine",
@@ -700,6 +745,24 @@
       "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
+      "id": "relby-blaster-pistol",
+      "name": "Relby Blaster Pistol",
+      "image": "media/relby-blaster-pistol-image-b79d2790.webp",
+      "sound": null,
+      "wiki": "Relby blaster pistol",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
+      "id": "relby-k-25-blaster",
+      "name": "Relby K-25 Blaster",
+      "image": "media/relby-k-25-blaster-image-f7fb9ae9.webp",
+      "sound": null,
+      "wiki": "Relby K-25 blaster",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
       "id": "relby-v-4d-blaster-rifle",
       "name": "Relby V-4d Blaster Rifle",
       "image": "media/relby-v-4d-blaster-rifle-image-68192623.webp",
@@ -895,6 +958,15 @@
       "wiki": "WESTAR-35 blaster pistol",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "wookiee-pistol",
+      "name": "Wookiee Pistol",
+      "image": "media/wookiee-pistol-image-4caca99f.webp",
+      "sound": null,
+      "wiki": "Wookiee pistol",
+      "createdAt": "2026-10-02T03:41:18.442Z",
+      "updatedAt": "2026-10-02T03:41:18.442Z"
     },
     {
       "id": "x-8-night-sniper",
