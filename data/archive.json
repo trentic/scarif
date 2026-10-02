@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:52.889Z",
+  "updatedAt": "2026-10-02T03:41:58.660Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -9,6 +9,15 @@
       "wiki": "\"Huttsplitter\" blaster rifle",
       "createdAt": "2026-10-02T03:40:31.534Z",
       "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "jakku-night-special-blaster-rifle",
+      "name": "\"Jakku Night Special\" Blaster Rifle",
+      "image": "media/jakku-night-special-blaster-rifle-image-8618d2b2.webp",
+      "sound": null,
+      "wiki": "\"Jakku Night Special\" blaster rifle",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
     },
     {
       "id": "precision-x-marksman-rifle",
@@ -36,6 +45,15 @@
       "wiki": "\"Wasp\" blaster rifle",
       "createdAt": "2026-10-02T03:41:41.253Z",
       "updatedAt": "2026-10-02T03:41:41.253Z"
+    },
+    {
+      "id": "434-deathhammer",
+      "name": "434 Deathhammer",
+      "image": "media/434-deathhammer-image-30bbf7cd.webp",
+      "sound": null,
+      "wiki": "434 Deathhammer",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
     },
     {
       "id": "a-180-blaster",
@@ -397,6 +415,24 @@
       "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
+      "id": "dh-23-blaster-pistol",
+      "name": "DH-23 Blaster Pistol",
+      "image": "media/dh-23-blaster-pistol-image-3731fbd0.webp",
+      "sound": null,
+      "wiki": "DH-23 blaster pistol",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
+    },
+    {
+      "id": "dh-42-blaster-pistol",
+      "name": "DH-42 Blaster Pistol",
+      "image": "media/dh-42-blaster-pistol-image-11aea2aa.webp",
+      "sound": null,
+      "wiki": "DH-42 blaster pistol",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
+    },
+    {
       "id": "dl-17-blaster-rifle",
       "name": "DL-17 Blaster Rifle",
       "image": "media/dl-17-blaster-rifle-image-d8067988.webp",
@@ -692,6 +728,15 @@
       "updatedAt": "2026-10-02T03:41:18.442Z"
     },
     {
+      "id": "ga-2128-blaster-rifle",
+      "name": "GA-2128 Blaster Rifle",
+      "image": "media/ga-2128-blaster-rifle-image-2ecbc7af.webp",
+      "sound": null,
+      "wiki": "GA-2128 blaster rifle",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
+    },
+    {
       "id": "galaar-15-blaster-carbine",
       "name": "GALAAR-15 Blaster Carbine",
       "image": "media/galaar-15-blaster-carbine-image-82671412.webp",
@@ -980,6 +1025,15 @@
       "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
+      "id": "mt-62",
+      "name": "MT-62",
+      "image": "media/mt-62-image-8597198d.webp",
+      "sound": null,
+      "wiki": "MT-62",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
+    },
+    {
       "id": "mt-97",
       "name": "MT-97",
       "image": "media/mt-97-image-4b615dd7.webp",
@@ -1249,6 +1303,15 @@
       "updatedAt": "2026-10-02T03:40:55.013Z"
     },
     {
+      "id": "supercharged-carbine",
+      "name": "Supercharged Carbine",
+      "image": "media/supercharged-carbine-image-70b57b7b.webp",
+      "sound": null,
+      "wiki": "Supercharged carbine",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
+    },
+    {
       "id": "sx-21-pump-action-scatter-blaster",
       "name": "SX-21 Pump-Action Scatter Blaster",
       "image": "media/sx-21-pump-action-scatter-blaster-image-fe627b53.webp",
@@ -1345,6 +1408,15 @@
       "wiki": "VT-33d blaster pistol",
       "createdAt": "2026-10-02T03:40:49.346Z",
       "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
+      "id": "we-11-blaster-pistol",
+      "name": "WE-11 Blaster Pistol",
+      "image": "media/we-11-blaster-pistol-image-fdf7d8b1.webp",
+      "sound": null,
+      "wiki": "WE-11 blaster pistol",
+      "createdAt": "2026-10-02T03:41:58.660Z",
+      "updatedAt": "2026-10-02T03:41:58.660Z"
     },
     {
       "id": "westar-34-blaster-pistol",
