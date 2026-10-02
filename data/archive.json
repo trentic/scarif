@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:18.442Z",
+  "updatedAt": "2026-10-02T03:41:24.181Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -38,6 +38,15 @@
       "updatedAt": "2026-10-02T03:40:25.774Z"
     },
     {
+      "id": "a140-blaster-pistol",
+      "name": "A140 Blaster Pistol",
+      "image": "media/a140-blaster-pistol-image-e3c9058b.webp",
+      "sound": null,
+      "wiki": "A140 blaster pistol",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
+    },
+    {
       "id": "a280-blaster-rifle",
       "name": "A280 Blaster Rifle",
       "image": "media/a280-blaster-rifle-image-594e0641.webp",
@@ -71,6 +80,15 @@
       "wiki": "A300 blaster rifle",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "a310-rifle",
+      "name": "A310 Rifle",
+      "image": "media/a310-rifle-image-52e69cbc.webp",
+      "sound": null,
+      "wiki": "A310 rifle",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
     },
     {
       "id": "a350-blaster-rifle",
@@ -197,6 +215,15 @@
       "wiki": "C-10 heavy blaster pistol",
       "createdAt": "2026-10-02T03:41:18.442Z",
       "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
+      "id": "ca-87-blaster",
+      "name": "CA-87 Blaster",
+      "image": "media/ca-87-blaster-image-d53e4c08.webp",
+      "sound": null,
+      "wiki": "CA-87 blaster",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
     },
     {
       "id": "cc-420-pistol",
@@ -656,6 +683,15 @@
       "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
+      "id": "longblaster",
+      "name": "Longblaster",
+      "image": "media/longblaster-image-c5471cfb.webp",
+      "sound": null,
+      "wiki": "Longblaster",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
+    },
+    {
       "id": "m-300-hunting-blaster",
       "name": "M-300 Hunting Blaster",
       "image": "media/m-300-hunting-blaster-image-9249bc4c.webp",
@@ -710,6 +746,15 @@
       "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
+      "id": "neimoidian-ceremonial-blaster-rifle",
+      "name": "Neimoidian Ceremonial Blaster Rifle",
+      "image": "media/neimoidian-ceremonial-blaster-rifle-image-1bf96569.webp",
+      "sound": null,
+      "wiki": "Neimoidian ceremonial blaster rifle",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
+    },
+    {
       "id": "nn-14-blaster-pistol",
       "name": "NN-14 Blaster Pistol",
       "image": "media/nn-14-blaster-pistol-image-3cb2cc63.webp",
@@ -734,6 +779,15 @@
       "wiki": "Pao's rifle",
       "createdAt": "2026-10-02T03:40:20.196Z",
       "updatedAt": "2026-10-02T03:40:20.196Z"
+    },
+    {
+      "id": "poe-s-blaster-rifle",
+      "name": "Poe's Blaster Rifle",
+      "image": "media/poe-s-blaster-rifle-image-8a5c0875.webp",
+      "sound": null,
+      "wiki": "Poe's blaster rifle",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
     },
     {
       "id": "power-5-blaster",
@@ -788,6 +842,15 @@
       "wiki": "Rey's blaster",
       "createdAt": "2026-10-02T03:40:31.534Z",
       "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "rg-4d",
+      "name": "RG-4D",
+      "image": "media/rg-4d-image-9684d0c7.webp",
+      "sound": null,
+      "wiki": "RG-4D",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
     },
     {
       "id": "rk-3-blaster",
@@ -851,6 +914,15 @@
       "wiki": "SE-44C blaster pistol",
       "createdAt": "2026-10-02T03:40:49.346Z",
       "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
+      "id": "sp-b50-blaster-rifle",
+      "name": "SP-B50 Blaster Rifle",
+      "image": "media/sp-b50-blaster-rifle-image-1d5abc77.webp",
+      "sound": null,
+      "wiki": "SP-B50 blaster rifle",
+      "createdAt": "2026-10-02T03:41:24.181Z",
+      "updatedAt": "2026-10-02T03:41:24.181Z"
     },
     {
       "id": "st-w48-blaster-rifle",
