@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:40:49.346Z",
+  "updatedAt": "2026-10-02T03:40:55.013Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -91,6 +91,24 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "cc-420-pistol",
+      "name": "CC-420 Pistol",
+      "image": "media/cc-420-pistol-image-bea863cd.webp",
+      "sound": null,
+      "wiki": "CC-420 pistol",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
+      "id": "dc-12u-beam-rifle",
+      "name": "DC-12U Beam Rifle",
+      "image": "media/dc-12u-beam-rifle-image-3b2f5f37.webp",
+      "sound": null,
+      "wiki": "DC-12U beam rifle",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
       "id": "dc-15a-blaster-carbine",
       "name": "DC-15A Blaster Carbine",
       "image": "media/dc-15a-blaster-carbine-image-d1a82bfe.webp",
@@ -136,6 +154,15 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "dl-21-blaster-pistol",
+      "name": "DL-21 Blaster Pistol",
+      "image": "media/dl-21-blaster-pistol-image-4b31c95b.webp",
+      "sound": null,
+      "wiki": "DL-21 blaster pistol",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
       "id": "dl-44",
       "name": "DL-44",
       "image": "media/dl-44-image-a598f7ac.webp",
@@ -151,6 +178,15 @@
       "wiki": "DLT-20A blaster rifle",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "dt-12-heavy-blaster-pistol",
+      "name": "DT-12 Heavy Blaster Pistol",
+      "image": "media/dt-12-heavy-blaster-pistol-image-b125008d.webp",
+      "sound": null,
+      "wiki": "DT-12 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
     },
     {
       "id": "dx-2-disruptor-blaster-pistol",
@@ -213,6 +249,15 @@
       "wiki": "E-5 blaster rifle",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "e-851-blaster-pistol",
+      "name": "E-851 Blaster Pistol",
+      "image": "media/e-851-blaster-pistol-image-ae1ed426.webp",
+      "sound": null,
+      "wiki": "E-851 blaster pistol",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
     },
     {
       "id": "ee-3-carbine-rifle",
@@ -350,6 +395,15 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "ka74-blaster-rifle",
+      "name": "KA74 Blaster Rifle",
+      "image": "media/ka74-blaster-rifle-image-d60d7997.webp",
+      "sound": null,
+      "wiki": "KA74 blaster rifle",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
       "id": "kanan-s-blaster",
       "name": "Kanan's Blaster",
       "image": "media/kanan-s-blaster-image-8f09510f.webp",
@@ -457,6 +511,15 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "relby-v-4d-blaster-rifle",
+      "name": "Relby V-4d Blaster Rifle",
+      "image": "media/relby-v-4d-blaster-rifle-image-68192623.webp",
+      "sound": null,
+      "wiki": "Relby V-4d blaster rifle",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
       "id": "relby-v10-micro-grenade-launcher",
       "name": "Relby-V10 Micro Grenade Launcher",
       "image": "media/relby-v10-micro-grenade-launcher-image-435e9011.webp",
@@ -518,6 +581,15 @@
       "wiki": "SE-44C blaster pistol",
       "createdAt": "2026-10-02T03:40:49.346Z",
       "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
+      "id": "st-w48-blaster-rifle",
+      "name": "ST-W48 Blaster Rifle",
+      "image": "media/st-w48-blaster-rifle-image-20111bf6.webp",
+      "sound": null,
+      "wiki": "ST-W48 blaster rifle",
+      "createdAt": "2026-10-02T03:40:55.013Z",
+      "updatedAt": "2026-10-02T03:40:55.013Z"
     },
     {
       "id": "t-21-light-repeating-blaster",
