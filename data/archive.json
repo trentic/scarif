@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:47.208Z",
+  "updatedAt": "2026-10-02T03:41:52.889Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -244,6 +244,15 @@
       "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
+      "id": "br-14-blaster",
+      "name": "BR-14 Blaster",
+      "image": "media/br-14-blaster-image-7f70a210.webp",
+      "sound": null,
+      "wiki": "BR-14 blaster",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
+    },
+    {
       "id": "bryar-pistol",
       "name": "Bryar Pistol",
       "image": "media/bryar-pistol-image-05a33d42.webp",
@@ -388,6 +397,15 @@
       "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
+      "id": "dl-17-blaster-rifle",
+      "name": "DL-17 Blaster Rifle",
+      "image": "media/dl-17-blaster-rifle-image-d8067988.webp",
+      "sound": null,
+      "wiki": "DL-17 blaster rifle",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
+    },
+    {
       "id": "dl-18-blaster-pistol",
       "name": "DL-18 Blaster Pistol",
       "image": "media/dl-18-blaster-pistol-image-5571e974.webp",
@@ -412,6 +430,15 @@
       "sound": "media/dl-44-sound-145731d6.mp3",
       "createdAt": "2026-09-26T20:50:52.052Z",
       "updatedAt": "2026-09-26T20:50:52.052Z"
+    },
+    {
+      "id": "dl-75-heavy-blaster-pistol",
+      "name": "DL-75 Heavy Blaster Pistol",
+      "image": "media/dl-75-heavy-blaster-pistol-image-0513e4fa.webp",
+      "sound": null,
+      "wiki": "DL-75 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
     },
     {
       "id": "dlt-20a-blaster-rifle",
@@ -439,6 +466,15 @@
       "wiki": "DT-12 heavy blaster pistol",
       "createdAt": "2026-10-02T03:40:55.013Z",
       "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
+      "id": "dt-15-blaster-pistol",
+      "name": "DT-15 Blaster Pistol",
+      "image": "media/dt-15-blaster-pistol-image-e2f29101.webp",
+      "sound": null,
+      "wiki": "DT-15 blaster pistol",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
     },
     {
       "id": "dt-29-heavy-blaster-pistol",
@@ -719,6 +755,15 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "imperial-supercommando-blaster-rifle",
+      "name": "Imperial Supercommando Blaster Rifle",
+      "image": "media/imperial-supercommando-blaster-rifle-image-cf59dd8b.webp",
+      "sound": null,
+      "wiki": "Imperial Supercommando Blaster Rifle",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
+    },
+    {
       "id": "ion-blaster",
       "name": "Ion Blaster",
       "image": "media/ion-blaster-image-b7b86b00.webp",
@@ -771,6 +816,15 @@
       "wiki": "Kanan's blaster",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "karina",
+      "name": "Karina",
+      "image": "media/karina-image-70436cce.webp",
+      "sound": null,
+      "wiki": "Karina (blaster rifle)",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
     },
     {
       "id": "kay-s-blaster",
@@ -879,6 +933,15 @@
       "wiki": "Longblaster",
       "createdAt": "2026-10-02T03:41:24.181Z",
       "updatedAt": "2026-10-02T03:41:24.181Z"
+    },
+    {
+      "id": "lw-896-blaster-pistol",
+      "name": "LW-896 Blaster Pistol",
+      "image": "media/lw-896-blaster-pistol-image-96293397.webp",
+      "sound": null,
+      "wiki": "LW-896 Blaster Pistol",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
     },
     {
       "id": "m-300-hunting-blaster",
@@ -1237,6 +1300,15 @@
       "sound": "media/tl-50-heavy-repeater-sound-6b32ce99.wav",
       "createdAt": "2026-09-26T21:13:06.082Z",
       "updatedAt": "2026-09-26T21:13:06.082Z"
+    },
+    {
+      "id": "umbaran-blaster-pistol",
+      "name": "Umbaran Blaster Pistol",
+      "image": "media/umbaran-blaster-pistol-image-7440fd0c.webp",
+      "sound": null,
+      "wiki": "Umbaran blaster pistol",
+      "createdAt": "2026-10-02T03:41:52.889Z",
+      "updatedAt": "2026-10-02T03:41:52.889Z"
     },
     {
       "id": "vail-s-blaster",
