@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:26:09.023Z",
+  "updatedAt": "2026-10-02T03:37:32.744Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -261,9 +261,10 @@
       "name": "Darth Sion",
       "side": "sith",
       "power": 82,
-      "image": null,
+      "image": "media/characters/darth-sion-751a87ec.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Darth Sion"
     },
     {
       "id": "darth-vader",
@@ -279,9 +280,10 @@
       "name": "Darth Vitiate",
       "side": "sith",
       "power": 92,
-      "image": null,
+      "image": "media/characters/darth-vitiate-7028d00f.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Tenebrae"
     },
     {
       "id": "darth-vowrawn",
@@ -298,9 +300,10 @@
       "name": "Darth Zannah",
       "side": "sith",
       "power": 78,
-      "image": null,
+      "image": "media/characters/darth-zannah-04b3aa64.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Darth Zannah"
     },
     {
       "id": "edward-starspeeder",
@@ -337,9 +340,10 @@
       "name": "Ezra Bridger",
       "side": "jedi",
       "power": 72,
-      "image": null,
+      "image": "media/characters/ezra-bridger-7c784b66.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Ezra Bridger"
     },
     {
       "id": "freedon-nadd",
@@ -375,9 +379,10 @@
       "name": "Kanan Jarrus",
       "side": "jedi",
       "power": 70,
-      "image": null,
+      "image": "media/characters/kanan-jarrus-46580fb6.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Kanan Jarrus"
     },
     {
       "id": "kane-starkiller",
@@ -432,9 +437,10 @@
       "name": "Kylo Ren",
       "side": "sith",
       "power": 79,
-      "image": null,
+      "image": "media/characters/kylo-ren-75be7bd8.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Ben Solo"
     },
     {
       "id": "kyp-durron",
@@ -470,9 +476,10 @@
       "name": "Luminara Unduli",
       "side": "jedi",
       "power": 66,
-      "image": null,
+      "image": "media/characters/luminara-unduli-443aeb61.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Luminara Unduli"
     },
     {
       "id": "lumiya",
@@ -555,9 +562,10 @@
       "name": "Quinlan Vos",
       "side": "jedi",
       "power": 77,
-      "image": null,
+      "image": "media/characters/quinlan-vos-ba668ab0.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T00:00:00.000Z"
+      "updatedAt": "2026-10-02T03:37:32.744Z",
+      "wiki": "Quinlan Vos"
     },
     {
       "id": "quorlac-fornayh",
