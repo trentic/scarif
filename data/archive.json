@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:40:43.326Z",
+  "updatedAt": "2026-10-02T03:40:49.346Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -64,6 +64,15 @@
       "updatedAt": "2026-10-02T03:40:31.534Z"
     },
     {
+      "id": "b1-na-blaster-pistol",
+      "name": "B1-NA Blaster Pistol",
+      "image": "media/b1-na-blaster-pistol-image-741df230.webp",
+      "sound": null,
+      "wiki": "B1-NA blaster pistol",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
       "id": "bo-rifle",
       "name": "Bo-Rifle",
       "image": "media/bo-rifle-image-1878e0e3.webp",
@@ -109,6 +118,15 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "dh-17-blaster-rifle",
+      "name": "DH-17 Blaster Rifle",
+      "image": "media/dh-17-blaster-rifle-image-4b6a069d.webp",
+      "sound": null,
+      "wiki": "DH-17 blaster rifle",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
       "id": "dl-18-blaster-pistol",
       "name": "DL-18 Blaster Pistol",
       "image": "media/dl-18-blaster-pistol-image-5571e974.webp",
@@ -151,6 +169,15 @@
       "wiki": "E-10 blaster rifle",
       "createdAt": "2026-10-02T03:40:43.326Z",
       "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "e-10r-blaster-rifle",
+      "name": "E-10R Blaster Rifle",
+      "image": "media/e-10r-blaster-rifle-image-9b9fccd8.webp",
+      "sound": null,
+      "wiki": "E-10R blaster rifle",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
       "id": "e-11",
@@ -204,6 +231,15 @@
       "wiki": "EE-4 carbine rifle",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "el-16-blaster-rifle",
+      "name": "EL-16 Blaster Rifle",
+      "image": "media/el-16-blaster-rifle-image-41b05a24.webp",
+      "sound": null,
+      "wiki": "EL-16 blaster rifle",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
       "id": "el-16hfe-blaster-rifle",
@@ -341,6 +377,15 @@
       "updatedAt": "2026-10-02T03:40:43.326Z"
     },
     {
+      "id": "lando-calrissian-s-se-14r-light-repeating-blasters",
+      "name": "Lando Calrissian's SE-14r Light Repeating Blasters",
+      "image": "media/lando-calrissian-s-se-14r-light-repeating-blasters-image-3e825be6.webp",
+      "sound": null,
+      "wiki": "Lando Calrissian's SE-14r light repeating blasters",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
       "id": "lightsaber-blaster-hybrid",
       "name": "Lightsaber-Blaster Hybrid",
       "image": "media/lightsaber-blaster-hybrid-image-22d5fb39.webp",
@@ -348,6 +393,15 @@
       "wiki": "Lightsaber-blaster hybrid",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "ll-30-blaster-pistol",
+      "name": "LL-30 Blaster Pistol",
+      "image": "media/ll-30-blaster-pistol-image-25542ae9.webp",
+      "sound": null,
+      "wiki": "LL-30 blaster pistol",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
       "id": "m-300-hunting-blaster",
@@ -457,6 +511,15 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "se-44c-blaster-pistol",
+      "name": "SE-44C Blaster Pistol",
+      "image": "media/se-44c-blaster-pistol-image-acaf2058.webp",
+      "sound": null,
+      "wiki": "SE-44C blaster pistol",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
       "id": "t-21-light-repeating-blaster",
       "name": "T-21 Light Repeating Blaster",
       "image": "media/t-21-light-repeating-blaster-image-aae31563.webp",
@@ -517,6 +580,15 @@
       "wiki": "VM-19 heavy blaster pistol",
       "createdAt": "2026-10-02T03:40:25.774Z",
       "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
+      "id": "vt-33d-blaster-pistol",
+      "name": "VT-33d Blaster Pistol",
+      "image": "media/vt-33d-blaster-pistol-image-e2309d5c.webp",
+      "sound": null,
+      "wiki": "VT-33d blaster pistol",
+      "createdAt": "2026-10-02T03:40:49.346Z",
+      "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
       "id": "westar-34-blaster-pistol",
