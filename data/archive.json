@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:35.382Z",
+  "updatedAt": "2026-10-02T03:41:41.253Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -27,6 +27,15 @@
       "wiki": "\"Snubble special\" pistol",
       "createdAt": "2026-10-02T03:41:12.904Z",
       "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
+      "id": "wasp-blaster-rifle",
+      "name": "\"Wasp\" Blaster Rifle",
+      "image": "media/wasp-blaster-rifle-image-5baaca8b.webp",
+      "sound": null,
+      "wiki": "\"Wasp\" blaster rifle",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
     },
     {
       "id": "a-180-blaster",
@@ -280,6 +289,15 @@
       "updatedAt": "2026-10-02T03:41:18.442Z"
     },
     {
+      "id": "corpo-rifle",
+      "name": "Corpo Rifle",
+      "image": "media/corpo-rifle-image-d66acb56.webp",
+      "sound": null,
+      "wiki": "Corpo rifle",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
+    },
+    {
       "id": "cs14-ghost-light-blaster-pistol",
       "name": "CS14 \"Ghost\" Light Blaster Pistol",
       "image": "media/cs14-ghost-light-blaster-pistol-image-6f3207b7.webp",
@@ -305,6 +323,15 @@
       "wiki": "DC-15A blaster carbine",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "dc-15le",
+      "name": "DC-15LE",
+      "image": "media/dc-15le-image-45d13e48.webp",
+      "sound": null,
+      "wiki": "DC-15LE",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
     },
     {
       "id": "dc-17-repeater-hand-blaster",
@@ -421,6 +448,15 @@
       "wiki": "DT-57 \"Annihilator\" blaster",
       "createdAt": "2026-10-02T03:41:00.737Z",
       "updatedAt": "2026-10-02T03:41:00.737Z"
+    },
+    {
+      "id": "dx-13-blaster-pistol",
+      "name": "DX-13 Blaster Pistol",
+      "image": "media/dx-13-blaster-pistol-image-d26c00cc.webp",
+      "sound": null,
+      "wiki": "DX-13 blaster pistol",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
     },
     {
       "id": "dx-2-disruptor-blaster-pistol",
@@ -744,6 +780,15 @@
       "wiki": "L-23 blaster pistol",
       "createdAt": "2026-10-02T03:41:35.382Z",
       "updatedAt": "2026-10-02T03:41:35.382Z"
+    },
+    {
+      "id": "l60-blaster-rifle",
+      "name": "L60 Blaster Rifle",
+      "image": "media/l60-blaster-rifle-image-b47ec789.webp",
+      "sound": null,
+      "wiki": "L60 blaster rifle",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
     },
     {
       "id": "lando-calrissian-s-se-14r-light-repeating-blasters",
@@ -1087,6 +1132,15 @@
       "updatedAt": "2026-10-02T03:40:25.774Z"
     },
     {
+      "id": "t-21b-heavy-blaster",
+      "name": "T-21B Heavy Blaster",
+      "image": "media/t-21b-heavy-blaster-image-2f59323b.webp",
+      "sound": null,
+      "wiki": "T-21B heavy blaster",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
+    },
+    {
       "id": "teroj-s-blaster",
       "name": "Teroj's Blaster",
       "image": "media/teroj-s-blaster-image-3a006173.webp",
@@ -1185,6 +1239,15 @@
       "updatedAt": "2026-10-02T03:40:43.326Z"
     },
     {
+      "id": "zagyar-s-blaster",
+      "name": "Zagyar's Blaster",
+      "image": "media/zagyar-s-blaster-image-6ace0358.webp",
+      "sound": null,
+      "wiki": "Zagyar's blaster",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
+    },
+    {
       "id": "zorii-bliss-s-blasters",
       "name": "Zorii Bliss's Blasters",
       "image": "media/zorii-bliss-s-blasters-image-bf47faa5.webp",
@@ -1192,6 +1255,15 @@
       "wiki": "Zorii Bliss's blasters",
       "createdAt": "2026-10-02T03:41:29.706Z",
       "updatedAt": "2026-10-02T03:41:29.706Z"
+    },
+    {
+      "id": "zygerrian-blaster-rifle",
+      "name": "Zygerrian Blaster Rifle",
+      "image": "media/zygerrian-blaster-rifle-image-58905b2e.webp",
+      "sound": null,
+      "wiki": "Zygerrian blaster rifle",
+      "createdAt": "2026-10-02T03:41:41.253Z",
+      "updatedAt": "2026-10-02T03:41:41.253Z"
     }
   ]
 }
