@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:42:04.332Z",
+  "updatedAt": "2026-10-02T03:44:19.674Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -152,15 +152,6 @@
       "wiki": "AD-616K6KA",
       "createdAt": "2026-10-02T03:40:31.534Z",
       "updatedAt": "2026-10-02T03:40:31.534Z"
-    },
-    {
-      "id": "ascension-gun",
-      "name": "Ascension Gun",
-      "image": "media/ascension-gun-image-d8bad885.webp",
-      "sound": null,
-      "wiki": "Ascension gun",
-      "createdAt": "2026-10-02T03:41:00.737Z",
-      "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
       "id": "b1-na-blaster-pistol",
