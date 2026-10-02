@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T03:33:37.632Z",
+  "updatedAt": "2026-10-02T03:40:08.676Z",
   "entries": [
     {
       "id": "a280c",
@@ -10,12 +10,30 @@
       "updatedAt": "2026-09-30T03:33:37.628Z"
     },
     {
+      "id": "dc-15a-blaster-carbine",
+      "name": "DC-15A Blaster Carbine",
+      "image": "media/dc-15a-blaster-carbine-image-d1a82bfe.webp",
+      "sound": null,
+      "wiki": "DC-15A blaster carbine",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
       "id": "dl-44",
       "name": "DL-44",
       "image": "media/dl-44-image-a598f7ac.webp",
       "sound": "media/dl-44-sound-145731d6.mp3",
       "createdAt": "2026-09-26T20:50:52.052Z",
       "updatedAt": "2026-09-26T20:50:52.052Z"
+    },
+    {
+      "id": "dlt-20a-blaster-rifle",
+      "name": "DLT-20A Blaster Rifle",
+      "image": "media/dlt-20a-blaster-rifle-image-6f7be596.webp",
+      "sound": null,
+      "wiki": "DLT-20A blaster rifle",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
       "id": "e-11",
@@ -26,12 +44,66 @@
       "updatedAt": "2026-09-26T20:54:47.730Z"
     },
     {
+      "id": "e-5-blaster-rifle",
+      "name": "E-5 Blaster Rifle",
+      "image": "media/e-5-blaster-rifle-image-20707bd9.webp",
+      "sound": null,
+      "wiki": "E-5 blaster rifle",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "ee-3-carbine-rifle",
+      "name": "EE-3 Carbine Rifle",
+      "image": "media/ee-3-carbine-rifle-image-cf6fdb9e.webp",
+      "sound": null,
+      "wiki": "EE-3 carbine rifle",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "ee-4-carbine-rifle",
+      "name": "EE-4 Carbine Rifle",
+      "image": "media/ee-4-carbine-rifle-image-efba4271.webp",
+      "sound": null,
+      "wiki": "EE-4 carbine rifle",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "ib-94-blaster",
+      "name": "IB-94 Blaster",
+      "image": "media/ib-94-blaster-image-a0c3cf82.webp",
+      "sound": null,
+      "wiki": "IB-94 blaster",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
       "id": "nt-242",
       "name": "NT-242",
       "image": "media/nt-242-image-17d19a30.webp",
       "sound": "media/nt-242-sound-13919e88.wav",
       "createdAt": "2026-09-26T21:23:32.738Z",
       "updatedAt": "2026-09-26T21:23:32.738Z"
+    },
+    {
+      "id": "se-14r-light-repeating-blaster",
+      "name": "SE-14r Light Repeating Blaster",
+      "image": "media/se-14r-light-repeating-blaster-image-4948b24d.webp",
+      "sound": null,
+      "wiki": "SE-14r light repeating blaster",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "the-mandalorian-s-ib-94-blaster-pistol",
+      "name": "The Mandalorian's IB-94 Blaster Pistol",
+      "image": "media/the-mandalorian-s-ib-94-blaster-pistol-image-1ee534dd.webp",
+      "sound": null,
+      "wiki": "The Mandalorian's IB-94 blaster pistol",
+      "createdAt": "2026-10-02T03:40:08.676Z",
+      "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
       "id": "tl-50-heavy-repeater",
