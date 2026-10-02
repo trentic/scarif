@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:29.707Z",
+  "updatedAt": "2026-10-02T03:41:35.382Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -145,6 +145,15 @@
       "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
+      "id": "be-09-blaster-pistol",
+      "name": "BE-09 Blaster Pistol",
+      "image": "media/be-09-blaster-pistol-image-03eeeea8.webp",
+      "sound": null,
+      "wiki": "BE-09 blaster pistol",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
+    },
+    {
       "id": "be-29-blaster-rifle",
       "name": "BE-29 Blaster Rifle",
       "image": "media/be-29-blaster-rifle-image-61b38ed9.webp",
@@ -233,6 +242,15 @@
       "wiki": "C-10 heavy blaster pistol",
       "createdAt": "2026-10-02T03:41:18.442Z",
       "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
+      "id": "c-44d-piratesweeper-blaster-rifle",
+      "name": "C-44D \"Piratesweeper\" Blaster Rifle",
+      "image": "media/c-44d-piratesweeper-blaster-rifle-image-eef4c05d.webp",
+      "sound": null,
+      "wiki": "C-44D \"Piratesweeper\" blaster rifle",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
     },
     {
       "id": "ca-87-blaster",
@@ -458,6 +476,15 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "e-11p-blaster",
+      "name": "E-11P Blaster",
+      "image": "media/e-11p-blaster-image-ac99c960.webp",
+      "sound": null,
+      "wiki": "E-11P blaster",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
+    },
+    {
       "id": "e-22-reciprocating-double-barreled-blaster-rifle",
       "name": "E-22 Reciprocating Double-Barreled Blaster Rifle",
       "image": "media/e-22-reciprocating-double-barreled-blaster-rifle-image-4f82d6e2.webp",
@@ -620,6 +647,15 @@
       "updatedAt": "2026-10-02T03:40:25.774Z"
     },
     {
+      "id": "jsp-14-pistol",
+      "name": "JSP-14 Pistol",
+      "image": "media/jsp-14-pistol-image-61054cfb.webp",
+      "sound": null,
+      "wiki": "JSP-14 pistol",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
+    },
+    {
       "id": "jyn-erso-s-blaster",
       "name": "Jyn Erso's Blaster",
       "image": "media/jyn-erso-s-blaster-image-0dc95d4f.webp",
@@ -690,6 +726,24 @@
       "wiki": "KYD-21 blaster pistol",
       "createdAt": "2026-10-02T03:40:43.326Z",
       "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "kyd-44-blaster-pistol",
+      "name": "KYD-44 Blaster Pistol",
+      "image": "media/kyd-44-blaster-pistol-image-2d7e987a.webp",
+      "sound": null,
+      "wiki": "KYD-44 blaster pistol",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
+    },
+    {
+      "id": "l-23-blaster-pistol",
+      "name": "L-23 Blaster Pistol",
+      "image": "media/l-23-blaster-pistol-image-dd6146ab.webp",
+      "sound": null,
+      "wiki": "L-23 blaster pistol",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
     },
     {
       "id": "lando-calrissian-s-se-14r-light-repeating-blasters",
@@ -764,6 +818,15 @@
       "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
+      "id": "mt-97",
+      "name": "MT-97",
+      "image": "media/mt-97-image-4b615dd7.webp",
+      "sound": null,
+      "wiki": "MT-97",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
+    },
+    {
       "id": "mt2-blaster-pistol",
       "name": "MT2 Blaster Pistol",
       "image": "media/mt2-blaster-pistol-image-71c55ff5.webp",
@@ -771,6 +834,15 @@
       "wiki": "MT2 blaster pistol",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "mustafarian-blaster-rifle",
+      "name": "Mustafarian Blaster Rifle",
+      "image": "media/mustafarian-blaster-rifle-image-dbf82521.webp",
+      "sound": null,
+      "wiki": "Mustafarian blaster rifle",
+      "createdAt": "2026-10-02T03:41:35.382Z",
+      "updatedAt": "2026-10-02T03:41:35.382Z"
     },
     {
       "id": "mw-20-bryar-pistol",
