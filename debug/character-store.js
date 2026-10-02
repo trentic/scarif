@@ -57,6 +57,38 @@ export function addCharacter(gh, { name, side, power, image }) {
   }, CHAR_FILE);
 }
 
+// Adds many characters in one commit. Names already in the archive are skipped
+// (listed in `skipped`) rather than failing the whole batch.
+// items: [{ name, side, power, image, wiki }]
+export async function addCharacters(gh, items) {
+  let skipped = [];
+  const archive = await gh.commitArchive((archive) => {
+    skipped = [];
+    const add = [];
+    const now = new Date().toISOString();
+    for (const item of items) {
+      let clean;
+      try {
+        clean = checkName(archive, item.name);
+      } catch {
+        skipped.push(item.name);
+        continue;
+      }
+      const base = slugify(clean) || 'character';
+      let id = base;
+      for (let n = 2; archive.entries.some((e) => e.id === id); n++) id = `${base}-${n}`;
+      const entry = { id, name: clean, side: checkSide(item.side), power: checkPower(item.power), image: null, createdAt: now, updatedAt: now };
+      if (item.wiki) entry.wiki = item.wiki;
+      if (item.image) placeImage(entry, item.image, add, []);
+      archive.entries.push(entry);
+    }
+    sortEntries(archive);
+    const n = items.length - skipped.length;
+    return { archive, add, message: `Characters: import ${n} from Wookieepedia` };
+  }, CHAR_FILE);
+  return { archive, skipped };
+}
+
 export function updateCharacter(gh, id, { name, side, power }) {
   return gh.commitArchive((archive) => {
     const entry = archive.entries.find((e) => e.id === id);

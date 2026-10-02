@@ -85,6 +85,8 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 
 **Quick pictures:** hover a character card and press **Ctrl+V** (or click **📋 Paste**). It uses whatever you last copied — an image address (right-click → *Copy image address*) or the image itself (right-click → *Copy image*). You can also drop an image file on a card. If a site blocks copying its images, the address is linked instead.
 
+**Import from Wookieepedia:** in the Characters tab, click **🌐 Import from Wookieepedia**. Choose categories to read (each marked Jedi or Sith; use **Find** to look up category names) and/or paste names or Wookieepedia links, then **Search Wookieepedia**. You get a list with each article's main picture, a guessed fan power (longer article = better known) and anyone already in your archive greyed out (redirects count, so *Darth Sidious* matches *Sheev Palpatine*). Pick who to add, fix names, sides and fan power, then **Add**. Pictures are copied into the site and saved in batches of 8. Wookieepedia is read from your browser, so nothing needs setting up.
+
 ### Who Would Win? percentages
 
 Until real voting is set up, the split is a **fan estimate** from the gap in fan power, labelled *Fan estimate* on screen. It uses a logistic curve, so close fights stay close and big mismatches level off:

@@ -362,3 +362,52 @@ kbd { padding: 1px 6px; border-radius: 5px; border: 1px solid var(--line-2); bac
 .power-field input { flex: 1; accent-color: var(--gold); }
 .power-field b { min-width: 32px; text-align: right; font-family: var(--font-display); color: var(--gold); }
 .entry-form input[type='file'] { display: block; margin-bottom: 8px; font-size: 13px; color: var(--muted); }
+
+/* ---- Wookieepedia import ---- */
+dialog.wiki-dialog { width: min(1100px, calc(100vw - 32px)); padding: 20px 20px 0; }
+.wiki-dialog .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.wiki-dialog > .hint { margin: 8px 0 16px; color: var(--muted); font-size: 14px; }
+.wiki-dialog label { display: block; font-weight: 700; margin-bottom: 6px; }
+.wiki-dialog label.check { display: flex; align-items: center; gap: 8px; font-weight: 400; margin-top: 10px; }
+.wiki-setup { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px) { .wiki-setup { grid-template-columns: 1fr; } }
+.wiki-sources { display: grid; gap: 6px; margin-bottom: 10px; }
+.wiki-source { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); }
+.wiki-source a { flex: 1; color: var(--text); text-decoration: none; }
+.wiki-source a:hover { text-decoration: underline; }
+.side-toggle { border: 0; background: none; padding: 0; cursor: pointer; }
+.side-toggle:disabled { cursor: default; }
+.wiki-add { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.wiki-add input { flex: 1 1 200px; }
+.wiki-dialog input[type='text'], .wiki-dialog input[type='number'], .wiki-dialog textarea {
+  min-height: 36px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); font: inherit;
+}
+.wiki-dialog textarea { width: 100%; resize: vertical; font-family: ui-monospace, monospace; font-size: 13px; }
+.wiki-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip-btn { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--panel-2); color: var(--text); font-size: 13px; cursor: pointer; }
+.chip-btn:hover { border-color: var(--cyan); }
+.wiki-go { display: flex; align-items: center; gap: 14px; margin: 18px 0 8px; flex-wrap: wrap; }
+.wiki-status { color: var(--muted); font-size: 14px; }
+.wiki-status.ok { color: var(--green); }
+.wiki-status.warn { color: var(--gold); }
+.wiki-status.err { color: var(--red); }
+.wiki-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--line); }
+.wiki-toolbar[hidden], .wiki-footer[hidden] { display: none; }
+.wiki-select { display: flex; align-items: center; gap: 8px; }
+.wiki-top { width: 70px; }
+.wiki-summary { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.wiki-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.wiki-card .thumb { aspect-ratio: 1 / 1; cursor: pointer; margin: 0; }
+.wiki-card .thumb img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover; object-position: top; }
+.wiki-card .thumb input { position: absolute; top: 8px; left: 8px; width: 22px; height: 22px; accent-color: var(--green); }
+.wiki-card.picked { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
+.wiki-card.in-archive { opacity: 0.45; }
+.wiki-card .body { gap: 6px; padding: 10px; }
+.wiki-card .body input[type='text'] { width: 100%; font-weight: 700; }
+.wiki-power { display: flex !important; align-items: center; gap: 4px; margin: 0 !important; color: var(--gold); }
+.wiki-power input { width: 64px; }
+.wiki-link { font-size: 12px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wiki-flag { position: absolute; right: 8px; top: 8px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; background: rgba(4, 6, 10, 0.85); color: var(--text); border: 1px solid var(--line-2); }
+.wiki-flag.warn { top: auto; bottom: 8px; color: var(--gold); border-color: var(--gold); }
+.wiki-footer { position: sticky; bottom: 0; display: flex; justify-content: flex-end; align-items: center; gap: 14px; margin: 16px -20px 0; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--panel); }
+.wiki-progress { flex: 1; font-size: 14px; color: var(--muted); }

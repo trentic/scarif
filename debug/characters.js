@@ -7,6 +7,7 @@ import { SIDES } from '../js/registry.js';
 import { h } from '../js/ui.js';
 import { addCharacter, CHAR_FILE, deleteCharacter, setCharacterImage, updateCharacter } from './character-store.js';
 import { downloadImage, readMedia, StoreError } from './store.js';
+import { openWikiImport } from './wiki-import.js';
 
 const FILTERS = [['all', 'All'], ['jedi', 'Jedi'], ['sith', 'Sith'], ['missing', 'No picture']];
 
@@ -92,7 +93,20 @@ function render() {
         characterForm({ onSaved: (archive) => { view.ctx.toast('Character added.', 'ok'); saved(archive); } }),
       ),
       h('section', { class: 'card' },
-        h('div', { class: 'card-head' }, h('h2', {}, 'Characters'), h('div', { class: 'filter' }, filterBtns)),
+        h('div', { class: 'card-head' },
+          h('h2', {}, 'Characters'),
+          h('button', {
+            class: 'btn small',
+            onclick: () => openWikiImport({
+              gh: view.ctx.gh,
+              entries: view.entries,
+              toast: view.ctx.toast,
+              onAuthError: view.ctx.onAuthError,
+              onSaved: saved,
+            }),
+          }, '🌐 Import from Wookieepedia'),
+        ),
+        h('div', { class: 'filter' }, filterBtns),
         h('div', { class: 'library-tools' }, search),
         gridEl,
       ),
