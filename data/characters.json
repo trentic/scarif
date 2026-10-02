@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T04:15:43.477Z",
+  "updatedAt": "2026-10-02T03:25:43.713Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -72,6 +72,26 @@
       "image": "media/characters/darth-bane-1b0b3db4.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:06:22.977Z"
+    },
+    {
+      "id": "darth-caedus",
+      "name": "Darth Caedus",
+      "side": "sith",
+      "power": 89,
+      "image": "media/characters/darth-caedus-1ba7948e.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "Darth Caedus"
+    },
+    {
+      "id": "darth-krayt",
+      "name": "Darth Krayt",
+      "side": "sith",
+      "power": 81,
+      "image": "media/characters/darth-krayt-39ebb39f.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "Darth Krayt"
     },
     {
       "id": "darth-malak",
@@ -182,6 +202,16 @@
       "updatedAt": "2026-09-30T00:00:00.000Z"
     },
     {
+      "id": "freedon-nadd",
+      "name": "Freedon Nadd",
+      "side": "sith",
+      "power": 73,
+      "image": "media/characters/freedon-nadd-08c64607.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "Freedon Nadd"
+    },
+    {
       "id": "grogu",
       "name": "Grogu",
       "side": "jedi",
@@ -218,6 +248,16 @@
       "updatedAt": "2026-09-30T04:11:02.241Z"
     },
     {
+      "id": "kreia",
+      "name": "Kreia",
+      "side": "sith",
+      "power": 75,
+      "image": "media/characters/kreia-02a3df9c.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "Kreia"
+    },
+    {
       "id": "kylo-ren",
       "name": "Kylo Ren",
       "side": "sith",
@@ -225,6 +265,16 @@
       "image": null,
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "kyp-durron",
+      "name": "Kyp Durron",
+      "side": "sith",
+      "power": 84,
+      "image": "media/characters/kyp-durron-4217bdf7.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "Kyp Durron"
     },
     {
       "id": "luke-skywalker",
@@ -243,6 +293,16 @@
       "image": null,
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "lumiya",
+      "name": "Lumiya",
+      "side": "sith",
+      "power": 85,
+      "image": "media/characters/lumiya-3749a459.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "Lumiya"
     },
     {
       "id": "mace-windu",
@@ -351,6 +411,26 @@
       "image": "media/characters/the-grand-inquisitor-153c9f16.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:14:56.208Z"
+    },
+    {
+      "id": "the-ronin",
+      "name": "The Ronin",
+      "side": "sith",
+      "power": 76,
+      "image": "media/characters/the-ronin-f420f9fc.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "The Ronin"
+    },
+    {
+      "id": "the-stranger",
+      "name": "The Stranger",
+      "side": "sith",
+      "power": 72,
+      "image": "media/characters/the-stranger-14050839.webp",
+      "createdAt": "2026-10-02T03:25:43.708Z",
+      "updatedAt": "2026-10-02T03:25:43.708Z",
+      "wiki": "The Stranger"
     },
     {
       "id": "yoda",
