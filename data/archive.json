@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:41.253Z",
+  "updatedAt": "2026-10-02T03:41:47.208Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -188,6 +188,15 @@
       "wiki": "BH-4 Double Blaster",
       "createdAt": "2026-10-02T03:41:12.904Z",
       "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
+      "id": "bk-43-blaster-rifle",
+      "name": "BK-43 Blaster Rifle",
+      "image": "media/bk-43-blaster-rifle-image-a66dfddb.webp",
+      "sound": null,
+      "wiki": "BK-43 blaster rifle",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
     },
     {
       "id": "blaster-musket",
@@ -566,6 +575,15 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "ef-11d-blaster-rifle",
+      "name": "EF-11D Blaster Rifle",
+      "image": "media/ef-11d-blaster-rifle-image-48f86e3c.webp",
+      "sound": null,
+      "wiki": "EF-11D blaster rifle",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
+    },
+    {
       "id": "el-16-blaster-rifle",
       "name": "EL-16 Blaster Rifle",
       "image": "media/el-16-blaster-rifle-image-41b05a24.webp",
@@ -620,6 +638,15 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "f-78-blaster-rifle",
+      "name": "F-78 Blaster Rifle",
+      "image": "media/f-78-blaster-rifle-image-2e55aaac.webp",
+      "sound": null,
+      "wiki": "F-78 blaster rifle",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
+    },
+    {
       "id": "finn-s-blaster-pistol",
       "name": "Finn's Blaster Pistol",
       "image": "media/finn-s-blaster-pistol-image-f0a526a7.webp",
@@ -654,6 +681,24 @@
       "wiki": "Grievance Striker",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "hb-9-blaster-rifle",
+      "name": "HB-9 Blaster Rifle",
+      "image": "media/hb-9-blaster-rifle-image-0371c0ea.webp",
+      "sound": null,
+      "wiki": "HB-9 blaster rifle",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
+    },
+    {
+      "id": "hf-94-heavy-blaster-pistol",
+      "name": "HF-94 Heavy Blaster Pistol",
+      "image": "media/hf-94-heavy-blaster-pistol-image-aa1ce7a5.webp",
+      "sound": null,
+      "wiki": "HF-94 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
     },
     {
       "id": "hk8-sawtooth",
@@ -854,6 +899,15 @@
       "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
+      "id": "model-80-blaster-pistol",
+      "name": "Model 80 Blaster Pistol",
+      "image": "media/model-80-blaster-pistol-image-8a3b535e.webp",
+      "sound": null,
+      "wiki": "Model 80 Blaster Pistol",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
+    },
+    {
       "id": "mr-90-proton-rifle",
       "name": "MR-90 Proton Rifle",
       "image": "media/mr-90-proton-rifle-image-24610c0b.webp",
@@ -968,6 +1022,15 @@
       "wiki": "Relby blaster pistol",
       "createdAt": "2026-10-02T03:41:18.442Z",
       "updatedAt": "2026-10-02T03:41:18.442Z"
+    },
+    {
+      "id": "relby-k-23-blaster-pistol",
+      "name": "Relby K-23 Blaster Pistol",
+      "image": "media/relby-k-23-blaster-pistol-image-04a54ed4.webp",
+      "sound": null,
+      "wiki": "Relby K-23 blaster pistol",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
     },
     {
       "id": "relby-k-25-blaster",
@@ -1103,6 +1166,15 @@
       "wiki": "SP-B50 blaster rifle",
       "createdAt": "2026-10-02T03:41:24.181Z",
       "updatedAt": "2026-10-02T03:41:24.181Z"
+    },
+    {
+      "id": "ss-410-police-special-blaster-pistol",
+      "name": "SS-410 Police Special Blaster Pistol",
+      "image": "media/ss-410-police-special-blaster-pistol-image-55203426.webp",
+      "sound": null,
+      "wiki": "SS-410 Police Special blaster pistol",
+      "createdAt": "2026-10-02T03:41:47.208Z",
+      "updatedAt": "2026-10-02T03:41:47.208Z"
     },
     {
       "id": "st-w48-blaster-rifle",
