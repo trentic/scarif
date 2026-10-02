@@ -887,8 +887,8 @@ body {
   z-index: 0;
 }
 .chat-count { margin-left: auto; font-size: 32px; font-weight: 700; color: var(--muted); white-space: nowrap; }
-.chat-hint { margin-top: 18px; text-align: center; font-size: 32px; color: var(--muted); letter-spacing: 0.04em; }
-.chat-hint b { color: var(--text); }
+.chat-hint { margin-top: 18px; text-align: center; font-size: 34px; font-weight: 700; color: var(--text); }
+.chat-hint b { display: inline-block; min-width: 50px; padding: 0 10px; border-radius: 12px; background: var(--accent); color: #000; font-family: var(--font-display); }
 .chat-banner {
   position: absolute;
   left: 50%;
@@ -932,30 +932,50 @@ body {
 .wv-chat {
   position: absolute;
   z-index: 2;
-  right: 36px;
-  padding: 10px 22px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.62);
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 26px 10px;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 3px solid #fff;
   color: #fff;
-  font-size: 30px;
-  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
-.wv-top .wv-chat { bottom: 40px; }
-.wv-bottom .wv-chat { top: 40px; }
+.wv-chat b { font-family: var(--font-display); font-weight: 900; font-size: 48px; letter-spacing: 0.04em; line-height: 1; }
+.wv-chat .n { margin-top: 6px; font-size: 26px; font-weight: 700; opacity: 0.85; }
+.wv-top .wv-chat { bottom: 36px; }
+.wv-bottom .wv-chat { top: 36px; }
+
+/* Chat on: colours start dimmed and light up with the votes (the dim layer
+   shrinks away from red's left edge / blue's right edge). */
+.wv-dim {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  transition: left 1.4s cubic-bezier(.25,.8,.25,1), right 1.4s cubic-bezier(.25,.8,.25,1);
+  pointer-events: none;
+}
+.wv-instruct { margin-top: 12px; text-align: center; font-size: 36px; font-weight: 700; color: var(--text); }
+.wv-instruct b { display: inline-block; min-width: 64px; padding: 2px 16px; border-radius: 14px; color: #fff; font-family: var(--font-display); }
+.wv-instruct b.red { background: #e02b2b; }
+.wv-instruct b.blue { background: #0ea5ff; }
+.wv-screen.has-chat .wv-panel { height: 1076px; margin-top: 14px; }
 
 .chat-chip {
   position: absolute;
   z-index: 30;
-  top: 78px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   max-width: 640px;
-  padding: 10px 24px;
+  padding: 6px 20px;
   border-radius: 999px;
   background: rgba(10, 15, 22, 0.85);
   border: 2px solid var(--line-2);
   color: var(--muted);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;

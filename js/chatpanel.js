@@ -97,13 +97,15 @@ export function openChatPanel(stage, onClose) {
     if (c.source !== 'off') {
       const rows = top(5);
       parts.push(
+        seg('Who can vote', [[false, 'Everyone'], [true, 'Members only']], c.membersOnly, (v) => { chat.saveConfig({ membersOnly: v }); render(); },
+          'Members only counts votes from your channel members (plus you and your moderators). On screen it says “Members: type 1 or 2”.'),
         seg('Chat leaderboard', [[true, 'Show'], [false, 'Hide']], c.leaderboard, (v) => { chat.saveConfig({ leaderboard: v }); render(); },
           'Correct chat answers in the quiz games score points (the first correct answer gets a bonus). Top 5 shows on the results screen. Resets when you close the tab.'),
         h('div', { class: 'chat-board-preview' },
           rows.length ? h('ol', {}, rows.map((r) => h('li', {}, `${r.user} · ${r.points} pts`))) : h('div', { class: 'help' }, 'No chat points yet this session.'),
           rows.length ? h('button', { class: 'btn ghost', onclick: () => { resetBoard(); render(); } }, 'Reset leaderboard') : null,
         ),
-        h('div', { class: 'keys' }, 'How chat plays: quiz games → type A, B, C or D (or 1–4, or the name). Who Would Win? → type 1 or 2 (or red / blue, or the name). One vote per viewer per round; their latest message counts.'),
+        h('div', { class: 'keys' }, 'How chat plays: quiz games → type A, B, C or D (or 1–4, or the name). Who Would Win? → type 1 or 2 (or red / blue, or the name). One vote per viewer per round, and their first vote is final, so spamming doesn’t add votes.'),
       );
     }
     body.replaceChildren(...parts);

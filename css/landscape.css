@@ -87,15 +87,20 @@ body.side-green { background: #00b140; }
 
 /* ---------- who would win: fighters side by side ---------- */
 
+.layout-43 .wv-screen {
+  grid-template-rows: auto auto auto 1fr auto;
+  grid-template-areas: 'hud hud' 'timer timer' 'instr instr' 'panel panel' 'host host';
+}
+.layout-43 .wv-instruct { grid-area: instr; margin-top: 10px; font-size: 32px; }
 .layout-43 .wv-screen .wv-panel {
-  grid-column: 1 / -1;
-  grid-row: 3;
+  grid-area: panel;
   height: auto;
   margin-top: 26px;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
 }
-.layout-43 .wv-host { grid-column: 1 / -1; grid-row: 4; }
+.layout-43 .wv-host { grid-area: host; }
+.layout-43 .wv-screen.has-chat .wv-panel { height: auto; margin-top: 14px; }
 .layout-43 .wv-bottom { justify-content: flex-start; }
 .layout-43 .wv-top .wv-img,
 .layout-43 .wv-bottom .wv-img { top: 112px; bottom: 36px; left: 40px; right: 40px; }
@@ -135,5 +140,5 @@ body.side-green { background: #00b140; }
 .layout-43 .chat-board { margin-top: 24px; max-width: 900px; }
 .layout-43 .chat-board ol { grid-template-columns: 1fr 1fr; }
 .layout-43 .chat-board li { font-size: 28px; padding: 6px 20px; }
-.layout-43 .chat-chip { top: 64px; }
+.layout-43 .chat-chip { top: 8px; }
 .layout-43 .wv-top .wv-chat, .layout-43 .wv-bottom .wv-chat { top: auto; bottom: 40px; }

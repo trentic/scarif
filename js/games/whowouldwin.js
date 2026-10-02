@@ -91,8 +91,14 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       const chatOn = chat.isOn();
       const half = (c, pos) => {
         const pct = h('div', { class: 'wv-pct' });
-        const chatEl = chatOn ? h('div', { class: 'wv-chat' }, `💬 Type ${pos === 'top' ? 1 : 2}`) : null;
+        const n = pos === 'top' ? 1 : 2;
+        const count = h('span', { class: 'n' }, '0 votes');
+        const chatEl = chatOn ? h('div', { class: 'wv-chat' }, h('b', {}, `TYPE ${n}`), count) : null;
+        // With chat on, the colour starts dimmed and lights up with the votes:
+        // red from the left edge, blue from the right edge.
+        const dim = chatOn ? h('div', { class: 'wv-dim' }) : null;
         const el = h('button', { class: `wv-half wv-${pos}`, 'aria-label': `${c.name} wins` },
+          dim,
           h('div', { class: 'wv-img' }, h('img', { src: c.image, alt: '', draggable: 'false' })),
           h('div', { class: 'wv-label' },
             h('span', { class: `wv-side ${c.side}` }, SIDES[c.side]?.label || c.side),
@@ -103,7 +109,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           h('div', { class: 'wv-pick' }, '✓ Your pick'),
         );
         el.addEventListener('click', () => onTap(c));
-        return { el, pct, chatEl };
+        return { el, pct, chatEl, count, dim };
       };
       const top = half(a, 'top');
       const bottom = half(b, 'bottom');
@@ -115,11 +121,19 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       ], {
         onUpdate: ({ counts, total }) => {
           if (phase !== 'picking') return;
-          top.chatEl.textContent = `💬 1 · ${counts.a} vote${counts.a === 1 ? '' : 's'}`;
-          bottom.chatEl.textContent = `💬 2 · ${counts.b} vote${counts.b === 1 ? '' : 's'}`;
-          void total;
+          top.count.textContent = `${counts.a} vote${counts.a === 1 ? '' : 's'}`;
+          bottom.count.textContent = `${counts.b} vote${counts.b === 1 ? '' : 's'}`;
+          setFill(counts.a / total, counts.b / total);
         },
       }) : null;
+
+      // Lit share of each half (0–1): red's lit part grows from its left edge,
+      // blue's from its right edge.
+      function setFill(shareA, shareB) {
+        if (!chatOn) return;
+        top.dim.style.left = `${shareA * 100}%`;
+        bottom.dim.style.right = `${shareB * 100}%`;
+      }
       if (chatOn) {
         // Test chat leans towards the character with more fan power.
         const fav = (a.power || 50) >= (b.power || 50) ? ['1', a.name] : ['2', b.name];
@@ -130,7 +144,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       const timer = h('div', { class: `timer ${settings.timer ? '' : 'hidden'}` }, timerFill);
       const hostHint = h('div', { class: 'wv-host chrome' });
 
-      const screen = h('div', { class: 'screen round-screen wv-screen' },
+      const screen = h('div', { class: `screen round-screen wv-screen ${chatOn ? 'has-chat' : ''}` },
         h('div', { class: 'corner left chrome' }, iconButton('home', 'Quit to menu', () => { finish(); resolve('exit'); exit(); })),
         // Stays visible in clean mode (it sits under the app's own header strip).
         total === 0 && h('div', { class: 'corner right' },
@@ -141,6 +155,9 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           h('span', { class: 'pill' }, total ? `${index + 1} / ${total}` : `#${index + 1}`),
         ),
         timer,
+        chatOn && h('div', { class: 'wv-instruct' },
+          `💬 ${chat.config.membersOnly ? 'Members' : 'Vote in chat'}: type `, h('b', { class: 'red' }, '1'), ' or ', h('b', { class: 'blue' }, '2'),
+        ),
         h('div', { class: 'wv-panel' }, top.el, bottom.el, h('div', { class: 'wv-or' }, 'OR')),
         hostHint,
       );
@@ -215,6 +232,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
         if (!alive) return;
         top.chatEl?.remove();
         bottom.chatEl?.remove();
+        setFill(result.a / 100, result.b / 100);
         countUp(top.pct, result.a, label);
         countUp(bottom.pct, result.b, label);
         screen.classList.add('revealed');

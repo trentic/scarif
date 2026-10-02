@@ -23,7 +23,8 @@ export function on(type, fn) {
 // --- config ---------------------------------------------------------------------------
 
 function load() {
-  try { return { source: 'off', apiKey: '', stream: '', leaderboard: true, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return { source: 'off', apiKey: '', stream: '', leaderboard: true }; }
+  const defaults = { source: 'off', apiKey: '', stream: '', leaderboard: true, membersOnly: false };
+  try { return { ...defaults, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return defaults; }
 }
 export const config = load();
 export function saveConfig(patch) {
@@ -152,6 +153,7 @@ async function poll() {
         user: item.authorDetails?.displayName || 'viewer',
         text: item.snippet?.displayMessage || '',
         isMod: Boolean(item.authorDetails?.isChatModerator || item.authorDetails?.isChatOwner),
+        isMember: Boolean(item.authorDetails?.isChatSponsor),
         at,
       });
     }
@@ -167,6 +169,7 @@ async function poll() {
 
 // --- test chat (fake viewers) ------------------------------------------------------------------
 
+const FAKE_MEMBERS = new Set(['kyber_kid', 'TatooineTina', 'ObiWanKenoBro', 'Ahsoka4Life', 'MandoMom', 'HelloThere77']);
 const FAKE_USERS = ['kyber_kid', 'DinDjarinFan', 'rogue_one_42', 'TatooineTina', 'Grievous_Gamer', 'ObiWanKenoBro', 'sith_happens', 'PadawanPete', 'BB8_Lover', 'ClankerHater99', 'Ahsoka4Life', 'NerfHerder', 'TheChosenWon', 'MandoMom', 'blue_milk', 'HelloThere77'];
 let testHint = () => [];
 // Games tell the test chat what a sensible vote looks like right now.
@@ -180,7 +183,7 @@ function testTick() {
   const text = choices.length && Math.random() < 0.85
     ? choices[Math.floor(Math.random() ** 1.6 * choices.length)] // skewed: first choices more popular
     : junk[Math.floor(Math.random() * junk.length)];
-  emit('message', { id: `t${Date.now()}${Math.random()}`, userId: user, user, text, isMod: false, at: Date.now() });
+  emit('message', { id: `t${Date.now()}${Math.random()}`, userId: user, user, text, isMod: false, isMember: FAKE_MEMBERS.has(user), at: Date.now() });
   timer = setTimeout(testTick, 250 + Math.random() * 700);
 }
 

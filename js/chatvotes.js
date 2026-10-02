@@ -34,6 +34,10 @@ export function voteRound(options, { onUpdate } = {}) {
 
   const off = chat.on('message', (m) => {
     if (!open) return;
+    // Members-only voting (owner and moderators can always vote).
+    if (chat.config.membersOnly && !m.isMember && !m.isMod) return;
+    // First vote is final: one vote per account, so spamming changes nothing.
+    if (votes.has(m.userId)) return;
     const o = match(m.text);
     if (!o) return;
     votes.set(m.userId, { option: o.id, user: m.user, userId: m.userId, at: m.at });
