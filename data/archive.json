@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:06.897Z",
+  "updatedAt": "2026-10-02T03:41:12.904Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -9,6 +9,24 @@
       "wiki": "\"Huttsplitter\" blaster rifle",
       "createdAt": "2026-10-02T03:40:31.534Z",
       "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "precision-x-marksman-rifle",
+      "name": "\"Precision-X\" Marksman Rifle",
+      "image": "media/precision-x-marksman-rifle-image-43d037d9.webp",
+      "sound": null,
+      "wiki": "\"Precision-X\" Marksman Rifle",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
+      "id": "snubble-special-pistol",
+      "name": "\"Snubble Special\" Pistol",
+      "image": "media/snubble-special-pistol-image-351c9dcf.webp",
+      "sound": null,
+      "wiki": "\"Snubble special\" pistol",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
       "id": "a-180-blaster",
@@ -55,6 +73,15 @@
       "updatedAt": "2026-10-02T03:40:37.269Z"
     },
     {
+      "id": "a350-blaster-rifle",
+      "name": "A350 Blaster Rifle",
+      "image": "media/a350-blaster-rifle-image-27311439.webp",
+      "sound": null,
+      "wiki": "A350 blaster rifle",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
       "id": "a43-hushabye",
       "name": "A43 Hushabye",
       "image": "media/a43-hushabye-image-cff0c64f.webp",
@@ -98,6 +125,24 @@
       "wiki": "B1-NA blaster pistol",
       "createdAt": "2026-10-02T03:40:49.346Z",
       "updatedAt": "2026-10-02T03:40:49.346Z"
+    },
+    {
+      "id": "be-29-blaster-rifle",
+      "name": "BE-29 Blaster Rifle",
+      "image": "media/be-29-blaster-rifle-image-61b38ed9.webp",
+      "sound": null,
+      "wiki": "BE-29 blaster rifle",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
+      "id": "bh-4-double-blaster",
+      "name": "BH-4 Double Blaster",
+      "image": "media/bh-4-double-blaster-image-e918a165.webp",
+      "sound": null,
+      "wiki": "BH-4 Double Blaster",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
       "id": "bo-rifle",
@@ -170,6 +215,15 @@
       "wiki": "DC-17 repeater hand blaster",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "dh-16-blaster-pistol",
+      "name": "DH-16 Blaster Pistol",
+      "image": "media/dh-16-blaster-pistol-image-0944d731.webp",
+      "sound": null,
+      "wiki": "DH-16 Blaster Pistol",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
       "id": "dh-17-blaster-pistol",
@@ -530,6 +584,15 @@
       "updatedAt": "2026-10-02T03:40:49.346Z"
     },
     {
+      "id": "lando-calrissian-s-x-8-night-sniper",
+      "name": "Lando Calrissian's X-8 Night Sniper",
+      "image": "media/lando-calrissian-s-x-8-night-sniper-image-028697a8.webp",
+      "sound": null,
+      "wiki": "Lando Calrissian's X-8 Night Sniper",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
+    },
+    {
       "id": "lightsaber-blaster-hybrid",
       "name": "Lightsaber-Blaster Hybrid",
       "image": "media/lightsaber-blaster-hybrid-image-22d5fb39.webp",
@@ -626,6 +689,15 @@
       "wiki": "Pao's rifle",
       "createdAt": "2026-10-02T03:40:20.196Z",
       "updatedAt": "2026-10-02T03:40:20.196Z"
+    },
+    {
+      "id": "power-5-blaster",
+      "name": "Power 5 Blaster",
+      "image": "media/power-5-blaster-image-dba609f1.webp",
+      "sound": null,
+      "wiki": "Power 5 blaster",
+      "createdAt": "2026-10-02T03:41:12.904Z",
+      "updatedAt": "2026-10-02T03:41:12.904Z"
     },
     {
       "id": "relby-v-4d-blaster-rifle",
