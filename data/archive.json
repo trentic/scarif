@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:41:00.738Z",
+  "updatedAt": "2026-10-02T03:41:06.897Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -53,6 +53,15 @@
       "wiki": "A300 blaster rifle",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "a43-hushabye",
+      "name": "A43 Hushabye",
+      "image": "media/a43-hushabye-image-cff0c64f.webp",
+      "sound": null,
+      "wiki": "A43 Hushabye",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
       "id": "abr-2-zato-blaster-rifle",
@@ -116,6 +125,15 @@
       "wiki": "Bossk's Relby-v10 Mortar Gun",
       "createdAt": "2026-10-02T03:41:00.737Z",
       "updatedAt": "2026-10-02T03:41:00.737Z"
+    },
+    {
+      "id": "bryar-pistol",
+      "name": "Bryar Pistol",
+      "image": "media/bryar-pistol-image-05a33d42.webp",
+      "sound": null,
+      "wiki": "Bryar pistol",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
       "id": "cc-420-pistol",
@@ -476,6 +494,24 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "krennic-s-dt-29-heavy-blaster-pistol",
+      "name": "Krennic's DT-29 Heavy Blaster Pistol",
+      "image": "media/krennic-s-dt-29-heavy-blaster-pistol-image-e774c8a2.webp",
+      "sound": null,
+      "wiki": "Krennic's DT-29 heavy blaster pistol",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
+    },
+    {
+      "id": "kuruk-s-blaster-rifle",
+      "name": "Kuruk's Blaster Rifle",
+      "image": "media/kuruk-s-blaster-rifle-image-419b90b4.webp",
+      "sound": null,
+      "wiki": "Kuruk's blaster rifle",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
+    },
+    {
       "id": "kyd-21-blaster-pistol",
       "name": "KYD-21 Blaster Pistol",
       "image": "media/kyd-21-blaster-pistol-image-ccb988f6.webp",
@@ -530,6 +566,15 @@
       "updatedAt": "2026-10-02T03:41:00.737Z"
     },
     {
+      "id": "mr-90-proton-rifle",
+      "name": "MR-90 Proton Rifle",
+      "image": "media/mr-90-proton-rifle-image-24610c0b.webp",
+      "sound": null,
+      "wiki": "MR-90 proton rifle",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
+    },
+    {
       "id": "mt2-blaster-pistol",
       "name": "MT2 Blaster Pistol",
       "image": "media/mt2-blaster-pistol-image-71c55ff5.webp",
@@ -546,6 +591,15 @@
       "wiki": "MW-20 Bryar pistol",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "nd-5-s-blaster",
+      "name": "ND-5's Blaster",
+      "image": "media/nd-5-s-blaster-image-fd01deaf.webp",
+      "sound": null,
+      "wiki": "ND-5's blaster",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
       "id": "nn-14-blaster-pistol",
@@ -610,6 +664,15 @@
       "updatedAt": "2026-10-02T03:40:31.534Z"
     },
     {
+      "id": "rskf-44-heavy-blaster",
+      "name": "RSKF-44 Heavy Blaster",
+      "image": "media/rskf-44-heavy-blaster-image-51711d88.webp",
+      "sound": null,
+      "wiki": "RSKF-44 heavy blaster",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
+    },
+    {
       "id": "s-5-security-grade-blaster-ascension-gun",
       "name": "S-5 Security-Grade Blaster/ascension Gun",
       "image": "media/s-5-security-grade-blaster-ascension-gun-image-d6f7e7e7.webp",
@@ -662,6 +725,15 @@
       "wiki": "ST-W48 blaster rifle",
       "createdAt": "2026-10-02T03:40:55.013Z",
       "updatedAt": "2026-10-02T03:40:55.013Z"
+    },
+    {
+      "id": "sx-21-pump-action-scatter-blaster",
+      "name": "SX-21 Pump-Action Scatter Blaster",
+      "image": "media/sx-21-pump-action-scatter-blaster-image-fe627b53.webp",
+      "sound": null,
+      "wiki": "SX-21 pump-action scatter blaster",
+      "createdAt": "2026-10-02T03:41:06.897Z",
+      "updatedAt": "2026-10-02T03:41:06.897Z"
     },
     {
       "id": "t-21-light-repeating-blaster",
