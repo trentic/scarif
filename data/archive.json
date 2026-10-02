@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-02T03:40:25.774Z",
+  "updatedAt": "2026-10-02T03:40:31.534Z",
   "entries": [
+    {
+      "id": "huttsplitter-blaster-rifle",
+      "name": "\"Huttsplitter\" Blaster Rifle",
+      "image": "media/huttsplitter-blaster-rifle-image-be470c63.webp",
+      "sound": null,
+      "wiki": "\"Huttsplitter\" blaster rifle",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
     {
       "id": "a-180-blaster",
       "name": "A-180 Blaster",
@@ -20,12 +29,30 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "a280-cfe-convertible-heavy-blaster-pistol",
+      "name": "A280-CFE Convertible Heavy Blaster Pistol",
+      "image": "media/a280-cfe-convertible-heavy-blaster-pistol-image-46f63ce3.webp",
+      "sound": null,
+      "wiki": "A280-CFE convertible heavy blaster pistol",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
       "id": "a280c",
       "name": "A280C",
       "image": "media/a280c-image-f9abeb7f.webp",
       "sound": "media/a280c-sound-51d1ed83.wav",
       "createdAt": "2026-09-26T21:19:22.940Z",
       "updatedAt": "2026-09-30T03:33:37.628Z"
+    },
+    {
+      "id": "ad-616k6ka",
+      "name": "AD-616K6KA",
+      "image": "media/ad-616k6ka-image-3601a6eb.webp",
+      "sound": null,
+      "wiki": "AD-616K6KA",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
     },
     {
       "id": "bo-rifle",
@@ -179,6 +206,15 @@
       "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
+      "id": "galaar-15-blaster-carbine",
+      "name": "GALAAR-15 Blaster Carbine",
+      "image": "media/galaar-15-blaster-carbine-image-82671412.webp",
+      "sound": null,
+      "wiki": "GALAAR-15 blaster carbine",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
       "id": "glie-44-blaster-pistol",
       "name": "Glie-44 Blaster Pistol",
       "image": "media/glie-44-blaster-pistol-image-294bc114.webp",
@@ -204,6 +240,15 @@
       "wiki": "Ion blaster",
       "createdAt": "2026-10-02T03:40:25.774Z",
       "updatedAt": "2026-10-02T03:40:25.774Z"
+    },
+    {
+      "id": "jyn-erso-s-blaster",
+      "name": "Jyn Erso's Blaster",
+      "image": "media/jyn-erso-s-blaster-image-0dc95d4f.webp",
+      "sound": null,
+      "wiki": "Jyn Erso's blaster",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
     },
     {
       "id": "k-16-bryar-pistol",
@@ -257,6 +302,33 @@
       "wiki": "Pao's rifle",
       "createdAt": "2026-10-02T03:40:20.196Z",
       "updatedAt": "2026-10-02T03:40:20.196Z"
+    },
+    {
+      "id": "relby-v10-micro-grenade-launcher",
+      "name": "Relby-V10 Micro Grenade Launcher",
+      "image": "media/relby-v10-micro-grenade-launcher-image-435e9011.webp",
+      "sound": null,
+      "wiki": "Relby-v10 micro grenade launcher",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "rey-s-blaster",
+      "name": "Rey's Blaster",
+      "image": "media/rey-s-blaster-image-c8d11b02.webp",
+      "sound": null,
+      "wiki": "Rey's blaster",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "rk-3-blaster",
+      "name": "RK-3 Blaster",
+      "image": "media/rk-3-blaster-image-8e3e40ca.webp",
+      "sound": null,
+      "wiki": "RK-3 blaster",
+      "createdAt": "2026-10-02T03:40:31.534Z",
+      "updatedAt": "2026-10-02T03:40:31.534Z"
     },
     {
       "id": "se-14r-light-repeating-blaster",
