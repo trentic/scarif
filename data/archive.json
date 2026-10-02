@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:40:37.270Z",
+  "updatedAt": "2026-10-02T03:40:43.326Z",
   "entries": [
     {
       "id": "huttsplitter-blaster-rifle",
@@ -135,6 +135,24 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "dx-2-disruptor-blaster-pistol",
+      "name": "DX-2 Disruptor Blaster Pistol",
+      "image": "media/dx-2-disruptor-blaster-pistol-image-4595275a.webp",
+      "sound": null,
+      "wiki": "DX-2 disruptor blaster pistol",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "e-10-blaster-rifle",
+      "name": "E-10 Blaster Rifle",
+      "image": "media/e-10-blaster-rifle-image-8a532e88.webp",
+      "sound": null,
+      "wiki": "E-10 blaster rifle",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
       "id": "e-11",
       "name": "E-11",
       "image": "media/e-11-image-507659f3.webp",
@@ -251,6 +269,15 @@
       "updatedAt": "2026-10-02T03:40:37.269Z"
     },
     {
+      "id": "hk8-sawtooth",
+      "name": "HK8 Sawtooth",
+      "image": "media/hk8-sawtooth-image-9c8ea71f.webp",
+      "sound": null,
+      "wiki": "HK8 Sawtooth",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
       "id": "ib-94-blaster",
       "name": "IB-94 Blaster",
       "image": "media/ib-94-blaster-image-a0c3cf82.webp",
@@ -305,6 +332,15 @@
       "updatedAt": "2026-10-02T03:40:20.196Z"
     },
     {
+      "id": "kyd-21-blaster-pistol",
+      "name": "KYD-21 Blaster Pistol",
+      "image": "media/kyd-21-blaster-pistol-image-ccb988f6.webp",
+      "sound": null,
+      "wiki": "KYD-21 blaster pistol",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
       "id": "lightsaber-blaster-hybrid",
       "name": "Lightsaber-Blaster Hybrid",
       "image": "media/lightsaber-blaster-hybrid-image-22d5fb39.webp",
@@ -312,6 +348,15 @@
       "wiki": "Lightsaber-blaster hybrid",
       "createdAt": "2026-10-02T03:40:37.269Z",
       "updatedAt": "2026-10-02T03:40:37.269Z"
+    },
+    {
+      "id": "m-300-hunting-blaster",
+      "name": "M-300 Hunting Blaster",
+      "image": "media/m-300-hunting-blaster-image-9249bc4c.webp",
+      "sound": null,
+      "wiki": "M-300 hunting blaster",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
     },
     {
       "id": "mt2-blaster-pistol",
@@ -383,6 +428,24 @@
       "wiki": "RK-3 blaster",
       "createdAt": "2026-10-02T03:40:31.534Z",
       "updatedAt": "2026-10-02T03:40:31.534Z"
+    },
+    {
+      "id": "s-5-security-grade-blaster-ascension-gun",
+      "name": "S-5 Security-Grade Blaster/ascension Gun",
+      "image": "media/s-5-security-grade-blaster-ascension-gun-image-d6f7e7e7.webp",
+      "sound": null,
+      "wiki": "S-5 Security-grade blaster/ascension gun",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
+    },
+    {
+      "id": "scattergun",
+      "name": "Scattergun",
+      "image": "media/scattergun-image-45bba77b.webp",
+      "sound": null,
+      "wiki": "Scattergun",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
     },
     {
       "id": "se-14r-light-repeating-blaster",
@@ -472,6 +535,15 @@
       "wiki": "WESTAR-35 blaster pistol",
       "createdAt": "2026-10-02T03:40:14.440Z",
       "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "x-8-night-sniper",
+      "name": "X-8 Night Sniper",
+      "image": "media/x-8-night-sniper-image-5ea84f89.webp",
+      "sound": null,
+      "wiki": "X-8 Night Sniper",
+      "createdAt": "2026-10-02T03:40:43.326Z",
+      "updatedAt": "2026-10-02T03:40:43.326Z"
     }
   ]
 }
