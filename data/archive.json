@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:40:08.676Z",
+  "updatedAt": "2026-10-02T03:40:14.440Z",
   "entries": [
     {
       "id": "a280c",
@@ -10,6 +10,15 @@
       "updatedAt": "2026-09-30T03:33:37.628Z"
     },
     {
+      "id": "boiler-rifle",
+      "name": "Boiler Rifle",
+      "image": "media/boiler-rifle-image-4cd1465e.webp",
+      "sound": null,
+      "wiki": "Boiler rifle",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
       "id": "dc-15a-blaster-carbine",
       "name": "DC-15A Blaster Carbine",
       "image": "media/dc-15a-blaster-carbine-image-d1a82bfe.webp",
@@ -17,6 +26,33 @@
       "wiki": "DC-15A blaster carbine",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "dc-17-repeater-hand-blaster",
+      "name": "DC-17 Repeater Hand Blaster",
+      "image": "media/dc-17-repeater-hand-blaster-image-11d410ac.webp",
+      "sound": null,
+      "wiki": "DC-17 repeater hand blaster",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "dh-17-blaster-pistol",
+      "name": "DH-17 Blaster Pistol",
+      "image": "media/dh-17-blaster-pistol-image-81280152.webp",
+      "sound": null,
+      "wiki": "DH-17 blaster pistol",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "dl-18-blaster-pistol",
+      "name": "DL-18 Blaster Pistol",
+      "image": "media/dl-18-blaster-pistol-image-5571e974.webp",
+      "sound": null,
+      "wiki": "DL-18 blaster pistol",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
       "id": "dl-44",
@@ -71,6 +107,24 @@
       "updatedAt": "2026-10-02T03:40:08.676Z"
     },
     {
+      "id": "ezra-bridger-s-first-lightsaber",
+      "name": "Ezra Bridger's First Lightsaber",
+      "image": "media/ezra-bridger-s-first-lightsaber-image-cbe467ad.webp",
+      "sound": null,
+      "wiki": "Ezra Bridger's first lightsaber",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
+      "id": "f-11d-blaster-rifle",
+      "name": "F-11D Blaster Rifle",
+      "image": "media/f-11d-blaster-rifle-image-917d7fca.webp",
+      "sound": null,
+      "wiki": "F-11D blaster rifle",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
+    },
+    {
       "id": "ib-94-blaster",
       "name": "IB-94 Blaster",
       "image": "media/ib-94-blaster-image-a0c3cf82.webp",
@@ -78,6 +132,15 @@
       "wiki": "IB-94 blaster",
       "createdAt": "2026-10-02T03:40:08.676Z",
       "updatedAt": "2026-10-02T03:40:08.676Z"
+    },
+    {
+      "id": "mt2-blaster-pistol",
+      "name": "MT2 Blaster Pistol",
+      "image": "media/mt2-blaster-pistol-image-71c55ff5.webp",
+      "sound": null,
+      "wiki": "MT2 blaster pistol",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
     },
     {
       "id": "nt-242",
@@ -112,6 +175,15 @@
       "sound": "media/tl-50-heavy-repeater-sound-6b32ce99.wav",
       "createdAt": "2026-09-26T21:13:06.082Z",
       "updatedAt": "2026-09-26T21:13:06.082Z"
+    },
+    {
+      "id": "westar-35-blaster-pistol",
+      "name": "WESTAR-35 Blaster Pistol",
+      "image": "media/westar-35-blaster-pistol-image-ec3242ae.webp",
+      "sound": null,
+      "wiki": "WESTAR-35 blaster pistol",
+      "createdAt": "2026-10-02T03:40:14.440Z",
+      "updatedAt": "2026-10-02T03:40:14.440Z"
     }
   ]
 }
