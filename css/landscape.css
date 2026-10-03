@@ -161,3 +161,4 @@ body.side-green { background: #00b140; }
 .layout-43 .results.has-board .big small { font-size: 80px; }
 .layout-43 .results.has-board .chat-board li { font-size: 30px; padding: 8px 22px; }
 .layout-43 .results.has-board .actions { grid-area: actions; justify-self: center; }
+.layout-43 .wv-modes .seg button { min-height: 64px; font-size: 28px; padding: 0 22px; }

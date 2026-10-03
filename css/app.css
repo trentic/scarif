@@ -1028,3 +1028,9 @@ body {
 .results.has-board .chat-board ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .results.has-board .chat-board li { font-size: 28px; padding: 6px 18px; gap: 12px; }
 .results.has-board .chat-board li::before { width: 26px; }
+
+/* Who Would Win? matchup modes (lobby) */
+.wv-modes { margin-bottom: 40px; }
+.wv-modes .seg { flex-wrap: wrap; gap: 14px; }
+.wv-modes .seg button { min-height: 76px; font-size: 32px; }
+.wv-modes .seg button:disabled { opacity: 0.35; cursor: not-allowed; }

@@ -1,11 +1,12 @@
-// "Who Would Win?": two random characters (any side vs any side), tap the one
-// you think wins. It's opinion only; after each pick the fan split is shown.
+// "Who Would Win?": two characters, tap the one you think wins. It's opinion
+// only; after each pick the fan split is shown. Modes pick who fights whom
+// (anyone, Jedi vs Sith, Jedi only, Sith only, close fights).
 import * as chat from '../chat.js';
 import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
 import { SIDES } from '../registry.js';
 import { sfx } from '../sfx.js';
-import { h, iconButton, shuffle, wait } from '../ui.js';
+import { h, iconButton, wait } from '../ui.js';
 import { record, split, splitLabel } from '../votes.js';
 
 const AUTO_NEXT_MS = 2600;
@@ -19,34 +20,93 @@ const RANKS = [
   [0, 'Certified Contrarian', 'Did you pick the underdog every time?'],
 ];
 
+// --- modes ------------------------------------------------------------------------------
+
+const MODE_KEY = 'scarif.wvw.mode';
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+};
+
+const bySide = (pool, side) => pool.filter((c) => c.side === side);
+function everyPair(list) {
+  const out = [];
+  for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) out.push([list[i], list[j]]);
+  return out;
+}
+// Matchups with similar fan power: start strict and widen until there are enough.
+function closePairs(pool) {
+  const all = everyPair(pool);
+  const want = Math.min(12, all.length);
+  for (const gap of [5, 8, 12, 18, 100]) {
+    const pairs = all.filter(([a, b]) => Math.abs((a.power || 50) - (b.power || 50)) <= gap);
+    if (pairs.length >= want) return pairs;
+  }
+  return all;
+}
+
+// pairs(pool) → [[a, b], …]. `fixed` keeps a on top (red) and b on the bottom
+// (blue); otherwise each matchup is flipped at random.
+export const MODES = [
+  { id: 'mixed', label: '🎲 Anyone', title: 'Who would win?', pairs: (pool) => everyPair(pool) },
+  {
+    id: 'jvs', label: '⚔️ Jedi vs Sith', title: 'Jedi vs Sith', fixed: true,
+    // Sith on red (1), Jedi on blue (2).
+    pairs: (pool) => bySide(pool, 'sith').flatMap((s) => bySide(pool, 'jedi').map((j) => [s, j])),
+  },
+  { id: 'jedi', label: 'Jedi only', title: 'Jedi vs Jedi', pairs: (pool) => everyPair(bySide(pool, 'jedi')) },
+  { id: 'sith', label: 'Sith only', title: 'Sith vs Sith', pairs: (pool) => everyPair(bySide(pool, 'sith')) },
+  { id: 'close', label: '🔥 Close fights', title: 'Close fight', pairs: closePairs },
+];
+
+function currentMode(pool) {
+  const saved = MODES.find((m) => m.id === store.get(MODE_KEY));
+  return saved && saved.pairs(pool).length ? saved : MODES[0];
+}
+const fighters = (pairs) => new Set(pairs.flat().map((c) => c.id)).size;
+
 // Uses the Rounds setting; "All" (0) means unlimited matchups here.
-export function lobby({ pool, settings }) {
+export function lobby({ pool, settings, refresh }) {
   const length = settings.rounds;
+  const mode = currentMode(pool);
+  const pairs = mode.pairs(pool);
+  const extra = pool.length >= 2 && h('div', { class: 'hl-choose wv-modes' },
+    h('div', { class: 'title' }, 'Matchups'),
+    h('div', { class: 'seg' }, MODES.map((m) => {
+      const n = m.pairs(pool).length;
+      return h('button', {
+        'aria-pressed': String(m.id === mode.id),
+        disabled: !n || null,
+        title: n ? null : 'Not enough characters for this mode yet',
+        onclick: () => { store.set(MODE_KEY, m.id); refresh(); },
+      }, m.label);
+    })),
+  );
   return {
+    ready: pairs.length > 0,
+    extra,
     notReady: 'Needs 2 characters with a picture. Add pictures in debug mode → Characters.',
-    facts: `${length ? `${length} matchups` : 'Unlimited matchups'} · ${pool.length} fighters · no wrong answers`,
+    facts: `${mode.id === 'mixed' ? 'Anyone vs anyone' : mode.title} · ${length ? `${length} matchups` : 'unlimited matchups'} · ${fighters(pairs)} fighters`,
   };
 }
 
-// Random pairs on demand: no repeated matchup until every pairing has been
-// used, and nobody fights twice in a row when there are enough characters.
-function pairer(pool) {
-  const maxPairs = (pool.length * (pool.length - 1)) / 2;
-  const seen = new Set();
+// Picks matchups from `pairs` on demand: no repeats until every matchup has
+// been used, and nobody fights twice in a row when it can be avoided.
+function pairer(pairs, fixed) {
+  let unused = [];
   let prev = new Set();
   return () => {
-    if (seen.size >= maxPairs) seen.clear();
-    for (let tries = 0; tries < 500; tries++) {
-      const [a, b] = shuffle(pool);
-      const key = [a.id, b.id].sort().join('|');
-      if (seen.has(key)) continue;
-      if (pool.length >= 4 && tries < 400 && (prev.has(a.id) || prev.has(b.id))) continue;
-      seen.add(key);
-      prev = new Set([a.id, b.id]);
-      return [a, b];
+    if (!unused.length) unused = [...pairs];
+    let idx = -1;
+    for (let tries = 0; tries < 80; tries++) {
+      const i = Math.floor(Math.random() * unused.length);
+      const [a, b] = unused[i];
+      if (!prev.has(a.id) && !prev.has(b.id)) { idx = i; break; }
     }
-    const [a, b] = shuffle(pool);
-    return [a, b];
+    if (idx < 0) idx = Math.floor(Math.random() * unused.length);
+    const [pair] = unused.splice(idx, 1);
+    prev = new Set([pair[0].id, pair[1].id]);
+    return fixed || Math.random() < 0.5 ? [pair[0], pair[1]] : [pair[1], pair[0]];
   };
 }
 
@@ -65,16 +125,20 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   const exit = () => { stop(); onExit(); };
 
   const total = settings.rounds; // 0 ("All") = unlimited
-  const nextPair = pairer(pool);
+  const mode = currentMode(pool);
+  const pairs = mode.pairs(pool);
+  const nextPair = pairer(pairs, mode.fixed);
+  const sideMode = mode.id === 'mixed' || mode.id === 'jvs';
   let played = 0;
   let finishing = false; // "Finish" tapped in unlimited mode
-  pool.forEach((c) => { new Image().src = c.image; });
+  new Set(pairs.flat()).forEach((c) => { new Image().src = c.image; });
 
   keyHandler = (e) => e.key === 'Escape' && exit();
   if (!(await countdown(stage, () => alive))) return;
 
   let agreed = 0;
   const picks = { jedi: 0, sith: 0 };
+  let underdogs = 0; // picked the one with less fan power
 
   for (let i = 0; alive && (total === 0 || i < total) && !finishing; i++) {
     const result = await round(i, nextPair());
@@ -151,7 +215,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           h('button', { class: 'btn ghost wv-finish', onclick: () => endRun() }, 'Finish'),
         ),
         h('div', { class: 'hud' },
-          h('div', { class: 'wv-title' }, 'Who would win?'),
+          h('div', { class: 'wv-title' }, mode.title),
           h('span', { class: 'pill' }, total ? `${index + 1} / ${total}` : `#${index + 1}`),
         ),
         timer,
@@ -213,6 +277,8 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           (pick === a ? top : bottom).el.classList.add('picked');
           (pick === a ? bottom : top).el.classList.add('not-picked');
           picks[pick.side] = (picks[pick.side] || 0) + 1;
+          const other = pick === a ? b : a;
+          if ((pick.power || 50) < (other.power || 50)) underdogs++;
           record(a, b, pick);
           sfx.choose();
         }
@@ -295,10 +361,10 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       caption: 'picks matched the fan favourite',
       rank,
       blurb,
-      stats: [
-        [`${picks.jedi || 0}`, 'Jedi picks'],
-        [`${picks.sith || 0}`, 'Sith picks'],
-      ],
+      // Jedi/Sith picks only mean something when both sides are fighting.
+      stats: sideMode
+        ? [[`${picks.jedi || 0}`, 'Jedi picks'], [`${picks.sith || 0}`, 'Sith picks']]
+        : [[`${underdogs}`, 'Underdog picks'], [`${played}`, 'Matchups']],
       cta: 'Who would YOU pick? 👇',
       onMenu: exit,
       onReplay: replay,
