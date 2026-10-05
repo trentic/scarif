@@ -237,6 +237,7 @@ async function showLobby(gameId) {
       onExit: () => { location.hash = '#/'; },
       onReplay: start,
     };
+    playing = true;
     chat.startGame(); // read chat only while a game is running
     if (mod.run) mod.run(opts);
     else runGame({ ...opts, renderer: mod.renderer });
@@ -248,10 +249,35 @@ async function showLobby(gameId) {
 function route() {
   stopCurrent();
   stopCurrent = () => {};
+  playing = false;
+  if (updateReady) { location.reload(); return; }
   const m = location.hash.match(/^#\/play\/([\w-]+)/);
   if (m) showLobby(m[1]);
   else showHub();
 }
+
+// --- updates ------------------------------------------------------------------------------
+// An open tab keeps running the code it loaded. Check for a new version every
+// couple of minutes and reload when it's safe: on the menu or a lobby, never
+// mid-game (a running game reloads when you leave it).
+let playing = false;
+let updateReady = false;
+const reloadIfSafe = () => {
+  if (updateReady && !playing && !stage.querySelector('.drawer')) location.reload();
+};
+async function checkForUpdate() {
+  if (!window.SCARIF_VERSION || updateReady) return;
+  try {
+    const res = await fetch(`version.json?t=${Date.now()}`, { cache: 'no-store' });
+    const { v } = await res.json();
+    if (v && v !== window.SCARIF_VERSION) {
+      updateReady = true;
+      reloadIfSafe();
+    }
+  } catch {}
+}
+setInterval(checkForUpdate, 2 * 60 * 1000);
+document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && checkForUpdate());
 
 window.addEventListener('hashchange', route);
 route();

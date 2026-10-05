@@ -180,3 +180,7 @@ npm start   # http://localhost:8080 — no install needed (Node 20+)
 ```
 
 Debug mode works on `localhost` too, and it commits to the real repository set in [`config.js`](config.js).
+
+## Updates and caching
+
+Scripts and styles load as `file.js?v=<hash>` using `version.json`, so browsers fetch a file again as soon as it changes. Open tabs check for a new version every 2 minutes (and when you switch back to the tab) and reload on the menu or a lobby, never mid-game. After changing code, run `npm run stamp` to refresh `version.json` (or install the git hook once with `sh scripts/install-hooks.sh`, which does it on every commit).

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Star Wars mini-game hub built for vertical content recording",
   "scripts": {
-    "start": "node scripts/serve.mjs"
+    "start": "node scripts/serve.mjs",
+    "stamp": "node scripts/stamp-version.mjs"
   },
   "repository": {
     "type": "git",

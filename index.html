@@ -6,14 +6,29 @@
   <meta name="theme-color" content="#04060a">
   <title>Scarif · Blaster Archives</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/landscape.css">
 </head>
 <body>
   <div id="viewport">
     <main id="stage" class="accent-red"></main>
   </div>
-  <script type="module" src="js/app.js"></script>
+  <script>
+    // Loads scripts and styles as file?v=<hash> (from version.json), so the
+    // browser always fetches a file again once it changes. An import map does
+    // the same for every module the entry script imports.
+    (async () => {
+      const root = new URL('./', location.href);
+      let info = { files: {} };
+      try { info = await (await fetch(new URL(`version.json?t=${Date.now()}`, root), { cache: 'no-store' })).json(); } catch {}
+      window.SCARIF_VERSION = info.v || null;
+      const url = (p) => new URL(p, root).href + (info.files?.[p] ? `?v=${info.files[p]}` : '');
+      const imports = {};
+      for (const p of Object.keys(info.files || {})) if (p.endsWith('.js')) imports[new URL(p, root).href] = url(p);
+      document.head.append(Object.assign(document.createElement('script'), { type: 'importmap', textContent: JSON.stringify({ imports }) }));
+      await Promise.all(['css/theme.css', 'css/app.css', 'css/landscape.css'].map((p) => new Promise((done) => {
+        document.head.append(Object.assign(document.createElement('link'), { rel: 'stylesheet', href: url(p), onload: done, onerror: done }));
+      })));
+      import(new URL('js/app.js', root).href);
+    })();
+  </script>
 </body>
 </html>
