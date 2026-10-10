@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T04:47:38.944Z",
+  "updatedAt": "2026-10-10T04:47:44.694Z",
   "entries": [
     {
       "id": "1-jac",
@@ -40,6 +40,16 @@
       "wiki": "Ajunta Pall"
     },
     {
+      "id": "amanaman",
+      "name": "Amanaman",
+      "side": "hunter",
+      "power": 77,
+      "image": "media/characters/amanaman-0e7de54e.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Amanaman"
+    },
+    {
       "id": "anakin-skywalker",
       "name": "Anakin Skywalker",
       "side": "jedi",
@@ -56,6 +66,16 @@
       "image": "media/characters/asajj-ventress-32af3a25.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:04:33.444Z"
+    },
+    {
+      "id": "auromae-iselo",
+      "name": "Auromae Iselo",
+      "side": "hunter",
+      "power": 76,
+      "image": "media/characters/auromae-iselo-f4ed1ef8.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Auromae Iselo"
     },
     {
       "id": "aurra-sing",
@@ -127,6 +147,16 @@
       "updatedAt": "2026-09-30T04:05:03.626Z"
     },
     {
+      "id": "cassilyda-cryar",
+      "name": "Cassilyda Cryar",
+      "side": "hunter",
+      "power": 76,
+      "image": "media/characters/cassilyda-cryar-6fcca8e1.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Cassilyda Cryar"
+    },
+    {
       "id": "cato-parasitti",
       "name": "Cato Parasitti",
       "side": "hunter",
@@ -154,6 +184,16 @@
       "createdAt": "2026-10-10T04:47:27.393Z",
       "updatedAt": "2026-10-10T04:47:27.393Z",
       "wiki": "Chanath Cha"
+    },
+    {
+      "id": "chio-fain",
+      "name": "Chio Fain",
+      "side": "hunter",
+      "power": 76,
+      "image": "media/characters/chio-fain-d5b46949.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Chio Fain"
     },
     {
       "id": "count-dooku",
@@ -798,6 +838,16 @@
       "wiki": "Raam"
     },
     {
+      "id": "rako-hardeen",
+      "name": "Rako Hardeen",
+      "side": "hunter",
+      "power": 75,
+      "image": "media/characters/rako-hardeen-f623c2b8.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Rako Hardeen"
+    },
+    {
       "id": "remulus-dreypa",
       "name": "Remulus Dreypa",
       "side": "sith",
@@ -896,6 +946,16 @@
       "wiki": "Second Sister"
     },
     {
+      "id": "seripas",
+      "name": "Seripas",
+      "side": "hunter",
+      "power": 75,
+      "image": "media/characters/seripas-8c72a5db.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Seripas"
+    },
+    {
       "id": "shaak-ti",
       "name": "Shaak Ti",
       "side": "jedi",
@@ -903,6 +963,16 @@
       "image": "media/characters/shaak-ti-41ef478e.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:15:27.466Z"
+    },
+    {
+      "id": "shahan-alama",
+      "name": "Shahan Alama",
+      "side": "hunter",
+      "power": 77,
+      "image": "media/characters/shahan-alama-9f0848e9.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Shahan Alama"
     },
     {
       "id": "shar-dakhan",
@@ -1031,6 +1101,16 @@
       "createdAt": "2026-10-02T03:26:09.023Z",
       "updatedAt": "2026-10-02T03:26:09.023Z",
       "wiki": "Vanzell Mar-Klar"
+    },
+    {
+      "id": "vivert-stag",
+      "name": "Vivert Stag",
+      "side": "hunter",
+      "power": 74,
+      "image": "media/characters/vivert-stag-310961db.webp",
+      "createdAt": "2026-10-10T04:47:44.694Z",
+      "updatedAt": "2026-10-10T04:47:44.694Z",
+      "wiki": "Vivert Stag"
     },
     {
       "id": "vukorah",
