@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:10:40.691Z",
+  "updatedAt": "2026-10-10T05:10:46.747Z",
   "entries": [
     {
       "id": "1-jac",
@@ -138,6 +138,16 @@
       "wiki": "Bichan"
     },
     {
+      "id": "big-mouth",
+      "name": "Big-Mouth",
+      "side": "clone",
+      "power": 52,
+      "image": "media/characters/big-mouth-b721a064.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Big-Mouth"
+    },
+    {
       "id": "bly",
       "name": "Bly",
       "side": "clone",
@@ -254,6 +264,16 @@
       "createdAt": "2026-10-10T05:10:40.691Z",
       "updatedAt": "2026-10-10T05:10:40.691Z",
       "wiki": "Clone 99"
+    },
+    {
+      "id": "colt",
+      "name": "Colt",
+      "side": "clone",
+      "power": 51,
+      "image": "media/characters/colt-36946fb5.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Colt"
     },
     {
       "id": "comet",
@@ -524,6 +544,16 @@
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-10-02T03:37:32.744Z",
       "wiki": "Darth Zannah"
+    },
+    {
+      "id": "davijaan",
+      "name": "Davijaan",
+      "side": "clone",
+      "power": 52,
+      "image": "media/characters/davijaan-02f85d67.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Davijaan"
     },
     {
       "id": "denal",
@@ -1121,6 +1151,16 @@
       "wiki": "Neimoidian battle droid"
     },
     {
+      "id": "neyo",
+      "name": "Neyo",
+      "side": "clone",
+      "power": 55,
+      "image": "media/characters/neyo-cfd99c31.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Neyo"
+    },
+    {
       "id": "obi-wan-kenobi",
       "name": "Obi-Wan Kenobi",
       "side": "jedi",
@@ -1235,6 +1275,16 @@
       "image": "media/characters/rey-ee5bff7a.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:15:43.477Z"
+    },
+    {
+      "id": "ridge",
+      "name": "Ridge",
+      "side": "clone",
+      "power": 52,
+      "image": "media/characters/ridge-5fde34c7.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Ridge"
     },
     {
       "id": "rorr-hn-of-drgi",
@@ -1425,6 +1475,16 @@
       "wiki": "Snoke"
     },
     {
+      "id": "sp-113",
+      "name": "SP-113",
+      "side": "clone",
+      "power": 51,
+      "image": "media/characters/sp-113-0d8d4bf3.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "SP-113"
+    },
+    {
       "id": "starkiller",
       "name": "Starkiller",
       "side": "sith",
@@ -1513,6 +1573,16 @@
       "wiki": "Thire"
     },
     {
+      "id": "thorn",
+      "name": "Thorn",
+      "side": "clone",
+      "power": 51,
+      "image": "media/characters/thorn-3ea0d797.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Thorn"
+    },
+    {
       "id": "toro-calican",
       "name": "Toro Calican",
       "side": "hunter",
@@ -1591,6 +1661,16 @@
       "createdAt": "2026-10-10T04:47:33.092Z",
       "updatedAt": "2026-10-10T04:47:33.092Z",
       "wiki": "Vukorah"
+    },
+    {
+      "id": "waxer",
+      "name": "Waxer",
+      "side": "clone",
+      "power": 56,
+      "image": "media/characters/waxer-f700a4b2.webp",
+      "createdAt": "2026-10-10T05:10:46.747Z",
+      "updatedAt": "2026-10-10T05:10:46.747Z",
+      "wiki": "Waxer"
     },
     {
       "id": "wildfire",
