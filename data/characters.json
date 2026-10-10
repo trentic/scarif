@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:04:07.651Z",
+  "updatedAt": "2026-10-10T05:04:14.203Z",
   "entries": [
     {
       "id": "1-jac",
@@ -57,6 +57,16 @@
       "image": "media/characters/anakin-skywalker-2835f381.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:04:10.186Z"
+    },
+    {
+      "id": "annihilator-droid",
+      "name": "Annihilator droid",
+      "side": "droid",
+      "power": 38,
+      "image": "media/characters/annihilator-droid-bf5ff3cf.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Annihilator droid"
     },
     {
       "id": "aq-series-battle-droid",
@@ -496,6 +506,16 @@
       "wiki": "Dogma"
     },
     {
+      "id": "droid-laser-turret",
+      "name": "Droid laser turret",
+      "side": "droid",
+      "power": 35,
+      "image": "media/characters/droid-laser-turret-1e12be56.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Droid laser turret (Primacy)"
+    },
+    {
       "id": "droid-starfighter",
       "name": "Droid starfighter",
       "side": "droid",
@@ -504,6 +524,16 @@
       "createdAt": "2026-10-10T05:04:07.651Z",
       "updatedAt": "2026-10-10T05:04:07.651Z",
       "wiki": "Droid starfighter"
+    },
+    {
+      "id": "droid-tank",
+      "name": "Droid tank",
+      "side": "droid",
+      "power": 44,
+      "image": "media/characters/droid-tank-26e27d22.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Droid tank"
     },
     {
       "id": "droideka",
@@ -626,6 +656,16 @@
       "wiki": "Greedo"
     },
     {
+      "id": "greer",
+      "name": "Greer",
+      "side": "clone",
+      "power": 62,
+      "image": "media/characters/greer-91ad95ae.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Greer"
+    },
+    {
       "id": "grogu",
       "name": "Grogu",
       "side": "jedi",
@@ -655,6 +695,16 @@
       "wiki": "Hardcase"
     },
     {
+      "id": "hawkeye",
+      "name": "Hawkeye",
+      "side": "clone",
+      "power": 73,
+      "image": "media/characters/hawkeye-0aafd2a4.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Hawkeye"
+    },
+    {
       "id": "heater",
       "name": "Heater",
       "side": "clone",
@@ -663,6 +713,16 @@
       "createdAt": "2026-10-10T05:04:00.794Z",
       "updatedAt": "2026-10-10T05:04:00.794Z",
       "wiki": "Heater (clone trooper)"
+    },
+    {
+      "id": "ig-lancer-droid",
+      "name": "IG lancer droid",
+      "side": "droid",
+      "power": 61,
+      "image": "media/characters/ig-lancer-droid-9137397c.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "IG lancer droid"
     },
     {
       "id": "ig-100-magnaguard",
@@ -1018,6 +1078,16 @@
       "wiki": "Rako Hardeen"
     },
     {
+      "id": "raxus-droid",
+      "name": "Raxus Droid",
+      "side": "droid",
+      "power": 40,
+      "image": "media/characters/raxus-droid-577c1f94.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Raxus Droid"
+    },
+    {
       "id": "remulus-dreypa",
       "name": "Remulus Dreypa",
       "side": "sith",
@@ -1281,6 +1351,16 @@
       "createdAt": "2026-10-10T04:47:38.944Z",
       "updatedAt": "2026-10-10T04:47:38.944Z",
       "wiki": "Toro Calican"
+    },
+    {
+      "id": "trick",
+      "name": "Trick",
+      "side": "clone",
+      "power": 72,
+      "image": "media/characters/trick-50e60b9e.webp",
+      "createdAt": "2026-10-10T05:04:14.202Z",
+      "updatedAt": "2026-10-10T05:04:14.202Z",
+      "wiki": "Trick"
     },
     {
       "id": "tulak-hord",
