@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:04:00.794Z",
+  "updatedAt": "2026-10-10T05:04:07.651Z",
   "entries": [
     {
       "id": "1-jac",
@@ -233,6 +233,16 @@
       "image": "media/characters/count-dooku-1f234494.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:06:01.400Z"
+    },
+    {
+      "id": "crys",
+      "name": "Crys",
+      "side": "clone",
+      "power": 74,
+      "image": "media/characters/crys-02a734b2.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "Crys"
     },
     {
       "id": "cut-lawquane",
@@ -486,6 +496,16 @@
       "wiki": "Dogma"
     },
     {
+      "id": "droid-starfighter",
+      "name": "Droid starfighter",
+      "side": "droid",
+      "power": 76,
+      "image": "media/characters/droid-starfighter-28ed4604.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "Droid starfighter"
+    },
+    {
       "id": "droideka",
       "name": "Droideka",
       "side": "droid",
@@ -504,6 +524,16 @@
       "createdAt": "2026-10-10T04:47:27.393Z",
       "updatedAt": "2026-10-10T04:47:27.393Z",
       "wiki": "Durge"
+    },
+    {
+      "id": "e-xd-series-infiltrator-droid",
+      "name": "E-XD-series infiltrator droid",
+      "side": "droid",
+      "power": 78,
+      "image": "media/characters/e-xd-series-infiltrator-droid-77e0ed1e.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "E-XD-series infiltrator droid"
     },
     {
       "id": "edward-starspeeder",
@@ -783,6 +813,16 @@
       "wiki": "Kyp Durron"
     },
     {
+      "id": "lr-57-combat-retail-droid",
+      "name": "LR-57 combat/retail droid",
+      "side": "droid",
+      "power": 75,
+      "image": "media/characters/lr-57-combat-retail-droid-0afd049c.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "LR-57 combat/retail droid"
+    },
+    {
       "id": "ludo-kressh",
       "name": "Ludo Kressh",
       "side": "sith",
@@ -859,6 +899,16 @@
       "createdAt": "2026-10-10T04:47:38.944Z",
       "updatedAt": "2026-10-10T04:47:38.944Z",
       "wiki": "Mercurial Swift"
+    },
+    {
+      "id": "mixer",
+      "name": "Mixer",
+      "side": "clone",
+      "power": 75,
+      "image": "media/characters/mixer-dc033da0.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "Mixer"
     },
     {
       "id": "naga-sadow",
@@ -1027,6 +1077,16 @@
       "wiki": "Sabine Wren"
     },
     {
+      "id": "samson",
+      "name": "Samson",
+      "side": "clone",
+      "power": 73,
+      "image": "media/characters/samson-76e0ac7a.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "Samson"
+    },
+    {
       "id": "sana-starros",
       "name": "Sana Starros",
       "side": "hunter",
@@ -1142,6 +1202,16 @@
       "image": "media/characters/starkiller-96552ab8.png",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:14:44.898Z"
+    },
+    {
+      "id": "sterling",
+      "name": "Sterling",
+      "side": "clone",
+      "power": 76,
+      "image": "media/characters/sterling-5043161b.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "Sterling"
     },
     {
       "id": "sugi",
@@ -1271,6 +1341,16 @@
       "createdAt": "2026-10-10T04:47:33.092Z",
       "updatedAt": "2026-10-10T04:47:33.092Z",
       "wiki": "Vukorah"
+    },
+    {
+      "id": "wildfire",
+      "name": "Wildfire",
+      "side": "clone",
+      "power": 79,
+      "image": "media/characters/wildfire-cfd002d0.webp",
+      "createdAt": "2026-10-10T05:04:07.651Z",
+      "updatedAt": "2026-10-10T05:04:07.651Z",
+      "wiki": "Wildfire (clone trooper)"
     },
     {
       "id": "wooley",
