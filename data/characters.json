@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T04:47:44.694Z",
+  "updatedAt": "2026-10-10T05:03:53.675Z",
   "entries": [
     {
       "id": "1-jac",
@@ -118,6 +118,16 @@
       "wiki": "Bichan"
     },
     {
+      "id": "boost",
+      "name": "Boost",
+      "side": "clone",
+      "power": 90,
+      "image": "media/characters/boost-4e81268b.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Boost"
+    },
+    {
       "id": "brander-lawson",
       "name": "Brander Lawson",
       "side": "hunter",
@@ -203,6 +213,16 @@
       "image": "media/characters/count-dooku-1f234494.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:06:01.400Z"
+    },
+    {
+      "id": "cut-lawquane",
+      "name": "Cut Lawquane",
+      "side": "clone",
+      "power": 90,
+      "image": "media/characters/cut-lawquane-a846ef3e.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Cut Lawquane"
     },
     {
       "id": "darth-acina",
@@ -426,6 +446,16 @@
       "wiki": "Darth Zannah"
     },
     {
+      "id": "droideka",
+      "name": "Droideka",
+      "side": "droid",
+      "power": 89,
+      "image": "media/characters/droideka-c9fba325.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Droideka"
+    },
+    {
       "id": "durge",
       "name": "Durge",
       "side": "hunter",
@@ -543,6 +573,26 @@
       "createdAt": "2026-10-10T04:47:38.944Z",
       "updatedAt": "2026-10-10T04:47:38.944Z",
       "wiki": "H'Tar"
+    },
+    {
+      "id": "hardcase",
+      "name": "Hardcase",
+      "side": "clone",
+      "power": 88,
+      "image": "media/characters/hardcase-41a88e94.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Hardcase"
+    },
+    {
+      "id": "ig-100-magnaguard",
+      "name": "IG-100 MagnaGuard",
+      "side": "droid",
+      "power": 92,
+      "image": "media/characters/ig-100-magnaguard-4a8ec693.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "IG-100 MagnaGuard"
     },
     {
       "id": "imara-vex",
@@ -769,6 +819,16 @@
       "createdAt": "2026-10-02T03:26:02.871Z",
       "updatedAt": "2026-10-02T03:26:02.871Z",
       "wiki": "Naga Sadow"
+    },
+    {
+      "id": "neimoidian-battle-droid",
+      "name": "Neimoidian battle droid",
+      "side": "droid",
+      "power": 87,
+      "image": "media/characters/neimoidian-battle-droid-d2840bcf.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Neimoidian battle droid"
     },
     {
       "id": "obi-wan-kenobi",
@@ -1091,6 +1151,26 @@
       "createdAt": "2026-10-02T03:25:56.534Z",
       "updatedAt": "2026-10-02T03:25:56.534Z",
       "wiki": "Tulak Hord"
+    },
+    {
+      "id": "tup",
+      "name": "Tup",
+      "side": "clone",
+      "power": 91,
+      "image": "media/characters/tup-bc16d91b.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Tup"
+    },
+    {
+      "id": "umbra",
+      "name": "Umbra",
+      "side": "clone",
+      "power": 87,
+      "image": "media/characters/umbra-e1d2010c.webp",
+      "createdAt": "2026-10-10T05:03:53.675Z",
+      "updatedAt": "2026-10-10T05:03:53.675Z",
+      "wiki": "Umbra"
     },
     {
       "id": "vanzell-mar-klar",
