@@ -1,6 +1,16 @@
 {
-  "updatedAt": "2026-10-10T04:47:27.393Z",
+  "updatedAt": "2026-10-10T04:47:33.092Z",
   "entries": [
+    {
+      "id": "1-jac",
+      "name": "1-JAC",
+      "side": "hunter",
+      "power": 83,
+      "image": "media/characters/1-jac-cd862824.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "1-JAC"
+    },
     {
       "id": "aayla-secura",
       "name": "Aayla Secura",
@@ -465,6 +475,16 @@
       "wiki": "Imara Vex"
     },
     {
+      "id": "j-quille",
+      "name": "J'Quille",
+      "side": "hunter",
+      "power": 84,
+      "image": "media/characters/j-quille-58974886.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "J'Quille"
+    },
+    {
       "id": "jas-emari",
       "name": "Jas Emari",
       "side": "hunter",
@@ -493,6 +513,16 @@
       "createdAt": "2026-10-02T03:26:09.023Z",
       "updatedAt": "2026-10-02T03:26:09.023Z",
       "wiki": "Kane Starkiller"
+    },
+    {
+      "id": "kendoh-voss",
+      "name": "Kendoh Voss",
+      "side": "hunter",
+      "power": 83,
+      "image": "media/characters/kendoh-voss-6b30cda9.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "Kendoh Voss"
     },
     {
       "id": "ketsu-onyo",
@@ -631,6 +661,16 @@
       "wiki": "Marka Ragnos"
     },
     {
+      "id": "mayze-vice",
+      "name": "Mayze Vice",
+      "side": "hunter",
+      "power": 81,
+      "image": "media/characters/mayze-vice-f240da3d.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "Mayze Vice"
+    },
+    {
       "id": "naga-sadow",
       "name": "Naga Sadow",
       "side": "sith",
@@ -757,6 +797,16 @@
       "wiki": "Sana Starros"
     },
     {
+      "id": "sarco-plank",
+      "name": "Sarco Plank",
+      "side": "hunter",
+      "power": 84,
+      "image": "media/characters/sarco-plank-ec9a8e02.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "Sarco Plank"
+    },
+    {
       "id": "savage-opress",
       "name": "Savage Opress",
       "side": "sith",
@@ -824,6 +874,26 @@
       "updatedAt": "2026-09-30T04:14:44.898Z"
     },
     {
+      "id": "sugi",
+      "name": "Sugi",
+      "side": "hunter",
+      "power": 82,
+      "image": "media/characters/sugi-2546fb5a.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "Sugi (bounty hunter)"
+    },
+    {
+      "id": "sy-snootles",
+      "name": "Sy Snootles",
+      "side": "hunter",
+      "power": 82,
+      "image": "media/characters/sy-snootles-396c6ed4.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "Sy Snootles"
+    },
+    {
       "id": "tam-posla",
       "name": "Tam Posla",
       "side": "hunter",
@@ -881,6 +951,16 @@
       "createdAt": "2026-10-02T03:26:09.023Z",
       "updatedAt": "2026-10-02T03:26:09.023Z",
       "wiki": "Vanzell Mar-Klar"
+    },
+    {
+      "id": "vukorah",
+      "name": "Vukorah",
+      "side": "hunter",
+      "power": 82,
+      "image": "media/characters/vukorah-b8c26b05.webp",
+      "createdAt": "2026-10-10T04:47:33.092Z",
+      "updatedAt": "2026-10-10T04:47:33.092Z",
+      "wiki": "Vukorah"
     },
     {
       "id": "x1",
