@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:03:53.675Z",
+  "updatedAt": "2026-10-10T05:04:00.794Z",
   "entries": [
     {
       "id": "1-jac",
@@ -57,6 +57,16 @@
       "image": "media/characters/anakin-skywalker-2835f381.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:04:10.186Z"
+    },
+    {
+      "id": "aq-series-battle-droid",
+      "name": "AQ-series battle droid",
+      "side": "droid",
+      "power": 85,
+      "image": "media/characters/aq-series-battle-droid-668d0539.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "AQ-series battle droid"
     },
     {
       "id": "asajj-ventress",
@@ -204,6 +214,16 @@
       "createdAt": "2026-10-10T04:47:44.694Z",
       "updatedAt": "2026-10-10T04:47:44.694Z",
       "wiki": "Chio Fain"
+    },
+    {
+      "id": "chopper",
+      "name": "Chopper",
+      "side": "clone",
+      "power": 86,
+      "image": "media/characters/chopper-bf904d6c.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Chopper (clone trooper)"
     },
     {
       "id": "count-dooku",
@@ -446,6 +466,26 @@
       "wiki": "Darth Zannah"
     },
     {
+      "id": "denal",
+      "name": "Denal",
+      "side": "clone",
+      "power": 82,
+      "image": "media/characters/denal-b1b027fc.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Denal"
+    },
+    {
+      "id": "dogma",
+      "name": "Dogma",
+      "side": "clone",
+      "power": 86,
+      "image": "media/characters/dogma-7aa03dba.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Dogma"
+    },
+    {
       "id": "droideka",
       "name": "Droideka",
       "side": "droid",
@@ -583,6 +623,16 @@
       "createdAt": "2026-10-10T05:03:53.675Z",
       "updatedAt": "2026-10-10T05:03:53.675Z",
       "wiki": "Hardcase"
+    },
+    {
+      "id": "heater",
+      "name": "Heater",
+      "side": "clone",
+      "power": 81,
+      "image": "media/characters/heater-0565f039.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Heater (clone trooper)"
     },
     {
       "id": "ig-100-magnaguard",
@@ -821,6 +871,16 @@
       "wiki": "Naga Sadow"
     },
     {
+      "id": "nax",
+      "name": "Nax",
+      "side": "clone",
+      "power": 84,
+      "image": "media/characters/nax-ab5ce60a.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Nax"
+    },
+    {
       "id": "neimoidian-battle-droid",
       "name": "Neimoidian battle droid",
       "side": "droid",
@@ -994,6 +1054,16 @@
       "image": "media/characters/savage-opress-eb98e5cf.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:15:10.840Z"
+    },
+    {
+      "id": "scorpenek-annihilator-droid",
+      "name": "Scorpenek annihilator droid",
+      "side": "droid",
+      "power": 84,
+      "image": "media/characters/scorpenek-annihilator-droid-74ee0706.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Scorpenek annihilator droid"
     },
     {
       "id": "second-sister",
@@ -1201,6 +1271,16 @@
       "createdAt": "2026-10-10T04:47:33.092Z",
       "updatedAt": "2026-10-10T04:47:33.092Z",
       "wiki": "Vukorah"
+    },
+    {
+      "id": "wooley",
+      "name": "Wooley",
+      "side": "clone",
+      "power": 80,
+      "image": "media/characters/wooley-523d000c.webp",
+      "createdAt": "2026-10-10T05:04:00.794Z",
+      "updatedAt": "2026-10-10T05:04:00.794Z",
+      "wiki": "Wooley"
     },
     {
       "id": "x1",
