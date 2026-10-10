@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:04:14.203Z",
+  "updatedAt": "2026-10-10T05:04:22.392Z",
   "entries": [
     {
       "id": "1-jac",
@@ -234,6 +234,16 @@
       "createdAt": "2026-10-10T05:04:00.794Z",
       "updatedAt": "2026-10-10T05:04:00.794Z",
       "wiki": "Chopper (clone trooper)"
+    },
+    {
+      "id": "corvax-sentinel",
+      "name": "Corvax Sentinel",
+      "side": "droid",
+      "power": 35,
+      "image": "media/characters/corvax-sentinel-36ffd77e.webp",
+      "createdAt": "2026-10-10T05:04:22.391Z",
+      "updatedAt": "2026-10-10T05:04:22.391Z",
+      "wiki": "Corvax Sentinel"
     },
     {
       "id": "count-dooku",
