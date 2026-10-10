@@ -84,18 +84,67 @@ function toResult(p) {
   };
 }
 
-// Article pages in a category, with their main picture.
-export async function categoryPages(category, { onProgress } = {}) {
+// Subcategories of a category (one level), e.g. Clone troopers → Clone commanders.
+export async function subcategories(category) {
+  const title = `Category:${category.replace(/^category:/i, '').trim()}`;
+  const { pages } = await queryAll({ generator: 'categorymembers', gcmtitle: title, gcmtype: 'subcat', gcmlimit: '500', prop: 'info' }, { max: 200 });
+  return pages.map((p) => p.title.replace(/^Category:/, ''));
+}
+
+// Every article in a category (up to `max`), with its length and Legends flag
+// but no picture yet: big categories (thousands of numbered clone troopers) are
+// read 500 at a time, and pictures are only fetched for the ones shown.
+export async function categoryPages(category, { onProgress, max = 10000 } = {}) {
   const title = `Category:${category.replace(/^category:/i, '').trim()}`;
   const { pages } = await queryAll({
-    generator: 'categorymembers', gcmtitle: title, gcmnamespace: '0', gcmtype: 'page', gcmlimit: '50', ...PAGE_PROPS,
-  }, { max: 3000, onPage: onProgress });
+    generator: 'categorymembers', gcmtitle: title, gcmnamespace: '0', gcmtype: 'page', gcmlimit: '500',
+    prop: 'info|categories', clcategories: LEGENDS, cllimit: 'max',
+  }, { max, onPage: onProgress });
   if (!pages.length) {
     const info = await call({ action: 'query', titles: title, prop: 'categoryinfo' });
     const page = info.query?.pages?.[0];
     if (!page || page.missing) throw new WikiError(`There's no "${title}" on Wookieepedia. Use Find to look up the right name.`);
   }
   return pages.map(toResult);
+}
+
+// Fills in each result's main picture (50 articles per request).
+export async function addPictures(results, { onProgress } = {}) {
+  let done = 0;
+  for (const batch of chunk(results.filter((r) => !r.image), 50)) {
+    const { pages } = await queryAll({ titles: batch.map((r) => r.title).join('|'), prop: 'pageimages', piprop: 'thumbnail', pithumbsize: String(THUMB), pilimit: '50' });
+    const byTitle = new Map(pages.map((p) => [p.title, p]));
+    for (const r of batch) r.image = byTitle.get(r.title)?.thumbnail?.source || null;
+    done += batch.length;
+    onProgress?.(done);
+  }
+  return results;
+}
+
+// Clone troopers' articles are titled by number (CT-7567). Fans know them by
+// nickname, and Wookieepedia redirects those to the article ("Captain Rex",
+// "Rex" → CT-7567), so the most common nickname among the redirects is used.
+const DESIGNATION = /^(CT|CC|ARC|RC|CRC|CS|CP|CF|CX|CN|CRS)-\d/;
+const RANKS = /^(?:(?:Clone|Marshal|Senior|Lieutenant|Sergeant|Captain|Commander|Major|Colonel|Admiral|General|Private|Corporal|Trooper|Lieutenant Commander|ARC|Advanced Recon Commando|Commando|Shock|Fleet)\s+)+/i;
+export const isDesignation = (title) => DESIGNATION.test(title);
+
+export async function nicknames(results) {
+  const out = new Map(); // title → nickname
+  for (const batch of chunk(results.filter((r) => isDesignation(r.title)), 50)) {
+    const { pages } = await queryAll({ titles: batch.map((r) => r.title).join('|'), prop: 'redirects', rdnamespace: '0', rdlimit: 'max' });
+    for (const p of pages) {
+      const votes = new Map();
+      for (const { title } of p.redirects || []) {
+        if (/[\d/()]/.test(title)) continue; // other designations, sub-pages, disambiguations
+        const nick = title.replace(RANKS, '').trim();
+        if (!nick || nick.split(' ').length > 2) continue;
+        votes.set(nick, (votes.get(nick) || 0) + 1);
+      }
+      const best = [...votes].sort((a, b) => b[1] - a[1] || a[0].length - b[0].length)[0];
+      if (best) out.set(p.title, best[0]);
+    }
+  }
+  return out;
 }
 
 // Looks up article names (following redirects, e.g. "Darth Vader" → "Anakin Skywalker").

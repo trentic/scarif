@@ -7,9 +7,14 @@ import { SIDE_IDS, SIDES } from '../js/registry.js';
 import { h } from '../js/ui.js';
 import { addCharacters, setCharacterImages } from './character-store.js';
 import { addEntries, downloadImage } from './store.js';
-import { categoryPages, fillMissingImages, findCategories, lookupTitles, pageUrl, WikiError } from './wookieepedia.js';
+import {
+  addPictures, categoryPages, fillMissingImages, findCategories, lookupTitles, nicknames, pageUrl, subcategories, WikiError,
+} from './wookieepedia.js';
 
 const BATCH = 8; // items per commit
+const SHOW = 300; // most articles shown after a search (the best-known ones)
+// Subcategories that aren't worth reading.
+const SKIP_SUBCAT = /^(Unidentified|Images of|Individuals? (?:who|with)|Legends|Non-canon)\b/i;
 
 // "Maul (Zabrak)" → "Maul"; "Revan/Legends" → "Revan".
 const baseTitle = (title) => title.replace(/\/Legends$/, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
@@ -65,6 +70,9 @@ const KINDS = {
 function modelCodes(name) {
   return String(name).toLowerCase().split(/[\s_/]+/).map((t) => t.replace(/[^a-z0-9]/g, '')).filter((t) => /[a-z]/.test(t) && /\d/.test(t));
 }
+// Fan power from article length (bytes), the same in every search: each
+// doubling adds 10 points. ~3 KB stub → 30 · 12 KB → 50 · 50 KB → 70 · 200 KB → 90.
+const fanPower = (length) => Math.round(Math.max(25, Math.min(95, 30 + 10 * Math.log2(Math.max(length, 1) / 3000))));
 function nameKey(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
 const sideBadge = (side) => h('span', { class: `side-badge ${side}` }, SIDES[side]?.label || side);
 // Next group when a badge is clicked: Jedi → Sith → Bounty Hunter → Jedi…
@@ -93,7 +101,7 @@ async function picture(url) {
 export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuthError, onSaved, findMissing: autoFind = false }) {
   const K = KINDS[kind];
   const prefs = (() => {
-    const defaults = { sources: structuredClone(K.sources), legends: false, top: 40 };
+    const defaults = { sources: structuredClone(K.sources), legends: false, subcats: true, top: 40 };
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem(K.store) || '{}'); } catch {}
     const merged = { ...defaults, ...saved };
@@ -182,6 +190,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
   const pasteSide = sidePicker('jedi');
   const pasteBox = h('textarea', { rows: '4', placeholder: K.paste, spellcheck: 'false' });
   const legends = h('input', { type: 'checkbox', checked: prefs.legends || null, onchange: () => { prefs.legends = legends.checked; savePrefs(); } });
+  const subcats = h('input', { type: 'checkbox', checked: prefs.subcats || null, onchange: () => { prefs.subcats = subcats.checked; savePrefs(); } });
 
   const status = h('div', { class: 'wiki-status' });
   const setStatus = (text, kindClass = '') => { status.className = `wiki-status ${kindClass}`; status.textContent = text; };
@@ -398,12 +407,18 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       found.set(result.pageid, item);
     };
     const problems = [];
+    const pastedIds = new Set();
     try {
       for (const s of prefs.sources) {
         setStatus(`Reading "${s.category}"…`);
         try {
-          const pages = await categoryPages(s.category, { onProgress: (n) => setStatus(`Reading "${s.category}"… ${n}`) });
-          pages.forEach((p) => note(p, s.side));
+          let cats = [s.category];
+          if (prefs.subcats) cats = [...cats, ...(await subcategories(s.category)).filter((c) => !SKIP_SUBCAT.test(c))];
+          for (const cat of cats) {
+            const where = cat === s.category ? `"${cat}"` : `"${s.category}" → "${cat}"`;
+            const pages = await categoryPages(cat, { onProgress: (n) => setStatus(`Reading ${where}… ${n}`) });
+            pages.forEach((p) => note(p, s.side));
+          }
         } catch (err) {
           if (!(err instanceof WikiError) || /reach|replied/.test(err.message)) throw err;
           problems.push(err.message);
@@ -412,19 +427,28 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       if (pasted.length) {
         setStatus(`Looking up ${pasted.length} pasted name${pasted.length === 1 ? '' : 's'}…`);
         const { found: pages, missing } = await lookupTitles(pasted);
-        pages.forEach((p) => note(p, K.sides ? pasteSide.get() : undefined));
+        pages.forEach((p) => { note(p, K.sides ? pasteSide.get() : undefined); pastedIds.add(p.pageid); });
         if (missing.length) problems.push(`Not found on Wookieepedia: ${missing.join(', ')}`);
       }
 
-      let list = [...found.values()].filter(({ result }) => !K.skip.test(result.title) && (prefs.legends || !result.legends));
-      const noPic = list.filter(({ result }) => !result.image);
-      if (noPic.length) {
-        setStatus(`Finding pictures for ${noPic.length} articles…`);
-        await fillMissingImages(noPic.map((x) => x.result), { onProgress: (d, t) => setStatus(`Finding pictures… ${d} / ${t}`) });
-      }
+      // Best-known first (longest articles). Big categories have thousands of
+      // articles, so only the top SHOW (plus anything pasted) get pictures.
+      let list = [...found.values()]
+        .filter(({ result }) => !K.skip.test(result.title) && (prefs.legends || !result.legends))
+        .sort((a, b) => b.result.length - a.result.length);
+      const total = list.length;
+      list = list.filter(({ result }, i) => i < SHOW || pastedIds.has(result.pageid));
+      const hidden = total - list.length;
+      const shown = list.map((x) => x.result);
+      setStatus(`Finding pictures for ${shown.length} articles…`);
+      await addPictures(shown, { onProgress: (d) => setStatus(`Finding pictures… ${d} / ${shown.length}`) });
+      const noPic = shown.filter((r) => !r.image);
+      if (noPic.length) await fillMissingImages(noPic, { onProgress: (d, t) => setStatus(`Looking for more pictures… ${d} / ${t}`) });
       const legendsSkipped = prefs.legends ? 0 : [...found.values()].filter(({ result }) => result.legends).length;
       const withoutPicture = list.filter(({ result }) => !result.image).length;
       list = list.filter(({ result }) => result.image);
+      // Numbered clone troopers → their nickname (CT-7567 → Rex).
+      const nick = K.sides ? await nicknames(list.map((x) => x.result)) : new Map();
 
       // What's already in the archive: match by article (following redirects, so
       // "Darth Vader" in the archive matches the "Anakin Skywalker" article) or by name.
@@ -433,12 +457,8 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       const { from } = await lookupTitles(entries.map((e) => e.wiki || e.name));
       from.forEach((r) => known.add(r.title));
 
-      // Fan power from article length: the longest articles are the best-known characters.
-      const byLength = [...list].sort((a, b) => a.result.length - b.result.length);
-      const rank = new Map(byLength.map(({ result }, i) => [result.pageid, byLength.length > 1 ? i / (byLength.length - 1) : 1]));
-
       for (const { result, sides } of list) {
-        const name = K.name(result.title);
+        const name = nick.get(result.title) || K.name(result.title);
         results.set(result.pageid, {
           ...result,
           name,
@@ -446,8 +466,8 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
           side: [...sides].filter((x) => SIDES[x]).sort((x, y) => SIDES[y].rank - SIDES[x].rank)[0] || 'jedi',
           both: K.sides && sides.size > 1,
           groups: [...sides],
-          power: Math.round(35 + 57 * rank.get(result.pageid) ** 1.4),
-          inArchive: known.has(result.title) || entries.some((e) => K.same(e.name, name)),
+          power: fanPower(result.length),
+          inArchive: known.has(result.title) || entries.some((e) => K.same(e.name, name) || K.same(e.name, result.title)),
           selected: false,
         });
       }
@@ -455,7 +475,12 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       let left = prefs.top;
       for (const r of visible()) r.selected = !r.inArchive && left-- > 0;
 
-      const extra = [legendsSkipped && `${legendsSkipped} Legends articles left out`, withoutPicture && `${withoutPicture} skipped (no picture)`, ...problems].filter(Boolean);
+      const extra = [
+        hidden && `Showing the ${SHOW} best-known of ${total} (paste a name to get anyone else)`,
+        legendsSkipped && `${legendsSkipped} Legends articles left out`,
+        withoutPicture && `${withoutPicture} skipped (no picture)`,
+        ...problems,
+      ].filter(Boolean);
       setStatus(`${results.size ? 'Done.' : 'Nothing found.'}${extra.length ? ` ${extra.join(' · ')}` : ''}`, problems.length ? 'warn' : 'ok');
       progress.textContent = '';
       showResults();
@@ -559,6 +584,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         pasteBox,
         K.sides ? h('div', { class: 'wiki-add' }, h('span', { class: 'hint' }, 'Pasted names are'), pasteSide.el) : null,
         h('label', { class: 'check' }, legends, 'Include Legends articles'),
+        h('label', { class: 'check' }, subcats, 'Also read subcategories (e.g. Clone troopers → Clone commanders)'),
       ),
     ),
     h('div', { class: 'wiki-go' }, searchBtn, status),

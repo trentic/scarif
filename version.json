@@ -1,5 +1,5 @@
 {
-  "v": "74fdef9dd9",
+  "v": "44b15d0304",
   "files": {
     "config.js": "a6ef3b3cb9",
     "css/app.css": "9e75a26c4b",
@@ -14,8 +14,8 @@
     "debug/store.js": "049698164e",
     "debug/trimmer.js": "7a6db8f609",
     "debug/vault.js": "82f5f17c16",
-    "debug/wiki-import.js": "d3ac8726bd",
-    "debug/wookieepedia.js": "7a6fda7177",
+    "debug/wiki-import.js": "f90f0012d1",
+    "debug/wookieepedia.js": "d12ed24b53",
     "debug/yt-recorder.js": "e68254c4f0",
     "js/app.js": "f704ad2f50",
     "js/archive.js": "7ced580979",
