@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:10:34.042Z",
+  "updatedAt": "2026-10-10T05:10:40.691Z",
   "entries": [
     {
       "id": "1-jac",
@@ -138,6 +138,16 @@
       "wiki": "Bichan"
     },
     {
+      "id": "bly",
+      "name": "Bly",
+      "side": "clone",
+      "power": 63,
+      "image": "media/characters/bly-29d9aab6.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Bly"
+    },
+    {
       "id": "boost",
       "name": "Boost",
       "side": "clone",
@@ -234,6 +244,26 @@
       "createdAt": "2026-10-10T05:04:00.794Z",
       "updatedAt": "2026-10-10T05:04:00.794Z",
       "wiki": "Chopper (clone trooper)"
+    },
+    {
+      "id": "clone-99",
+      "name": "Clone 99",
+      "side": "clone",
+      "power": 56,
+      "image": "media/characters/clone-99-afc37312.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Clone 99"
+    },
+    {
+      "id": "comet",
+      "name": "Comet",
+      "side": "clone",
+      "power": 56,
+      "image": "media/characters/comet-bdb22ffc.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Comet (clone trooper)"
     },
     {
       "id": "corvax-sentinel",
@@ -656,6 +686,16 @@
       "wiki": "Fives"
     },
     {
+      "id": "fox",
+      "name": "Fox",
+      "side": "clone",
+      "power": 61,
+      "image": "media/characters/fox-40c26cd6.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Fox"
+    },
+    {
       "id": "freedon-nadd",
       "name": "Freedon Nadd",
       "side": "sith",
@@ -813,6 +853,16 @@
       "createdAt": "2026-10-10T04:47:20.905Z",
       "updatedAt": "2026-10-10T04:47:20.905Z",
       "wiki": "Jas Emari"
+    },
+    {
+      "id": "jek",
+      "name": "Jek",
+      "side": "clone",
+      "power": 56,
+      "image": "media/characters/jek-39313100.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Jek"
     },
     {
       "id": "jesse",
@@ -1207,6 +1257,16 @@
       "wiki": "Rum Sleg"
     },
     {
+      "id": "rys",
+      "name": "Rys",
+      "side": "clone",
+      "power": 56,
+      "image": "media/characters/rys-9ba82413.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Rys"
+    },
+    {
       "id": "saalo-morn",
       "name": "Saalo Morn",
       "side": "sith",
@@ -1335,6 +1395,16 @@
       "wiki": "Shar Dakhan"
     },
     {
+      "id": "sister",
+      "name": "Sister",
+      "side": "clone",
+      "power": 58,
+      "image": "media/characters/sister-732b2a44.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Sister"
+    },
+    {
       "id": "sith-mother",
       "name": "Sith Mother",
       "side": "sith",
@@ -1431,6 +1501,16 @@
       "createdAt": "2026-10-02T03:25:43.708Z",
       "updatedAt": "2026-10-02T03:25:43.708Z",
       "wiki": "The Stranger"
+    },
+    {
+      "id": "thire",
+      "name": "Thire",
+      "side": "clone",
+      "power": 56,
+      "image": "media/characters/thire-df69f42b.webp",
+      "createdAt": "2026-10-10T05:10:40.691Z",
+      "updatedAt": "2026-10-10T05:10:40.691Z",
+      "wiki": "Thire"
     },
     {
       "id": "toro-calican",
