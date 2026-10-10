@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:04:22.392Z",
+  "updatedAt": "2026-10-10T05:10:34.042Z",
   "entries": [
     {
       "id": "1-jac",
@@ -576,6 +576,16 @@
       "wiki": "E-XD-series infiltrator droid"
     },
     {
+      "id": "echo",
+      "name": "Echo",
+      "side": "clone",
+      "power": 89,
+      "image": "media/characters/echo-07ca7956.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Echo"
+    },
+    {
       "id": "edward-starspeeder",
       "name": "Edward Starspeeder",
       "side": "sith",
@@ -636,6 +646,16 @@
       "wiki": "Fennec Shand"
     },
     {
+      "id": "fives",
+      "name": "Fives",
+      "side": "clone",
+      "power": 71,
+      "image": "media/characters/fives-e35117b8.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Fives"
+    },
+    {
       "id": "freedon-nadd",
       "name": "Freedon Nadd",
       "side": "sith",
@@ -674,6 +694,16 @@
       "createdAt": "2026-10-10T05:04:14.202Z",
       "updatedAt": "2026-10-10T05:04:14.202Z",
       "wiki": "Greer"
+    },
+    {
+      "id": "gregor",
+      "name": "Gregor",
+      "side": "clone",
+      "power": 65,
+      "image": "media/characters/gregor-6406871a.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Gregor"
     },
     {
       "id": "grogu",
@@ -725,6 +755,16 @@
       "wiki": "Heater (clone trooper)"
     },
     {
+      "id": "hevy",
+      "name": "Hevy",
+      "side": "clone",
+      "power": 64,
+      "image": "media/characters/hevy-b04c2130.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Hevy"
+    },
+    {
       "id": "ig-lancer-droid",
       "name": "IG lancer droid",
       "side": "droid",
@@ -773,6 +813,16 @@
       "createdAt": "2026-10-10T04:47:20.905Z",
       "updatedAt": "2026-10-10T04:47:20.905Z",
       "wiki": "Jas Emari"
+    },
+    {
+      "id": "jesse",
+      "name": "Jesse",
+      "side": "clone",
+      "power": 68,
+      "image": "media/characters/jesse-eb780cb5.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Jesse"
     },
     {
       "id": "kanan-jarrus",
@@ -831,6 +881,16 @@
       "image": "media/characters/kit-fisto-522c9122.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:11:02.241Z"
+    },
+    {
+      "id": "kix",
+      "name": "Kix",
+      "side": "clone",
+      "power": 74,
+      "image": "media/characters/kix-36efe37d.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Kix"
     },
     {
       "id": "kouru",
@@ -1108,6 +1168,16 @@
       "wiki": "Remulus Dreypa"
     },
     {
+      "id": "rex",
+      "name": "Rex",
+      "side": "clone",
+      "power": 93,
+      "image": "media/characters/rex-84000499.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Rex"
+    },
+    {
       "id": "rey",
       "name": "Rey",
       "side": "jedi",
@@ -1194,6 +1264,16 @@
       "image": "media/characters/savage-opress-eb98e5cf.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:15:10.840Z"
+    },
+    {
+      "id": "scorch",
+      "name": "Scorch",
+      "side": "clone",
+      "power": 64,
+      "image": "media/characters/scorch-a5bfc3be.webp",
+      "createdAt": "2026-10-10T05:10:34.042Z",
+      "updatedAt": "2026-10-10T05:10:34.042Z",
+      "wiki": "Scorch"
     },
     {
       "id": "scorpenek-annihilator-droid",
