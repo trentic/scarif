@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T04:47:33.092Z",
+  "updatedAt": "2026-10-10T04:47:38.944Z",
   "entries": [
     {
       "id": "1-jac",
@@ -68,6 +68,26 @@
       "wiki": "Aurra Sing"
     },
     {
+      "id": "baash",
+      "name": "Baash",
+      "side": "hunter",
+      "power": 81,
+      "image": "media/characters/baash-7b7d9599.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Baash"
+    },
+    {
+      "id": "beedo",
+      "name": "Beedo",
+      "side": "hunter",
+      "power": 78,
+      "image": "media/characters/beedo-9f44095a.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Beedo"
+    },
+    {
       "id": "bichan",
       "name": "Bichan",
       "side": "sith",
@@ -105,6 +125,16 @@
       "image": "media/characters/cal-kestis-c92e6adc.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:05:03.626Z"
+    },
+    {
+      "id": "cato-parasitti",
+      "name": "Cato Parasitti",
+      "side": "hunter",
+      "power": 78,
+      "image": "media/characters/cato-parasitti-3663fe42.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Cato Parasitti"
     },
     {
       "id": "cere-junda",
@@ -465,6 +495,16 @@
       "updatedAt": "2026-09-30T04:11:14.407Z"
     },
     {
+      "id": "h-tar",
+      "name": "H'Tar",
+      "side": "hunter",
+      "power": 78,
+      "image": "media/characters/h-tar-f431e0b8.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "H'Tar"
+    },
+    {
       "id": "imara-vex",
       "name": "Imara Vex",
       "side": "hunter",
@@ -671,6 +711,16 @@
       "wiki": "Mayze Vice"
     },
     {
+      "id": "mercurial-swift",
+      "name": "Mercurial Swift",
+      "side": "hunter",
+      "power": 80,
+      "image": "media/characters/mercurial-swift-3b593bfd.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Mercurial Swift"
+    },
+    {
       "id": "naga-sadow",
       "name": "Naga Sadow",
       "side": "sith",
@@ -738,6 +788,16 @@
       "wiki": "Quorlac Fornayh"
     },
     {
+      "id": "raam",
+      "name": "Raam",
+      "side": "hunter",
+      "power": 80,
+      "image": "media/characters/raam-6bbdcefc.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Raam"
+    },
+    {
       "id": "remulus-dreypa",
       "name": "Remulus Dreypa",
       "side": "sith",
@@ -765,6 +825,16 @@
       "createdAt": "2026-10-02T03:26:02.871Z",
       "updatedAt": "2026-10-02T03:26:02.871Z",
       "wiki": "Rorr'hn of Drgi"
+    },
+    {
+      "id": "rum-sleg",
+      "name": "Rum Sleg",
+      "side": "hunter",
+      "power": 79,
+      "image": "media/characters/rum-sleg-0cde4547.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Rum Sleg"
     },
     {
       "id": "saalo-morn",
@@ -931,6 +1001,16 @@
       "createdAt": "2026-10-02T03:25:43.708Z",
       "updatedAt": "2026-10-02T03:25:43.708Z",
       "wiki": "The Stranger"
+    },
+    {
+      "id": "toro-calican",
+      "name": "Toro Calican",
+      "side": "hunter",
+      "power": 80,
+      "image": "media/characters/toro-calican-499d4837.webp",
+      "createdAt": "2026-10-10T04:47:38.944Z",
+      "updatedAt": "2026-10-10T04:47:38.944Z",
+      "wiki": "Toro Calican"
     },
     {
       "id": "tulak-hord",
