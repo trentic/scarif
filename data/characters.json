@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:10:46.747Z",
+  "updatedAt": "2026-10-10T05:10:52.790Z",
   "entries": [
     {
       "id": "1-jac",
@@ -148,6 +148,16 @@
       "wiki": "Big-Mouth"
     },
     {
+      "id": "blackout",
+      "name": "Blackout",
+      "side": "clone",
+      "power": 49,
+      "image": "media/characters/blackout-9e8d8645.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Blackout"
+    },
+    {
       "id": "bly",
       "name": "Bly",
       "side": "clone",
@@ -156,6 +166,16 @@
       "createdAt": "2026-10-10T05:10:40.691Z",
       "updatedAt": "2026-10-10T05:10:40.691Z",
       "wiki": "Bly"
+    },
+    {
+      "id": "boil",
+      "name": "Boil",
+      "side": "clone",
+      "power": 49,
+      "image": "media/characters/boil-575ad198.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Boil"
     },
     {
       "id": "boost",
@@ -323,6 +343,16 @@
       "createdAt": "2026-10-10T05:03:53.675Z",
       "updatedAt": "2026-10-10T05:03:53.675Z",
       "wiki": "Cut Lawquane"
+    },
+    {
+      "id": "cutup",
+      "name": "Cutup",
+      "side": "clone",
+      "power": 49,
+      "image": "media/characters/cutup-0edb63d9.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Cutup"
     },
     {
       "id": "darth-acina",
@@ -795,6 +825,16 @@
       "wiki": "H'Tar"
     },
     {
+      "id": "hammer",
+      "name": "Hammer",
+      "side": "clone",
+      "power": 49,
+      "image": "media/characters/hammer-2777ce09.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Hammer (ARC trooper)"
+    },
+    {
       "id": "hardcase",
       "name": "Hardcase",
       "side": "clone",
@@ -803,6 +843,26 @@
       "createdAt": "2026-10-10T05:03:53.675Z",
       "updatedAt": "2026-10-10T05:03:53.675Z",
       "wiki": "Hardcase"
+    },
+    {
+      "id": "havoc",
+      "name": "Havoc",
+      "side": "clone",
+      "power": 48,
+      "image": "media/characters/havoc-a0a3c913.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Havoc (ARC trooper)"
+    },
+    {
+      "id": "hawk",
+      "name": "Hawk",
+      "side": "clone",
+      "power": 49,
+      "image": "media/characters/hawk-2accd687.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Hawk"
     },
     {
       "id": "hawkeye",
@@ -1661,6 +1721,16 @@
       "createdAt": "2026-10-10T04:47:33.092Z",
       "updatedAt": "2026-10-10T04:47:33.092Z",
       "wiki": "Vukorah"
+    },
+    {
+      "id": "warthog",
+      "name": "Warthog",
+      "side": "clone",
+      "power": 50,
+      "image": "media/characters/warthog-aa6fa348.webp",
+      "createdAt": "2026-10-10T05:10:52.790Z",
+      "updatedAt": "2026-10-10T05:10:52.790Z",
+      "wiki": "Warthog"
     },
     {
       "id": "waxer",
