@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T03:37:39.274Z",
+  "updatedAt": "2026-10-10T04:47:20.910Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -48,6 +48,16 @@
       "updatedAt": "2026-09-30T04:04:33.444Z"
     },
     {
+      "id": "aurra-sing",
+      "name": "Aurra Sing",
+      "side": "hunter",
+      "power": 89,
+      "image": "media/characters/aurra-sing-183e86d8.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Aurra Sing"
+    },
+    {
       "id": "bichan",
       "name": "Bichan",
       "side": "sith",
@@ -56,6 +66,16 @@
       "createdAt": "2026-10-02T03:25:50.172Z",
       "updatedAt": "2026-10-02T03:25:50.172Z",
       "wiki": "Bichan"
+    },
+    {
+      "id": "cad-bane",
+      "name": "Cad Bane",
+      "side": "hunter",
+      "power": 92,
+      "image": "media/characters/cad-bane-8d4a5748.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Cad Bane"
     },
     {
       "id": "cal-kestis",
@@ -316,6 +336,16 @@
       "wiki": "Edward Starspeeder"
     },
     {
+      "id": "embo",
+      "name": "Embo",
+      "side": "hunter",
+      "power": 89,
+      "image": "media/characters/embo-92c94206.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Embo"
+    },
+    {
       "id": "exar-kun",
       "name": "Exar Kun",
       "side": "sith",
@@ -346,6 +376,16 @@
       "wiki": "Ezra Bridger"
     },
     {
+      "id": "fennec-shand",
+      "name": "Fennec Shand",
+      "side": "hunter",
+      "power": 91,
+      "image": "media/characters/fennec-shand-73b7a3ba.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Fennec Shand"
+    },
+    {
       "id": "freedon-nadd",
       "name": "Freedon Nadd",
       "side": "sith",
@@ -373,6 +413,16 @@
       "image": "media/characters/grogu-0803266e.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:11:14.407Z"
+    },
+    {
+      "id": "jas-emari",
+      "name": "Jas Emari",
+      "side": "hunter",
+      "power": 88,
+      "image": "media/characters/jas-emari-80c2eda7.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Jas Emari"
     },
     {
       "id": "kanan-jarrus",
@@ -617,6 +667,26 @@
       "wiki": "Saalo Morn"
     },
     {
+      "id": "sabine-wren",
+      "name": "Sabine Wren",
+      "side": "hunter",
+      "power": 92,
+      "image": "media/characters/sabine-wren-7137bd7f.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Sabine Wren"
+    },
+    {
+      "id": "sana-starros",
+      "name": "Sana Starros",
+      "side": "hunter",
+      "power": 91,
+      "image": "media/characters/sana-starros-dcb62619.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Sana Starros"
+    },
+    {
       "id": "savage-opress",
       "name": "Savage Opress",
       "side": "sith",
@@ -682,6 +752,16 @@
       "image": "media/characters/starkiller-96552ab8.png",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:14:44.898Z"
+    },
+    {
+      "id": "tam-posla",
+      "name": "Tam Posla",
+      "side": "hunter",
+      "power": 90,
+      "image": "media/characters/tam-posla-24144b50.webp",
+      "createdAt": "2026-10-10T04:47:20.905Z",
+      "updatedAt": "2026-10-10T04:47:20.905Z",
+      "wiki": "Tam Posla"
     },
     {
       "id": "the-grand-inquisitor",
