@@ -464,3 +464,5 @@ dialog.wiki-dialog { width: min(1100px, calc(100vw - 32px)); padding: 20px 20px 
 .yt-recorder .hint { font-size: 12px; color: var(--dim); }
 .yt-section { margin-top: 12px; }
 .yt-section summary { cursor: pointer; font-weight: 700; padding: 6px 0; }
+.side-badge.hunter { color: #ffd27a; border: 1px solid var(--gold); background: rgba(245, 184, 61, 0.12); }
+.side-pick .side-btn[aria-pressed='true'].hunter { border-color: var(--gold); color: #ffd27a; background: rgba(245, 184, 61, 0.12); }

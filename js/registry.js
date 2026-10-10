@@ -84,10 +84,15 @@ export const ARCHIVES = {
   characters: { file: 'characters', title: 'Character games', noun: 'characters' },
 };
 
+// Character groups. To add one, add it here (plus its colours in css/app.css
+// and debug/debug.css); debug mode and the Who Would Win? modes pick it up.
+// When a character is listed in several groups, `rank` decides (higher wins).
 export const SIDES = {
-  jedi: { label: 'Jedi' },
-  sith: { label: 'Sith' },
+  jedi: { label: 'Jedi', plural: 'Jedi', rank: 0 },
+  sith: { label: 'Sith', plural: 'Sith', rank: 2 },
+  hunter: { label: 'Bounty Hunter', plural: 'Bounty Hunters', short: 'Hunter', rank: 1 },
 };
+export const SIDE_IDS = Object.keys(SIDES);
 
 export function getGame(id) {
   return GAMES.find((g) => g.id === id) || null;

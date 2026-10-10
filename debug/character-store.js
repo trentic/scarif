@@ -1,9 +1,9 @@
 // Characters archive (data/characters.json): Jedi & Sith for character games.
 // Pictures live in media/characters/.
+import { SIDES } from '../js/registry.js';
 import { slugify, StoreError } from './store.js';
 
 export const CHAR_FILE = 'data/characters.json';
-const SIDES = ['jedi', 'sith'];
 const rand = () => Math.random().toString(16).slice(2, 10);
 const isLocal = (path) => typeof path === 'string' && path.startsWith('media/');
 
@@ -17,7 +17,7 @@ function checkName(archive, raw, selfId) {
 }
 
 function checkSide(side) {
-  if (!SIDES.includes(side)) throw new StoreError('Pick a side: Jedi or Sith.');
+  if (!SIDES[side]) throw new StoreError(`Pick a group: ${Object.values(SIDES).map((s) => s.label).join(', ')}.`);
   return side;
 }
 

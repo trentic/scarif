@@ -1,10 +1,10 @@
 // "Who Would Win?": two characters, tap the one you think wins. It's opinion
 // only; after each pick the fan split is shown. Modes pick who fights whom
-// (anyone, Jedi vs Sith, Jedi only, Sith only, close fights).
+// (anyone, Jedi vs Sith, hunters vs Force users, one group only, close fights).
 import * as chat from '../chat.js';
 import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
-import { SIDES } from '../registry.js';
+import { SIDE_IDS, SIDES } from '../registry.js';
 import { sfx } from '../sfx.js';
 import { h, iconButton, wait } from '../ui.js';
 import { record, split, splitLabel } from '../votes.js';
@@ -45,17 +45,34 @@ function closePairs(pool) {
   return all;
 }
 
+const across = (as, bs) => as.flatMap((a) => bs.map((b) => [a, b]));
+const pickStat = (picks, ids, label) => [`${ids.reduce((n, id) => n + (picks[id] || 0), 0)}`, label];
+
 // pairs(pool) → [[a, b], …]. `fixed` keeps a on top (red) and b on the bottom
-// (blue); otherwise each matchup is flipped at random.
+// (blue); otherwise each matchup is flipped at random. `stats(picks, pairs)`
+// gives the results-screen boxes; without it they show underdog picks.
 export const MODES = [
-  { id: 'mixed', label: '🎲 Anyone', title: 'Who would win?', pairs: (pool) => everyPair(pool) },
+  {
+    id: 'mixed', label: '🎲 Anyone', title: 'Who would win?', pairs: (pool) => everyPair(pool),
+    // A "picks" box for each group that took part.
+    stats: (picks, pairs) => SIDE_IDS.filter((id) => pairs.some((p) => p.some((c) => c.side === id)))
+      .map((id) => pickStat(picks, [id], `${SIDES[id].short || SIDES[id].label} picks`)),
+  },
   {
     id: 'jvs', label: '⚔️ Jedi vs Sith', title: 'Jedi vs Sith', fixed: true,
     // Sith on red (1), Jedi on blue (2).
-    pairs: (pool) => bySide(pool, 'sith').flatMap((s) => bySide(pool, 'jedi').map((j) => [s, j])),
+    pairs: (pool) => across(bySide(pool, 'sith'), bySide(pool, 'jedi')),
+    stats: (picks) => [pickStat(picks, ['jedi'], 'Jedi picks'), pickStat(picks, ['sith'], 'Sith picks')],
+  },
+  {
+    id: 'hvf', label: '🎯 Hunters vs Force users', title: 'Hunters vs Force', fixed: true,
+    // Bounty hunter on red (1), Jedi or Sith on blue (2).
+    pairs: (pool) => across(bySide(pool, 'hunter'), [...bySide(pool, 'jedi'), ...bySide(pool, 'sith')]),
+    stats: (picks) => [pickStat(picks, ['hunter'], 'Hunter picks'), pickStat(picks, ['jedi', 'sith'], 'Force user picks')],
   },
   { id: 'jedi', label: 'Jedi only', title: 'Jedi vs Jedi', pairs: (pool) => everyPair(bySide(pool, 'jedi')) },
   { id: 'sith', label: 'Sith only', title: 'Sith vs Sith', pairs: (pool) => everyPair(bySide(pool, 'sith')) },
+  { id: 'hunter', label: 'Hunters only', title: 'Hunter vs Hunter', pairs: (pool) => everyPair(bySide(pool, 'hunter')) },
   { id: 'close', label: '🔥 Close fights', title: 'Close fight', pairs: closePairs },
 ];
 
@@ -128,7 +145,6 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   const mode = currentMode(pool);
   const pairs = mode.pairs(pool);
   const nextPair = pairer(pairs, mode.fixed);
-  const sideMode = mode.id === 'mixed' || mode.id === 'jvs';
   let played = 0;
   let finishing = false; // "Finish" tapped in unlimited mode
   new Set(pairs.flat()).forEach((c) => { new Image().src = c.image; });
@@ -137,7 +153,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   if (!(await countdown(stage, () => alive))) return;
 
   let agreed = 0;
-  const picks = { jedi: 0, sith: 0 };
+  const picks = {}; // group → times picked
   let underdogs = 0; // picked the one with less fan power
 
   for (let i = 0; alive && (total === 0 || i < total) && !finishing; i++) {
@@ -361,10 +377,8 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
       caption: 'picks matched the fan favourite',
       rank,
       blurb,
-      // Jedi/Sith picks only mean something when both sides are fighting.
-      stats: sideMode
-        ? [[`${picks.jedi || 0}`, 'Jedi picks'], [`${picks.sith || 0}`, 'Sith picks']]
-        : [[`${underdogs}`, 'Underdog picks'], [`${played}`, 'Matchups']],
+      // Group picks only mean something when different groups are fighting.
+      stats: mode.stats?.(picks, pairs) || [[`${underdogs}`, 'Underdog picks'], [`${played}`, 'Matchups']],
       cta: 'Who would YOU pick? 👇',
       onMenu: exit,
       onReplay: replay,

@@ -1034,3 +1034,9 @@ body {
 .wv-modes .seg { flex-wrap: wrap; gap: 14px; }
 .wv-modes .seg button { min-height: 76px; font-size: 32px; }
 .wv-modes .seg button:disabled { opacity: 0.35; cursor: not-allowed; }
+.wv-side.hunter { box-shadow: inset 0 0 0 2px #ffd27a; }
+/* three stat boxes (e.g. Jedi / Sith / Hunter picks) */
+.results .stats:has(.stat:nth-child(3)) { gap: 20px; }
+.results .stats:has(.stat:nth-child(3)) .stat { padding: 24px 26px; }
+.results .stats:has(.stat:nth-child(3)) .stat span { font-size: 24px; letter-spacing: 0.08em; }
+.wv-screen .hud .pill { white-space: nowrap; flex: none; }

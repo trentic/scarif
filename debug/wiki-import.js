@@ -3,6 +3,7 @@
 // with each article's main picture, lets you pick, then saves the picked ones
 // to the archive in small batches, pictures included.
 // For characters it can also find pictures for ones already in the archive.
+import { SIDE_IDS, SIDES } from '../js/registry.js';
 import { h } from '../js/ui.js';
 import { addCharacters, setCharacterImages } from './character-store.js';
 import { addEntries, downloadImage } from './store.js';
@@ -29,6 +30,7 @@ const KINDS = {
       { category: 'Sith Lords', side: 'sith' },
       { category: 'Dark Lords of the Sith', side: 'sith' },
       { category: 'Inquisitorius members', side: 'sith' },
+      { category: 'Bounty hunters', side: 'hunter' },
     ],
     skip: /^(Unidentified|List of|Jedi Order|Sith Order|Order of)\b/i,
     name: (title) => baseTitle(title).slice(0, 60),
@@ -62,15 +64,17 @@ function modelCodes(name) {
   return String(name).toLowerCase().split(/[\s_/]+/).map((t) => t.replace(/[^a-z0-9]/g, '')).filter((t) => /[a-z]/.test(t) && /\d/.test(t));
 }
 function nameKey(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
-const sideBadge = (side) => h('span', { class: `side-badge ${side}` }, side === 'jedi' ? 'Jedi' : 'Sith');
+const sideBadge = (side) => h('span', { class: `side-badge ${side}` }, SIDES[side]?.label || side);
+// Next group when a badge is clicked: Jedi → Sith → Bounty Hunter → Jedi…
+const nextSide = (side) => SIDE_IDS[(SIDE_IDS.indexOf(side) + 1) % SIDE_IDS.length];
 const plural = (n, [one, many]) => `${n} ${n === 1 ? one : many}`;
 
 function sidePicker(initial, onPick) {
   let value = initial;
-  const btns = ['jedi', 'sith'].map((side) => h('button', {
+  const btns = SIDE_IDS.map((side) => h('button', {
     type: 'button', class: `side-btn ${side}`, 'aria-pressed': String(side === value),
-    onclick: () => { value = side; btns.forEach((b, i) => b.setAttribute('aria-pressed', String(['jedi', 'sith'][i] === side))); onPick?.(side); },
-  }, side === 'jedi' ? 'Jedi' : 'Sith'));
+    onclick: () => { value = side; btns.forEach((b, i) => b.setAttribute('aria-pressed', String(SIDE_IDS[i] === side))); onPick?.(side); },
+  }, SIDES[side].label));
   return { el: h('div', { class: 'filter side-pick' }, btns), get: () => value };
 }
 
@@ -88,7 +92,16 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
   const K = KINDS[kind];
   const prefs = (() => {
     const defaults = { sources: structuredClone(K.sources), legends: false, top: 40 };
-    try { return { ...defaults, ...JSON.parse(localStorage.getItem(K.store) || '{}') }; } catch { return defaults; }
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(K.store) || '{}'); } catch {}
+    const merged = { ...defaults, ...saved };
+    // Categories added to the defaults since these preferences were saved.
+    const seen = new Set(saved.seenDefaults || (saved.sources ? ['Jedi Grand Masters', 'Jedi Masters', 'Jedi Knights', 'Sith Lords', 'Dark Lords of the Sith', 'Inquisitorius members', 'Blaster pistols', 'Heavy blaster pistols', 'Blaster rifles', 'Blaster carbines'] : []));
+    for (const src of K.sources) {
+      if (!seen.has(src.category) && !merged.sources.some((x) => x.category === src.category)) merged.sources.push(structuredClone(src));
+    }
+    merged.seenDefaults = K.sources.map((x) => x.category);
+    return merged;
   })();
   const savePrefs = () => { try { localStorage.setItem(K.store, JSON.stringify(prefs)); } catch {} };
 
@@ -115,8 +128,8 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
   function renderSources() {
     sourcesEl.replaceChildren(...prefs.sources.map((s, i) => h('div', { class: 'wiki-source' },
       K.sides ? h('button', {
-        class: 'side-toggle', type: 'button', title: 'Switch side',
-        onclick: () => { s.side = s.side === 'jedi' ? 'sith' : 'jedi'; savePrefs(); renderSources(); },
+        class: 'side-toggle', type: 'button', title: 'Switch group',
+        onclick: () => { s.side = nextSide(s.side); savePrefs(); renderSources(); },
       }, sideBadge(s.side)) : null,
       h('a', { href: pageUrl(`Category:${s.category}`), target: '_blank', rel: 'noopener' }, s.category),
       h('button', {
@@ -254,9 +267,10 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
   const summaryEl = h('div', { class: 'wiki-summary' });
   const gridEl = h('div', { class: 'grid wiki-grid' });
   const topInput = h('input', { type: 'number', min: '1', max: '500', value: String(prefs.top), class: 'wiki-top', 'aria-label': 'How many' });
-  const filterBtns = [['all', 'All'], ['jedi', 'Jedi'], ['sith', 'Sith']].map(([key, label]) => h('button', {
+  const filterKeys = [['all', 'All'], ...SIDE_IDS.map((id) => [id, SIDES[id].plural])];
+  const filterBtns = filterKeys.map(([key, label]) => h('button', {
     type: 'button', 'aria-pressed': String(filter === key),
-    onclick: () => { filter = key; filterBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(['all', 'jedi', 'sith'][i] === key))); renderResults(); },
+    onclick: () => { filter = key; filterBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(filterKeys[i][0] === key))); renderResults(); },
   }, label));
   const pickTop = h('div', { class: 'wiki-select' },
     h('button', {
@@ -335,8 +349,8 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
           oninput: () => { r.power = Math.max(1, Math.min(100, Math.round(Number(power.value) || 50))); },
         });
         const side = h('button', {
-          class: 'side-toggle', type: 'button', title: 'Switch side', disabled: locked || null,
-          onclick: () => { r.side = r.side === 'jedi' ? 'sith' : 'jedi'; side.replaceChildren(sideBadge(r.side)); },
+          class: 'side-toggle', type: 'button', title: 'Switch group', disabled: locked || null,
+          onclick: () => { r.side = nextSide(r.side); side.replaceChildren(sideBadge(r.side)); },
         }, sideBadge(r.side));
         fields.push(h('div', { class: 'char-top' }, side, h('label', { class: 'wiki-power', title: 'Fan power (1–100), estimated from how long the article is' }, '⚡', power)));
       }
@@ -346,7 +360,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         h('img', { src: r.image, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }),
         check,
         r.inArchive ? h('span', { class: 'wiki-flag' }, 'In archive') : null,
-        r.both ? h('span', { class: 'wiki-flag warn', title: 'Listed as both Jedi and Sith. Check the side.' }, 'Jedi & Sith') : null,
+        r.both ? h('span', { class: 'wiki-flag warn', title: 'Listed in more than one group. Check the group.' }, r.groups.map((g) => SIDES[g]?.plural || g).join(' & ')) : null,
         r.legends ? h('span', { class: 'wiki-flag legends' }, 'Legends') : null,
       ),
       h('div', { class: 'body' },
@@ -426,8 +440,10 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         results.set(result.pageid, {
           ...result,
           name,
-          side: sides.has('sith') ? 'sith' : 'jedi',
+          // Listed in several groups (e.g. a fallen Jedi) → the highest-ranked one.
+          side: [...sides].filter((x) => SIDES[x]).sort((x, y) => SIDES[y].rank - SIDES[x].rank)[0] || 'jedi',
           both: K.sides && sides.size > 1,
+          groups: [...sides],
           power: Math.round(35 + 57 * rank.get(result.pageid) ** 1.4),
           inArchive: known.has(result.title) || entries.some((e) => K.same(e.name, name)),
           selected: false,

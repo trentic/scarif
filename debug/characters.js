@@ -3,13 +3,13 @@
 // Quick pictures: hover a character card and press Ctrl+V (or click
 // "📋 Paste") to use whatever you last copied: an image address, or the
 // image itself. Dropping an image file on a card works too.
-import { SIDES } from '../js/registry.js';
+import { SIDE_IDS, SIDES } from '../js/registry.js';
 import { h } from '../js/ui.js';
 import { addCharacter, CHAR_FILE, deleteCharacter, setCharacterImage, updateCharacter } from './character-store.js';
 import { downloadImage, readMedia, StoreError } from './store.js';
 import { openWikiImport } from './wiki-import.js';
 
-const FILTERS = [['all', 'All'], ['jedi', 'Jedi'], ['sith', 'Sith'], ['missing', 'No picture']];
+const FILTERS = [['all', 'All'], ...SIDE_IDS.map((id) => [id, SIDES[id].plural]), ['missing', 'No picture']];
 
 const view = {
   ctx: null,
@@ -128,8 +128,7 @@ function renderStats() {
   missingBtn.textContent = `🖼 Find ${missing} missing picture${missing === 1 ? '' : 's'}`;
   statsEl.replaceChildren(
     h('div', { class: 'stat' }, h('b', {}, view.entries.length), h('span', {}, 'Characters')),
-    h('div', { class: 'stat' }, h('b', {}, n((e) => e.side === 'jedi')), h('span', {}, 'Jedi')),
-    h('div', { class: 'stat' }, h('b', {}, n((e) => e.side === 'sith')), h('span', {}, 'Sith')),
+    ...SIDE_IDS.map((id) => h('div', { class: 'stat' }, h('b', {}, n((e) => e.side === id)), h('span', {}, SIDES[id].plural))),
     h('div', { class: `stat ${missing ? 'warn' : ''}` }, h('b', {}, view.entries.length - missing), h('span', {}, `With a picture${missing ? ` · ${missing} to go` : ''}`)),
   );
 }
@@ -348,7 +347,7 @@ function characterForm({ entry = null, onSaved, onCancel }) {
     },
   },
     h('div', {}, h('label', { for: `cname-${uid}` }, 'Name'), name),
-    h('div', {}, h('label', {}, 'Side'), side.el),
+    h('div', {}, h('label', {}, 'Group'), side.el),
     h('div', {},
       h('label', {}, 'Fan power ', h('span', { class: 'label-note' }, '(1–100)')),
       power.el,

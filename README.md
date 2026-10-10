@@ -16,7 +16,7 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 
 | Game | What players do | Needs per character |
 | --- | --- | --- |
-| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Uses the **Rounds** setting; **All** means unlimited matchups (tap **Finish** or press F to end). Pick a **matchup mode** in the lobby: 🎲 Anyone, ⚔️ Jedi vs Sith (Sith on red / 1, Jedi on blue / 2), Jedi only, Sith only, or 🔥 Close fights (similar fan power). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
+| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Uses the **Rounds** setting; **All** means unlimited matchups (tap **Finish** or press F to end). Pick a **matchup mode** in the lobby: 🎲 Anyone, ⚔️ Jedi vs Sith (Sith on red / 1, Jedi on blue / 2), 🎯 Hunters vs Force users (bounty hunter on red vs a Jedi or Sith), Jedi only, Sith only, Hunters only, or 🔥 Close fights (similar fan power). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
 
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 
@@ -81,7 +81,7 @@ Files are checked by their actual contents, not their extension.
 
 ## Characters (Jedi & Sith)
 
-Debug mode has two tabs: **Blasters** and **Characters**. Characters live in their own archive (`data/characters.json`, pictures in `media/characters/`) with a name, side (Jedi or Sith), a **fan power** (1–100) and a picture. It starts with 20 Jedi and 20 Sith; characters appear in games once they have a picture.
+Debug mode has two tabs: **Blasters** and **Characters**. Characters live in their own archive (`data/characters.json`, pictures in `media/characters/`) with a name, group (Jedi, Sith or Bounty Hunter), a **fan power** (1–100) and a picture. It starts with 20 Jedi and 20 Sith; characters appear in games once they have a picture.
 
 **Quick pictures:** hover a character card and press **Ctrl+V** (or click **📋 Paste**). It uses whatever you last copied — an image address (right-click → *Copy image address*) or the image itself (right-click → *Copy image*). You can also drop an image file on a card. If a site blocks copying its images, the address is linked instead.
 
