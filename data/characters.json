@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T04:47:20.910Z",
+  "updatedAt": "2026-10-10T04:47:27.393Z",
   "entries": [
     {
       "id": "aayla-secura",
@@ -68,6 +68,16 @@
       "wiki": "Bichan"
     },
     {
+      "id": "brander-lawson",
+      "name": "Brander Lawson",
+      "side": "hunter",
+      "power": 87,
+      "image": "media/characters/brander-lawson-e615fade.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Brander Lawson"
+    },
+    {
       "id": "cad-bane",
       "name": "Cad Bane",
       "side": "hunter",
@@ -94,6 +104,16 @@
       "image": "media/characters/cere-junda-59ee244c.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:05:21.598Z"
+    },
+    {
+      "id": "chanath-cha",
+      "name": "Chanath Cha",
+      "side": "hunter",
+      "power": 84,
+      "image": "media/characters/chanath-cha-42fcbc71.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Chanath Cha"
     },
     {
       "id": "count-dooku",
@@ -326,6 +346,16 @@
       "wiki": "Darth Zannah"
     },
     {
+      "id": "durge",
+      "name": "Durge",
+      "side": "hunter",
+      "power": 86,
+      "image": "media/characters/durge-027c86cc.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Durge"
+    },
+    {
       "id": "edward-starspeeder",
       "name": "Edward Starspeeder",
       "side": "sith",
@@ -406,6 +436,16 @@
       "wiki": "Gol (Sith)"
     },
     {
+      "id": "greedo",
+      "name": "Greedo",
+      "side": "hunter",
+      "power": 87,
+      "image": "media/characters/greedo-e4b945fd.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Greedo"
+    },
+    {
       "id": "grogu",
       "name": "Grogu",
       "side": "jedi",
@@ -413,6 +453,16 @@
       "image": "media/characters/grogu-0803266e.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:11:14.407Z"
+    },
+    {
+      "id": "imara-vex",
+      "name": "Imara Vex",
+      "side": "hunter",
+      "power": 85,
+      "image": "media/characters/imara-vex-ad089e4d.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Imara Vex"
     },
     {
       "id": "jas-emari",
@@ -443,6 +493,16 @@
       "createdAt": "2026-10-02T03:26:09.023Z",
       "updatedAt": "2026-10-02T03:26:09.023Z",
       "wiki": "Kane Starkiller"
+    },
+    {
+      "id": "ketsu-onyo",
+      "name": "Ketsu Onyo",
+      "side": "hunter",
+      "power": 85,
+      "image": "media/characters/ketsu-onyo-f4bd69bb.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Ketsu Onyo"
     },
     {
       "id": "ki-adi-mundi",
@@ -481,6 +541,16 @@
       "createdAt": "2026-10-02T03:25:43.708Z",
       "updatedAt": "2026-10-02T03:25:43.708Z",
       "wiki": "Kreia"
+    },
+    {
+      "id": "krrsantan",
+      "name": "Krrsantan",
+      "side": "hunter",
+      "power": 88,
+      "image": "media/characters/krrsantan-fc7a2c8f.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Krrsantan"
     },
     {
       "id": "kylo-ren",
@@ -830,6 +900,16 @@
       "image": "media/characters/yoda-abf5f839.webp",
       "createdAt": "2026-09-30T00:00:00.000Z",
       "updatedAt": "2026-09-30T04:14:15.728Z"
+    },
+    {
+      "id": "zam-wesell",
+      "name": "Zam Wesell",
+      "side": "hunter",
+      "power": 87,
+      "image": "media/characters/zam-wesell-aaf1aa58.webp",
+      "createdAt": "2026-10-10T04:47:27.393Z",
+      "updatedAt": "2026-10-10T04:47:27.393Z",
+      "wiki": "Zam Wesell"
     }
   ]
 }
