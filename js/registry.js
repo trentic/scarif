@@ -89,8 +89,10 @@ export const ARCHIVES = {
 // When a character is listed in several groups, `rank` decides (higher wins).
 export const SIDES = {
   jedi: { label: 'Jedi', plural: 'Jedi', rank: 0 },
-  sith: { label: 'Sith', plural: 'Sith', rank: 2 },
-  hunter: { label: 'Bounty Hunter', plural: 'Bounty Hunters', short: 'Hunter', rank: 1 },
+  sith: { label: 'Sith', plural: 'Sith', rank: 4 },
+  hunter: { label: 'Bounty Hunter', plural: 'Bounty Hunters', short: 'Hunter', shortPlural: 'Hunters', rank: 3 },
+  clone: { label: 'Clone Trooper', plural: 'Clone Troopers', short: 'Clone', shortPlural: 'Clones', rank: 1 },
+  droid: { label: 'Combat Droid', plural: 'Combat Droids', short: 'Droid', shortPlural: 'Droids', rank: 2 },
 };
 export const SIDE_IDS = Object.keys(SIDES);
 

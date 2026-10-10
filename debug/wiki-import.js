@@ -31,6 +31,8 @@ const KINDS = {
       { category: 'Dark Lords of the Sith', side: 'sith' },
       { category: 'Inquisitorius members', side: 'sith' },
       { category: 'Bounty hunters', side: 'hunter' },
+      { category: 'Clone troopers', side: 'clone' },
+      { category: 'Battle droid models', side: 'droid' },
     ],
     skip: /^(Unidentified|List of|Jedi Order|Sith Order|Order of)\b/i,
     name: (title) => baseTitle(title).slice(0, 60),

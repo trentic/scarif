@@ -48,15 +48,19 @@ function closePairs(pool) {
 const across = (as, bs) => as.flatMap((a) => bs.map((b) => [a, b]));
 const pickStat = (picks, ids, label) => [`${ids.reduce((n, id) => n + (picks[id] || 0), 0)}`, label];
 
+const shortName = (id) => SIDES[id].short || SIDES[id].label;
+
 // pairs(pool) → [[a, b], …]. `fixed` keeps a on top (red) and b on the bottom
 // (blue); otherwise each matchup is flipped at random. `stats(picks, pairs)`
 // gives the results-screen boxes; without it they show underdog picks.
+// `row`: 'versus' modes go on the first lobby row, 'only' modes on the second.
 export const MODES = [
   {
     id: 'mixed', label: '🎲 Anyone', title: 'Who would win?', pairs: (pool) => everyPair(pool),
-    // A "picks" box for each group that took part.
+    // A "picks" box for the (up to 3) most-picked groups that took part.
     stats: (picks, pairs) => SIDE_IDS.filter((id) => pairs.some((p) => p.some((c) => c.side === id)))
-      .map((id) => pickStat(picks, [id], `${SIDES[id].short || SIDES[id].label} picks`)),
+      .sort((x, y) => (picks[y] || 0) - (picks[x] || 0)).slice(0, 3)
+      .map((id) => pickStat(picks, [id], `${shortName(id)} picks`)),
   },
   {
     id: 'jvs', label: '⚔️ Jedi vs Sith', title: 'Jedi vs Sith', fixed: true,
@@ -65,15 +69,23 @@ export const MODES = [
     stats: (picks) => [pickStat(picks, ['jedi'], 'Jedi picks'), pickStat(picks, ['sith'], 'Sith picks')],
   },
   {
+    id: 'cvd', label: '🤖 Clones vs Droids', title: 'Clones vs Droids', fixed: true,
+    // Droid on red (1), clone on blue (2).
+    pairs: (pool) => across(bySide(pool, 'droid'), bySide(pool, 'clone')),
+    stats: (picks) => [pickStat(picks, ['clone'], 'Clone picks'), pickStat(picks, ['droid'], 'Droid picks')],
+  },
+  {
     id: 'hvf', label: '🎯 Hunters vs Force users', title: 'Hunters vs Force', fixed: true,
     // Bounty hunter on red (1), Jedi or Sith on blue (2).
     pairs: (pool) => across(bySide(pool, 'hunter'), [...bySide(pool, 'jedi'), ...bySide(pool, 'sith')]),
     stats: (picks) => [pickStat(picks, ['hunter'], 'Hunter picks'), pickStat(picks, ['jedi', 'sith'], 'Force user picks')],
   },
-  { id: 'jedi', label: 'Jedi only', title: 'Jedi vs Jedi', pairs: (pool) => everyPair(bySide(pool, 'jedi')) },
-  { id: 'sith', label: 'Sith only', title: 'Sith vs Sith', pairs: (pool) => everyPair(bySide(pool, 'sith')) },
-  { id: 'hunter', label: 'Hunters only', title: 'Hunter vs Hunter', pairs: (pool) => everyPair(bySide(pool, 'hunter')) },
   { id: 'close', label: '🔥 Close fights', title: 'Close fight', pairs: closePairs },
+  // One group only, for every group in the registry (ids match the group ids).
+  ...SIDE_IDS.map((id) => ({
+    id, row: 'only', label: SIDES[id].shortPlural || SIDES[id].plural, title: `${shortName(id)} vs ${shortName(id)}`,
+    pairs: (pool) => everyPair(bySide(pool, id)),
+  })),
 ];
 
 function currentMode(pool) {
@@ -87,17 +99,20 @@ export function lobby({ pool, settings, refresh }) {
   const length = settings.rounds;
   const mode = currentMode(pool);
   const pairs = mode.pairs(pool);
+  const button = (m) => {
+    const n = m.pairs(pool).length;
+    return h('button', {
+      'aria-pressed': String(m.id === mode.id),
+      disabled: !n || null,
+      title: n ? null : 'Not enough characters for this mode yet',
+      onclick: () => { store.set(MODE_KEY, m.id); refresh(); },
+    }, m.label);
+  };
   const extra = pool.length >= 2 && h('div', { class: 'hl-choose wv-modes' },
     h('div', { class: 'title' }, 'Matchups'),
-    h('div', { class: 'seg' }, MODES.map((m) => {
-      const n = m.pairs(pool).length;
-      return h('button', {
-        'aria-pressed': String(m.id === mode.id),
-        disabled: !n || null,
-        title: n ? null : 'Not enough characters for this mode yet',
-        onclick: () => { store.set(MODE_KEY, m.id); refresh(); },
-      }, m.label);
-    })),
+    h('div', { class: 'seg' }, MODES.filter((m) => m.row !== 'only').map(button)),
+    h('div', { class: 'title wv-only-title' }, 'One group only'),
+    h('div', { class: 'seg wv-only' }, MODES.filter((m) => m.row === 'only').map(button)),
   );
   return {
     ready: pairs.length > 0,
