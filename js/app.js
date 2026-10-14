@@ -185,11 +185,13 @@ async function showLobby(gameId) {
     loadArchive(game.archive).catch(() => ({ entries: [], stats: [] })),
     modules[game.module](),
   ]);
-  const pool = poolFor(game, archive);
+  const fullPool = poolFor(game, archive);
   const refresh = () => showLobby(gameId);
 
-  // Games can customise the lobby (extra controls, their own facts line).
-  const custom = mod.lobby?.({ game, pool, archive, settings, refresh }) || {};
+  // Games can customise the lobby (extra controls, their own facts line) and
+  // narrow down who's in the game (`pool`, e.g. Jedi only).
+  const custom = mod.lobby?.({ game, pool: fullPool, archive, settings, refresh }) || {};
+  const pool = custom.pool || fullPool;
   const ready = custom.ready ?? pool.length >= game.minEntries;
   const rounds = settings.rounds > 0 ? Math.min(settings.rounds, pool.length) : pool.length;
 

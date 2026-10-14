@@ -4,6 +4,7 @@
 import * as chat from '../chat.js';
 import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
+import { bySide, CHAR_MODES, modePicker, savedMode } from '../charmodes.js';
 import { SIDE_IDS, SIDES } from '../registry.js';
 import { sfx } from '../sfx.js';
 import { h, iconButton, wait } from '../ui.js';
@@ -23,12 +24,6 @@ const RANKS = [
 // --- modes ------------------------------------------------------------------------------
 
 const MODE_KEY = 'scarif.wvw.mode';
-const store = {
-  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
-  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
-};
-
-const bySide = (pool, side) => pool.filter((c) => c.side === side);
 function everyPair(list) {
   const out = [];
   for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) out.push([list[i], list[j]]);
@@ -49,49 +44,35 @@ const across = (as, bs) => as.flatMap((a) => bs.map((b) => [a, b]));
 const pickStat = (picks, ids, label) => [`${ids.reduce((n, id) => n + (picks[id] || 0), 0)}`, label];
 
 const shortName = (id) => SIDES[id].short || SIDES[id].label;
+const groupsOf = (pool, ids) => pool.filter((c) => ids.includes(c.side));
 
-// pairs(pool) → [[a, b], …]. `fixed` keeps a on top (red) and b on the bottom
-// (blue); otherwise each matchup is flipped at random. `stats(picks, pairs)`
-// gives the results-screen boxes; without it they show underdog picks.
-// `row`: 'versus' modes go on the first lobby row, 'only' modes on the second.
-export const MODES = [
-  {
-    id: 'mixed', label: '🎲 Anyone', title: 'Who would win?', pairs: (pool) => everyPair(pool),
-    // A "picks" box for the (up to 3) most-picked groups that took part.
-    stats: (picks, pairs) => SIDE_IDS.filter((id) => pairs.some((p) => p.some((c) => c.side === id)))
-      .sort((x, y) => (picks[y] || 0) - (picks[x] || 0)).slice(0, 3)
-      .map((id) => pickStat(picks, [id], `${shortName(id)} picks`)),
-  },
-  {
-    id: 'jvs', label: '⚔️ Jedi vs Sith', title: 'Jedi vs Sith', fixed: true,
-    // Sith on red (1), Jedi on blue (2).
-    pairs: (pool) => across(bySide(pool, 'sith'), bySide(pool, 'jedi')),
-    stats: (picks) => [pickStat(picks, ['jedi'], 'Jedi picks'), pickStat(picks, ['sith'], 'Sith picks')],
-  },
-  {
-    id: 'cvd', label: '🤖 Clones vs Droids', title: 'Clones vs Droids', fixed: true,
-    // Droid on red (1), clone on blue (2).
-    pairs: (pool) => across(bySide(pool, 'droid'), bySide(pool, 'clone')),
-    stats: (picks) => [pickStat(picks, ['clone'], 'Clone picks'), pickStat(picks, ['droid'], 'Droid picks')],
-  },
-  {
-    id: 'hvf', label: '🎯 Hunters vs Force users', title: 'Hunters vs Force', fixed: true,
-    // Bounty hunter on red (1), Jedi or Sith on blue (2).
-    pairs: (pool) => across(bySide(pool, 'hunter'), [...bySide(pool, 'jedi'), ...bySide(pool, 'sith')]),
-    stats: (picks) => [pickStat(picks, ['hunter'], 'Hunter picks'), pickStat(picks, ['jedi', 'sith'], 'Force user picks')],
-  },
-  { id: 'close', label: '🔥 Close fights', title: 'Close fight', pairs: closePairs },
-  // One group only, for every group in the registry (ids match the group ids).
-  ...SIDE_IDS.map((id) => ({
-    id, row: 'only', label: SIDES[id].shortPlural || SIDES[id].plural, title: `${shortName(id)} vs ${shortName(id)}`,
-    pairs: (pool) => everyPair(bySide(pool, id)),
-  })),
-];
+// Results-screen boxes per mode; modes without one show underdog picks.
+const STATS = {
+  // A "picks" box for the (up to 3) most-picked groups that took part.
+  mixed: (picks, pairs) => SIDE_IDS.filter((id) => pairs.some((p) => p.some((c) => c.side === id)))
+    .sort((x, y) => (picks[y] || 0) - (picks[x] || 0)).slice(0, 3)
+    .map((id) => pickStat(picks, [id], `${shortName(id)} picks`)),
+  jvs: (picks) => [pickStat(picks, ['jedi'], 'Jedi picks'), pickStat(picks, ['sith'], 'Sith picks')],
+  cvd: (picks) => [pickStat(picks, ['clone'], 'Clone picks'), pickStat(picks, ['droid'], 'Droid picks')],
+  hvf: (picks) => [pickStat(picks, ['hunter'], 'Hunter picks'), pickStat(picks, ['jedi', 'sith'], 'Force user picks')],
+};
 
-function currentMode(pool) {
-  const saved = MODES.find((m) => m.id === store.get(MODE_KEY));
-  return saved && saved.pairs(pool).length ? saved : MODES[0];
-}
+// The shared character modes (js/charmodes.js) as matchups: pairs(pool) →
+// [[a, b], …]. Versus modes are `fixed`: side a on top (red / 1), side b on
+// the bottom (blue / 2), e.g. Sith on red and Jedi on blue; other matchups
+// are flipped at random.
+export const MODES = CHAR_MODES.map((m) => ({
+  ...m,
+  title: m.id === 'mixed' ? 'Who would win?' : m.title,
+  fixed: Boolean(m.a),
+  stats: STATS[m.id],
+  pairs: m.a ? (pool) => across(groupsOf(pool, m.a), groupsOf(pool, m.b))
+    : m.only ? (pool) => everyPair(bySide(pool, m.only))
+      : m.close ? closePairs
+        : (pool) => everyPair(pool),
+}));
+
+const currentMode = (pool) => savedMode(MODE_KEY, MODES, (m) => m.pairs(pool).length > 0);
 const fighters = (pairs) => new Set(pairs.flat().map((c) => c.id)).size;
 
 // Uses the Rounds setting; "All" (0) means unlimited matchups here.
@@ -99,21 +80,9 @@ export function lobby({ pool, settings, refresh }) {
   const length = settings.rounds;
   const mode = currentMode(pool);
   const pairs = mode.pairs(pool);
-  const button = (m) => {
-    const n = m.pairs(pool).length;
-    return h('button', {
-      'aria-pressed': String(m.id === mode.id),
-      disabled: !n || null,
-      title: n ? null : 'Not enough characters for this mode yet',
-      onclick: () => { store.set(MODE_KEY, m.id); refresh(); },
-    }, m.label);
-  };
-  const extra = pool.length >= 2 && h('div', { class: 'hl-choose wv-modes' },
-    h('div', { class: 'title' }, 'Matchups'),
-    h('div', { class: 'seg' }, MODES.filter((m) => m.row !== 'only').map(button)),
-    h('div', { class: 'title wv-only-title' }, 'One group only'),
-    h('div', { class: 'seg wv-only' }, MODES.filter((m) => m.row === 'only').map(button)),
-  );
+  const extra = pool.length >= 2 && modePicker({
+    key: MODE_KEY, modes: MODES, current: mode, playable: (m) => m.pairs(pool).length > 0, refresh,
+  });
   return {
     ready: pairs.length > 0,
     extra,
