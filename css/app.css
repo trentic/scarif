@@ -1053,3 +1053,8 @@ body {
 .wv-modes .seg { gap: 12px; }
 .wv-modes .seg button { min-height: 66px; font-size: 29px; padding: 0 22px; }
 .wv-modes .wv-only-title { margin-top: 20px; }
+
+/* Who's That? (2 answers): a taller picture, two big answers */
+.who-screen .prompt { height: 720px; }
+.who-screen .picture-frame { height: 700px; }
+.who-screen .answer { min-height: 128px; font-size: 52px; }

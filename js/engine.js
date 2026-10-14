@@ -1,9 +1,13 @@
-// Shared quiz flow: countdown → rounds (prompt + 4 answers + timer) → results.
+// Shared quiz flow: countdown → rounds (prompt + answers + timer) → results.
 // Each game only supplies a "renderer" that draws the prompt for one entry:
 //
 //   renderer.mount(promptEl, entry, ctx) → { reveal(), replay?(), destroy(), points?() }
 //   renderer.preload?(entry)
 //   renderer.maxPoints (default 1) — points a perfect round is worth
+//   renderer.choices (default 4) — how many answers to show (2–4)
+//   renderer.distractors?(target, pool, n) → n wrong answers (default: random)
+//   renderer.ranks — results ranks [[minPct, title, blurb], …] (default: blaster ranks)
+//   renderer.screenClass — extra class on the round screen, for layout
 //
 // Games with their own flow (Speed Round, Higher or Lower) export `run()`
 // instead and reuse `countdown()` and `resultsScreen()` from here.
@@ -26,9 +30,9 @@ const RANKS = [
   [0, 'Stormtrooper', "Couldn't hit the side of a Star Destroyer."],
 ];
 
-export function rankFor(score, total) {
+export function rankFor(score, total, ranks = RANKS) {
   const pct = total ? (score / total) * 100 : 0;
-  return RANKS.find(([min]) => pct >= min);
+  return ranks.find(([min]) => pct >= min);
 }
 
 export function showScreen(stage, screen) {
@@ -115,6 +119,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
 
   // --- rounds ------------------------------------------------------------------
   const maxPoints = renderer.maxPoints || 1;
+  const nChoices = Math.max(2, Math.min(4, renderer.choices || 4, pool.length));
   let score = 0;
   let correct = 0;
   let streak = 0;
@@ -131,7 +136,8 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
   function playRound(index) {
     return new Promise((resolve) => {
       const target = targets[index];
-      const others = shuffle(pool.filter((e) => e.id !== target.id)).slice(0, 3);
+      const wrong = nChoices - 1;
+      const others = renderer.distractors?.(target, pool, wrong) || shuffle(pool.filter((e) => e.id !== target.id)).slice(0, wrong);
       const choices = shuffle([target, ...others]);
       const correctIdx = choices.indexOf(target);
 
@@ -171,7 +177,9 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
         el.append(count);
         return { bar, count };
       });
-      const chatHint = chatOn ? h('div', { class: 'chat-hint' }, '💬 Chat: type ', h('b', {}, 'A'), ', ', h('b', {}, 'B'), ', ', h('b', {}, 'C'), ' or ', h('b', {}, 'D')) : null;
+      const letters = LETTERS.slice(0, choices.length);
+      const chatHint = chatOn ? h('div', { class: 'chat-hint' }, '💬 Chat: type ',
+        letters.flatMap((l, i) => [i ? (i === letters.length - 1 ? ' or ' : ', ') : null, h('b', {}, l)])) : null;
       const showTally = ({ counts, total }) => {
         choices.forEach((_, i) => {
           const n = counts[i] || 0;
@@ -184,7 +192,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
       const votes = chatOn ? voteRound(choices.map((e, i) => ({ id: i, keys: [LETTERS[i], String(i + 1)], names: [e.name] })), { onUpdate: showTally }) : null;
       if (chatOn) {
         // Test chat leans towards the right answer, like a real audience might.
-        chat.setTestHint(() => (phase === 'asking' ? [LETTERS[correctIdx], LETTERS[correctIdx], choices[correctIdx].name, ...LETTERS] : []));
+        chat.setTestHint(() => (phase === 'asking' ? [LETTERS[correctIdx], LETTERS[correctIdx], choices[correctIdx].name, ...letters] : []));
       }
       function updateBanner() {
         const { counts, total } = votes.tally();
@@ -196,7 +204,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
       const hostBar = h('div', { class: 'host-bar chrome' }, hostBtn);
       if (settings.mode !== 'host') hostBar.style.visibility = 'hidden';
 
-      const screen = h('div', { class: 'screen round-screen' },
+      const screen = h('div', { class: `screen round-screen ${renderer.screenClass || ''} choices-${choices.length}` },
         h('div', { class: 'corner left chrome' }, iconButton('home', 'Quit to menu', () => { finish(); resolve('exit'); exit(); })),
         hud, timer, prompt, chatHint, answers, hostBar,
       );
@@ -342,7 +350,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
 
   function showResults() {
     const total = targets.length * maxPoints;
-    const [, rank, blurb] = rankFor(score, total);
+    const [, rank, blurb] = rankFor(score, total, renderer.ranks);
     const replay = () => { stop(); onReplay(); };
     keyHandler = (e) => {
       if (e.key === 'Escape') exit();

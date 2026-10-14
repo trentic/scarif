@@ -20,6 +20,7 @@ const modules = {
   speed: () => import('./games/speed.js'),
   higherlower: () => import('./games/higherlower.js'),
   whowouldwin: () => import('./games/whowouldwin.js'),
+  character: () => import('./games/character.js'),
 };
 
 let stopCurrent = () => {};

@@ -16,6 +16,7 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 
 | Game | What players do | Needs per character |
 | --- | --- | --- |
+| 🕵️ **Who’s That?** | Name the character from their picture: just 2 answers (A or B), so the picture can be big and everything stays inside the Shorts / TikTok safe zone. The wrong answer is someone from the same group with similar fan power. Uses the **Picture mode** setting (clear, blur, silhouette, zoom) | picture |
 | ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Uses the **Rounds** setting; **All** means unlimited matchups (tap **Finish** or press F to end). Pick a **matchup mode** in the lobby: 🎲 Anyone, ⚔️ Jedi vs Sith (Sith on red / 1, Jedi on blue / 2), 🤖 Clones vs Droids (droid on red, clone on blue), 🎯 Hunters vs Force users (bounty hunter on red vs a Jedi or Sith), 🔥 Close fights (similar fan power), or one group only (Jedi, Sith, Hunters, Clones or Droids). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
 
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.

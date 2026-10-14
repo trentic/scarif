@@ -66,6 +66,17 @@ export const GAMES = [
     minEntries: 3,
   },
   {
+    id: 'whos-that',
+    title: 'Who’s That?',
+    tagline: 'name the character',
+    icon: '🕵️',
+    accent: 'cyan',
+    module: 'character',
+    archive: 'characters',
+    requires: { image: true },
+    minEntries: 2,
+  },
+  {
     id: 'who-would-win',
     title: 'Who Would Win?',
     tagline: 'pick your fighter',

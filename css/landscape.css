@@ -168,3 +168,6 @@ body.side-green { background: #00b140; }
 .layout-43 .lobby:has(.wv-modes) h1 { margin-top: 28px; font-size: 84px; }
 .layout-43 .lobby .wv-modes { margin-top: 24px; }
 .layout-43 .wv-modes .seg button { min-height: 58px; font-size: 26px; }
+.layout-43 .who-screen .prompt { height: auto; }
+.layout-43 .who-screen .picture-frame { height: 700px; }
+.layout-43 .who-screen .answers { gap: 28px; }
