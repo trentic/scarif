@@ -13,6 +13,7 @@ export const DEFAULTS = {
   sfx: true,
   safeZones: false,
   clean: false,
+  wordleHint: 'after3', // Star Wars Wordle: show the word's category after 3 misses, or 'off'
 };
 
 export const OPTIONS = [
@@ -42,6 +43,10 @@ export const OPTIONS = [
     help: 'Clear shows the picture as-is. Blur, Silhouette and Zoom hide it until the answer is revealed (silhouette works best with transparent PNGs).',
   },
   { key: 'speedSeconds', title: 'Speed Round length', choices: [[30, '30s'], [60, '60s'], [90, '90s']] },
+  {
+    key: 'wordleHint', title: 'Wordle hint', choices: [['after3', 'After 3 misses'], ['off', 'Off']],
+    help: 'Shows what kind of word it is (Character, Planet, Ship…) after your 3rd wrong guess.',
+  },
   { key: 'sfx', title: 'Game sound effects', choices: [[true, 'On'], [false, 'Off']] },
   {
     key: 'safeZones', title: 'Safe-zone overlay', choices: [[true, 'Show'], [false, 'Hide']],

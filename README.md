@@ -80,6 +80,15 @@ Files are checked by their actual contents, not their extension.
 
 > The repository must be **public** for free GitHub Pages, so uploaded media is publicly visible in the repo. Upload only media you're allowed to share.
 
+## Star Wars Wordle (daily puzzle)
+
+Guess the 5-letter Star Wars word in 6 tries: green = right letter and spot, yellow = in the word but elsewhere, grey = not in it (repeated letters are only marked as often as they appear in the answer). Guesses must be real words: any English 5-letter word or Star Wars word (`data/wordle-guesses.txt`).
+
+- **Daily**: one word per day, the same for everyone, changing at local midnight. Puzzle #1 is the schedule's start date; after 365 days the list repeats. Progress, stats, streaks and the guess chart are kept in the browser, and **Share** copies the emoji grid.
+- **Practice**: random words any time (never one of the next 30 daily words); doesn't affect stats.
+- **Hint**: after 3 misses the word's category shows (Character, Planet, Ship or vehicle…). Settings → **Wordle hint** turns it off.
+- The schedule is `data/wordle.json` (words lightly encoded so the file doesn't spoil answers at a glance). There's no live chat mode.
+
 ## Characters (Jedi & Sith)
 
 Debug mode has two tabs: **Blasters** and **Characters**. Characters live in their own archive (`data/characters.json`, pictures in `media/characters/`) with a name, group (Jedi, Sith, Bounty Hunter, Clone Trooper or Combat Droid), a **fan power** (1–100) and a picture. It starts with 20 Jedi and 20 Sith; characters appear in games once they have a picture.

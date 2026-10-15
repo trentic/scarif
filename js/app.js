@@ -21,6 +21,7 @@ const modules = {
   higherlower: () => import('./games/higherlower.js'),
   whowouldwin: () => import('./games/whowouldwin.js'),
   character: () => import('./games/character.js'),
+  wordle: () => import('./games/wordle.js'),
 };
 
 let stopCurrent = () => {};
@@ -167,7 +168,7 @@ async function showHub() {
           h('div', { class: 'tag' }, g.tagline),
           h('div', { class: 'meta' }, locked
             ? `🔒 Needs ${g.minEntries} ${info.noun} ${requirementLabel(g.requires)} · ${eligible} added`
-            : `${eligible} ${info.noun} in the archive`),
+            : g.blurb || `${eligible} ${info.noun} in the archive`),
         ),
       ));
     }
@@ -177,6 +178,10 @@ async function showHub() {
 // --- lobby & game -------------------------------------------------------------------------
 
 async function showLobby(gameId) {
+  // Redrawing the lobby (a mode or setting changed) must drop the previous
+  // lobby's Enter-to-start key handler, or Enter would restart a game later.
+  stopCurrent();
+  stopCurrent = () => {};
   const game = getGame(gameId);
   if (!game) { location.hash = '#/'; return; }
   setAccent(game.accent);
@@ -209,7 +214,7 @@ async function showLobby(gameId) {
     h('div', { class: 'facts' }, facts),
     custom.extra || null,
     h('div', { class: 'actions' },
-      h('button', { class: 'btn', disabled: !ready, style: ready ? null : { opacity: 0.4 }, onclick: () => ready && start() }, 'Start'),
+      h('button', { class: 'btn', disabled: !ready, style: ready ? null : { opacity: 0.4 }, onclick: () => ready && start() }, custom.startLabel || 'Start'),
     ),
   ));
 
@@ -241,7 +246,7 @@ async function showLobby(gameId) {
       onReplay: start,
     };
     playing = true;
-    chat.startGame(); // read chat only while a game is running
+    if (game.chat !== false) chat.startGame(); // read chat only while a game is running
     if (mod.run) mod.run(opts);
     else runGame({ ...opts, renderer: mod.renderer });
   }

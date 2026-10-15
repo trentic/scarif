@@ -171,3 +171,22 @@ body.side-green { background: #00b140; }
 .layout-43 .who-screen .prompt { height: auto; }
 .layout-43 .who-screen .picture-frame { height: 700px; }
 .layout-43 .who-screen .answers { gap: 28px; }
+
+/* Star Wars Wordle: board left, keyboard right */
+.layout-43 .wd-screen .hud { padding-left: 140px; }
+.layout-43 .wd-hint { margin-top: 10px; height: 44px; font-size: 28px; }
+.layout-43 .wd-main { flex-direction: row; justify-content: center; align-items: center; gap: 60px; margin-top: 0; }
+.layout-43 .wd-row { grid-template-columns: repeat(5, 112px); }
+.layout-43 .wd-tile { height: 112px; font-size: 58px; }
+.layout-43 .wd-keys { width: 600px; }
+.layout-43 .wd-key { max-width: 54px; height: 86px; font-size: 28px; }
+.layout-43 .wd-key.wide { max-width: 96px; font-size: 20px; }
+.layout-43 .wd-toast { top: 170px; }
+.layout-43 .wd-end { left: 50%; right: auto; width: 820px; transform: translateX(-50%); top: 120px; padding: 30px 46px 34px; animation: none; }
+.layout-43 .wd-answer span { width: 80px; height: 80px; font-size: 44px; }
+.layout-43 .wd-stats { margin-top: 22px; }
+.layout-43 .wd-stats b { font-size: 50px; }
+.layout-43 .wd-dist { margin-top: 18px; gap: 6px; }
+.layout-43 .wd-bar-row { font-size: 24px; }
+.layout-43 .wd-next { margin-top: 16px; }
+.layout-43 .wd-actions { margin-top: 20px; }

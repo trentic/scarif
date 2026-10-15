@@ -66,6 +66,19 @@ export const GAMES = [
     minEntries: 3,
   },
   {
+    id: 'wordle',
+    title: 'Star Wars Wordle',
+    tagline: 'a new word every day',
+    icon: '🔤',
+    accent: 'green',
+    module: 'wordle',
+    archive: 'words',
+    requires: {},
+    minEntries: 1,
+    chat: false, // no chat mode: don't read live chat while playing
+    blurb: 'Guess the 5-letter word in 6 tries',
+  },
+  {
     id: 'whos-that',
     title: 'Who’s That?',
     tagline: 'name the character',
@@ -93,6 +106,7 @@ export const GAMES = [
 export const ARCHIVES = {
   blasters: { file: 'archive', title: 'Blaster games', noun: 'blasters' },
   characters: { file: 'characters', title: 'Character games', noun: 'characters' },
+  words: { file: 'wordle', title: 'Daily puzzle', noun: 'words' },
 };
 
 // Character groups. To add one, add it here (plus its colours in css/app.css
