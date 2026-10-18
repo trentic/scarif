@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T20:48:06.000Z",
+  "updatedAt": "2026-10-18T20:53:23.723Z",
   "entries": [
     {
       "id": "1-jac",
@@ -172,9 +172,9 @@
       "name": "Boba Fett",
       "side": "hunter",
       "power": 95,
-      "image": null,
+      "image": "media/characters/boba-fett-28d28e20.webp",
       "createdAt": "2026-10-18T20:48:06.000Z",
-      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:53:23.723Z",
       "wiki": "Boba Fett"
     },
     {
@@ -202,10 +202,10 @@
       "name": "Bossk",
       "side": "hunter",
       "power": 82,
-      "image": null,
+      "image": "media/characters/bossk-c2539dd7.webp",
       "createdAt": "2026-10-18T20:48:06.000Z",
-      "updatedAt": "2026-10-18T20:48:06.000Z",
-      "wiki": "Bossk"
+      "updatedAt": "2026-10-18T20:53:23.723Z",
+      "wiki": "Bossk'wassak'Cradossk"
     },
     {
       "id": "brander-lawson",
@@ -790,9 +790,9 @@
       "name": "General Grievous",
       "side": "droid",
       "power": 94,
-      "image": null,
+      "image": "media/characters/general-grievous-89bb6738.webp",
       "createdAt": "2026-10-18T20:48:06.000Z",
-      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:53:23.723Z",
       "wiki": "Grievous"
     },
     {
@@ -969,9 +969,9 @@
       "name": "Jango Fett",
       "side": "hunter",
       "power": 91,
-      "image": null,
+      "image": "media/characters/jango-fett-d4ef23ed.webp",
       "createdAt": "2026-10-18T20:48:06.000Z",
-      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:53:23.723Z",
       "wiki": "Jango Fett"
     },
     {
