@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T20:53:23.723Z",
+  "updatedAt": "2026-10-18T21:55:05.189Z",
   "entries": [
     {
       "id": "1-jac",
@@ -1265,10 +1265,10 @@
       "id": "obi-wan-kenobi",
       "name": "Obi-Wan Kenobi",
       "side": "jedi",
-      "power": 89,
+      "power": 98,
       "image": "media/characters/obi-wan-kenobi-cee5acac.jpg",
       "createdAt": "2026-09-30T00:00:00.000Z",
-      "updatedAt": "2026-09-30T04:12:31.011Z"
+      "updatedAt": "2026-10-18T21:55:05.183Z"
     },
     {
       "id": "phobos",
