@@ -290,7 +290,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         prefs.top = Math.max(1, Math.min(500, Number(topInput.value) || 40));
         savePrefs();
         let left = prefs.top; // only new ones count towards N
-        for (const r of visible()) r.selected = !r.inArchive && left-- > 0;
+        for (const r of visible()) r.selected = r.fillFor ? true : !r.inArchive && left-- > 0;
         renderResults();
       },
     }, 'Pick the top'), topInput, h('span', { class: 'hint' }, 'best known'),
@@ -299,7 +299,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
     K.sides ? h('div', { class: 'filter wiki-filter' }, filterBtns) : h('span'),
     h('div', { class: 'wiki-select' },
       pickTop,
-      h('button', { class: 'btn ghost small', type: 'button', onclick: () => { results.forEach((r) => { r.selected = !r.inArchive; }); renderResults(); } }, 'Pick all'),
+      h('button', { class: 'btn ghost small', type: 'button', onclick: () => { results.forEach((r) => { r.selected = pickable(r); }); renderResults(); } }, 'Pick all'),
       h('button', { class: 'btn ghost small', type: 'button', onclick: () => { results.forEach((r) => { r.selected = false; }); renderResults(); } }, 'Pick none'),
     ),
   );
@@ -310,7 +310,9 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
   const visible = () => [...results.values()]
     .filter((r) => mode === 'fix' || filter === 'all' || r.side === filter)
     .sort((a, b) => (mode === 'fix' ? a.name.localeCompare(b.name) : b.length - a.length));
-  const picked = () => visible().filter((r) => r.selected && !r.inArchive);
+  // New articles, or archive entries that are missing a picture.
+  const pickable = (r) => !r.inArchive || Boolean(r.fillFor);
+  const picked = () => visible().filter((r) => r.selected && pickable(r));
 
   function showResults() {
     toolbar.hidden = !results.size;
@@ -328,8 +330,11 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       saveBtn.textContent = `Save ${n} picture${n === 1 ? '' : 's'}`;
     } else {
       const inArchive = all.filter((r) => r.inArchive).length;
-      summaryEl.textContent = `${all.length} found · ${all.length - inArchive} new · ${inArchive} already in your archive · ${n} picked`;
-      saveBtn.textContent = `Add ${plural(n, K.noun)}`;
+      const fills = all.filter((r) => r.fillFor).length;
+      const pickedFills = picked().filter((r) => r.fillFor).length;
+      summaryEl.textContent = `${all.length} found · ${all.length - inArchive} new · ${inArchive} already in your archive${fills ? ` (${fills} without a picture)` : ''} · ${n} picked`;
+      saveBtn.textContent = [n - pickedFills && `Add ${plural(n - pickedFills, K.noun)}`, pickedFills && `save ${pickedFills} missing picture${pickedFills === 1 ? '' : 's'}`]
+        .filter(Boolean).join(' + ').replace(/^s/, 'S') || `Add 0 ${K.noun[1]}`;
     }
     saveBtn.disabled = saving || !n;
   }
@@ -342,15 +347,15 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
   }
 
   function resultCard(r) {
-    const locked = r.inArchive || saving;
+    const locked = !pickable(r) || saving;
     const check = h('input', {
-      type: 'checkbox', checked: (r.selected && !r.inArchive) || null, disabled: locked || null,
+      type: 'checkbox', checked: (r.selected && pickable(r)) || null, disabled: locked || null,
       'aria-label': `Pick ${r.name}`,
       onchange: () => { r.selected = check.checked; el.classList.toggle('picked', r.selected); renderSummary(); },
     });
     let fields;
-    if (mode === 'fix') {
-      fields = [h('div', { class: 'name' }, r.name)];
+    if (mode === 'fix' || r.fillFor) {
+      fields = [h('div', { class: 'name' }, r.fillFor ? r.fillFor.name : r.name)];
     } else {
       const name = h('input', { type: 'text', value: r.name, maxlength: kind === 'blasters' ? '80' : '60', disabled: locked || null, 'aria-label': 'Name', oninput: () => { r.name = name.value; } });
       fields = [name];
@@ -366,11 +371,12 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         fields.push(h('div', { class: 'char-top' }, side, h('label', { class: 'wiki-power', title: 'Fan power (1–100), estimated from how long the article is' }, '⚡', power)));
       }
     }
-    const el = h('article', { class: `entry wiki-card ${kind} ${r.selected && !r.inArchive ? 'picked' : ''} ${r.inArchive ? 'in-archive' : ''}` },
+    const el = h('article', { class: `entry wiki-card ${kind} ${r.selected && pickable(r) ? 'picked' : ''} ${r.inArchive && !r.fillFor ? 'in-archive' : ''}` },
       h('label', { class: 'thumb' },
         h('img', { src: r.image, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }),
         check,
-        r.inArchive ? h('span', { class: 'wiki-flag' }, 'In archive') : null,
+        r.fillFor ? h('span', { class: 'wiki-flag fill' }, 'In archive · no picture')
+          : r.inArchive ? h('span', { class: 'wiki-flag' }, 'In archive') : null,
         r.both ? h('span', { class: 'wiki-flag warn', title: 'Listed in more than one group. Check the group.' }, r.groups.map((g) => SIDES[g]?.plural || g).join(' & ')) : null,
         r.legends ? h('span', { class: 'wiki-flag legends' }, 'Legends') : null,
       ),
@@ -456,10 +462,20 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
       const known = new Set(entries.map((e) => e.wiki).filter(Boolean));
       const { from } = await lookupTitles(entries.map((e) => e.wiki || e.name));
       from.forEach((r) => known.add(r.title));
+      // Which archive entry an article is, so ones with no picture can get one.
+      const entryFor = new Map();
+      for (const e of entries) {
+        if (e.wiki) entryFor.set(e.wiki, e);
+        const found = from.get(e.wiki || e.name);
+        if (found) entryFor.set(found.title, e);
+      }
 
       for (const { result, sides } of list) {
         const name = nick.get(result.title) || K.name(result.title);
+        const existing = entryFor.get(result.title) || entries.find((e) => K.same(e.name, name) || K.same(e.name, result.title));
         results.set(result.pageid, {
+          // Already in the archive but without a picture: picking it saves this picture.
+          fillFor: K.fixPictures && existing && !existing.image ? existing : null,
           ...result,
           name,
           // Listed in several groups (e.g. a fallen Jedi) → the highest-ranked one.
@@ -471,9 +487,9 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
           selected: false,
         });
       }
-      // Start with the best-known new ones picked.
+      // Start with the best-known new ones picked, plus every missing picture.
       let left = prefs.top;
-      for (const r of visible()) r.selected = !r.inArchive && left-- > 0;
+      for (const r of visible()) r.selected = r.fillFor ? true : !r.inArchive && left-- > 0;
 
       const extra = [
         hidden && `Showing the ${SHOW} best-known of ${total} (paste a name to get anyone else)`,
@@ -526,7 +542,7 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
         for (const { r } of ready) {
           r.selected = false;
           if (mode === 'fix') results.delete(r.key);
-          else r.inArchive = true;
+          else { r.inArchive = true; r.fillFor = null; }
         }
         entries = archive.entries;
         done += ready.length - (res.skipped?.length || 0);
@@ -551,9 +567,17 @@ export function openWikiImport({ kind = 'characters', gh, entries, toast, onAuth
     }
   }
 
+  // New ones are added; archive entries without a picture get this one.
   const importPicked = () => {
     const list = picked();
-    if (list.length && !saving) saveInBatches(list, (ready) => K.add(gh, ready), 'Added');
+    if (!list.length || saving) return;
+    saveInBatches(list, async (ready) => {
+      const fills = ready.filter(({ r }) => r.fillFor);
+      const fresh = ready.filter(({ r }) => !r.fillFor);
+      let archive = null;
+      if (fills.length) archive = await setCharacterImages(gh, fills.map(({ r, image }) => ({ id: r.fillFor.id, image, wiki: r.title })));
+      return fresh.length ? K.add(gh, fresh) : archive;
+    }, 'Saved');
   };
 
   const savePictures = () => {

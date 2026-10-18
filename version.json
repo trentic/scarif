@@ -1,5 +1,5 @@
 {
-  "v": "ddd86bd4c6",
+  "v": "5bd6428bbb",
   "files": {
     "config.js": "cc8ebd2a9c",
     "css/app.css": "7c6f3893fc",
@@ -7,14 +7,14 @@
     "css/theme.css": "d5d4bcf719",
     "debug/character-store.js": "996853e37c",
     "debug/characters.js": "bc78aa3d8a",
-    "debug/debug.css": "9ed5129ce7",
+    "debug/debug.css": "ed6bff7206",
     "debug/debug.js": "e2a89418d4",
     "debug/github.js": "c9ec398048",
     "debug/sound-match.js": "7cf97984a2",
     "debug/store.js": "049698164e",
     "debug/trimmer.js": "7a6db8f609",
     "debug/vault.js": "82f5f17c16",
-    "debug/wiki-import.js": "f90f0012d1",
+    "debug/wiki-import.js": "49d757b1e5",
     "debug/wookieepedia.js": "d12ed24b53",
     "debug/yt-recorder.js": "e68254c4f0",
     "js/app.js": "49f5fc324c",

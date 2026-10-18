@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:10:52.790Z",
+  "updatedAt": "2026-10-18T20:48:06.000Z",
   "entries": [
     {
       "id": "1-jac",
@@ -168,6 +168,16 @@
       "wiki": "Bly"
     },
     {
+      "id": "boba-fett",
+      "name": "Boba Fett",
+      "side": "hunter",
+      "power": 95,
+      "image": null,
+      "createdAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "wiki": "Boba Fett"
+    },
+    {
       "id": "boil",
       "name": "Boil",
       "side": "clone",
@@ -186,6 +196,16 @@
       "createdAt": "2026-10-10T05:03:53.675Z",
       "updatedAt": "2026-10-10T05:03:53.675Z",
       "wiki": "Boost"
+    },
+    {
+      "id": "bossk",
+      "name": "Bossk",
+      "side": "hunter",
+      "power": 82,
+      "image": null,
+      "createdAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "wiki": "Bossk"
     },
     {
       "id": "brander-lawson",
@@ -766,6 +786,16 @@
       "wiki": "Freedon Nadd"
     },
     {
+      "id": "general-grievous",
+      "name": "General Grievous",
+      "side": "droid",
+      "power": 94,
+      "image": null,
+      "createdAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "wiki": "Grievous"
+    },
+    {
       "id": "gol",
       "name": "Gol",
       "side": "sith",
@@ -933,6 +963,16 @@
       "createdAt": "2026-10-10T04:47:33.092Z",
       "updatedAt": "2026-10-10T04:47:33.092Z",
       "wiki": "J'Quille"
+    },
+    {
+      "id": "jango-fett",
+      "name": "Jango Fett",
+      "side": "hunter",
+      "power": 91,
+      "image": null,
+      "createdAt": "2026-10-18T20:48:06.000Z",
+      "updatedAt": "2026-10-18T20:48:06.000Z",
+      "wiki": "Jango Fett"
     },
     {
       "id": "jas-emari",

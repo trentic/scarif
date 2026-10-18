@@ -97,6 +97,8 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 
 **Import from Wookieepedia** (Characters and Blasters tabs): click **🌐 Import from Wookieepedia**. Choose categories to read (characters: each marked Jedi or Sith; use **Find** to look up category names) and/or paste names or Wookieepedia links, then **Search Wookieepedia**. Whole categories are read (plus their subcategories, e.g. *Clone troopers → Clone commanders*), and the 300 best-known articles are shown with their main picture and, for characters, a fan power from the article's length (each doubling adds 10 points, so it's the same in every search). Numbered clone troopers get their nickname (*CT-7567 → Rex*), taken from Wookieepedia's redirects. Anything already in your archive is greyed out (redirects count, so *Darth Sidious* matches *Sheev Palpatine*, and a blaster's model code counts, so *DL-44* matches *DL-44 Heavy Blaster Pistol*). Pick what to add, fix names (and sides / fan power), then **Add**. Pictures are copied into the site and saved in batches of 8. Wookieepedia is read from your browser, so nothing needs setting up.
 
+**Pictures while importing:** characters already in your archive but without a picture show up in search results tagged *In archive · no picture* and are ticked; **Add** saves their picture along with any new characters.
+
 **Missing character pictures:** **🖼 Find N missing pictures** (Characters tab) looks up every character with no picture on Wookieepedia and shows what it found. For any it can't find, type the right article name (or paste its link) and press **Look up**, then **Save**.
 
 **Blaster sounds:** Wookieepedia has no sounds, so add your own files:
