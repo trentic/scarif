@@ -1,10 +1,12 @@
 // Vote split for a "Who Would Win?" matchup.
 //
 // Until a vote backend is configured (VOTES.endpoint in config.js), the split
-// is an estimate from each character's fan power: the bigger the power gap,
-// the more one-sided, with a little randomness so repeat matchups vary.
+// is an estimate from each character's fight strength (their group plus fan
+// power, see strength() in registry.js): the bigger the gap, the more
+// one-sided, with a little randomness so repeat matchups vary.
 // These are labelled as estimates on screen, never as real votes.
 import { VOTES } from '../config.js';
+import { strength } from './registry.js';
 
 // Logistic curve on the fan-power gap: equal powers split 50/50, and the
 // split grows with the gap but levels off (see VOTES.estimate in config.js).
@@ -15,7 +17,7 @@ export function estimateShare(gap, { spread = 12, min = 8, max = 92 } = {}) {
 
 function estimate(a, b) {
   const opts = VOTES.estimate || {};
-  const gap = (Number(a.power) || 50) - (Number(b.power) || 50);
+  const gap = strength(a) - strength(b);
   const jitter = (Math.random() * 2 - 1) * (opts.jitter ?? 3);
   const pctA = Math.round(estimateShare(gap, opts) + jitter);
   const clamped = Math.min(opts.max ?? 92, Math.max(opts.min ?? 8, pctA));

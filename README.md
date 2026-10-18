@@ -17,7 +17,7 @@ A hub of Star Wars mini-games built for recording vertical (9:16) content for Ti
 | Game | What players do | Needs per character |
 | --- | --- | --- |
 | 🕵️ **Who’s That?** | Name the character from their picture: just 2 answers (A or B), so the picture can be big and everything stays inside the Shorts / TikTok safe zone. The wrong answer is someone from the same group with similar fan power. The lobby has the same **matchup modes** as Who Would Win?: in Jedi vs Sith (and the other versus modes) the two options are one from each side, one-group modes only show that group, and 🔥 Tough calls makes the wrong answer the closest fan-power match. Uses the **Picture mode** setting (clear, blur, silhouette, zoom) | picture |
-| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Uses the **Rounds** setting; **All** means unlimited matchups (tap **Finish** or press F to end). Pick a **matchup mode** in the lobby: 🎲 Anyone, ⭐ Icons only (only the most popular characters, any group: Vader, Yoda, Rex, Cad Bane… the list is in `js/icons.js`, and debug mode's ⭐ Icon box adds or removes anyone), ⚔️ Jedi vs Sith (Sith on red / 1, Jedi on blue / 2), 🤖 Clones vs Droids (droid on red, clone on blue), 🎯 Hunters vs Force users (bounty hunter on red vs a Jedi or Sith), 🔥 Close fights (similar fan power), or one group only (Jedi, Sith, Hunters, Clones or Droids). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
+| ⚔️ **Who Would Win?** | Two random characters (any side vs any side) — tap who you think wins, then see the fan split. Uses the **Rounds** setting; **All** means unlimited matchups (tap **Finish** or press F to end). Pick a **matchup mode** in the lobby: 🎲 Anyone, ⭐ Icons only (only the most popular characters, any group: Vader, Yoda, Rex, Cad Bane… the list is in `js/icons.js`, and debug mode's ⭐ Icon box adds or removes anyone), ⚔️ Jedi vs Sith (Sith on red / 1, Jedi on blue / 2), 🤖 Clones vs Droids (droid on red, clone on blue), 🎯 Hunters vs Force users (bounty hunter on red vs a Jedi or Sith), 🔥 Close fights (similar fight strength), or one group only (Jedi, Sith, Hunters, Clones or Droids). Opinion only; the end screen shows how many picks matched the fan favourite | picture |
 
 Both games draw from one shared **archive**, which you manage in password-protected debug mode.
 
@@ -91,7 +91,7 @@ Guess the 5-letter Star Wars word in 6 tries: green = right letter and spot, yel
 
 ## Characters (Jedi & Sith)
 
-Debug mode has two tabs: **Blasters** and **Characters**. Characters live in their own archive (`data/characters.json`, pictures in `media/characters/`) with a name, group (Jedi, Sith, Bounty Hunter, Clone Trooper or Combat Droid), a **fan power** (1–100) and a picture. It starts with 20 Jedi and 20 Sith; characters appear in games once they have a picture.
+Debug mode has two tabs: **Blasters** and **Characters**. Characters live in their own archive (`data/characters.json`, pictures in `media/characters/`) with a name, group (Jedi, Sith, Bounty Hunter, Clone Trooper or Combat Droid), a **fan power** (1–100, how popular and strong they are within their group) and a picture. It starts with 20 Jedi and 20 Sith; characters appear in games once they have a picture.
 
 **Quick pictures:** hover a character card and press **Ctrl+V** (or click **📋 Paste**). It uses whatever you last copied — an image address (right-click → *Copy image address*) or the image itself (right-click → *Copy image*). You can also drop an image file on a card. If a site blocks copying its images, the address is linked instead.
 
@@ -106,7 +106,7 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 
 ### Who Would Win? percentages
 
-Until real voting is set up, the split is a **fan estimate** from the gap in fan power, labelled *Fan estimate* on screen. It uses a logistic curve, so close fights stay close and big mismatches level off:
+Until real voting is set up, the split is a **fan estimate** from the gap in **fight strength**, labelled *Fan estimate* on screen. Fight strength comes from the character's group plus their fan power: each group has a range (`strength` in `js/registry.js`: Jedi and Sith 62–100, Bounty Hunters 35–80, Clone Troopers 15–58, Combat Droids 10–58) and fan power places the character inside it, so even the best-known clone or droid loses to any Jedi or Sith. It uses a logistic curve, so close fights stay close and big mismatches level off:
 
 | Power gap | 0 | 5 | 10 | 20 | 30+ |
 | --- | --- | --- | --- | --- | --- |

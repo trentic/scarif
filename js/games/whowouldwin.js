@@ -5,7 +5,7 @@ import * as chat from '../chat.js';
 import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
 import { bySide, CHAR_MODES, iconsOf, modePicker, savedMode } from '../charmodes.js';
-import { SIDE_IDS, SIDES } from '../registry.js';
+import { SIDE_IDS, SIDES, strength } from '../registry.js';
 import { sfx } from '../sfx.js';
 import { h, iconButton, wait } from '../ui.js';
 import { record, split, splitLabel } from '../votes.js';
@@ -29,12 +29,12 @@ function everyPair(list) {
   for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) out.push([list[i], list[j]]);
   return out;
 }
-// Matchups with similar fan power: start strict and widen until there are enough.
+// Matchups with similar fight strength: start strict and widen until there are enough.
 function closePairs(pool) {
   const all = everyPair(pool);
   const want = Math.min(12, all.length);
   for (const gap of [5, 8, 12, 18, 100]) {
-    const pairs = all.filter(([a, b]) => Math.abs((a.power || 50) - (b.power || 50)) <= gap);
+    const pairs = all.filter(([a, b]) => Math.abs(strength(a) - strength(b)) <= gap);
     if (pairs.length >= want) return pairs;
   }
   return all;
@@ -140,7 +140,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
 
   let agreed = 0;
   const picks = {}; // group → times picked
-  let underdogs = 0; // picked the one with less fan power
+  let underdogs = 0; // picked the weaker fighter
 
   for (let i = 0; alive && (total === 0 || i < total) && !finishing; i++) {
     const result = await round(i, nextPair());
@@ -201,8 +201,8 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
         bottom.dim.style.right = `${shareB * 100}%`;
       }
       if (chatOn) {
-        // Test chat leans towards the character with more fan power.
-        const fav = (a.power || 50) >= (b.power || 50) ? ['1', a.name] : ['2', b.name];
+        // Test chat leans towards the stronger fighter.
+        const fav = strength(a) >= strength(b) ? ['1', a.name] : ['2', b.name];
         chat.setTestHint(() => (phase === 'picking' ? [...fav, ...fav, '1', '2', a.name, b.name] : []));
       }
 
@@ -280,7 +280,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           (pick === a ? bottom : top).el.classList.add('not-picked');
           picks[pick.side] = (picks[pick.side] || 0) + 1;
           const other = pick === a ? b : a;
-          if ((pick.power || 50) < (other.power || 50)) underdogs++;
+          if (strength(pick) < strength(other)) underdogs++;
           record(a, b, pick);
           sfx.choose();
         }

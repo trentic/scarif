@@ -1,8 +1,8 @@
 {
-  "v": "130e1188c1",
+  "v": "ddd86bd4c6",
   "files": {
-    "config.js": "a6ef3b3cb9",
-    "css/app.css": "824ec29020",
+    "config.js": "cc8ebd2a9c",
+    "css/app.css": "7c6f3893fc",
     "css/landscape.css": "a77207922e",
     "css/theme.css": "d5d4bcf719",
     "debug/character-store.js": "996853e37c",
@@ -29,15 +29,15 @@
     "js/games/picture.js": "4f7f6a9392",
     "js/games/sound.js": "8c736d1760",
     "js/games/speed.js": "33fd67a1d9",
-    "js/games/whowouldwin.js": "1376b71a4c",
+    "js/games/whowouldwin.js": "f44b02f59e",
     "js/games/wordle.js": "ca36eda20f",
     "js/games/zoom.js": "9bc4d230b4",
     "js/icons.js": "ccba744090",
-    "js/registry.js": "97ba517e52",
+    "js/registry.js": "ff3783edcc",
     "js/settings.js": "bbbadddfdd",
     "js/sfx.js": "6f620188ec",
-    "js/stage.js": "46b81f752e",
+    "js/stage.js": "c97698dee8",
     "js/ui.js": "bc704fa7e7",
-    "js/votes.js": "8b748c1d07"
+    "js/votes.js": "e6dea00f52"
   }
 }

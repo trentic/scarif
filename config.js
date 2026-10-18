@@ -17,7 +17,8 @@ export const VOTES = {
   endpoint: '',
   // Show real percentages only once a matchup has this many votes.
   minVotes: 20,
-  // Fan estimate (used until real votes exist), from the gap in fan power:
+  // Fan estimate (used until real votes exist), from the gap in fight strength
+  // (group + fan power, see strength() in js/registry.js):
   //   gap 0 → 50/50 · 5 → 60/40 · 10 → 70/30 · 20 → 84/16 · 30+ → 92/8
   estimate: {
     spread: 12, // bigger = gentler curve (closer splits for the same gap)

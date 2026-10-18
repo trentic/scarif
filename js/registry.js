@@ -112,14 +112,23 @@ export const ARCHIVES = {
 // Character groups. To add one, add it here (plus its colours in css/app.css
 // and debug/debug.css); debug mode and the Who Would Win? modes pick it up.
 // When a character is listed in several groups, `rank` decides (higher wins).
+// `strength` [min, max]: how strong the group is in a fight. A character's
+// fan power (1–100) places them inside their group's range, so the
+// strongest clone or droid still loses to the weakest Jedi or Sith.
 export const SIDES = {
-  jedi: { label: 'Jedi', plural: 'Jedi', rank: 0 },
-  sith: { label: 'Sith', plural: 'Sith', rank: 4 },
-  hunter: { label: 'Bounty Hunter', plural: 'Bounty Hunters', short: 'Hunter', shortPlural: 'Hunters', rank: 3 },
-  clone: { label: 'Clone Trooper', plural: 'Clone Troopers', short: 'Clone', shortPlural: 'Clones', rank: 1 },
-  droid: { label: 'Combat Droid', plural: 'Combat Droids', short: 'Droid', shortPlural: 'Droids', rank: 2 },
+  jedi: { label: 'Jedi', plural: 'Jedi', rank: 0, strength: [62, 100] },
+  sith: { label: 'Sith', plural: 'Sith', rank: 4, strength: [62, 100] },
+  hunter: { label: 'Bounty Hunter', plural: 'Bounty Hunters', short: 'Hunter', shortPlural: 'Hunters', rank: 3, strength: [35, 80] },
+  clone: { label: 'Clone Trooper', plural: 'Clone Troopers', short: 'Clone', shortPlural: 'Clones', rank: 1, strength: [15, 58] },
+  droid: { label: 'Combat Droid', plural: 'Combat Droids', short: 'Droid', shortPlural: 'Droids', rank: 2, strength: [10, 58] },
 };
 export const SIDE_IDS = Object.keys(SIDES);
+
+// How strong a character is in a fight (0–100), from their group and fan power.
+export function strength(c) {
+  const [lo, hi] = SIDES[c.side]?.strength || [0, 100];
+  return lo + ((hi - lo) * (Number(c.power) || 50)) / 100;
+}
 
 export function getGame(id) {
   return GAMES.find((g) => g.id === id) || null;

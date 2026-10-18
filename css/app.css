@@ -1163,3 +1163,46 @@ body {
 .wd-next { margin-top: 26px; font-size: 28px; color: var(--muted); }
 .wd-actions { display: flex; gap: 24px; margin-top: 30px; }
 .wd-actions .btn { flex: 1; font-size: 38px; }
+
+/* The background (glow, stars, scan lines) fills the whole window, so the
+   empty space beside the stage (4:3 Left / Right, or a wide monitor) matches
+   the game instead of being a flat block. With the green-screen side fill the
+   stage keeps its own background and the sides stay plain green. */
+body:not(.side-green) #viewport {
+  background:
+    radial-gradient(ellipse calc(var(--stage-w, 100vw) * 0.9) calc(var(--stage-h, 100vh) * 0.75) at var(--stage-cx, 50%) var(--stage-cy, 40%), #0c1726 0%, transparent 70%),
+    radial-gradient(ellipse 140% 90% at 50% 45%, #0a121e 0%, transparent 75%),
+    var(--bg);
+}
+body:not(.side-green) #viewport::before,
+body:not(.side-green) #viewport::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+body:not(.side-green) #viewport::before {
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, #fff8 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 78% 9%, #fffa 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 42% 71%, #fff6 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 88% 58%, #fff8 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 23% 88%, #fff5 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 64% 33%, #fff6 50%, transparent 51%),
+    radial-gradient(2px 2px at 7% 52%, #fff7 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 55% 94%, #fff5 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 33% 6%, #fff6 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 94% 83%, #fff6 50%, transparent 51%);
+  background-size: 640px 640px; /* same star density on any window size */
+  animation: twinkle 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+body:not(.side-green) #viewport::after {
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 6px);
+  z-index: 60;
+}
+/* The window draws it now, so the stage itself is see-through. */
+body:not(.side-green) #stage,
+body:not(.side-green) #stage.layout-43 { background: transparent; z-index: 1; }
+body:not(.side-green) #stage::before,
+body:not(.side-green) #stage::after { display: none; }
