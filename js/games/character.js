@@ -3,7 +3,7 @@
 // tall picture and keep everything inside the Shorts / TikTok safe zone.
 // The lobby has the same matchup modes as Who Would Win? (js/charmodes.js):
 // they decide who can appear and who the wrong answer is.
-import { bySide, CHAR_MODES, inGroups, modePicker, savedMode } from '../charmodes.js';
+import { bySide, CHAR_MODES, iconsOf, inGroups, modePicker, savedMode } from '../charmodes.js';
 import { renderer as picture } from './picture.js';
 
 const MODE_KEY = 'scarif.whos.mode';
@@ -13,6 +13,7 @@ const MODES = CHAR_MODES.map((m) => (m.close ? { ...m, label: '🔥 Tough calls'
 function poolFor(mode, pool) {
   if (mode.a) return pool.filter((c) => inGroups(c, [...mode.a, ...mode.b]));
   if (mode.only) return bySide(pool, mode.only);
+  if (mode.iconic) return iconsOf(pool);
   return pool;
 }
 function playable(mode, pool) {

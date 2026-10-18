@@ -5,6 +5,8 @@
 //   versus modes: `a` vs `b` (lists of group ids), e.g. Jedi vs Sith
 //   only modes:   one group (`only`)
 //   close:        similar fan power
+//   iconic:       only the most popular characters, any group (js/icons.js)
+import { isIconic } from './icons.js';
 import { SIDE_IDS, SIDES } from './registry.js';
 import { h } from './ui.js';
 
@@ -12,6 +14,7 @@ const shortName = (id) => SIDES[id].short || SIDES[id].label;
 
 export const CHAR_MODES = [
   { id: 'mixed', label: '🎲 Anyone', title: 'Anyone vs anyone' },
+  { id: 'icons', label: '⭐ Icons only', title: 'Icons only', iconic: true },
   { id: 'jvs', label: '⚔️ Jedi vs Sith', title: 'Jedi vs Sith', a: ['sith'], b: ['jedi'] },
   { id: 'cvd', label: '🤖 Clones vs Droids', title: 'Clones vs Droids', a: ['droid'], b: ['clone'] },
   { id: 'hvf', label: '🎯 Hunters vs Force users', title: 'Hunters vs Force', a: ['hunter'], b: ['jedi', 'sith'] },
@@ -22,6 +25,7 @@ export const CHAR_MODES = [
 ];
 
 export const inGroups = (c, groups) => groups.includes(c.side);
+export const iconsOf = (pool) => pool.filter(isIconic);
 export const bySide = (pool, side) => pool.filter((c) => c.side === side);
 
 const store = {

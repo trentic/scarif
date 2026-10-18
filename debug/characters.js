@@ -3,13 +3,14 @@
 // Quick pictures: hover a character card and press Ctrl+V (or click
 // "📋 Paste") to use whatever you last copied: an image address, or the
 // image itself. Dropping an image file on a card works too.
+import { isIconic } from '../js/icons.js';
 import { SIDE_IDS, SIDES } from '../js/registry.js';
 import { h } from '../js/ui.js';
 import { addCharacter, CHAR_FILE, deleteCharacter, setCharacterImage, updateCharacter } from './character-store.js';
 import { downloadImage, readMedia, StoreError } from './store.js';
 import { openWikiImport } from './wiki-import.js';
 
-const FILTERS = [['all', 'All'], ...SIDE_IDS.map((id) => [id, SIDES[id].plural]), ['missing', 'No picture']];
+const FILTERS = [['all', 'All'], ['icons', '⭐ Icons'], ...SIDE_IDS.map((id) => [id, SIDES[id].plural]), ['missing', 'No picture']];
 
 const view = {
   ctx: null,
@@ -137,7 +138,7 @@ function renderGrid() {
   const q = view.query.trim().toLowerCase();
   const list = view.entries.filter((e) =>
     (!q || e.name.toLowerCase().includes(q)) &&
-    (view.filter === 'all' || (view.filter === 'missing' ? !e.image : e.side === view.filter)),
+    (view.filter === 'all' || (view.filter === 'missing' ? !e.image : view.filter === 'icons' ? isIconic(e) : e.side === view.filter)),
   );
   if (!list.length) {
     gridEl.replaceChildren(h('div', { class: 'empty' }, view.entries.length ? 'Nothing matches.' : 'No characters yet. Add one on the left.'));
@@ -170,7 +171,7 @@ function card(e) {
     h('div', { class: 'body' },
       h('div', { class: 'char-top' },
         h('span', { class: `side-badge ${e.side}` }, SIDES[e.side]?.label || e.side),
-        h('span', { class: 'char-power', title: 'Fan power (1–100)' }, `⚡ ${e.power}`),
+        h('span', { class: 'char-power', title: 'Fan power (1–100)' }, isIconic(e) ? h('span', { class: 'char-icon', title: 'Icon: shows in ⭐ Icons only mode' }, '⭐ ') : null, `⚡ ${e.power}`),
       ),
       h('div', { class: 'name' }, e.name),
       h('div', { class: 'actions' },
@@ -313,6 +314,7 @@ function characterForm({ entry = null, onSaved, onCancel }) {
   const file = h('input', { type: 'file', accept: 'image/png,image/jpeg,image/gif,image/webp,image/avif', 'aria-label': 'Picture file' });
   const url = h('input', { type: 'url', placeholder: '…or paste an image address' });
   const removePic = h('input', { type: 'checkbox' });
+  const iconic = h('input', { type: 'checkbox', checked: (entry ? isIconic(entry) : false) || null });
   const error = h('div', { class: 'form-error', role: 'alert' });
   const idle = entry ? 'Save changes' : 'Add character';
   const submit = h('button', { class: 'btn', type: 'submit' }, idle);
@@ -329,10 +331,12 @@ function characterForm({ entry = null, onSaved, onCancel }) {
         const picture = source ? (await toImage(source)).image : null;
         let archive;
         if (entry) {
-          archive = await updateCharacter(view.ctx.gh, entry.id, { name: name.value, side: side.get(), power: power.get() });
+          // Only store an icon flag when it differs from the automatic list.
+          const iconChange = iconic.checked !== isIconic(entry) ? iconic.checked : undefined;
+          archive = await updateCharacter(view.ctx.gh, entry.id, { name: name.value, side: side.get(), power: power.get(), iconic: iconChange });
           if (picture || removePic.checked) archive = await setCharacterImage(view.ctx.gh, entry.id, picture);
         } else {
-          archive = await addCharacter(view.ctx.gh, { name: name.value, side: side.get(), power: power.get(), image: picture });
+          archive = await addCharacter(view.ctx.gh, { name: name.value, side: side.get(), power: power.get(), image: picture, iconic: iconic.checked || undefined });
           form.reset();
           power.set(50);
         }
@@ -352,6 +356,10 @@ function characterForm({ entry = null, onSaved, onCancel }) {
       h('label', {}, 'Fan power ', h('span', { class: 'label-note' }, '(1–100)')),
       power.el,
       h('div', { class: 'hint' }, 'How strong fans think they are. Used to estimate who fans favour in Who Would Win?'),
+    ),
+    h('div', {},
+      h('label', { class: 'check' }, iconic, '⭐ Icon'),
+      h('div', { class: 'hint' }, 'Shows in the “⭐ Icons only” mode. The best-known characters are icons automatically; untick to leave one out.'),
     ),
     h('div', {},
       h('label', {}, entry ? 'Replace picture ' : 'Picture ', h('span', { class: 'label-note' }, '(optional; you can paste it on the card later)')),

@@ -4,7 +4,7 @@
 import * as chat from '../chat.js';
 import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
-import { bySide, CHAR_MODES, modePicker, savedMode } from '../charmodes.js';
+import { bySide, CHAR_MODES, iconsOf, modePicker, savedMode } from '../charmodes.js';
 import { SIDE_IDS, SIDES } from '../registry.js';
 import { sfx } from '../sfx.js';
 import { h, iconButton, wait } from '../ui.js';
@@ -56,6 +56,7 @@ const STATS = {
   cvd: (picks) => [pickStat(picks, ['clone'], 'Clone picks'), pickStat(picks, ['droid'], 'Droid picks')],
   hvf: (picks) => [pickStat(picks, ['hunter'], 'Hunter picks'), pickStat(picks, ['jedi', 'sith'], 'Force user picks')],
 };
+STATS.icons = STATS.mixed;
 
 // The shared character modes (js/charmodes.js) as matchups: pairs(pool) →
 // [[a, b], …]. Versus modes are `fixed`: side a on top (red / 1), side b on
@@ -63,10 +64,11 @@ const STATS = {
 // are flipped at random.
 export const MODES = CHAR_MODES.map((m) => ({
   ...m,
-  title: m.id === 'mixed' ? 'Who would win?' : m.title,
+  title: m.id === 'mixed' ? 'Who would win?' : m.iconic ? 'Icon vs Icon' : m.title,
   fixed: Boolean(m.a),
   stats: STATS[m.id],
   pairs: m.a ? (pool) => across(groupsOf(pool, m.a), groupsOf(pool, m.b))
+    : m.iconic ? (pool) => everyPair(iconsOf(pool))
     : m.only ? (pool) => everyPair(bySide(pool, m.only))
       : m.close ? closePairs
         : (pool) => everyPair(pool),

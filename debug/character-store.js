@@ -41,7 +41,7 @@ function placeImage(entry, image, add, remove) {
 
 const sortEntries = (archive) => archive.entries.sort((a, b) => a.name.localeCompare(b.name));
 
-export function addCharacter(gh, { name, side, power, image }) {
+export function addCharacter(gh, { name, side, power, image, iconic }) {
   return gh.commitArchive((archive) => {
     const clean = checkName(archive, name);
     const base = slugify(clean) || 'character';
@@ -49,6 +49,7 @@ export function addCharacter(gh, { name, side, power, image }) {
     for (let n = 2; archive.entries.some((e) => e.id === id); n++) id = `${base}-${n}`;
     const now = new Date().toISOString();
     const entry = { id, name: clean, side: checkSide(side), power: checkPower(power), image: null, createdAt: now, updatedAt: now };
+    if (typeof iconic === 'boolean') entry.iconic = iconic;
     const add = [];
     if (image) placeImage(entry, image, add, []);
     archive.entries.push(entry);
@@ -89,13 +90,14 @@ export async function addCharacters(gh, items) {
   return { archive, skipped };
 }
 
-export function updateCharacter(gh, id, { name, side, power }) {
+export function updateCharacter(gh, id, { name, side, power, iconic }) {
   return gh.commitArchive((archive) => {
     const entry = archive.entries.find((e) => e.id === id);
     if (!entry) throw new StoreError('That character no longer exists. Reload the page.');
     if (name !== undefined) entry.name = checkName(archive, name, id);
     if (side !== undefined) entry.side = checkSide(side);
     if (power !== undefined) entry.power = checkPower(power);
+    if (typeof iconic === 'boolean') entry.iconic = iconic;
     entry.updatedAt = new Date().toISOString();
     sortEntries(archive);
     return { archive, message: `Characters: update ${entry.name}` };
