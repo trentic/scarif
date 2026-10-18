@@ -4,7 +4,7 @@
 // "📋 Paste") to use whatever you last copied: an image address, or the
 // image itself. Dropping an image file on a card works too.
 import { isIconic } from '../js/icons.js';
-import { SIDE_IDS, SIDES } from '../js/registry.js';
+import { SIDE_IDS, SIDES, strength as fightStrength } from '../js/registry.js';
 import { h } from '../js/ui.js';
 import { addCharacter, CHAR_FILE, deleteCharacter, setCharacterImage, updateCharacter } from './character-store.js';
 import { downloadImage, readMedia, StoreError } from './store.js';
@@ -315,6 +315,11 @@ function characterForm({ entry = null, onSaved, onCancel }) {
   const url = h('input', { type: 'url', placeholder: '…or paste an image address' });
   const removePic = h('input', { type: 'checkbox' });
   const iconic = h('input', { type: 'checkbox', checked: (entry ? isIconic(entry) : false) || null });
+  const strengthInput = h('input', {
+    type: 'number', min: '1', max: '100', class: 'strength-input', 'aria-label': 'Fight strength override',
+    value: Number.isFinite(entry?.strength) ? String(entry.strength) : null,
+    placeholder: `auto (${Math.round(fightStrength({ side: entry?.side || 'jedi', power: entry?.power ?? 50 }))})`,
+  });
   const error = h('div', { class: 'form-error', role: 'alert' });
   const idle = entry ? 'Save changes' : 'Add character';
   const submit = h('button', { class: 'btn', type: 'submit' }, idle);
@@ -333,7 +338,8 @@ function characterForm({ entry = null, onSaved, onCancel }) {
         if (entry) {
           // Only store an icon flag when it differs from the automatic list.
           const iconChange = iconic.checked !== isIconic(entry) ? iconic.checked : undefined;
-          archive = await updateCharacter(view.ctx.gh, entry.id, { name: name.value, side: side.get(), power: power.get(), iconic: iconChange });
+          const strengthValue = strengthInput.value.trim() === '' ? (Number.isFinite(entry.strength) ? null : undefined) : Number(strengthInput.value);
+          archive = await updateCharacter(view.ctx.gh, entry.id, { name: name.value, side: side.get(), power: power.get(), iconic: iconChange, strength: strengthValue });
           if (picture || removePic.checked) archive = await setCharacterImage(view.ctx.gh, entry.id, picture);
         } else {
           archive = await addCharacter(view.ctx.gh, { name: name.value, side: side.get(), power: power.get(), image: picture, iconic: iconic.checked || undefined });
@@ -357,6 +363,11 @@ function characterForm({ entry = null, onSaved, onCancel }) {
       power.el,
       h('div', { class: 'hint' }, 'How strong fans think they are. Used to estimate who fans favour in Who Would Win?'),
     ),
+    entry ? h('div', {},
+      h('label', {}, 'Fight strength ', h('span', { class: 'label-note' }, '(optional override, 1–100)')),
+      strengthInput,
+      h('div', { class: 'hint' }, 'Leave empty to use the group’s range (Jedi & Sith 62–100, Hunters 35–80, Clones 15–58, Droids 10–58) placed by fan power. Set it for special cases, e.g. General Grievous at 84 beats weaker Jedi.'),
+    ) : null,
     h('div', {},
       h('label', { class: 'check' }, iconic, '⭐ Icon'),
       h('div', { class: 'hint' }, 'Shows in the “⭐ Icons only” mode. The best-known characters are icons automatically; untick to leave one out.'),

@@ -90,7 +90,7 @@ export async function addCharacters(gh, items) {
   return { archive, skipped };
 }
 
-export function updateCharacter(gh, id, { name, side, power, iconic }) {
+export function updateCharacter(gh, id, { name, side, power, iconic, strength }) {
   return gh.commitArchive((archive) => {
     const entry = archive.entries.find((e) => e.id === id);
     if (!entry) throw new StoreError('That character no longer exists. Reload the page.');
@@ -98,6 +98,9 @@ export function updateCharacter(gh, id, { name, side, power, iconic }) {
     if (side !== undefined) entry.side = checkSide(side);
     if (power !== undefined) entry.power = checkPower(power);
     if (typeof iconic === 'boolean') entry.iconic = iconic;
+    // Fight strength override: a number sets it, null clears it (back to automatic).
+    if (strength === null) delete entry.strength;
+    else if (strength !== undefined) entry.strength = checkPower(strength);
     entry.updatedAt = new Date().toISOString();
     sortEntries(archive);
     return { archive, message: `Characters: update ${entry.name}` };

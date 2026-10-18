@@ -125,7 +125,10 @@ export const SIDES = {
 export const SIDE_IDS = Object.keys(SIDES);
 
 // How strong a character is in a fight (0–100), from their group and fan power.
+// A character's own `strength` (set in debug mode) overrides it, for special
+// cases like General Grievous, a droid who can beat weaker Jedi.
 export function strength(c) {
+  if (Number.isFinite(c.strength)) return c.strength;
   const [lo, hi] = SIDES[c.side]?.strength || [0, 100];
   return lo + ((hi - lo) * (Number(c.power) || 50)) / 100;
 }

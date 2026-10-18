@@ -108,7 +108,7 @@ Debug mode has two tabs: **Blasters** and **Characters**. Characters live in the
 
 ### Who Would Win? percentages
 
-Until real voting is set up, the split is a **fan estimate** from the gap in **fight strength**, labelled *Fan estimate* on screen. Fight strength comes from the character's group plus their fan power: each group has a range (`strength` in `js/registry.js`: Jedi and Sith 62–100, Bounty Hunters 35–80, Clone Troopers 15–58, Combat Droids 10–58) and fan power places the character inside it, so even the best-known clone or droid loses to any Jedi or Sith. It uses a logistic curve, so close fights stay close and big mismatches level off:
+Until real voting is set up, the split is a **fan estimate** from the gap in **fight strength**, labelled *Fan estimate* on screen. Fight strength comes from the character's group plus their fan power: each group has a range (`strength` in `js/registry.js`: Jedi and Sith 62–100, Bounty Hunters 35–80, Clone Troopers 15–58, Combat Droids 10–58) and fan power places the character inside it, so even the best-known clone or droid loses to any Jedi or Sith. A character can also have its own **fight strength** (debug mode → Edit → *Fight strength*), which overrides that for special cases: General Grievous is a Sith at 84, so he beats weaker Jedi but loses to the likes of Obi-Wan. It uses a logistic curve, so close fights stay close and big mismatches level off:
 
 | Power gap | 0 | 5 | 10 | 20 | 30+ |
 | --- | --- | --- | --- | --- | --- |

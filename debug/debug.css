@@ -472,3 +472,4 @@ dialog.wiki-dialog { width: min(1100px, calc(100vw - 32px)); padding: 20px 20px 
 .side-pick .side-btn[aria-pressed='true'].droid { border-color: #ff9a52; color: #ffb47f; background: rgba(255, 154, 82, 0.12); }
 .char-icon { color: var(--gold); }
 .wiki-flag.fill { color: var(--gold); border-color: var(--gold); }
+.strength-input { width: 140px; min-height: 38px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); font: inherit; }
