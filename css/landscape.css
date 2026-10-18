@@ -190,3 +190,10 @@ body.side-green { background: #00b140; }
 .layout-43 .wd-bar-row { font-size: 24px; }
 .layout-43 .wd-next { margin-top: 16px; }
 .layout-43 .wd-actions { margin-top: 20px; }
+.layout-43 .wv-filter { margin-bottom: 8px; }
+.layout-43 .wv-icons-toggle { min-height: 54px; font-size: 24px; }
+.layout-43 .lobby:has(.wv-filter) .glyph { margin-top: 16px; width: 140px; height: 140px; font-size: 70px; }
+.layout-43 .lobby:has(.wv-filter) h1 { margin-top: 18px; font-size: 78px; }
+.layout-43 .lobby:has(.wv-filter) .tag { margin-top: 10px; }
+.layout-43 .lobby:has(.wv-filter) .facts { margin-top: 18px; }
+.layout-43 .lobby:has(.wv-filter) .wv-modes { margin-top: 14px; }

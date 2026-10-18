@@ -4,7 +4,7 @@
 import * as chat from '../chat.js';
 import { voteRound } from '../chatvotes.js';
 import { countdown, resultsScreen, showScreen } from '../engine.js';
-import { bySide, CHAR_MODES, iconsOf, modePicker, savedMode } from '../charmodes.js';
+import { bySide, CHAR_MODES, iconsOf, iconsOnly, modePicker, popularity, rosterFor, savedMode, weightedIndex } from '../charmodes.js';
 import { SIDE_IDS, SIDES, strength } from '../registry.js';
 import { sfx } from '../sfx.js';
 import { h, iconButton, wait } from '../ui.js';
@@ -56,7 +56,6 @@ const STATS = {
   cvd: (picks) => [pickStat(picks, ['clone'], 'Clone picks'), pickStat(picks, ['droid'], 'Droid picks')],
   hvf: (picks) => [pickStat(picks, ['hunter'], 'Hunter picks'), pickStat(picks, ['jedi', 'sith'], 'Force user picks')],
 };
-STATS.icons = STATS.mixed;
 
 // The shared character modes (js/charmodes.js) as matchups: pairs(pool) →
 // [[a, b], …]. Versus modes are `fixed`: side a on top (red / 1), side b on
@@ -64,48 +63,51 @@ STATS.icons = STATS.mixed;
 // are flipped at random.
 export const MODES = CHAR_MODES.map((m) => ({
   ...m,
-  title: m.id === 'mixed' ? 'Who would win?' : m.iconic ? 'Icon vs Icon' : m.title,
+  title: m.id === 'mixed' ? 'Who would win?' : m.title,
   fixed: Boolean(m.a),
   stats: STATS[m.id],
   pairs: m.a ? (pool) => across(groupsOf(pool, m.a), groupsOf(pool, m.b))
-    : m.iconic ? (pool) => everyPair(iconsOf(pool))
     : m.only ? (pool) => everyPair(bySide(pool, m.only))
       : m.close ? closePairs
         : (pool) => everyPair(pool),
 }));
 
 const currentMode = (pool) => savedMode(MODE_KEY, MODES, (m) => m.pairs(pool).length > 0);
+// Lobby / screen title, e.g. "Jedi vs Sith" or, with the icons filter, "⭐ Jedi vs Sith".
+function titleFor(mode, inGame = false) {
+  const icons = iconsOnly(MODE_KEY);
+  if (mode.id === 'mixed') return icons ? 'Icon vs Icon' : inGame ? 'Who would win?' : 'Anyone vs anyone';
+  return icons ? `⭐ ${mode.title}` : mode.title;
+}
 const fighters = (pairs) => new Set(pairs.flat().map((c) => c.id)).size;
 
 // Uses the Rounds setting; "All" (0) means unlimited matchups here.
-export function lobby({ pool, settings, refresh }) {
+export function lobby({ pool: everyone, settings, refresh }) {
   const length = settings.rounds;
+  const pool = rosterFor(MODE_KEY, everyone); // everyone, or just the icons
   const mode = currentMode(pool);
   const pairs = mode.pairs(pool);
-  const extra = pool.length >= 2 && modePicker({
-    key: MODE_KEY, modes: MODES, current: mode, playable: (m) => m.pairs(pool).length > 0, refresh,
+  const extra = everyone.length >= 2 && modePicker({
+    key: MODE_KEY, modes: MODES, current: mode, playable: (m) => m.pairs(pool).length > 0, refresh, iconCount: iconsOf(everyone).length,
   });
   return {
     ready: pairs.length > 0,
     extra,
     notReady: 'Needs 2 characters with a picture. Add pictures in debug mode → Characters.',
-    facts: `${mode.id === 'mixed' ? 'Anyone vs anyone' : mode.title} · ${length ? `${length} matchups` : 'unlimited matchups'} · ${fighters(pairs)} fighters`,
+    facts: `${titleFor(mode)} · ${length ? `${length} matchups` : 'unlimited matchups'} · ${fighters(pairs)} fighters`,
   };
 }
 
-// Picks matchups from `pairs` on demand: no repeats until every matchup has
-// been used, and nobody fights twice in a row when it can be avoided.
-function pairer(pairs, fixed) {
+// Picks matchups from `pairs` on demand: popular characters come up more often
+// (weighted by both fighters' popularity), no matchup repeats until every one
+// has been used, and nobody fights twice in a row when it can be avoided.
+export function pairer(pairs, fixed) {
   let unused = [];
   let prev = new Set();
+  const weight = ([a, b]) => (prev.has(a.id) || prev.has(b.id) ? 0 : popularity(a) * popularity(b));
   return () => {
     if (!unused.length) unused = [...pairs];
-    let idx = -1;
-    for (let tries = 0; tries < 80; tries++) {
-      const i = Math.floor(Math.random() * unused.length);
-      const [a, b] = unused[i];
-      if (!prev.has(a.id) && !prev.has(b.id)) { idx = i; break; }
-    }
+    let idx = unused.some((p) => weight(p) > 0) ? weightedIndex(unused, weight) : -1;
     if (idx < 0) idx = Math.floor(Math.random() * unused.length);
     const [pair] = unused.splice(idx, 1);
     prev = new Set([pair[0].id, pair[1].id]);
@@ -128,6 +130,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
   const exit = () => { stop(); onExit(); };
 
   const total = settings.rounds; // 0 ("All") = unlimited
+  pool = rosterFor(MODE_KEY, pool); // everyone, or just the icons
   const mode = currentMode(pool);
   const pairs = mode.pairs(pool);
   const nextPair = pairer(pairs, mode.fixed);
@@ -217,7 +220,7 @@ export async function run({ stage, game, pool, settings, register, onExit, onRep
           h('button', { class: 'btn ghost wv-finish', onclick: () => endRun() }, 'Finish'),
         ),
         h('div', { class: 'hud' },
-          h('div', { class: 'wv-title' }, mode.title),
+          h('div', { class: 'wv-title' }, titleFor(mode, true)),
           h('span', { class: 'pill' }, total ? `${index + 1} / ${total}` : `#${index + 1}`),
         ),
         timer,

@@ -1206,3 +1206,25 @@ body:not(.side-green) #stage,
 body:not(.side-green) #stage.layout-43 { background: transparent; z-index: 1; }
 body:not(.side-green) #stage::before,
 body:not(.side-green) #stage::after { display: none; }
+/* "⭐ Icons only" filter switch above the matchup modes */
+.wv-filter { display: flex; justify-content: center; margin-bottom: 14px; }
+.wv-icons-toggle {
+  min-height: 64px;
+  padding: 0 30px;
+  border-radius: 999px;
+  border: 2px dashed var(--line-2);
+  background: transparent;
+  color: var(--muted);
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.wv-icons-toggle.on { border-style: solid; border-color: var(--gold); color: var(--gold); background: rgba(255, 201, 64, 0.12); box-shadow: 0 0 30px -10px rgba(255, 201, 64, 0.7); }
+.wv-icons-toggle:disabled { opacity: 0.35; cursor: not-allowed; }
+.lobby:has(.wv-filter) .glyph { width: 130px; height: 130px; font-size: 64px; }
+.lobby:has(.wv-filter) h1 { margin-top: 28px; }
+.lobby:has(.wv-filter) .facts { margin-top: 22px; }
+.lobby:has(.wv-filter) .wv-modes { margin-top: 22px; }
+.lobby:has(.wv-filter) .wv-filter { margin-bottom: 6px; }
+.lobby:has(.wv-filter) .wv-icons-toggle { min-height: 58px; }

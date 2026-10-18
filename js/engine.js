@@ -8,6 +8,7 @@
 //   renderer.distractors?(target, pool, n) → n wrong answers (default: random)
 //   renderer.ranks — results ranks [[minPct, title, blurb], …] (default: blaster ranks)
 //   renderer.screenClass — extra class on the round screen, for layout
+//   renderer.order?(pool) → pool in play order (default: random shuffle)
 //
 // Games with their own flow (Speed Round, Higher or Lower) export `run()`
 // instead and reuse `countdown()` and `resultsScreen()` from here.
@@ -110,7 +111,7 @@ export async function runGame({ stage, game, pool, renderer, onExit, onReplay, r
   };
 
   const count = settings.rounds > 0 ? Math.min(settings.rounds, pool.length) : pool.length;
-  const targets = shuffle(pool).slice(0, count);
+  const targets = (renderer.order ? renderer.order(pool) : shuffle(pool)).slice(0, count);
   targets.forEach((e) => renderer.preload?.(e));
 
   // --- countdown -------------------------------------------------------------

@@ -3,7 +3,7 @@
 // tall picture and keep everything inside the Shorts / TikTok safe zone.
 // The lobby has the same matchup modes as Who Would Win? (js/charmodes.js):
 // they decide who can appear and who the wrong answer is.
-import { bySide, CHAR_MODES, iconsOf, inGroups, modePicker, savedMode } from '../charmodes.js';
+import { bySide, CHAR_MODES, iconsOf, iconsOnly, inGroups, modePicker, popularShuffle, rosterFor, savedMode } from '../charmodes.js';
 import { renderer as picture } from './picture.js';
 
 const MODE_KEY = 'scarif.whos.mode';
@@ -13,7 +13,6 @@ const MODES = CHAR_MODES.map((m) => (m.close ? { ...m, label: '🔥 Tough calls'
 function poolFor(mode, pool) {
   if (mode.a) return pool.filter((c) => inGroups(c, [...mode.a, ...mode.b]));
   if (mode.only) return bySide(pool, mode.only);
-  if (mode.iconic) return iconsOf(pool);
   return pool;
 }
 function playable(mode, pool) {
@@ -22,15 +21,18 @@ function playable(mode, pool) {
 }
 let mode = MODES[0]; // set by the lobby; read when picking wrong answers
 
-export function lobby({ pool, settings, refresh }) {
+export function lobby({ pool: everyone, settings, refresh }) {
+  const pool = rosterFor(MODE_KEY, everyone); // everyone, or just the icons
   mode = savedMode(MODE_KEY, MODES, (m) => playable(m, pool));
   const modePool = poolFor(mode, pool);
   return {
     pool: modePool,
     ready: playable(mode, pool),
-    extra: pool.length >= 2 && modePicker({ key: MODE_KEY, modes: MODES, current: mode, playable: (m) => playable(m, pool), refresh }),
+    extra: everyone.length >= 2 && modePicker({
+      key: MODE_KEY, modes: MODES, current: mode, playable: (m) => playable(m, pool), refresh, iconCount: iconsOf(everyone).length,
+    }),
     notReady: 'Needs 2 characters with a picture. Add pictures in debug mode → Characters.',
-    facts: [mode.id === 'mixed' ? 'Anyone' : mode.title, `${settings.rounds > 0 ? Math.min(settings.rounds, modePool.length) : modePool.length} rounds`,
+    facts: [`${iconsOnly(MODE_KEY) ? '⭐ ' : ''}${mode.id === 'mixed' ? (iconsOnly(MODE_KEY) ? 'Icons' : 'Anyone') : mode.title}`, `${settings.rounds > 0 ? Math.min(settings.rounds, modePool.length) : modePool.length} rounds`,
       settings.timer ? `${settings.timer}s timer` : 'no timer'].join(' · '),
   };
 }
@@ -50,6 +52,9 @@ export const renderer = {
   screenClass: 'who-screen',
 
   preload: picture.preload,
+
+  // Popular characters come up more often.
+  order: popularShuffle,
 
   mount(el, entry, ctx) {
     const view = picture.mount(el, entry, ctx);
