@@ -14,10 +14,14 @@ const TYPES = {
 
 http.createServer((req, res) => {
   let file = path.join(ROOT, decodeURIComponent(new URL(req.url, 'http://x').pathname));
-  if (!file.startsWith(ROOT)) return res.writeHead(403).end();
+  // Only files inside the site folder. A plain startsWith check would also let through a sibling
+  // folder whose name starts the same (e.g. ../scarif-old), so compare the relative path instead.
+  const rel = path.relative(ROOT, file);
+  if (rel.startsWith('..') || path.isAbsolute(rel)) return res.writeHead(403).end();
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
   fs.readFile(file, (err, data) => {
     if (err) return res.writeHead(404).end('Not found');
     res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' }).end(data);
   });
-}).listen(PORT, () => console.log(`Scarif preview: http://localhost:${PORT}  (debug mode: /debug/)`));
+  // Listen on this computer only, so other devices on the same Wi-Fi can't browse the folder.
+}).listen(PORT, '127.0.0.1', () => console.log(`Scarif preview: http://localhost:${PORT}  (debug mode: /debug/)`));
